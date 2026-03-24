@@ -1,0 +1,57 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Xcode
+*.xcuserstate
+*.xcuserdatad
+*.xcworkspace
+*.xcworkspacedata
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM/
+
+# Derived data
+[Dd]erived[Dd]ata/
+.derived/
+derived/
+*.build/
+build/
+
+# Serena (Claude Code)
+.serena/
+
+# Claude
+.claude/
+
+# Temporary
+.tmp_home/
+*.tmp
+
+# WordGame specific
+# XcodeGen generates WordGame.xcodeproj from project.yml
+WordGame.xcodeproj/
+
+# Backup vocabulary files
+*.bak
+*_full.json
+
+# Packages
+*.pkg
+*.dmg
+*.app
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.*
+
+# Backup files
+*.bak

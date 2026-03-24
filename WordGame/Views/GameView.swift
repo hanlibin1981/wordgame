@@ -1,0 +1,506 @@
+import SwiftUI
+
+/// Main game view for playing through a level
+struct GameView: View {
+    let book: WordBook
+    let level: GameLevel?
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var gameVM = GameViewModel()
+    @State private var userAnswer = ""
+    @State private var showResult = false
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Header with progress
+            gameHeader
+
+            Divider()
+
+            // Question area with transition animation
+            ZStack {
+                if gameVM.isGameCompleted {
+                    gameCompletedView
+                        .transition(.opacity.combined(with: .scale(scale: 0.95)))
+                } else if gameVM.isGameActive, let question = gameVM.currentQuestion {
+                    questionArea(for: question)
+                        .transition(.asymmetric(
+                            insertion: .opacity.combined(with: .move(edge: .trailing)),
+                            removal: .opacity.combined(with: .move(edge: .leading))
+                        ))
+                } else if gameVM.totalQuestions == 0 && !gameVM.isGameActive {
+                    emptyStateView(message: "词库为空\n请先添加单词再开始学习")
+                } else {
+                    loadingView
+                }
+            }
+            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: gameVM.isGameCompleted)
+            .animation(.spring(response: 0.35, dampingFraction: 0.8), value: gameVM.currentQuestionIndex)
+        }
+        .onAppear {
+            Task {
+                await gameVM.startGame(for: book, level: level)
+            }
+        }
+    }
+
+    // MARK: - Header
+    private var gameHeader: some View {
+        VStack(spacing: 12) {
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(DesignFont.title2)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                // Score
+                HStack(spacing: 4) {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.warningOrange)
+                    Text("\(gameVM.score)")
+                        .fontWeight(.bold)
+                }
+
+                Spacer()
+
+                // Question counter
+                Text("\(gameVM.currentQuestionIndex + 1) / \(gameVM.totalQuestions)")
+                    .font(DesignFont.headline)
+            }
+
+            // Progress bar
+            ProgressView(value: gameVM.progress)
+                .tint(Color.primaryBlue)
+                .animation(.spring(response: 0.4, dampingFraction: 0.8), value: gameVM.progress)
+        }
+        .padding()
+        .background(Color.backgroundMain)
+    }
+
+    // MARK: - Question Area
+    @ViewBuilder
+    private func questionArea(for question: GameQuestion) -> some View {
+        VStack(spacing: 24) {
+            Spacer()
+
+            // Question content based on type
+            switch question.questionType {
+            case .choice:
+                choiceQuestionView(for: question)
+            case .spelling:
+                spellingQuestionView(for: question)
+            case .listening:
+                listeningQuestionView(for: question)
+            }
+
+            Spacer()
+        }
+        .padding()
+    }
+
+    // MARK: - Choice Question
+    private func choiceQuestionView(for question: GameQuestion) -> some View {
+        VStack(spacing: 24) {
+            // Word display with subtle scale-in animation
+            VStack(spacing: 8) {
+                Text(question.word.word)
+                    .font(DesignFont.largeTitle)
+                    .scaleEffect(showResult ? 1.0 : 0.85)
+                    .animation(.spring(response: 0.4, dampingFraction: 0.6), value: showResult)
+
+                if let phonetic = question.word.phonetic {
+                    Text(phonetic)
+                        .font(DesignFont.title3)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            Text("请选择正确的中文释义")
+                .font(DesignFont.headline)
+                .foregroundStyle(.secondary)
+
+            // Options with spring entrance animation
+            VStack(spacing: 12) {
+                ForEach(Array((question.options ?? []).enumerated()), id: \.element) { index, option in
+                    OptionButton(
+                        text: option,
+                        state: optionButtonState(for: option, correct: question.correctAnswer),
+                        action: { selectOption(option) }
+                    )
+                    .transitionEffect(index: index)
+                }
+            }
+        }
+    }
+
+    private func optionButtonState(for option: String, correct: String) -> OptionButtonState {
+        guard showResult else { return .normal }
+        if option == correct { return .correct }
+        if option == userAnswer { return .wrong }
+        return .normal
+    }
+
+    private func selectOption(_ option: String) {
+        guard !showResult else { return }
+        showResult = true
+        Task {
+            await gameVM.submitAnswer(option)
+            // Show feedback for 500ms before advancing to next question
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            userAnswer = ""
+            showResult = false
+        }
+    }
+
+    private func optionBackgroundColor(for option: String, question: GameQuestion) -> Color {
+        if !showResult {
+            return Color.gray.opacity(0.05)
+        }
+        if option == question.correctAnswer {
+            return Color.successGreen.opacity(0.2)
+        }
+        if option == userAnswer && option != question.correctAnswer {
+            return Color.errorRed.opacity(0.2)
+        }
+        return Color.gray.opacity(0.05)
+    }
+
+    // MARK: - Spelling Question
+    private func spellingQuestionView(for question: GameQuestion) -> some View {
+        VStack(spacing: 24) {
+            // Meaning
+            VStack(spacing: 8) {
+                Text("请拼写这个单词")
+                    .font(DesignFont.headline)
+                    .foregroundStyle(.secondary)
+
+                Text(question.word.meaning)
+                    .font(DesignFont.title3)
+            }
+
+            // Sentence if available
+            if let sentence = question.word.sentence, !sentence.isEmpty {
+                Text(sentence)
+                    .font(DesignFont.body)
+                    .italic()
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(8)
+            }
+
+            // Input field
+            TextField("输入单词...", text: $userAnswer)
+                .font(DesignFont.title2)
+                .textFieldStyle(.roundedBorder)
+                .onSubmit {
+                    submitSpelling()
+                }
+
+            Button(action: submitSpelling) {
+                Text("确认")
+                    .font(DesignFont.headline)
+                    .frame(width: 120)
+                    .padding()
+                    .background(userAnswer.isEmpty ? Color.gray : Color.primaryBlue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+            .disabled(userAnswer.isEmpty)
+        }
+        .padding(.horizontal)
+    }
+
+    private func submitSpelling() {
+        guard !userAnswer.isEmpty else { return }
+        Task {
+            await gameVM.submitAnswer(userAnswer)
+            // Show feedback for 500ms before advancing
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            userAnswer = ""
+        }
+    }
+
+    // MARK: - Listening Question
+    private func listeningQuestionView(for question: GameQuestion) -> some View {
+        VStack(spacing: 24) {
+            Text("听录音，写出单词")
+                .font(DesignFont.headline)
+                .foregroundStyle(.secondary)
+
+            // Play button
+            Button(action: { AudioService.shared.speakWithSay(question.word.word) }) {
+                VStack(spacing: 8) {
+                    Image(systemName: "speaker.wave.3.fill")
+                        .font(.system(size: 40 * 2))
+                    Text("点击播放")
+                        .font(DesignFont.caption)
+                }
+                .frame(width: 120, height: 120)
+                .background(Color.primaryBlue.opacity(0.1))
+                .cornerRadius(60)
+            }
+            .buttonStyle(.plain)
+
+            // Hint
+            if let sentence = question.word.sentence, !sentence.isEmpty {
+                Text("提示: \(sentence)")
+                    .font(DesignFont.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            // Input
+            TextField("输入单词...", text: $userAnswer)
+                .font(DesignFont.title2)
+                .textFieldStyle(.roundedBorder)
+                .onSubmit {
+                    submitListeningAnswer()
+                }
+
+            Button(action: submitListeningAnswer) {
+                Text("确认")
+                    .font(DesignFont.headline)
+                    .frame(width: 120)
+                    .padding()
+                    .background(userAnswer.isEmpty ? Color.gray : Color.primaryBlue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+            .disabled(userAnswer.isEmpty)
+        }
+    }
+
+    private func submitListeningAnswer() {
+        guard !userAnswer.isEmpty else { return }
+        Task {
+            await gameVM.submitAnswer(userAnswer)
+            // Show feedback for 500ms before advancing
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            userAnswer = ""
+        }
+    }
+
+    // MARK: - Loading
+    private var loadingView: some View {
+        VStack {
+            ProgressView()
+            Text("加载题目...")
+                .font(DesignFont.subheadline)
+                .foregroundStyle(.secondary)
+                .padding(.top)
+        }
+    }
+
+    // MARK: - Empty State
+    private func emptyStateView(message: String) -> some View {
+        VStack(spacing: 16) {
+            Image(systemName: "doc.text")
+                .font(.system(size: 50 * 2))
+                .foregroundStyle(.secondary)
+            Text(message)
+                .font(DesignFont.headline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+            Button("返回") {
+                dismiss()
+            }
+            .buttonStyle(.bordered)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    // MARK: - Game Completed
+    private var gameCompletedView: some View {
+        VStack(spacing: 32) {
+            Spacer()
+
+            // Result icon
+            if let result = gameVM.gameResult {
+                Image(systemName: result.isPassed ? "checkmark.circle.fill" : "xmark.circle.fill")
+                    .font(.system(size: 80 * 2))
+                    .foregroundColor(result.isPassed ? .successGreen : .errorRed)
+
+                Text(result.isPassed ? "恭喜通关!" : "继续加油!")
+                    .font(DesignFont.largeTitle)
+
+                // Stars with staggered animation
+                HStack(spacing: 8) {
+                    ForEach(0..<3) { index in
+                        Image(systemName: index < result.starsEarned ? "star.fill" : "star")
+                            .font(DesignFont.title)
+                            .foregroundColor(.warningOrange)
+                            .scaleEffect(index < result.starsEarned ? 1.0 : 0.7)
+                            .sensoryFeedback(.success, trigger: result.starsEarned)
+                    }
+                }
+                .onAppear {
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.3)) {
+                        // Stars will appear via view reload
+                    }
+                }
+
+                // Stats
+                VStack(spacing: 12) {
+                    HStack {
+                        Text("正确")
+                            .font(DesignFont.headline)
+                        Spacer()
+                        Text("\(result.correctCount)")
+                            .font(DesignFont.headline)
+                            .foregroundColor(.successGreen)
+                    }
+
+                    HStack {
+                        Text("错误")
+                            .font(DesignFont.headline)
+                        Spacer()
+                        Text("\(result.wrongCount)")
+                            .font(DesignFont.headline)
+                            .foregroundColor(.errorRed)
+                    }
+
+                    HStack {
+                        Text("正确率")
+                            .font(DesignFont.headline)
+                        Spacer()
+                        Text("\(Int(result.accuracy))%")
+                            .font(DesignFont.headline)
+                    }
+
+                    HStack {
+                        Text("得分")
+                            .font(DesignFont.headline)
+                        Spacer()
+                        Text("\(result.score)")
+                            .font(DesignFont.headline)
+                            .fontWeight(.bold)
+                    }
+                }
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(12)
+                .frame(width: 250)
+            }
+
+            Spacer()
+
+            // Actions
+            VStack(spacing: 12) {
+                Button(action: restartGame) {
+                    Text("再玩一次")
+                        .font(DesignFont.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.primaryBlue)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+
+                Button(action: { dismiss() }) {
+                    Text("返回")
+                        .font(DesignFont.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .foregroundColor(.primary)
+                        .cornerRadius(12)
+                }
+            }
+            .padding(.horizontal, 40)
+            .padding(.bottom)
+        }
+    }
+
+    private func restartGame() {
+        Task {
+            await gameVM.startGame(for: book, level: level)
+        }
+    }
+}
+
+// MARK: - Option Button with animation
+enum OptionButtonState {
+    case normal
+    case correct
+    case wrong
+
+    var backgroundColor: Color {
+        switch self {
+        case .normal:   return Color.gray.opacity(0.05)
+        case .correct:  return Color.successGreen.opacity(0.2)
+        case .wrong:    return Color.errorRed.opacity(0.2)
+        }
+    }
+
+    var borderColor: Color {
+        switch self {
+        case .normal:   return Color.gray.opacity(0.2)
+        case .correct:  return Color.successGreen
+        case .wrong:    return Color.errorRed
+        }
+    }
+}
+
+struct OptionButton: View {
+    let text: String
+    let state: OptionButtonState
+    let action: () -> Void
+
+    @State private var isHovered = false
+
+    var body: some View {
+        Button(action: action) {
+            Text(text)
+                .font(DesignFont.option)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(state.backgroundColor)
+                .foregroundColor(.primary)
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(state.borderColor, lineWidth: state == .normal ? 1 : 2)
+                )
+                .scaleEffect(isHovered && state == .normal ? 1.02 : 1.0)
+                .shadow(
+                    color: isHovered && state == .normal ? Color.black.opacity(0.08) : .clear,
+                    radius: 4, x: 0, y: 2
+                )
+        }
+        .buttonStyle(.plain)
+        .onHover { hovering in
+            isHovered = hovering
+        }
+        .sensoryFeedback(.selection, trigger: state)
+    }
+}
+
+// MARK: - Transition Effect
+struct TransitionEffect: ViewModifier {
+    let index: Int
+    @State private var appeared = false
+
+    func body(content: Content) -> some View {
+        content
+            .opacity(appeared ? 1 : 0)
+            .offset(y: appeared ? 0 : 16)
+            .onAppear {
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.75).delay(Double(index) * 0.06)) {
+                    appeared = true
+                }
+            }
+    }
+}
+
+extension View {
+    func transitionEffect(index: Int) -> some View {
+        modifier(TransitionEffect(index: index))
+    }
+}
+
+#Preview {
+    GameView(book: WordBook(name: "测试", wordCount: 100), level: nil)
+}
