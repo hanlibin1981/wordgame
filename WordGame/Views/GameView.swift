@@ -8,6 +8,8 @@ struct GameView: View {
     @StateObject private var gameVM = GameViewModel()
     @State private var userAnswer = ""
     @State private var showResult = false
+    /// Tracks whether audio is currently playing
+    @State private var isAudioPlaying = false
     /// Tracks whether the last spelling/listening answer was correct (nil = no answer yet)
     @State private var lastAnswerCorrect: Bool?
     /// For star pop-in animation in game completed view
@@ -120,10 +122,28 @@ struct GameView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+            .onAppear {
+                isAudioPlaying = true
+                AudioService.shared.playWordAudio(word: question.word) {
+                    DispatchQueue.main.async {
+                        self.isAudioPlaying = false
+                    }
+                }
+            }
 
             Text("请选择正确的中文释义")
                 .font(DesignFont.headline)
                 .foregroundStyle(.secondary)
+
+            // Audio replay button
+            Button(action: { replayAudio() }) {
+                HStack(spacing: 6) {
+                    Image(systemName: isAudioPlaying ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
+                    Text(isAudioPlaying ? "正在播放..." : "再次播放")
+                }
+            }
+            .foregroundColor(isAudioPlaying ? .secondary : .primaryBlue)
+            .disabled(isAudioPlaying)
 
             // Options with spring entrance animation
             VStack(spacing: 12) {
@@ -133,6 +153,8 @@ struct GameView: View {
                         state: optionButtonState(for: option, correct: question.correctAnswer),
                         action: { selectOption(option) }
                     )
+                    .disabled(isAudioPlaying)
+                    .opacity(isAudioPlaying ? 0.5 : 1.0)
                     .transitionEffect(index: index)
                 }
             }
@@ -155,6 +177,16 @@ struct GameView: View {
             try? await Task.sleep(nanoseconds: 500_000_000)
             userAnswer = ""
             showResult = false
+        }
+    }
+
+    private func replayAudio() {
+        guard !isAudioPlaying, let question = gameVM.currentQuestion else { return }
+        isAudioPlaying = true
+        AudioService.shared.playWordAudio(word: question.word) {
+            DispatchQueue.main.async {
+                self.isAudioPlaying = false
+            }
         }
     }
 
@@ -183,6 +215,14 @@ struct GameView: View {
                 Text(question.word.meaning)
                     .font(DesignFont.title3)
             }
+            .onAppear {
+                isAudioPlaying = true
+                AudioService.shared.playWordAudio(word: question.word) {
+                    DispatchQueue.main.async {
+                        self.isAudioPlaying = false
+                    }
+                }
+            }
 
             // Sentence if available
             if let sentence = question.word.sentence, !sentence.isEmpty {
@@ -196,12 +236,22 @@ struct GameView: View {
                     .cornerRadius(8)
             }
 
+            // Audio replay button
+            Button(action: { replayAudio() }) {
+                HStack(spacing: 6) {
+                    Image(systemName: isAudioPlaying ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
+                    Text(isAudioPlaying ? "正在播放..." : "再次播放")
+                }
+            }
+            .foregroundColor(isAudioPlaying ? .secondary : .primaryBlue)
+            .disabled(isAudioPlaying)
+
             // Input field
             HStack(spacing: 12) {
                 TextField("输入单词...", text: $userAnswer)
                     .font(DesignFont.title2)
                     .textFieldStyle(.roundedBorder)
-                    .disabled(showResult)
+                    .disabled(isAudioPlaying || showResult)
                     .overlay {
                         if showResult, let correct = lastAnswerCorrect {
                             RoundedRectangle(cornerRadius: 6)
@@ -224,17 +274,18 @@ struct GameView: View {
                     .font(DesignFont.headline)
                     .frame(width: 120)
                     .padding()
-                    .background(userAnswer.isEmpty || showResult ? Color.gray : Color.primaryBlue)
+                    .background(isAudioPlaying || userAnswer.isEmpty || showResult ? Color.gray : Color.primaryBlue)
+                    .opacity(isAudioPlaying ? 0.5 : 1.0)
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
-            .disabled(userAnswer.isEmpty || showResult)
+            .disabled(isAudioPlaying || userAnswer.isEmpty || showResult)
         }
         .padding(.horizontal)
     }
 
     private func submitSpelling() {
-        guard !userAnswer.isEmpty, !showResult else { return }
+        guard !userAnswer.isEmpty, !showResult, !isAudioPlaying else { return }
         let answer = userAnswer
         showResult = true
         Task {
