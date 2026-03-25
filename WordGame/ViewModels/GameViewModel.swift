@@ -360,14 +360,14 @@ final class GameViewModel: ObservableObject {
             let isLastStage = stage == stagesPerChapter && !chunk.isEmpty
 
             let level = GameLevel(
-                id: index + 1,
+                id: levels.count + 1,
                 bookId: bookId,
                 chapter: chapter,
-                stage: stage,       // stage 1, 2, or 3 (never 4 for regular levels)
+                stage: stage,
                 name: "第\(chapter)章 第\(stage)关",
                 wordIds: chunk.map { $0.id },
                 passingScore: 80,
-                isBossLevel: false  // regular levels are never boss levels
+                isBossLevel: false
             )
 
             levels.append(level)
@@ -375,10 +375,10 @@ final class GameViewModel: ObservableObject {
             // Add standalone Boss level as stage 4 (separate from regular stage 3)
             if isLastStage {
                 let bossLevel = GameLevel(
-                    id: index + 2,
+                    id: levels.count + 1,
                     bookId: bookId,
                     chapter: chapter,
-                    stage: 4,  // Boss record stored as stage=4; distinct from regular stage 3 (stage=3)
+                    stage: 4,
                     name: "Boss 挑战 - 第\(chapter)章",
                     wordIds: chunk.map { $0.id },
                     passingScore: 80,
