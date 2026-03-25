@@ -309,9 +309,9 @@ struct GameView: View {
     // MARK: - Listening Question
     private func listeningQuestionView(for question: GameQuestion) -> some View {
         VStack(spacing: 24) {
-            Text("听录音，写出单词")
-                .font(DesignFont.headline)
-                .foregroundStyle(.secondary)
+            // Auto-play on appear
+            Color.clear
+                .frame(width: 1, height: 1)
                 .onAppear {
                     isAudioPlaying = true
                     AudioService.shared.playWordAudio(word: question.word) {
@@ -320,6 +320,10 @@ struct GameView: View {
                         }
                     }
                 }
+
+            Text("听录音，写出单词")
+                .font(DesignFont.headline)
+                .foregroundStyle(.secondary)
 
             // Play/replay button
             Button(action: { replayAudio() }) {
