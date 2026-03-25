@@ -46,19 +46,18 @@ struct LevelSelectionView: View {
     /// Locking rules:
     /// - Chapter 1, Stage 1: always unlocked (first level)
     /// - Stage n (1-3): unlocked if stage n-1 of same chapter is passed
-    /// - Boss (stage=4, isBossLevel=true): unlocked if boss itself is passed
-    ///   (i.e., player has beaten this chapter's boss before)
+    /// - Boss (stage=4, isBossLevel=true): unlocked if this boss has been beaten before
     private func isLevelLocked(_ level: GameLevel) -> Bool {
         // First level is always accessible
         if level.chapter == 1 && level.stage == 1 && !level.isBossLevel {
             return false
         }
 
-        if level.isBossLevel && level.stage == 4 {
-            // Boss (stage=4): locked unless this boss has been beaten before.
-            // isStagePassed(ch, 4) checks the boss's own completion record (stage=4).
-            // Once beaten, the boss stays accessible (can be replayed for better stars).
-            return !isStagePassed(level.chapter, 4)
+        if level.isBossLevel {
+            // Boss: unlocked if already beaten (isBossLevel + stage=4, stage stored as 4 in DB)
+            let bossPassed = isStagePassed(level.chapter, 4)
+            print("[isLevelLocked] boss ch=\(level.chapter) stage=\(level.stage) isBossLevel=\(level.isBossLevel) → locked=\(!bossPassed)")
+            return !bossPassed
         } else {
             // Regular stage: locked unless previous stage in same chapter is passed
             let prevStage = level.stage - 1
@@ -177,6 +176,8 @@ struct LevelSelectionView: View {
                 for record in allRecords {
                     records[recordKey(chapter: record.chapter, stage: record.stage)] = record
                 }
+                print("[LevelSelection onAppear] total levels generated: \(generatedLevels.count), records loaded: \(allRecords.count)")
+                print("[LevelSelection] records: \(allRecords.map { "ch=\($0.chapter) s=\($0.stage) passed=\($0.isPassed)" })")
                 await MainActor.run {
                     levels = generatedLevels
                     levelRecords = records
