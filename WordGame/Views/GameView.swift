@@ -33,6 +33,12 @@ struct GameView: View {
                             insertion: .opacity.combined(with: .move(edge: .trailing)),
                             removal: .opacity.combined(with: .move(edge: .leading))
                         ))
+                        .onDisappear {
+                            if isAudioPlaying {
+                                AudioService.shared.stop()
+                                isAudioPlaying = false
+                            }
+                        }
                 } else if gameVM.totalQuestions == 0 && !gameVM.isGameActive {
                     emptyStateView(message: "词库为空\n请先添加单词再开始学习")
                 } else {
