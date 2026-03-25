@@ -54,11 +54,12 @@ struct LevelSelectionView: View {
         }
 
         if level.isBossLevel {
-            // Boss (isBossLevel=true, stage=4): unlocked once this boss has been beaten.
-            // isStagePassed(ch, 4) checks the boss's own record (stage=4 in DB).
-            let bossPassed = isStagePassed(level.chapter, 4)
-            print("[isLevelLocked] boss ch=\(level.chapter) isBossLevel=\(level.isBossLevel) stage=\(level.stage) → locked=\(!bossPassed)")
-            return !bossPassed
+            // Boss (isBossLevel=true, stage=4): unlocked once stage 3 of the same
+            // chapter is passed. After boss is beaten, isStagePassed(ch, 4) becomes
+            // true and boss shows as completed.
+            let stage3Passed = isStagePassed(level.chapter, 3)
+            print("[isLevelLocked] boss ch=\(level.chapter) isBossLevel=\(level.isBossLevel) stage=\(level.stage) → locked=\(!stage3Passed)")
+            return !stage3Passed
         } else {
             // Regular stage: locked unless previous stage in same chapter is passed
             let prevStage = level.stage - 1
