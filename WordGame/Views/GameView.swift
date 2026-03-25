@@ -23,6 +23,8 @@ struct GameView: View {
     /// Whether the current question has been passed (answered correctly)
     /// Stays true until the question changes
     @State private var hasPassedCurrentQuestion = false
+    /// The question index when hasPassedCurrentQuestion was last set to true
+    @State private var passedQuestionIndex: Int?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -56,14 +58,16 @@ struct GameView: View {
             }
             .animation(.spring(response: 0.4, dampingFraction: 0.8), value: gameVM.isGameCompleted)
             .animation(.spring(response: 0.35, dampingFraction: 0.8), value: gameVM.currentQuestionIndex)
-            .onChange(of: gameVM.currentQuestionIndex) { _, _ in
+            .onChange(of: gameVM.currentQuestionIndex) { oldIndex, newIndex in
                 userAnswer = ""
                 showResult = false
                 lastAnswerCorrect = nil
                 consecutiveWrongCount = 0
                 showHint = false
                 selectedOption = nil
+                // Reset pass state when question index changes
                 hasPassedCurrentQuestion = false
+                passedQuestionIndex = nil
             }
         }
         .onAppear {
@@ -252,6 +256,7 @@ struct GameView: View {
         lastAnswerCorrect = isCorrect
         if isCorrect {
             hasPassedCurrentQuestion = true
+            passedQuestionIndex = gameVM.currentQuestionIndex
         }
         Task {
             await gameVM.submitAnswer(option)
@@ -386,6 +391,7 @@ struct GameView: View {
             lastAnswerCorrect = isCorrect
             if isCorrect {
                 hasPassedCurrentQuestion = true
+                passedQuestionIndex = gameVM.currentQuestionIndex
             } else {
                 consecutiveWrongCount += 1
                 if consecutiveWrongCount >= 3 {
@@ -488,6 +494,7 @@ struct GameView: View {
             lastAnswerCorrect = isCorrect
             if isCorrect {
                 hasPassedCurrentQuestion = true
+                passedQuestionIndex = gameVM.currentQuestionIndex
             } else {
                 consecutiveWrongCount += 1
                 if consecutiveWrongCount >= 3 {
