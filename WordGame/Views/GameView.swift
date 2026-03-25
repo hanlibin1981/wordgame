@@ -14,6 +14,10 @@ struct GameView: View {
     @State private var lastAnswerCorrect: Bool?
     /// For star pop-in animation in game completed view
     @State private var visibleStars = 0
+    /// Consecutive wrong answer count for current question
+    @State private var consecutiveWrongCount = 0
+    /// Whether to show a hint after 3 consecutive wrong answers
+    @State private var showHint = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -51,6 +55,8 @@ struct GameView: View {
                 userAnswer = ""
                 showResult = false
                 lastAnswerCorrect = nil
+                consecutiveWrongCount = 0
+                showHint = false
             }
         }
         .onAppear {
@@ -114,6 +120,21 @@ struct GameView: View {
 
             Spacer()
 
+            // Hint after 3 consecutive wrong answers
+            if showHint, let correct = gameVM.currentQuestion?.correctAnswer {
+                HStack(spacing: 8) {
+                    Image(systemName: "lightbulb.fill")
+                        .foregroundColor(.warningOrange)
+                    Text("提示: 正确答案是「\(correct)」")
+                        .font(DesignFont.subheadline)
+                        .foregroundColor(.warningOrange)
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.warningOrange.opacity(0.1))
+                .cornerRadius(8)
+            }
+
             // Navigation buttons
             HStack(spacing: 24) {
                 if gameVM.currentQuestionIndex > 0 {
@@ -142,11 +163,12 @@ struct GameView: View {
                         .font(DesignFont.headline)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 10)
-                        .background(Color.primaryBlue)
+                        .background(lastAnswerCorrect == true ? Color.primaryBlue : Color.gray)
                         .foregroundColor(.white)
                         .cornerRadius(8)
                     }
                     .buttonStyle(.plain)
+                    .disabled(lastAnswerCorrect != true)
                 }
             }
         }
@@ -218,12 +240,23 @@ struct GameView: View {
     private func selectOption(_ option: String) {
         guard !showResult else { return }
         showResult = true
+        let isCorrect = option == (gameVM.currentQuestion?.correctAnswer ?? "")
+        lastAnswerCorrect = isCorrect
         Task {
             await gameVM.submitAnswer(option)
-            // Show feedback for 500ms before advancing to next question
+            if !isCorrect {
+                consecutiveWrongCount += 1
+                if consecutiveWrongCount >= 3 {
+                    showHint = true
+                }
+            } else {
+                consecutiveWrongCount = 0
+                showHint = false
+            }
             try? await Task.sleep(nanoseconds: 500_000_000)
             userAnswer = ""
             showResult = false
+            lastAnswerCorrect = nil
         }
     }
 
@@ -339,6 +372,15 @@ struct GameView: View {
             let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
                 == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
             lastAnswerCorrect = isCorrect
+            if !isCorrect {
+                consecutiveWrongCount += 1
+                if consecutiveWrongCount >= 3 {
+                    showHint = true
+                }
+            } else {
+                consecutiveWrongCount = 0
+                showHint = false
+            }
             await gameVM.submitAnswer(answer)
             try? await Task.sleep(nanoseconds: 700_000_000)
             userAnswer = ""
@@ -433,6 +475,15 @@ struct GameView: View {
             let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
                 == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
             lastAnswerCorrect = isCorrect
+            if !isCorrect {
+                consecutiveWrongCount += 1
+                if consecutiveWrongCount >= 3 {
+                    showHint = true
+                }
+            } else {
+                consecutiveWrongCount = 0
+                showHint = false
+            }
             await gameVM.submitAnswer(answer)
             try? await Task.sleep(nanoseconds: 700_000_000)
             userAnswer = ""
