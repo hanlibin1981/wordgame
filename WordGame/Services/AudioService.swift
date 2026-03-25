@@ -86,6 +86,84 @@ final class AudioService: ObservableObject {
         audioPlayer?.stop()
         isPlaying = false
     }
+
+    // MARK: - Word Audio Playback
+
+    /// Play audio for a word using hybrid strategy: URL audio first, then TTS fallback
+    func playWordAudio(word: Word, onFinish: (() -> Void)? = nil) {
+        stop()
+
+        // If URL exists, try to play it first
+        if let urlString = word.audioUrl, let url = URL(string: urlString) {
+            isPlaying = true
+            playFromURL(url) { [weak self] success in
+                DispatchQueue.main.async {
+                    self?.isPlaying = false
+                    if !success {
+                        // Fallback to TTS on URL failure
+                        self?.playTTSFallback(word: word, onFinish: onFinish)
+                    } else {
+                        onFinish?()
+                    }
+                }
+            }
+        } else {
+            // No URL, use TTS directly
+            playTTSFallback(word: word, onFinish: onFinish)
+        }
+    }
+
+    /// Play word via TTS and fire onFinish when done
+    private func playTTSFallback(word: Word, onFinish: (() -> Void)? = nil) {
+        let task = Process()
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/say")
+        task.arguments = ["-v", "Alex", word.word]
+
+        isPlaying = true
+
+        DispatchQueue.global().async { [weak self] in
+            do {
+                try task.run()
+                task.waitUntilExit()
+                DispatchQueue.main.async {
+                    self?.isPlaying = false
+                    onFinish?()
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self?.isPlaying = false
+                    self?.lastError = error.localizedDescription
+                    onFinish?()
+                }
+            }
+        }
+    }
+
+    /// Play audio from a URL using AVAudioPlayer
+    private func playFromURL(_ url: URL, onComplete: @escaping (Bool) -> Void) {
+        DispatchQueue.global().async { [weak self] in
+            do {
+                let player = try AVAudioPlayer(contentsOf: url)
+                self?.audioPlayer = player
+                player.prepareToPlay()
+                player.play()
+
+                // Poll for playback completion
+                while player.isPlaying {
+                    Thread.sleep(forTimeInterval: 0.1)
+                }
+
+                DispatchQueue.main.async {
+                    onComplete(true)
+                }
+            } catch {
+                print("Failed to play audio from URL: \(error)")
+                DispatchQueue.main.async {
+                    onComplete(false)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - Delegate
