@@ -268,8 +268,12 @@ struct GameView: View {
             } else {
                 consecutiveWrongCount = 0
                 showHint = false
+                // Auto-advance on correct answer
+                try? await Task.sleep(nanoseconds: 500_000_000)
+                if gameVM.currentQuestionIndex + 1 < gameVM.totalQuestions {
+                    gameVM.goToNextQuestion()
+                }
             }
-            try? await Task.sleep(nanoseconds: 500_000_000)
             userAnswer = ""
             showResult = false
             lastAnswerCorrect = nil
@@ -385,21 +389,28 @@ struct GameView: View {
         guard !userAnswer.isEmpty, !showResult, !isAudioPlaying else { return }
         let answer = userAnswer
         showResult = true
+        let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
+            == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
+        lastAnswerCorrect = isCorrect
+        if isCorrect {
+            hasPassedCurrentQuestion = true
+            passedQuestionIndex = gameVM.currentQuestionIndex
+        }
         Task {
-            let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
-                == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
-            lastAnswerCorrect = isCorrect
-            if isCorrect {
-                hasPassedCurrentQuestion = true
-                passedQuestionIndex = gameVM.currentQuestionIndex
-            } else {
+            if !isCorrect {
                 consecutiveWrongCount += 1
                 if consecutiveWrongCount >= 3 {
                     showHint = true
                 }
+            } else {
+                consecutiveWrongCount = 0
+                showHint = false
             }
             await gameVM.submitAnswer(answer)
             try? await Task.sleep(nanoseconds: 700_000_000)
+            if isCorrect && gameVM.currentQuestionIndex + 1 < gameVM.totalQuestions {
+                gameVM.goToNextQuestion()
+            }
             userAnswer = ""
             showResult = false
             lastAnswerCorrect = nil
@@ -488,21 +499,28 @@ struct GameView: View {
         guard !userAnswer.isEmpty, !showResult else { return }
         let answer = userAnswer
         showResult = true
+        let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
+            == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
+        lastAnswerCorrect = isCorrect
+        if isCorrect {
+            hasPassedCurrentQuestion = true
+            passedQuestionIndex = gameVM.currentQuestionIndex
+        }
         Task {
-            let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
-                == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
-            lastAnswerCorrect = isCorrect
-            if isCorrect {
-                hasPassedCurrentQuestion = true
-                passedQuestionIndex = gameVM.currentQuestionIndex
-            } else {
+            if !isCorrect {
                 consecutiveWrongCount += 1
                 if consecutiveWrongCount >= 3 {
                     showHint = true
                 }
+            } else {
+                consecutiveWrongCount = 0
+                showHint = false
             }
             await gameVM.submitAnswer(answer)
             try? await Task.sleep(nanoseconds: 700_000_000)
+            if isCorrect && gameVM.currentQuestionIndex + 1 < gameVM.totalQuestions {
+                gameVM.goToNextQuestion()
+            }
             userAnswer = ""
             showResult = false
             lastAnswerCorrect = nil
