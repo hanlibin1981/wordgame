@@ -159,6 +159,7 @@ final class GameViewModel: ObservableObject {
 
     // MARK: - Answer Handling
     /// Submit an answer for the current question
+    /// Note: does NOT auto-advance - caller decides when to move to next question
     func submitAnswer(_ answer: String) async {
         guard var question = currentQuestion else { return }
 
@@ -190,8 +191,7 @@ final class GameViewModel: ObservableObject {
         // Record learning
         await recordLearning(for: question, answer: answer, isCorrect: isCorrect)
 
-        // Move to next question or end game (non-blocking)
-        advanceQuestion()
+        // NOTE: no longer auto-advancing here - View controls navigation via goToNextQuestion()
     }
 
     /// Move to the next question or end the game
