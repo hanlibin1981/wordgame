@@ -20,6 +20,9 @@ struct GameView: View {
     @State private var consecutiveWrongCount = 0
     /// Whether to show a hint after 3 consecutive wrong answers
     @State private var showHint = false
+    /// Whether the current question has been passed (answered correctly)
+    /// Stays true until the question changes
+    @State private var hasPassedCurrentQuestion = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -60,6 +63,7 @@ struct GameView: View {
                 consecutiveWrongCount = 0
                 showHint = false
                 selectedOption = nil
+                hasPassedCurrentQuestion = false
             }
         }
         .onAppear {
@@ -166,12 +170,12 @@ struct GameView: View {
                         .font(DesignFont.headline)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 10)
-                        .background(lastAnswerCorrect == true ? Color.primaryBlue : Color.gray)
+                        .background(hasPassedCurrentQuestion ? Color.primaryBlue : Color.gray)
                         .foregroundColor(.white)
                         .cornerRadius(8)
                     }
                     .buttonStyle(.plain)
-                    .disabled(lastAnswerCorrect != true)
+                    .disabled(!hasPassedCurrentQuestion)
                 }
             }
         }
@@ -246,6 +250,9 @@ struct GameView: View {
         selectedOption = option
         let isCorrect = option == (gameVM.currentQuestion?.correctAnswer ?? "")
         lastAnswerCorrect = isCorrect
+        if isCorrect {
+            hasPassedCurrentQuestion = true
+        }
         Task {
             await gameVM.submitAnswer(option)
             if !isCorrect {
@@ -377,14 +384,13 @@ struct GameView: View {
             let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
                 == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
             lastAnswerCorrect = isCorrect
-            if !isCorrect {
+            if isCorrect {
+                hasPassedCurrentQuestion = true
+            } else {
                 consecutiveWrongCount += 1
                 if consecutiveWrongCount >= 3 {
                     showHint = true
                 }
-            } else {
-                consecutiveWrongCount = 0
-                showHint = false
             }
             await gameVM.submitAnswer(answer)
             try? await Task.sleep(nanoseconds: 700_000_000)
@@ -480,14 +486,13 @@ struct GameView: View {
             let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
                 == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
             lastAnswerCorrect = isCorrect
-            if !isCorrect {
+            if isCorrect {
+                hasPassedCurrentQuestion = true
+            } else {
                 consecutiveWrongCount += 1
                 if consecutiveWrongCount >= 3 {
                     showHint = true
                 }
-            } else {
-                consecutiveWrongCount = 0
-                showHint = false
             }
             await gameVM.submitAnswer(answer)
             try? await Task.sleep(nanoseconds: 700_000_000)
