@@ -140,17 +140,24 @@ struct LevelSelectionView: View {
                         GridItem(.flexible())
                     ], spacing: 16) {
                         ForEach(Array(levels.enumerated()), id: \.element.id) { index, level in
-                            LevelCard(
-                                level: level,
-                                isLocked: isLevelLocked(level),
-                                isCompleted: record(for: level)?.isPassed ?? false,
-                                starsEarned: record(for: level)?.starsEarned ?? 0
-                            )
-                            .onTapGesture {
-                                if !isLevelLocked(level) {
+                            let locked = isLevelLocked(level)
+                            Button {
+                                if !locked {
+                                    print("TAPPED: level=\(level.name), isBoss=\(level.isBossLevel), chapter=\(level.chapter), stage=\(level.stage)")
                                     navigateToGame(level)
+                                } else {
+                                    print("TAPPED BUT LOCKED: level=\(level.name), isBoss=\(level.isBossLevel)")
                                 }
+                            } label: {
+                                LevelCard(
+                                    level: level,
+                                    isLocked: locked,
+                                    isCompleted: record(for: level)?.isPassed ?? false,
+                                    starsEarned: record(for: level)?.starsEarned ?? 0
+                                )
                             }
+                            .buttonStyle(.plain)
+                            .opacity(locked ? 0.55 : 1.0)
                             .transitionEffect(index: index)
                         }
                     }
@@ -266,7 +273,6 @@ struct LevelCard: View {
             y: isHovered && !isLocked ? 6 : 2
         )
         .scaleEffect(isHovered && !isLocked ? 1.03 : 1.0)
-        .opacity(isLocked ? 0.55 : 1.0)
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isHovered)
         .onHover { hovering in
             isHovered = hovering
