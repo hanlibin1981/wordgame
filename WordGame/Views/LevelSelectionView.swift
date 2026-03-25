@@ -46,19 +46,19 @@ struct LevelSelectionView: View {
     /// Locking rules:
     /// - Chapter 1, Stage 1: always unlocked (first level)
     /// - Stage n (1-3): unlocked if stage n-1 of same chapter is passed
-    /// - Boss (stage 4): unlocked if all stages 1,2,3 of same chapter are passed
+    /// - Boss (stage=4, isBossLevel=true): unlocked if boss itself is passed
+    ///   (i.e., player has beaten this chapter's boss before)
     private func isLevelLocked(_ level: GameLevel) -> Bool {
         // First level is always accessible
         if level.chapter == 1 && level.stage == 1 && !level.isBossLevel {
             return false
         }
 
-        if level.isBossLevel {
-            // Boss locked unless all 3 regular stages in this chapter are passed
-            let s1Passed = isStagePassed(level.chapter, 1)
-            let s2Passed = isStagePassed(level.chapter, 2)
-            let s3Passed = isStagePassed(level.chapter, 3)
-            return !(s1Passed && s2Passed && s3Passed)
+        if level.isBossLevel && level.stage == 4 {
+            // Boss (stage=4): locked unless this boss has been beaten before.
+            // isStagePassed(ch, 4) checks the boss's own completion record (stage=4).
+            // Once beaten, the boss stays accessible (can be replayed for better stars).
+            return !isStagePassed(level.chapter, 4)
         } else {
             // Regular stage: locked unless previous stage in same chapter is passed
             let prevStage = level.stage - 1

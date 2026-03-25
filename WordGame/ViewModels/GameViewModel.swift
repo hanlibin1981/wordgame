@@ -315,8 +315,8 @@ final class GameViewModel: ObservableObject {
                     progress.currentChapter += 1
                     progress.currentStage = 1
                 } else if level.stage == 3 {
-                    // Stage 3 passed, next is boss
-                    progress.currentStage = 1
+                    // Stage 3 passed → next is the boss for this chapter (stage 4)
+                    progress.currentStage = 4
                 } else {
                     // Normal stage progression
                     progress.currentStage = level.stage + 1
@@ -353,30 +353,34 @@ final class GameViewModel: ObservableObject {
             let chapter = (index / stagesPerChapter) + 1
             let stage = (index % stagesPerChapter) + 1
 
-            let isBossLevel = stage == stagesPerChapter && !chunk.isEmpty
+            // isLastStage is true for the 3rd stage in a chapter (the chapter-finisher).
+            // The standalone Boss level uses stage=4 so its DB record is distinct from
+            // regular stage 3 (stage=3). This keeps isStagePassed(ch,3) and isStagePassed(ch,4)
+            // unambiguous: 3=regular stage 3 completion, 4=boss completion.
+            let isLastStage = stage == stagesPerChapter && !chunk.isEmpty
 
             let level = GameLevel(
                 id: index + 1,
                 bookId: bookId,
                 chapter: chapter,
-                stage: isBossLevel ? 3 : stage,
-                name: isBossLevel ? "Boss 挑战 - 第\(chapter)章" : "第\(chapter)章 第\(stage)关",
+                stage: stage,       // stage 1, 2, or 3 (never 4 for regular levels)
+                name: "第\(chapter)章 第\(stage)关",
                 wordIds: chunk.map { $0.id },
                 passingScore: 80,
-                isBossLevel: isBossLevel
+                isBossLevel: false  // regular levels are never boss levels
             )
 
             levels.append(level)
 
-            // Add boss level after stage 3
-            if isBossLevel {
+            // Add standalone Boss level as stage 4 (separate from regular stage 3)
+            if isLastStage {
                 let bossLevel = GameLevel(
                     id: index + 2,
                     bookId: bookId,
                     chapter: chapter,
-                    stage: 4,  // Boss is virtual stage 4
+                    stage: 4,  // Boss record stored as stage=4; distinct from regular stage 3 (stage=3)
                     name: "Boss 挑战 - 第\(chapter)章",
-                    wordIds: chunk.map { $0.id },  // Boss uses same words but mixed types
+                    wordIds: chunk.map { $0.id },
                     passingScore: 80,
                     isBossLevel: true
                 )
