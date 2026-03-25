@@ -10,12 +10,22 @@ struct WordBookListView: View {
     @State private var bookToDelete: WordBook?
     @State private var selectedBook: WordBook?
 
+    /// Cached preset books — avoids repeated filter calls on the same data
+    private var presetBooks: [WordBook] {
+        wordBookVM.wordBooks.filter { $0.isPreset }
+    }
+
+    /// Cached custom (non-preset) books
+    private var customBooks: [WordBook] {
+        wordBookVM.wordBooks.filter { !$0.isPreset }
+    }
+
     var body: some View {
         NavigationStack {
             List {
                 // Preset Vocabularies Section
                 Section("预置词库") {
-                    ForEach(wordBookVM.wordBooks.filter { $0.isPreset }) { book in
+                    ForEach(presetBooks) { book in
                         WordBookRow(book: book)
                             .onTapGesture {
                                 selectedBook = book
@@ -25,13 +35,13 @@ struct WordBookListView: View {
 
                 // Custom Vocabularies Section
                 Section("自定义词库") {
-                    if wordBookVM.wordBooks.filter({ !$0.isPreset }).isEmpty {
+                    if customBooks.isEmpty {
                         Text("暂无自定义词库")
                             .font(DesignFont.subheadline)
                             .foregroundStyle(.secondary)
                             .italic()
                     } else {
-                        ForEach(wordBookVM.wordBooks.filter { !$0.isPreset }) { book in
+                        ForEach(customBooks) { book in
                             WordBookRow(book: book)
                                 .onTapGesture {
                                     selectedBook = book

@@ -22,11 +22,10 @@ final class WordBookViewModel: ObservableObject {
         defer { isLoading = false }
 
         do {
-            // Load existing word books
-            wordBooks = try database.fetchAllWordBooks()
-
             // Always ensure preset vocabularies exist (idempotent skip if already imported).
             await vocabImport.initializePresetVocabularies()
+
+            // Load all word books (presets + custom) in a single query after import.
             wordBooks = try database.fetchAllWordBooks()
 
             isInitialized = true

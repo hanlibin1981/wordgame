@@ -8,6 +8,10 @@ struct GameView: View {
     @StateObject private var gameVM = GameViewModel()
     @State private var userAnswer = ""
     @State private var showResult = false
+    /// Tracks whether the last spelling/listening answer was correct (nil = no answer yet)
+    @State private var lastAnswerCorrect: Bool?
+    /// For star pop-in animation in game completed view
+    @State private var visibleStars = 0
 
     var body: some View {
         VStack(spacing: 0) {
@@ -193,34 +197,55 @@ struct GameView: View {
             }
 
             // Input field
-            TextField("输入单词...", text: $userAnswer)
-                .font(DesignFont.title2)
-                .textFieldStyle(.roundedBorder)
-                .onSubmit {
-                    submitSpelling()
+            HStack(spacing: 12) {
+                TextField("输入单词...", text: $userAnswer)
+                    .font(DesignFont.title2)
+                    .textFieldStyle(.roundedBorder)
+                    .disabled(showResult)
+                    .overlay {
+                        if showResult, let correct = lastAnswerCorrect {
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(correct ? Color.successGreen : Color.errorRed, lineWidth: 2)
+                        }
+                    }
+
+                if showResult, let correct = lastAnswerCorrect {
+                    Image(systemName: correct ? "checkmark.circle.fill" : "xmark.circle.fill")
+                        .font(.system(size: 24))
+                        .foregroundColor(correct ? .successGreen : .errorRed)
                 }
+            }
+            .onSubmit {
+                submitSpelling()
+            }
 
             Button(action: submitSpelling) {
                 Text("确认")
                     .font(DesignFont.headline)
                     .frame(width: 120)
                     .padding()
-                    .background(userAnswer.isEmpty ? Color.gray : Color.primaryBlue)
+                    .background(userAnswer.isEmpty || showResult ? Color.gray : Color.primaryBlue)
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
-            .disabled(userAnswer.isEmpty)
+            .disabled(userAnswer.isEmpty || showResult)
         }
         .padding(.horizontal)
     }
 
     private func submitSpelling() {
-        guard !userAnswer.isEmpty else { return }
+        guard !userAnswer.isEmpty, !showResult else { return }
+        let answer = userAnswer
+        showResult = true
         Task {
-            await gameVM.submitAnswer(userAnswer)
-            // Show feedback for 500ms before advancing
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
+                == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
+            lastAnswerCorrect = isCorrect
+            await gameVM.submitAnswer(answer)
+            try? await Task.sleep(nanoseconds: 700_000_000)
             userAnswer = ""
+            showResult = false
+            lastAnswerCorrect = nil
         }
     }
 
@@ -253,33 +278,54 @@ struct GameView: View {
             }
 
             // Input
-            TextField("输入单词...", text: $userAnswer)
-                .font(DesignFont.title2)
-                .textFieldStyle(.roundedBorder)
-                .onSubmit {
-                    submitListeningAnswer()
+            HStack(spacing: 12) {
+                TextField("输入单词...", text: $userAnswer)
+                    .font(DesignFont.title2)
+                    .textFieldStyle(.roundedBorder)
+                    .disabled(showResult)
+                    .overlay {
+                        if showResult, let correct = lastAnswerCorrect {
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(correct ? Color.successGreen : Color.errorRed, lineWidth: 2)
+                        }
+                    }
+
+                if showResult, let correct = lastAnswerCorrect {
+                    Image(systemName: correct ? "checkmark.circle.fill" : "xmark.circle.fill")
+                        .font(.system(size: 24))
+                        .foregroundColor(correct ? .successGreen : .errorRed)
                 }
+            }
+            .onSubmit {
+                submitListeningAnswer()
+            }
 
             Button(action: submitListeningAnswer) {
                 Text("确认")
                     .font(DesignFont.headline)
                     .frame(width: 120)
                     .padding()
-                    .background(userAnswer.isEmpty ? Color.gray : Color.primaryBlue)
+                    .background(userAnswer.isEmpty || showResult ? Color.gray : Color.primaryBlue)
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
-            .disabled(userAnswer.isEmpty)
+            .disabled(userAnswer.isEmpty || showResult)
         }
     }
 
     private func submitListeningAnswer() {
-        guard !userAnswer.isEmpty else { return }
+        guard !userAnswer.isEmpty, !showResult else { return }
+        let answer = userAnswer
+        showResult = true
         Task {
-            await gameVM.submitAnswer(userAnswer)
-            // Show feedback for 500ms before advancing
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            let isCorrect = answer.lowercased().trimmingCharacters(in: .whitespaces)
+                == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
+            lastAnswerCorrect = isCorrect
+            await gameVM.submitAnswer(answer)
+            try? await Task.sleep(nanoseconds: 700_000_000)
             userAnswer = ""
+            showResult = false
+            lastAnswerCorrect = nil
         }
     }
 
@@ -326,19 +372,23 @@ struct GameView: View {
                 Text(result.isPassed ? "恭喜通关!" : "继续加油!")
                     .font(DesignFont.largeTitle)
 
-                // Stars with staggered animation
+                // Stars with staggered bounce animation
                 HStack(spacing: 8) {
-                    ForEach(0..<3) { index in
-                        Image(systemName: index < result.starsEarned ? "star.fill" : "star")
+                    ForEach(0..<3, id: \.self) { index in
+                        Image(systemName: result.starsEarned > index ? "star.fill" : "star")
                             .font(DesignFont.title)
                             .foregroundColor(.warningOrange)
-                            .scaleEffect(index < result.starsEarned ? 1.0 : 0.7)
-                            .sensoryFeedback(.success, trigger: result.starsEarned)
+                            .scaleEffect(visibleStars > index ? 1.0 : 0.5)
+                            .opacity(visibleStars > index ? 1.0 : 0.3)
+                            .sensoryFeedback(.success, trigger: visibleStars)
                     }
                 }
                 .onAppear {
-                    withAnimation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.3)) {
-                        // Stars will appear via view reload
+                    // Stagger star pop-in one by one
+                    for i in 0..<3 {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.6).delay(Double(i) * 0.15)) {
+                            visibleStars = i + 1
+                        }
                     }
                 }
 
@@ -415,6 +465,7 @@ struct GameView: View {
     }
 
     private func restartGame() {
+        visibleStars = 0
         Task {
             await gameVM.startGame(for: book, level: level)
         }

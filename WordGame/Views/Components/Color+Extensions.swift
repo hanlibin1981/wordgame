@@ -38,29 +38,38 @@ extension Color {
     }
 }
 
-// MARK: - Design System Fonts (1.6× scaled)
-/// Scaled fonts: 1.6× the system default (2× → 0.8× = 1.6× net).
+// MARK: - Design System Fonts
+/// Scaled fonts for the word game.
+/// Base size = system default × 1.6 (34×2×0.8 = 54.4pt ≈ largeTitle).
+/// The 1.6× scale was chosen so that:
+///   - largeTitle ≈ 54pt (清晰展示单词)
+///   - titles remain readable without dominating the screen
+///   - captions are still legible on small screens
 enum DesignFont {
+    /// Shared scale factor: system default × 1.6
+    /// Computation: base_point_size × 2 × 0.8 = base_point_size × 1.6
+    private static let scale: CGFloat = 1.6
+
     // Large titles — game question word display
-    static let largeTitle = Font.system(size: 34 * 2 * 0.8, weight: .bold)
-    static let title       = Font.system(size: 28 * 2 * 0.8, weight: .bold)
-    static let title2     = Font.system(size: 24 * 2 * 0.8, weight: .bold)
-    static let title3     = Font.system(size: 20 * 2 * 0.8, weight: .semibold)
+    static let largeTitle = Font.system(size: 34 * scale, weight: .bold)
+    static let title       = Font.system(size: 28 * scale, weight: .bold)
+    static let title2     = Font.system(size: 24 * scale, weight: .bold)
+    static let title3     = Font.system(size: 20 * scale, weight: .semibold)
 
     // Section / card headings
-    static let headline   = Font.system(size: 18 * 2 * 0.8, weight: .semibold)
-    static let subheadline = Font.system(size: 15 * 2 * 0.8, weight: .regular)
+    static let headline   = Font.system(size: 18 * scale, weight: .semibold)
+    static let subheadline = Font.system(size: 15 * scale, weight: .regular)
 
     // Body text — meaning, sentences, labels
-    static let body       = Font.system(size: 17 * 2 * 0.8, weight: .regular)
-    static let callout    = Font.system(size: 16 * 2 * 0.8, weight: .regular)
+    static let body       = Font.system(size: 17 * scale, weight: .regular)
+    static let callout    = Font.system(size: 16 * scale, weight: .regular)
 
     // Captions, hints, metadata
-    static let caption    = Font.system(size: 12 * 2 * 0.8, weight: .regular)
-    static let caption2   = Font.system(size: 11 * 2 * 0.8, weight: .regular)
+    static let caption    = Font.system(size: 12 * scale, weight: .regular)
+    static let caption2   = Font.system(size: 11 * scale, weight: .regular)
 
     // Question option buttons
-    static let option     = Font.system(size: 17 * 2 * 0.8, weight: .medium)
+    static let option     = Font.system(size: 17 * scale, weight: .medium)
 
     // Tab bar labels (system-provided)
 }
