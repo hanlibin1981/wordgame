@@ -47,6 +47,11 @@ struct GameView: View {
             }
             .animation(.spring(response: 0.4, dampingFraction: 0.8), value: gameVM.isGameCompleted)
             .animation(.spring(response: 0.35, dampingFraction: 0.8), value: gameVM.currentQuestionIndex)
+            .onChange(of: gameVM.currentQuestionIndex) { _, _ in
+                userAnswer = ""
+                showResult = false
+                lastAnswerCorrect = nil
+            }
         }
         .onAppear {
             Task {
@@ -108,6 +113,42 @@ struct GameView: View {
             }
 
             Spacer()
+
+            // Navigation buttons
+            HStack(spacing: 24) {
+                if gameVM.currentQuestionIndex > 0 {
+                    Button(action: { gameVM.goToPreviousQuestion() }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "chevron.left")
+                            Text("上一题")
+                        }
+                        .font(DesignFont.headline)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 10)
+                        .background(Color.gray.opacity(0.15))
+                        .cornerRadius(8)
+                    }
+                    .buttonStyle(.plain)
+                }
+
+                Spacer()
+
+                if gameVM.currentQuestionIndex < gameVM.totalQuestions - 1 {
+                    Button(action: { gameVM.goToNextQuestion() }) {
+                        HStack(spacing: 4) {
+                            Text("下一题")
+                            Image(systemName: "chevron.right")
+                        }
+                        .font(DesignFont.headline)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 10)
+                        .background(Color.primaryBlue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
         }
         .padding()
     }

@@ -201,13 +201,25 @@ final class GameViewModel: ObservableObject {
     private func advanceQuestion() {
         if currentQuestionIndex + 1 < questions.count {
             currentQuestionIndex += 1
-            // Reset the per-question timer for the newly shown question
             currentQuestionStartTime = Date()
         } else {
             Task {
                 await endGame()
             }
         }
+    }
+
+    /// Go to the previous question (for navigation buttons)
+    func goToPreviousQuestion() {
+        guard currentQuestionIndex > 0 else { return }
+        currentQuestionIndex -= 1
+        currentQuestionStartTime = Date()
+    }
+
+    /// Go to the next question (for navigation buttons)
+    func goToNextQuestion() {
+        guard currentQuestionIndex + 1 < questions.count else { return }
+        advanceQuestion()
     }
 
     /// End the game and calculate results
