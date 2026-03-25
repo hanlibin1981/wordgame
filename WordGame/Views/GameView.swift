@@ -14,6 +14,8 @@ struct GameView: View {
     @State private var lastAnswerCorrect: Bool?
     /// For star pop-in animation in game completed view
     @State private var visibleStars = 0
+    /// Tracks the selected option in choice questions for visual feedback
+    @State private var selectedOption: String?
     /// Consecutive wrong answer count for current question
     @State private var consecutiveWrongCount = 0
     /// Whether to show a hint after 3 consecutive wrong answers
@@ -57,6 +59,7 @@ struct GameView: View {
                 lastAnswerCorrect = nil
                 consecutiveWrongCount = 0
                 showHint = false
+                selectedOption = nil
             }
         }
         .onAppear {
@@ -233,13 +236,14 @@ struct GameView: View {
     private func optionButtonState(for option: String, correct: String) -> OptionButtonState {
         guard showResult else { return .normal }
         if option == correct { return .correct }
-        if option == userAnswer { return .wrong }
+        if option == selectedOption { return .wrong }
         return .normal
     }
 
     private func selectOption(_ option: String) {
         guard !showResult else { return }
         showResult = true
+        selectedOption = option
         let isCorrect = option == (gameVM.currentQuestion?.correctAnswer ?? "")
         lastAnswerCorrect = isCorrect
         Task {
@@ -257,6 +261,7 @@ struct GameView: View {
             userAnswer = ""
             showResult = false
             lastAnswerCorrect = nil
+            selectedOption = nil
         }
     }
 
