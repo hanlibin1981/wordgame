@@ -312,13 +312,21 @@ struct GameView: View {
             Text("听录音，写出单词")
                 .font(DesignFont.headline)
                 .foregroundStyle(.secondary)
+                .onAppear {
+                    isAudioPlaying = true
+                    AudioService.shared.playWordAudio(word: question.word) {
+                        DispatchQueue.main.async {
+                            self.isAudioPlaying = false
+                        }
+                    }
+                }
 
-            // Play button
-            Button(action: { AudioService.shared.speakWithSay(question.word.word) }) {
+            // Play/replay button
+            Button(action: { replayAudio() }) {
                 VStack(spacing: 8) {
-                    Image(systemName: "speaker.wave.3.fill")
+                    Image(systemName: isAudioPlaying ? "speaker.wave.3.fill" : "speaker.wave.2.fill")
                         .font(.system(size: 40 * 2))
-                    Text("点击播放")
+                    Text(isAudioPlaying ? "正在播放..." : "再次播放")
                         .font(DesignFont.caption)
                 }
                 .frame(width: 120, height: 120)
@@ -326,6 +334,7 @@ struct GameView: View {
                 .cornerRadius(60)
             }
             .buttonStyle(.plain)
+            .disabled(isAudioPlaying)
 
             // Hint
             if let sentence = question.word.sentence, !sentence.isEmpty {
@@ -339,7 +348,7 @@ struct GameView: View {
                 TextField("输入单词...", text: $userAnswer)
                     .font(DesignFont.title2)
                     .textFieldStyle(.roundedBorder)
-                    .disabled(showResult)
+                    .disabled(isAudioPlaying || showResult)
                     .overlay {
                         if showResult, let correct = lastAnswerCorrect {
                             RoundedRectangle(cornerRadius: 6)
@@ -362,11 +371,12 @@ struct GameView: View {
                     .font(DesignFont.headline)
                     .frame(width: 120)
                     .padding()
-                    .background(userAnswer.isEmpty || showResult ? Color.gray : Color.primaryBlue)
+                    .background(isAudioPlaying || userAnswer.isEmpty || showResult ? Color.gray : Color.primaryBlue)
+                    .opacity(isAudioPlaying ? 0.5 : 1.0)
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
-            .disabled(userAnswer.isEmpty || showResult)
+            .disabled(isAudioPlaying || userAnswer.isEmpty || showResult)
         }
     }
 
