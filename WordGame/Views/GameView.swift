@@ -440,24 +440,45 @@ struct GameView: View {
             // Actions
             VStack(spacing: 12) {
                 Button(action: restartGame) {
-                    Text("再玩一次")
-                        .font(DesignFont.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.primaryBlue)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
+                    HStack {
+                        if gameVM.isSavingProgress {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .scaleEffect(0.8)
+                        }
+                        Text(gameVM.isSavingProgress ? "保存中..." : "再玩一次")
+                    }
+                    .font(DesignFont.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.primaryBlue)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
                 }
+                .disabled(gameVM.isSavingProgress)
 
-                Button(action: { dismiss() }) {
-                    Text("返回")
-                        .font(DesignFont.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .foregroundColor(.primary)
-                        .cornerRadius(12)
+                Button(action: {
+                    // Wait for progress save before navigating away
+                    if !gameVM.isSavingProgress {
+                        dismiss()
+                    }
+                }) {
+                    HStack {
+                        if gameVM.isSavingProgress {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .scaleEffect(0.8)
+                        }
+                        Text(gameVM.isSavingProgress ? "保存中..." : "返回")
+                    }
+                    .font(DesignFont.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .foregroundColor(.primary)
+                    .cornerRadius(12)
                 }
+                .disabled(gameVM.isSavingProgress)
             }
             .padding(.horizontal, 40)
             .padding(.bottom)

@@ -14,6 +14,8 @@ final class GameViewModel: ObservableObject {
     @Published var wrongCount = 0
     @Published var isGameActive = false
     @Published var isGameCompleted = false
+    /// True while progress is being saved to DB after game ends (blocks navigation)
+    @Published var isSavingProgress = false
     @Published var gameResult: GameResult?
     @Published var starsEarned = 0
 
@@ -210,6 +212,7 @@ final class GameViewModel: ObservableObject {
 
     /// End the game and calculate results
     private func endGame() async {
+        isSavingProgress = true  // Block navigation until DB write completes
         isGameActive = false
         isGameCompleted = true
 
@@ -241,6 +244,7 @@ final class GameViewModel: ObservableObject {
 
         // Update progress
         await updateProgress()
+        isSavingProgress = false  // Unblock navigation
     }
 
     /// Update word mastery level based on answer result
