@@ -272,6 +272,9 @@ struct GameView: View {
                 try? await Task.sleep(nanoseconds: 500_000_000)
                 if gameVM.currentQuestionIndex + 1 < gameVM.totalQuestions {
                     gameVM.goToNextQuestion()
+                } else {
+                    // Last question answered correctly — end the game
+                    await gameVM.endGame()
                 }
             }
             userAnswer = ""
@@ -347,23 +350,26 @@ struct GameView: View {
             .foregroundColor(isAudioPlaying ? .secondary : .primaryBlue)
             .disabled(isAudioPlaying)
 
-            // Input field
-            HStack(spacing: 12) {
-                TextField("输入单词...", text: $userAnswer)
-                    .font(DesignFont.title2)
-                    .textFieldStyle(.roundedBorder)
-                    .disabled(isAudioPlaying || showResult)
-                    .overlay {
-                        if showResult, let correct = lastAnswerCorrect {
-                            RoundedRectangle(cornerRadius: 6)
-                                .stroke(correct ? Color.successGreen : Color.errorRed, lineWidth: 2)
+            // Input field - centered with fixed width
+            VStack(spacing: 8) {
+                HStack(spacing: 12) {
+                    TextField("输入单词...", text: $userAnswer)
+                        .font(DesignFont.title2)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(maxWidth: 300)
+                        .disabled(isAudioPlaying || showResult)
+                        .overlay {
+                            if showResult, let correct = lastAnswerCorrect {
+                                RoundedRectangle(cornerRadius: 6)
+                                    .stroke(correct ? Color.successGreen : Color.errorRed, lineWidth: 2)
+                            }
                         }
-                    }
 
-                if showResult, let correct = lastAnswerCorrect {
-                    Image(systemName: correct ? "checkmark.circle.fill" : "xmark.circle.fill")
-                        .font(.system(size: 24))
-                        .foregroundColor(correct ? .successGreen : .errorRed)
+                    if showResult, let correct = lastAnswerCorrect {
+                        Image(systemName: correct ? "checkmark.circle.fill" : "xmark.circle.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(correct ? .successGreen : .errorRed)
+                    }
                 }
             }
             .onSubmit {
@@ -410,6 +416,8 @@ struct GameView: View {
             try? await Task.sleep(nanoseconds: 700_000_000)
             if isCorrect && gameVM.currentQuestionIndex + 1 < gameVM.totalQuestions {
                 gameVM.goToNextQuestion()
+            } else if isCorrect {
+                await gameVM.endGame()
             }
             userAnswer = ""
             showResult = false
@@ -458,23 +466,26 @@ struct GameView: View {
                     .foregroundStyle(.secondary)
             }
 
-            // Input
-            HStack(spacing: 12) {
-                TextField("输入单词...", text: $userAnswer)
-                    .font(DesignFont.title2)
-                    .textFieldStyle(.roundedBorder)
-                    .disabled(isAudioPlaying || showResult)
-                    .overlay {
-                        if showResult, let correct = lastAnswerCorrect {
-                            RoundedRectangle(cornerRadius: 6)
-                                .stroke(correct ? Color.successGreen : Color.errorRed, lineWidth: 2)
+            // Input - centered with fixed width
+            VStack(spacing: 8) {
+                HStack(spacing: 12) {
+                    TextField("输入单词...", text: $userAnswer)
+                        .font(DesignFont.title2)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(maxWidth: 300)
+                        .disabled(isAudioPlaying || showResult)
+                        .overlay {
+                            if showResult, let correct = lastAnswerCorrect {
+                                RoundedRectangle(cornerRadius: 6)
+                                    .stroke(correct ? Color.successGreen : Color.errorRed, lineWidth: 2)
+                            }
                         }
-                    }
 
-                if showResult, let correct = lastAnswerCorrect {
-                    Image(systemName: correct ? "checkmark.circle.fill" : "xmark.circle.fill")
-                        .font(.system(size: 24))
-                        .foregroundColor(correct ? .successGreen : .errorRed)
+                    if showResult, let correct = lastAnswerCorrect {
+                        Image(systemName: correct ? "checkmark.circle.fill" : "xmark.circle.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(correct ? .successGreen : .errorRed)
+                    }
                 }
             }
             .onSubmit {
@@ -520,6 +531,8 @@ struct GameView: View {
             try? await Task.sleep(nanoseconds: 700_000_000)
             if isCorrect && gameVM.currentQuestionIndex + 1 < gameVM.totalQuestions {
                 gameVM.goToNextQuestion()
+            } else if isCorrect {
+                await gameVM.endGame()
             }
             userAnswer = ""
             showResult = false
@@ -631,6 +644,37 @@ struct GameView: View {
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(12)
                 .frame(width: 250)
+
+                // Per-question breakdown
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("答题详情")
+                        .font(DesignFont.headline)
+                        .padding(.bottom, 4)
+
+                    ForEach(Array(gameVM.questions.enumerated()), id: \.offset) { index, question in
+                        let correct = question.isCorrect == true
+                        HStack(spacing: 8) {
+                            Image(systemName: correct ? "checkmark.circle.fill" : "xmark.circle.fill")
+                                .foregroundColor(correct ? .successGreen : .errorRed)
+                            Text("第\(index + 1)题")
+                                .font(DesignFont.subheadline)
+                            Spacer()
+                            Text(question.word.word)
+                                .font(DesignFont.subheadline)
+                                .foregroundColor(.secondary)
+                            if !correct {
+                                Text("「\(question.correctAnswer)」")
+                                    .font(DesignFont.subheadline)
+                                    .foregroundColor(.errorRed)
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(12)
+                .frame(width: 320)
             }
 
             Spacer()

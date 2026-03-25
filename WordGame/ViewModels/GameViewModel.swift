@@ -223,7 +223,7 @@ final class GameViewModel: ObservableObject {
     }
 
     /// End the game and calculate results
-    private func endGame() async {
+    func endGame() async {
         isSavingProgress = true  // Block navigation until DB write completes
         isGameActive = false
         isGameCompleted = true
