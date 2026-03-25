@@ -80,10 +80,13 @@ final class AudioService: ObservableObject {
 
     /// Stop any currently playing audio
     func stop() {
+        audioPlayerCompletionTimer?.invalidate()
+        audioPlayerCompletionTimer = nil
         if synthesizer.isSpeaking {
             synthesizer.stopSpeaking(at: .immediate)
         }
         audioPlayer?.stop()
+        audioPlayer = nil
         isPlaying = false
     }
 
@@ -139,26 +142,36 @@ final class AudioService: ObservableObject {
         }
     }
 
+    private var audioPlayerCompletionTimer: Timer?
+
     /// Play audio from a URL using AVAudioPlayer
     private func playFromURL(_ url: URL, onComplete: @escaping (Bool) -> Void) {
         DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
             do {
                 let player = try AVAudioPlayer(contentsOf: url)
-                self?.audioPlayer = player
+                self.audioPlayer = player
                 player.prepareToPlay()
                 player.play()
 
-                // Poll for playback completion
-                while player.isPlaying {
-                    Thread.sleep(forTimeInterval: 0.1)
-                }
-
+                // Use timer to detect playback completion (no CPU polling)
                 DispatchQueue.main.async {
-                    onComplete(true)
+                    self.audioPlayerCompletionTimer?.invalidate()
+                    self.audioPlayerCompletionTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak player] timer in
+                        guard let player = player else {
+                            timer.invalidate()
+                            return
+                        }
+                        if !player.isPlaying {
+                            timer.invalidate()
+                            self.audioPlayer = nil  // Release resource
+                            onComplete(true)
+                        }
+                    }
                 }
             } catch {
-                print("Failed to play audio from URL: \(error)")
                 DispatchQueue.main.async {
+                    self.lastError = "Failed to play audio from URL: \(error.localizedDescription)"
                     onComplete(false)
                 }
             }
