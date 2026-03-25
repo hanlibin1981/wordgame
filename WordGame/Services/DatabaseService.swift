@@ -582,6 +582,7 @@ final class DatabaseService: ObservableObject {
     /// Reset all game progress, level records, and learning records for a specific book.
     /// Preset vocabularies are also reset (user progress cleared, words remain).
     func resetAllProgress(forBookId bookId: String) throws {
+        guard let db = db else { throw DatabaseError.connectionFailed }
         try db.run(learningRecords.filter(lrBookId == bookId).delete())
         try db.run(gameProgress.filter(gpBookId == bookId).delete())
         try db.run(levelRecords.filter(lvlBookId == bookId).delete())
@@ -589,6 +590,7 @@ final class DatabaseService: ObservableObject {
 
     /// Reset all progress for ALL books (used by settings reset).
     func resetAllProgressGlobally() throws {
+        guard let db = db else { throw DatabaseError.connectionFailed }
         try db.run(learningRecords.delete())
         try db.run(gameProgress.delete())
         try db.run(levelRecords.delete())

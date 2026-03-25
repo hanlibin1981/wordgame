@@ -174,9 +174,22 @@ struct DifficultySettingsView: View {
             }
         }
         .navigationTitle("难度设置")
-        .navigationBarTitleDisplayMode(.inline)
+        .modifier(NavigationBarTitleInlineModifier())
     }
 }
+
+// MARK: - macOS-compatible modifier
+#if os(macOS)
+struct NavigationBarTitleInlineModifier: ViewModifier {
+    func body(content: Content) -> some View { content }
+}
+#else
+struct NavigationBarTitleInlineModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content.navigationBarTitleDisplayMode(.inline)
+    }
+}
+#endif
 
 #Preview {
     SettingsView()
