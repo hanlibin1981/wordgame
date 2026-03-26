@@ -28,6 +28,20 @@ final class GameViewModel: ObservableObject {
     private let database = DatabaseService.shared
 
     // MARK: - Computed Properties
+    /// Words available for the current level's pre-game learning phase.
+    /// Returns words belonging to the current level (or all words for practice mode),
+    /// limited to the same cap as generateQuestions().
+    var learningWords: [Word] {
+        guard let level = currentLevel else {
+            let cap = UserDefaults.standard.integer(forKey: "questionsPerRound")
+            return Array(allWords.shuffled().prefix(cap > 0 ? cap : 10))
+        }
+        let cap = UserDefaults.standard.integer(forKey: "questionsPerRound")
+        let levelWordIds = Set(level.wordIds)
+        let filtered = allWords.filter { levelWordIds.contains($0.id) }
+        return Array(filtered.prefix(cap > 0 ? cap : filtered.count))
+    }
+
     var currentQuestion: GameQuestion? {
         guard currentQuestionIndex < questions.count else { return nil }
         return questions[currentQuestionIndex]

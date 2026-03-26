@@ -1,5 +1,13 @@
 import SwiftUI
 
+// MARK: - Game Phase
+enum GamePhase {
+    case learning
+    case playing
+    case completed
+}
+
+// MARK: - Main Game View
 /// Main game view for playing through a level
 struct GameView: View {
     let book: WordBook
@@ -26,6 +34,10 @@ struct GameView: View {
     /// Pending UI resets to apply after the current Task completes.
     /// Prevents state from being cleared while an async auto-advance Task is running.
     @State private var pendingReset: (() -> Void)?
+    /// Current game phase: learning → playing → completed
+    @State private var gamePhase: GamePhase = .learning
+    /// Set of word IDs that have been marked as studied in the learning phase
+    @State private var studiedWordIds: Set<String> = []
 
     var body: some View {
         VStack(spacing: 0) {
@@ -34,30 +46,38 @@ struct GameView: View {
 
             Divider()
 
-            // Question area with transition animation
+            // Phase-based content
             ZStack {
-                if gameVM.isGameCompleted {
+                switch gamePhase {
+                case .learning:
+                    wordLearningView
+                        .transition(.opacity.combined(with: .scale(scale: 0.95)))
+
+                case .playing:
+                    if gameVM.isGameActive, let question = gameVM.currentQuestion {
+                        questionArea(for: question)
+                            .transition(.asymmetric(
+                                insertion: .opacity.combined(with: .move(edge: .trailing)),
+                                removal: .opacity.combined(with: .move(edge: .leading))
+                            ))
+                            .onDisappear {
+                                if isAudioPlaying {
+                                    AudioService.shared.stop()
+                                    isAudioPlaying = false
+                                }
+                            }
+                    } else if gameVM.totalQuestions == 0 {
+                        emptyStateView(message: "词库为空\n请先添加单词再开始学习")
+                    } else {
+                        loadingView
+                    }
+
+                case .completed:
                     gameCompletedView
                         .transition(.opacity.combined(with: .scale(scale: 0.95)))
-                } else if gameVM.isGameActive, let question = gameVM.currentQuestion {
-                    questionArea(for: question)
-                        .transition(.asymmetric(
-                            insertion: .opacity.combined(with: .move(edge: .trailing)),
-                            removal: .opacity.combined(with: .move(edge: .leading))
-                        ))
-                        .onDisappear {
-                            if isAudioPlaying {
-                                AudioService.shared.stop()
-                                isAudioPlaying = false
-                            }
-                        }
-                } else if gameVM.totalQuestions == 0 && !gameVM.isGameActive {
-                    emptyStateView(message: "词库为空\n请先添加单词再开始学习")
-                } else {
-                    loadingView
                 }
             }
-            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: gameVM.isGameCompleted)
+            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: gamePhase)
             .animation(.spring(response: 0.35, dampingFraction: 0.8), value: gameVM.currentQuestionIndex)
             .onChange(of: gameVM.currentQuestionIndex) { oldIndex, newIndex in
                 // Apply any pending reset from the previous question's answer processing
@@ -73,8 +93,14 @@ struct GameView: View {
             }
         }
         .onAppear {
+            // Load words for the learning phase (no game start yet)
             Task {
                 await gameVM.startGame(for: book, level: level)
+            }
+        }
+        .onChange(of: gameVM.isGameCompleted) { _, completed in
+            if completed {
+                gamePhase = .completed
             }
         }
     }
@@ -113,6 +139,29 @@ struct GameView: View {
         }
         .padding()
         .background(Color.backgroundMain)
+    }
+
+    // MARK: - Word Learning Phase
+    private var wordLearningView: some View {
+        WordLearningView(
+            book: book,
+            level: level,
+            learningWords: gameVM.learningWords,
+            onStartGame: startGameplay,
+            onDismiss: { dismiss() },
+            studiedWordIds: $studiedWordIds,
+            gamePhase: $gamePhase
+        )
+    }
+
+    /// Transition from learning phase to playing phase and start the game.
+    private func startGameplay() {
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+            gamePhase = .playing
+        }
+        Task {
+            await gameVM.startGame(for: book, level: level)
+        }
     }
 
     // MARK: - Question Area
@@ -878,6 +927,7 @@ struct GameView: View {
         }
     }
 }
+
 
 // MARK: - Option Button with animation
 enum OptionButtonState {
