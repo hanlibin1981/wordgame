@@ -595,159 +595,279 @@ struct GameView: View {
 
     // MARK: - Game Completed
     private var gameCompletedView: some View {
-        VStack(spacing: 32) {
-            Spacer()
+        ZStack {
+            Color.backgroundMain
+                .ignoresSafeArea()
 
-            // Result icon
             if let result = gameVM.gameResult {
+                // Main content card — centered, max-width, with sticky bottom buttons
+                VStack(spacing: 0) {
+                    ScrollView(.vertical, showsIndicators: true) {
+                        VStack(spacing: 28) {
+                            // ── Header: icon + title + stars ──
+                            completionHeader(result: result)
+
+                            Divider()
+
+                            // ── Stats: 2×2 grid with large numbers ──
+                            statsGrid(result: result)
+
+                            // ── Per-question breakdown ──
+                            questionBreakdown
+                        }
+                        .padding(28)
+                    }
+                    .frame(maxWidth: 520)
+
+                    // ── Sticky action buttons ──
+                    actionButtons
+                }
+                .background(Color.cardBackground)
+                .cornerRadius(20)
+                .shadow(color: .black.opacity(0.08), radius: 24, x: 0, y: 8)
+                .frame(maxWidth: 540, maxHeight: 680)
+            }
+        }
+        .onAppear {
+            // Kick off star animations when view appears
+            guard visibleStars == 0 else { return }
+            for i in 0..<3 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.15) {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+                        visibleStars = i + 1
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Completion Header
+    private func completionHeader(result: GameResult) -> some View {
+        VStack(spacing: 16) {
+            // Result icon with ambient ring
+            ZStack {
+                Circle()
+                    .fill(result.isPassed
+                          ? Color.successGreen.opacity(0.12)
+                          : Color.errorRed.opacity(0.12))
+                    .frame(width: 120, height: 120)
+
+                Circle()
+                    .stroke(result.isPassed ? Color.successGreen.opacity(0.3) : Color.errorRed.opacity(0.3), lineWidth: 2)
+                    .frame(width: 100, height: 100)
+
                 Image(systemName: result.isPassed ? "checkmark.circle.fill" : "xmark.circle.fill")
-                    .font(.system(size: 80 * 2))
+                    .font(.system(size: 64))
                     .foregroundColor(result.isPassed ? .successGreen : .errorRed)
+            }
+            .scaleEffect(visibleStars > 0 ? 1.0 : 0.6)
+            .animation(.spring(response: 0.5, dampingFraction: 0.6), value: visibleStars)
 
-                Text(result.isPassed ? "恭喜通关!" : "继续加油!")
-                    .font(DesignFont.largeTitle)
+            // Title
+            Text(result.isPassed ? "恭喜通关!" : "继续加油!")
+                .font(.system(size: 28, weight: .bold))
+                .foregroundColor(result.isPassed ? .successGreen : .errorRed)
 
-                // Stars with staggered bounce animation
-                HStack(spacing: 8) {
-                    ForEach(0..<3, id: \.self) { index in
-                        Image(systemName: result.starsEarned > index ? "star.fill" : "star")
-                            .font(DesignFont.title)
-                            .foregroundColor(.warningOrange)
-                            .scaleEffect(visibleStars > index ? 1.0 : 0.5)
-                            .opacity(visibleStars > index ? 1.0 : 0.3)
-                            .sensoryFeedback(.success, trigger: visibleStars)
-                    }
+            // Stars
+            HStack(spacing: 12) {
+                ForEach(0..<3, id: \.self) { index in
+                    starView(index: index, earned: result.starsEarned)
                 }
-                .onAppear {
-                    // Stagger star pop-in one by one
-                    for i in 0..<3 {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.6).delay(Double(i) * 0.15)) {
-                            visibleStars = i + 1
-                        }
-                    }
-                }
+            }
+        }
+        .padding(.top, 8)
+    }
 
-                // Stats
-                VStack(spacing: 12) {
-                    HStack {
-                        Text("正确")
-                            .font(DesignFont.headline)
-                        Spacer()
-                        Text("\(result.correctCount)")
-                            .font(DesignFont.headline)
-                            .foregroundColor(.successGreen)
-                    }
+    // MARK: - Star View
+    private func starView(index: Int, earned: Int) -> some View {
+        Image(systemName: earned > index ? "star.fill" : "star")
+            .font(.system(size: 32))
+            .foregroundColor(.warningOrange)
+            .shadow(color: earned > index ? .warningOrange.opacity(0.4) : .clear, radius: 6)
+            .scaleEffect(visibleStars > index ? 1.0 : 0.5)
+            .opacity(visibleStars > index ? 1.0 : 0.3)
+            .sensoryFeedback(.success, trigger: visibleStars)
+    }
 
-                    HStack {
-                        Text("错误")
-                            .font(DesignFont.headline)
-                        Spacer()
-                        Text("\(result.wrongCount)")
-                            .font(DesignFont.headline)
-                            .foregroundColor(.errorRed)
-                    }
+    // MARK: - Stats Grid
+    private func statsGrid(result: GameResult) -> some View {
+        LazyVGrid(columns: [
+            GridItem(.flexible(), spacing: 12),
+            GridItem(.flexible(), spacing: 12)
+        ], spacing: 12) {
+            StatCell(
+                icon: "checkmark.circle.fill",
+                iconColor: .successGreen,
+                value: "\(result.correctCount)",
+                label: "正确",
+                valueColor: .successGreen
+            )
 
-                    HStack {
-                        Text("正确率")
-                            .font(DesignFont.headline)
-                        Spacer()
-                        Text("\(Int(result.accuracy))%")
-                            .font(DesignFont.headline)
-                    }
+            StatCell(
+                icon: "xmark.circle.fill",
+                iconColor: .errorRed,
+                value: "\(result.wrongCount)",
+                label: "错误",
+                valueColor: .errorRed
+            )
 
-                    HStack {
-                        Text("得分")
-                            .font(DesignFont.headline)
-                        Spacer()
-                        Text("\(result.score)")
-                            .font(DesignFont.headline)
-                            .fontWeight(.bold)
-                    }
-                }
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(12)
-                .frame(width: 250)
+            StatCell(
+                icon: "percent",
+                iconColor: .primaryBlue,
+                value: "\(Int(result.accuracy))%",
+                label: "正确率",
+                valueColor: .primaryBlue
+            )
 
-                // Per-question breakdown
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("答题详情")
-                        .font(DesignFont.headline)
-                        .padding(.bottom, 4)
+            StatCell(
+                icon: "star.fill",
+                iconColor: .warningOrange,
+                value: "\(result.score)",
+                label: "得分",
+                valueColor: .warningOrange
+            )
+        }
+    }
 
-                    ForEach(Array(gameVM.questions.enumerated()), id: \.offset) { index, question in
-                        let correct = question.isCorrect == true
-                        HStack(spacing: 8) {
-                            Image(systemName: correct ? "checkmark.circle.fill" : "xmark.circle.fill")
-                                .foregroundColor(correct ? .successGreen : .errorRed)
+    // MARK: - Question Breakdown
+    private var questionBreakdown: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("答题详情")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(.secondary)
+
+            VStack(spacing: 0) {
+                ForEach(Array(gameVM.questions.enumerated()), id: \.offset) { index, question in
+                    let correct = question.isCorrect == true
+
+                    HStack(spacing: 12) {
+                        // Status icon
+                        Image(systemName: correct ? "checkmark.circle.fill" : "xmark.circle.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(correct ? .successGreen : .errorRed)
+                            .frame(width: 20)
+
+                        // Question number + word
+                        VStack(alignment: .leading, spacing: 2) {
                             Text("第\(index + 1)题")
-                                .font(DesignFont.subheadline)
-                            Spacer()
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(.primary)
+
                             Text(question.word.word)
-                                .font(DesignFont.subheadline)
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(correct ? .secondary : .primary)
+                        }
+
+                        Spacer()
+
+                        // Wrong answer display
+                        if !correct {
+                            Text("「\(question.correctAnswer)」")
+                                .font(.system(size: 13))
+                                .foregroundColor(.errorRed)
+                                .lineLimit(1)
+                        } else {
+                            Text(question.word.meaning)
+                                .font(.system(size: 12))
                                 .foregroundColor(.secondary)
-                            if !correct {
-                                Text("「\(question.correctAnswer)」")
-                                    .font(DesignFont.subheadline)
-                                    .foregroundColor(.errorRed)
-                            }
+                                .lineLimit(1)
                         }
-                        .padding(.vertical, 4)
+                    }
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 12)
+                    .background(index % 2 == 0 ? Color.clear : Color.gray.opacity(0.04))
+
+                    if index < gameVM.questions.count - 1 {
+                        Divider()
                     }
                 }
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(12)
-                .frame(width: 320)
             }
+            .background(Color.cardBackground)
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.gray.opacity(0.12), lineWidth: 1)
+            )
+        }
+    }
 
-            Spacer()
+    // MARK: - Action Buttons
+    private var actionButtons: some View {
+        VStack(spacing: 10) {
+            Divider()
 
-            // Actions
-            VStack(spacing: 12) {
-                Button(action: restartGame) {
-                    HStack {
-                        if gameVM.isSavingProgress {
-                            ProgressView()
-                                .progressViewStyle(.circular)
-                                .scaleEffect(0.8)
-                        }
-                        Text(gameVM.isSavingProgress ? "保存中..." : "再玩一次")
-                    }
-                    .font(DesignFont.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.primaryBlue)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
+            if gameVM.isSavingProgress {
+                HStack {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(0.8)
+                    Text("保存中...")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(.secondary)
                 }
-                .disabled(gameVM.isSavingProgress)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+            } else {
+                VStack(spacing: 8) {
+                    Button(action: restartGame) {
+                        Text("再玩一次")
+                            .font(.system(size: 16, weight: .semibold))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 13)
+                            .background(Color.primaryBlue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .buttonStyle(.plain)
 
-                Button(action: {
-                    // Wait for progress save before navigating away
-                    if !gameVM.isSavingProgress {
-                        dismiss()
-                    }
-                }) {
-                    HStack {
-                        if gameVM.isSavingProgress {
-                            ProgressView()
-                                .progressViewStyle(.circular)
-                                .scaleEffect(0.8)
+                    Button(action: {
+                        if !gameVM.isSavingProgress {
+                            dismiss()
                         }
-                        Text(gameVM.isSavingProgress ? "保存中..." : "返回")
+                    }) {
+                        Text("返回")
+                            .font(.system(size: 15, weight: .medium))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(Color.gray.opacity(0.1))
+                            .foregroundColor(.secondary)
+                            .cornerRadius(10)
                     }
-                    .font(DesignFont.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .foregroundColor(.primary)
-                    .cornerRadius(12)
+                    .buttonStyle(.plain)
                 }
-                .disabled(gameVM.isSavingProgress)
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 40)
-            .padding(.bottom)
+        }
+        .background(Color.cardBackground)
+    }
+
+    // MARK: - Stat Cell Component
+    private struct StatCell: View {
+        let icon: String
+        let iconColor: Color
+        let value: String
+        let label: String
+        let valueColor: Color
+
+        var body: some View {
+            VStack(spacing: 8) {
+                HStack(spacing: 6) {
+                    Image(systemName: icon)
+                        .font(.system(size: 14))
+                        .foregroundColor(iconColor)
+                    Text(label)
+                        .font(.system(size: 13))
+                        .foregroundColor(.secondary)
+                }
+
+                Text(value)
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(valueColor)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .background(iconColor.opacity(0.08))
+            .cornerRadius(12)
         }
     }
 
