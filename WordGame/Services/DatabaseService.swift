@@ -589,11 +589,18 @@ final class DatabaseService: ObservableObject {
     }
 
     /// Reset all progress for ALL books (used by settings reset).
+    /// Also resets word mastery levels and wrong counts so words are fresh.
     func resetAllProgressGlobally() throws {
         guard let db = db else { throw DatabaseError.connectionFailed }
         try db.run(learningRecords.delete())
         try db.run(gameProgress.delete())
         try db.run(levelRecords.delete())
+        // Reset word mastery so next game starts clean
+        try db.run(words.update(
+            wMasteryLevel <- 0,
+            wWrongCount <- 0,
+            wLastReviewedAt <- (nil as Double?)
+        ))
     }
 }
 

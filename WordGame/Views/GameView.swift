@@ -20,11 +20,12 @@ struct GameView: View {
     @State private var consecutiveWrongCount = 0
     /// Whether to show a hint after 3 consecutive wrong answers
     @State private var showHint = false
-    /// Whether the current question has been passed (answered correctly)
-    /// Stays true until the question changes
-    @State private var hasPassedCurrentQuestion = false
-    /// The question index when hasPassedCurrentQuestion was last set to true
-    @State private var passedQuestionIndex: Int?
+    /// Maps question index → whether that question has been correctly answered.
+    /// Used to restore "下一题" button state when navigating backwards.
+    @State private var answeredCorrectly: [Int: Bool] = [:]
+    /// Pending UI resets to apply after the current Task completes.
+    /// Prevents state from being cleared while an async auto-advance Task is running.
+    @State private var pendingReset: (() -> Void)?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -59,15 +60,16 @@ struct GameView: View {
             .animation(.spring(response: 0.4, dampingFraction: 0.8), value: gameVM.isGameCompleted)
             .animation(.spring(response: 0.35, dampingFraction: 0.8), value: gameVM.currentQuestionIndex)
             .onChange(of: gameVM.currentQuestionIndex) { oldIndex, newIndex in
+                // Apply any pending reset from the previous question's answer processing
+                pendingReset?()
+                pendingReset = nil
+                // Reset UI state for the new question
                 userAnswer = ""
                 showResult = false
                 lastAnswerCorrect = nil
                 consecutiveWrongCount = 0
                 showHint = false
                 selectedOption = nil
-                // Reset pass state when question index changes
-                hasPassedCurrentQuestion = false
-                passedQuestionIndex = nil
             }
         }
         .onAppear {
@@ -165,7 +167,9 @@ struct GameView: View {
 
                 Spacer()
 
-                if gameVM.currentQuestionIndex < gameVM.totalQuestions - 1 {
+                // Only show "下一题" for choice questions (spelling/listening auto-advance)
+                if gameVM.currentQuestionIndex < gameVM.totalQuestions - 1,
+                   question.questionType == .choice {
                     Button(action: { gameVM.goToNextQuestion() }) {
                         HStack(spacing: 4) {
                             Text("下一题")
@@ -174,12 +178,12 @@ struct GameView: View {
                         .font(DesignFont.headline)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 10)
-                        .background(hasPassedCurrentQuestion ? Color.primaryBlue : Color.gray)
+                        .background(answeredCorrectly[gameVM.currentQuestionIndex] == true ? Color.primaryBlue : Color.gray)
                         .foregroundColor(.white)
                         .cornerRadius(8)
                     }
                     .buttonStyle(.plain)
-                    .disabled(!hasPassedCurrentQuestion)
+                    .disabled(answeredCorrectly[gameVM.currentQuestionIndex] != true)
                 }
             }
         }
@@ -255,32 +259,42 @@ struct GameView: View {
         let isCorrect = option == (gameVM.currentQuestion?.correctAnswer ?? "")
         lastAnswerCorrect = isCorrect
         if isCorrect {
-            hasPassedCurrentQuestion = true
-            passedQuestionIndex = gameVM.currentQuestionIndex
+            answeredCorrectly[gameVM.currentQuestionIndex] = true
         }
+
+        // Capture reset closure — applied when the auto-advance Task finishes
+        // (or immediately if no auto-advance is needed for wrong answers)
+        let reset = {
+            self.userAnswer = ""
+            self.showResult = false
+            self.lastAnswerCorrect = nil
+            self.selectedOption = nil
+        }
+
         Task {
             await gameVM.submitAnswer(option)
             if !isCorrect {
-                consecutiveWrongCount += 1
-                if consecutiveWrongCount >= 3 {
-                    showHint = true
+                // All question types increment consecutiveWrongCount inside Task for consistency
+                self.consecutiveWrongCount += 1
+                if self.consecutiveWrongCount >= 3 {
+                    self.showHint = true
                 }
+                // Wrong answer: user must use navigation buttons
+                reset()
+                self.pendingReset = nil
             } else {
-                consecutiveWrongCount = 0
-                showHint = false
-                // Auto-advance on correct answer
+                self.consecutiveWrongCount = 0
+                self.showHint = false
+                // Auto-advance after correct answer
                 try? await Task.sleep(nanoseconds: 500_000_000)
-                if gameVM.currentQuestionIndex + 1 < gameVM.totalQuestions {
-                    gameVM.goToNextQuestion()
+                if self.gameVM.currentQuestionIndex + 1 < self.gameVM.totalQuestions {
+                    self.gameVM.goToNextQuestion()
                 } else {
-                    // Last question answered correctly — end the game
-                    await gameVM.endGame()
+                    await self.gameVM.endGame()
                 }
+                reset()
+                self.pendingReset = nil
             }
-            userAnswer = ""
-            showResult = false
-            lastAnswerCorrect = nil
-            selectedOption = nil
         }
     }
 
@@ -399,29 +413,34 @@ struct GameView: View {
             == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
         lastAnswerCorrect = isCorrect
         if isCorrect {
-            hasPassedCurrentQuestion = true
-            passedQuestionIndex = gameVM.currentQuestionIndex
+            answeredCorrectly[gameVM.currentQuestionIndex] = true
         }
+
+        let reset = {
+            self.userAnswer = ""
+            self.showResult = false
+            self.lastAnswerCorrect = nil
+        }
+
         Task {
-            if !isCorrect {
-                consecutiveWrongCount += 1
-                if consecutiveWrongCount >= 3 {
-                    showHint = true
-                }
-            } else {
-                consecutiveWrongCount = 0
-                showHint = false
-            }
             await gameVM.submitAnswer(answer)
-            try? await Task.sleep(nanoseconds: 700_000_000)
-            if isCorrect && gameVM.currentQuestionIndex + 1 < gameVM.totalQuestions {
-                gameVM.goToNextQuestion()
-            } else if isCorrect {
-                await gameVM.endGame()
+            if !isCorrect {
+                self.consecutiveWrongCount += 1
+                if self.consecutiveWrongCount >= 3 {
+                    self.showHint = true
+                }
+                reset()
+            } else {
+                self.consecutiveWrongCount = 0
+                self.showHint = false
+                try? await Task.sleep(nanoseconds: 700_000_000)
+                if self.gameVM.currentQuestionIndex + 1 < self.gameVM.totalQuestions {
+                    self.gameVM.goToNextQuestion()
+                } else {
+                    await self.gameVM.endGame()
+                }
+                reset()
             }
-            userAnswer = ""
-            showResult = false
-            lastAnswerCorrect = nil
         }
     }
 
@@ -514,29 +533,34 @@ struct GameView: View {
             == (gameVM.currentQuestion?.correctAnswer.lowercased() ?? "")
         lastAnswerCorrect = isCorrect
         if isCorrect {
-            hasPassedCurrentQuestion = true
-            passedQuestionIndex = gameVM.currentQuestionIndex
+            answeredCorrectly[gameVM.currentQuestionIndex] = true
         }
+
+        let reset = {
+            self.userAnswer = ""
+            self.showResult = false
+            self.lastAnswerCorrect = nil
+        }
+
         Task {
-            if !isCorrect {
-                consecutiveWrongCount += 1
-                if consecutiveWrongCount >= 3 {
-                    showHint = true
-                }
-            } else {
-                consecutiveWrongCount = 0
-                showHint = false
-            }
             await gameVM.submitAnswer(answer)
-            try? await Task.sleep(nanoseconds: 700_000_000)
-            if isCorrect && gameVM.currentQuestionIndex + 1 < gameVM.totalQuestions {
-                gameVM.goToNextQuestion()
-            } else if isCorrect {
-                await gameVM.endGame()
+            if !isCorrect {
+                self.consecutiveWrongCount += 1
+                if self.consecutiveWrongCount >= 3 {
+                    self.showHint = true
+                }
+                reset()
+            } else {
+                self.consecutiveWrongCount = 0
+                self.showHint = false
+                try? await Task.sleep(nanoseconds: 700_000_000)
+                if self.gameVM.currentQuestionIndex + 1 < self.gameVM.totalQuestions {
+                    self.gameVM.goToNextQuestion()
+                } else {
+                    await self.gameVM.endGame()
+                }
+                reset()
             }
-            userAnswer = ""
-            showResult = false
-            lastAnswerCorrect = nil
         }
     }
 

@@ -21,6 +21,8 @@ final class GameViewModel: ObservableObject {
 
     // MARK: - Private Properties
     private var allWords: [Word] = []
+    /// Maps chapter → [wordId] for generating contextually-relevant wrong options
+    private var chapterWordIds: [Int: Set<String>] = [:]
     /// Time when the current question was shown to the user (for accurate answer time tracking)
     private var currentQuestionStartTime: Date?
     private let database = DatabaseService.shared
@@ -41,17 +43,19 @@ final class GameViewModel: ObservableObject {
     }
 
     // MARK: - Game Lifecycle
-    /// Start a new game for the given word book
+    /// Start a new game for the given word book.
+    /// Clears progress/state immediately but keeps the previous questions visible
+    /// until fresh ones are ready (prevents UI flicker on restart).
     func startGame(for book: WordBook, level: GameLevel? = nil) async {
         currentBook = book
         currentLevel = level
 
-        // Reset state first
+        // Reset score/progress state immediately
         currentQuestionIndex = 0
         score = 0
         correctCount = 0
         wrongCount = 0
-        isGameActive = false
+        isGameActive = false   // Briefly false while generating
         isGameCompleted = false
         gameResult = nil
         starsEarned = 0
@@ -68,10 +72,21 @@ final class GameViewModel: ObservableObject {
         // Check if we have words
         guard !allWords.isEmpty else {
             print("No words found in book: \(book.name)")
+            // Clear questions so empty state shows instead of stale content
+            questions = []
             return
         }
 
-        // Generate questions for this level
+        // Build chapter → wordIds map from level definition (used for wrong options)
+        if let lvl = level {
+            chapterWordIds = buildChapterWordIds(for: lvl, allWords: allWords)
+        } else {
+            // Practice mode: group all words into a single synthetic chapter
+            chapterWordIds = [1: Set(allWords.map { $0.id })]
+        }
+
+        // Generate questions BEFORE clearing old ones
+        // This ensures GameView always has questions to display during the transition
         generateQuestions(for: level)
 
         // Only activate game if we have questions
@@ -85,19 +100,25 @@ final class GameViewModel: ObservableObject {
         _ = try? database.fetchOrCreateProgress(forBookId: book.id)
     }
 
-    /// Generate questions for a specific level
+    /// Generate questions for a specific level.
+    /// Respects questionsPerRound from UserSettings (Bug 8 fix).
     private func generateQuestions(for level: GameLevel?) {
         var generatedQuestions: [GameQuestion] = []
+
+        // Respect user setting for number of questions per round
+        let questionsPerRound = UserDefaults.standard.integer(forKey: "questionsPerRound")
+        let targetCount = questionsPerRound > 0 ? questionsPerRound : 10
 
         // Determine which words to use
         let wordsToUse: [Word]
         if let level = level {
-            // Use words for this specific level
+            // Use words for this specific level, limited to questionsPerRound
             let levelWordIds = Set(level.wordIds)
-            wordsToUse = allWords.filter { levelWordIds.contains($0.id) }
+            let filtered = allWords.filter { levelWordIds.contains($0.id) }
+            wordsToUse = Array(filtered.prefix(targetCount))
         } else {
-            // Use random words for practice
-            wordsToUse = Array(allWords.shuffled().prefix(10))
+            // Use random words for practice, capped at questionsPerRound
+            wordsToUse = Array(allWords.shuffled().prefix(targetCount))
         }
 
         // Create questions for each word with different types
@@ -148,13 +169,41 @@ final class GameViewModel: ObservableObject {
         }
     }
 
-    /// Generate wrong options for choice questions
+    /// Generate wrong options for choice questions.
+    /// Prioritises words from the same chapter (or same word-book for practice mode)
+    /// to make options feel contextually related rather than random.
     private func generateWrongOptions(for word: Word, count: Int) -> [String] {
-        // Get random words that aren't the correct one
-        let otherWords = allWords.filter { $0.id != word.id }
-        let shuffled = otherWords.shuffled()
+        // Find the chapter this word belongs to in the current level
+        let wordChapter = chapterWordIds.first { $0.value.contains(word.id) }?.key
 
-        return Array(shuffled.prefix(count).map { $0.meaning })
+        // Prefer words from the same chapter for semantically cohesive options
+        var preferredPool: [Word] = []
+        if let chapter = wordChapter, let chapterIds = chapterWordIds[chapter] {
+            preferredPool = allWords.filter { chapterIds.contains($0.id) && $0.id != word.id }
+        }
+
+        // Fall back to any other word in the book if same-chapter pool is too small
+        var fullPool = preferredPool.isEmpty ? allWords.filter { $0.id != word.id } : preferredPool
+        fullPool.shuffle()
+
+        return Array(fullPool.prefix(count).map { $0.meaning })
+    }
+
+    /// Build a chapter → wordIds map from the given level's structure.
+    private func buildChapterWordIds(for level: GameLevel, allWords: [Word]) -> [Int: Set<String>] {
+        // Use the same chunking logic as generateLevels to determine which chapter
+        // each word belongs to, so wrong options can be drawn from the same chapter.
+        var result: [Int: Set<String>] = [:]
+        let wordsPerStage = 10
+        let stagesPerChapter = 3
+        let wordChunks = allWords.chunked(into: wordsPerStage)
+
+        for (index, chunk) in wordChunks.enumerated() {
+            let chapter = (index / stagesPerChapter) + 1
+            let wordIds = Set(chunk.map { $0.id })
+            result[chapter] = (result[chapter] ?? []) .union(wordIds)
+        }
+        return result
     }
 
     // MARK: - Answer Handling
