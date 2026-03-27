@@ -176,30 +176,21 @@ struct LearningWordCard: View {
                         .lineLimit(2)
 
                     if let sentence = word.sentence, !sentence.isEmpty {
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack(spacing: 6) {
-                                Image(systemName: "text.quoteopening")
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.warningOrange)
-
-                                Text("例句")
-                                    .font(.system(size: 12, weight: .semibold))
-                                    .foregroundColor(.warningOrange)
-                            }
+                        HStack(alignment: .top, spacing: 4) {
+                            Text("例句：")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(.warningOrange)
+                                .lineLimit(1)
 
                             Text(sentence)
-                                .font(.system(size: 14))
-                                .foregroundColor(.primary)
+                                .font(.system(size: 15))
+                                .foregroundColor(.secondary)
                                 .italic()
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .padding(10)
+                        .padding(8)
                         .background(Color.warningOrange.opacity(0.07))
-                        .cornerRadius(8)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.warningOrange.opacity(0.2), lineWidth: 1)
-                        )
+                        .cornerRadius(6)
                     }
                 }
 
