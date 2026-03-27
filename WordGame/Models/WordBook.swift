@@ -39,6 +39,7 @@ enum PresetVocabulary: String, CaseIterable {
     // Use the full bundled 3500词表 for the default preset.
     case highSchool3500 = "high_school_3500"
     case cet4 = "cet4"
+    case primarySchool = "primary_school"
 
     var displayName: String {
         switch self {
@@ -46,6 +47,8 @@ enum PresetVocabulary: String, CaseIterable {
             return "高中英语3500词"
         case .cet4:
             return "大学英语四级词汇"
+        case .primarySchool:
+            return "小学英语词汇"
         }
     }
 
@@ -55,6 +58,8 @@ enum PresetVocabulary: String, CaseIterable {
             return "高中阶段必备词汇，涵盖高考所有考点"
         case .cet4:
             return "大学英语四级考试必备词汇"
+        case .primarySchool:
+            return "小学阶段必备词汇，适合英语入门学习"
         }
     }
 

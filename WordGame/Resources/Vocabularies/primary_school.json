@@ -1,0 +1,2682 @@
+{
+  "name": "小学英语词汇",
+  "description": "小学阶段必备词汇，适合英语入门学习",
+  "words": [
+    {
+      "word": "one",
+      "phonetic": "wʌn",
+      "meaning": "一",
+      "sentence": "I have one apple."
+    },
+    {
+      "word": "two",
+      "phonetic": "tuː",
+      "meaning": "二",
+      "sentence": "I have two books."
+    },
+    {
+      "word": "three",
+      "phonetic": "θriː",
+      "meaning": "三",
+      "sentence": "There are three cats."
+    },
+    {
+      "word": "four",
+      "phonetic": "fɔː",
+      "meaning": "四",
+      "sentence": "Four plus two is six."
+    },
+    {
+      "word": "five",
+      "phonetic": "faɪv",
+      "meaning": "五",
+      "sentence": "I am five years old."
+    },
+    {
+      "word": "six",
+      "phonetic": "sɪks",
+      "meaning": "六",
+      "sentence": "Six friends played together."
+    },
+    {
+      "word": "seven",
+      "phonetic": "ˈsevən",
+      "meaning": "七",
+      "sentence": "She is seven years old."
+    },
+    {
+      "word": "eight",
+      "phonetic": "eɪt",
+      "meaning": "八",
+      "sentence": "Eight o'clock in the morning."
+    },
+    {
+      "word": "nine",
+      "phonetic": "naɪn",
+      "meaning": "九",
+      "sentence": "I have nine pencils."
+    },
+    {
+      "word": "ten",
+      "phonetic": "ten",
+      "meaning": "十",
+      "sentence": "Count from one to ten."
+    },
+    {
+      "word": "twenty",
+      "phonetic": "ˈtwenti",
+      "meaning": "二十",
+      "sentence": "There are twenty students in our class."
+    },
+    {
+      "word": "thirty",
+      "phonetic": "ˈθɜːrti",
+      "meaning": "三十",
+      "sentence": "Thirty people came to the meeting."
+    },
+    {
+      "word": "hundred",
+      "phonetic": "ˈhʌndrəd",
+      "meaning": "百",
+      "sentence": "One hundred is a round number."
+    },
+    {
+      "word": "red",
+      "phonetic": "red",
+      "meaning": "红色",
+      "sentence": "The apple is red."
+    },
+    {
+      "word": "blue",
+      "phonetic": "bluː",
+      "meaning": "蓝色",
+      "sentence": "The sky is blue."
+    },
+    {
+      "word": "yellow",
+      "phonetic": "ˈjeloʊ",
+      "meaning": "黄色",
+      "sentence": "The banana is yellow."
+    },
+    {
+      "word": "green",
+      "phonetic": "griːn",
+      "meaning": "绿色",
+      "sentence": "The grass is green."
+    },
+    {
+      "word": "white",
+      "phonetic": "waɪt",
+      "meaning": "白色",
+      "sentence": "The snow is white."
+    },
+    {
+      "word": "black",
+      "phonetic": "blæk",
+      "meaning": "黑色",
+      "sentence": "The cat is black."
+    },
+    {
+      "word": "orange",
+      "phonetic": "ˈɔːrɪndʒ",
+      "meaning": "橙色",
+      "sentence": "The orange is sweet."
+    },
+    {
+      "word": "pink",
+      "phonetic": "pɪŋk",
+      "meaning": "粉色",
+      "sentence": "Her bag is pink."
+    },
+    {
+      "word": "purple",
+      "phonetic": "ˈpɜːrpəl",
+      "meaning": "紫色",
+      "sentence": "Grapes can be purple."
+    },
+    {
+      "word": "brown",
+      "phonetic": "braʊn",
+      "meaning": "棕色",
+      "sentence": "The bear is brown."
+    },
+    {
+      "word": "gray",
+      "phonetic": "ɡreɪ",
+      "meaning": "灰色",
+      "sentence": "The cloud is gray."
+    },
+    {
+      "word": "I",
+      "phonetic": "aɪ",
+      "meaning": "我",
+      "sentence": "I am a student."
+    },
+    {
+      "word": "you",
+      "phonetic": "juː",
+      "meaning": "你",
+      "sentence": "You are my friend."
+    },
+    {
+      "word": "he",
+      "phonetic": "hiː",
+      "meaning": "他",
+      "sentence": "He is my father."
+    },
+    {
+      "word": "she",
+      "phonetic": "ʃiː",
+      "meaning": "她",
+      "sentence": "She is my mother."
+    },
+    {
+      "word": "it",
+      "phonetic": "ɪt",
+      "meaning": "它",
+      "sentence": "It is a cat."
+    },
+    {
+      "word": "we",
+      "phonetic": "wiː",
+      "meaning": "我们",
+      "sentence": "We are in the same class."
+    },
+    {
+      "word": "they",
+      "phonetic": "ðeɪ",
+      "meaning": "他们",
+      "sentence": "They are playing games."
+    },
+    {
+      "word": "my",
+      "phonetic": "maɪ",
+      "meaning": "我的",
+      "sentence": "This is my book."
+    },
+    {
+      "word": "your",
+      "phonetic": "jɔːr",
+      "meaning": "你的",
+      "sentence": "Is this your bag?"
+    },
+    {
+      "word": "his",
+      "phonetic": "hɪz",
+      "meaning": "他的",
+      "sentence": "This is his desk."
+    },
+    {
+      "word": "her",
+      "phonetic": "hɜːr",
+      "meaning": "她的",
+      "sentence": "That is her name."
+    },
+    {
+      "word": "our",
+      "phonetic": "aʊr",
+      "meaning": "我们的",
+      "sentence": "This is our school."
+    },
+    {
+      "word": "their",
+      "phonetic": "ðer",
+      "meaning": "他们的",
+      "sentence": "These are their books."
+    },
+    {
+      "word": "mother",
+      "phonetic": "ˈmʌðər",
+      "meaning": "妈妈",
+      "sentence": "My mother cooks dinner."
+    },
+    {
+      "word": "father",
+      "phonetic": "ˈfɑːðər",
+      "meaning": "爸爸",
+      "sentence": "My father drives a car."
+    },
+    {
+      "word": "brother",
+      "phonetic": "ˈbrʌðər",
+      "meaning": "哥哥/弟弟",
+      "sentence": "I have one brother."
+    },
+    {
+      "word": "sister",
+      "phonetic": "ˈsɪstər",
+      "meaning": "姐姐/妹妹",
+      "sentence": "My sister is tall."
+    },
+    {
+      "word": "grandma",
+      "phonetic": "ˈɡrænmɑː",
+      "meaning": "奶奶/外婆",
+      "sentence": "Grandma makes cookies."
+    },
+    {
+      "word": "grandpa",
+      "phonetic": "ˈɡrænpɑː",
+      "meaning": "爷爷/外公",
+      "sentence": "Grandpa reads newspapers."
+    },
+    {
+      "word": "friend",
+      "phonetic": "frend",
+      "meaning": "朋友",
+      "sentence": "She is my best friend."
+    },
+    {
+      "word": "family",
+      "phonetic": "ˈfæməli",
+      "meaning": "家庭",
+      "sentence": "I love my family."
+    },
+    {
+      "word": "boy",
+      "phonetic": "bɔɪ",
+      "meaning": "男孩",
+      "sentence": "The boy is playing football."
+    },
+    {
+      "word": "girl",
+      "phonetic": "ɡɜːrl",
+      "meaning": "女孩",
+      "sentence": "The girl is reading a book."
+    },
+    {
+      "word": "man",
+      "phonetic": "mæn",
+      "meaning": "男人",
+      "sentence": "The man is a teacher."
+    },
+    {
+      "word": "woman",
+      "phonetic": "ˈwʊmən",
+      "meaning": "女人",
+      "sentence": "The woman is a doctor."
+    },
+    {
+      "word": "child",
+      "phonetic": "tʃaɪld",
+      "meaning": "孩子",
+      "sentence": "The child is sleeping."
+    },
+    {
+      "word": "children",
+      "phonetic": "ˈtʃɪldrən",
+      "meaning": "孩子们",
+      "sentence": "The children are playing outside."
+    },
+    {
+      "word": "people",
+      "phonetic": "ˈpiːpəl",
+      "meaning": "人们",
+      "sentence": "Many people like playing football."
+    },
+    {
+      "word": "teacher",
+      "phonetic": "ˈtiːtʃər",
+      "meaning": "老师",
+      "sentence": "Our teacher is very kind."
+    },
+    {
+      "word": "doctor",
+      "phonetic": "ˈdɑːktər",
+      "meaning": "医生",
+      "sentence": "The doctor helps sick people."
+    },
+    {
+      "word": "nurse",
+      "phonetic": "nɜːrs",
+      "meaning": "护士",
+      "sentence": "The nurse is very caring."
+    },
+    {
+      "word": "policeman",
+      "phonetic": "pəˈliːsmən",
+      "meaning": "警察",
+      "sentence": "The policeman directs traffic."
+    },
+    {
+      "word": "driver",
+      "phonetic": "ˈdraɪvər",
+      "meaning": "司机",
+      "sentence": "The bus driver is careful."
+    },
+    {
+      "word": "farmer",
+      "phonetic": "ˈfɑːrmər",
+      "meaning": "农民",
+      "sentence": "The farmer grows vegetables."
+    },
+    {
+      "word": "student",
+      "phonetic": "ˈstuːdənt",
+      "meaning": "学生",
+      "sentence": "I am a student in Class One."
+    },
+    {
+      "word": "worker",
+      "phonetic": "ˈwɜːrkər",
+      "meaning": "工人",
+      "sentence": "The worker builds houses."
+    },
+    {
+      "word": "cat",
+      "phonetic": "kæt",
+      "meaning": "猫",
+      "sentence": "The cat likes fish."
+    },
+    {
+      "word": "dog",
+      "phonetic": "dɔːɡ",
+      "meaning": "狗",
+      "sentence": "The dog barks loudly."
+    },
+    {
+      "word": "bird",
+      "phonetic": "bɜːrd",
+      "meaning": "鸟",
+      "sentence": "The bird sings sweetly."
+    },
+    {
+      "word": "fish",
+      "phonetic": "fɪʃ",
+      "meaning": "鱼",
+      "sentence": "The fish swims in water."
+    },
+    {
+      "word": "rabbit",
+      "phonetic": "ˈræbɪt",
+      "meaning": "兔子",
+      "sentence": "The rabbit has long ears."
+    },
+    {
+      "word": "mouse",
+      "phonetic": "maʊs",
+      "meaning": "老鼠",
+      "sentence": "The mouse is very small."
+    },
+    {
+      "word": "elephant",
+      "phonetic": "ˈelɪfənt",
+      "meaning": "大象",
+      "sentence": "The elephant is very big."
+    },
+    {
+      "word": "monkey",
+      "phonetic": "ˈmʌŋki",
+      "meaning": "猴子",
+      "sentence": "The monkey swings on trees."
+    },
+    {
+      "word": "panda",
+      "phonetic": "ˈpændə",
+      "meaning": "熊猫",
+      "sentence": "Pandas only live in China."
+    },
+    {
+      "word": "tiger",
+      "phonetic": "ˈtaɪɡər",
+      "meaning": "老虎",
+      "sentence": "The tiger runs very fast."
+    },
+    {
+      "word": "lion",
+      "phonetic": "ˈlaɪən",
+      "meaning": "狮子",
+      "sentence": "The lion is called the king of animals."
+    },
+    {
+      "word": "zebra",
+      "phonetic": "ˈziːbrə",
+      "meaning": "斑马",
+      "sentence": "The zebra has black and white stripes."
+    },
+    {
+      "word": "giraffe",
+      "phonetic": "dʒəˈræf",
+      "meaning": "长颈鹿",
+      "sentence": "The giraffe has a very long neck."
+    },
+    {
+      "word": "pig",
+      "phonetic": "pɪɡ",
+      "meaning": "猪",
+      "sentence": "The pig likes eating."
+    },
+    {
+      "word": "cow",
+      "phonetic": "kaʊ",
+      "meaning": "奶牛",
+      "sentence": "The cow gives us milk."
+    },
+    {
+      "word": "sheep",
+      "phonetic": "ʃiːp",
+      "meaning": "绵羊",
+      "sentence": "The sheep is fluffy and white."
+    },
+    {
+      "word": "duck",
+      "phonetic": "dʌk",
+      "meaning": "鸭子",
+      "sentence": "The duck swims in the pond."
+    },
+    {
+      "word": "chicken",
+      "phonetic": "ˈtʃɪkɪn",
+      "meaning": "鸡",
+      "sentence": "The chicken lays eggs."
+    },
+    {
+      "word": "snake",
+      "phonetic": "sneɪk",
+      "meaning": "蛇",
+      "sentence": "The snake can be dangerous."
+    },
+    {
+      "word": "frog",
+      "phonetic": "frɔːɡ",
+      "meaning": "青蛙",
+      "sentence": "The frog catches flies."
+    },
+    {
+      "word": "horse",
+      "phonetic": "hɔːrs",
+      "meaning": "马",
+      "sentence": "The horse runs very fast."
+    },
+    {
+      "word": "bear",
+      "phonetic": "ber",
+      "meaning": "熊",
+      "sentence": "The bear likes honey."
+    },
+    {
+      "word": "deer",
+      "phonetic": "dɪr",
+      "meaning": "鹿",
+      "sentence": "The deer runs very fast."
+    },
+    {
+      "word": "dolphin",
+      "phonetic": "ˈdɑːlfɪn",
+      "meaning": "海豚",
+      "sentence": "Dolphins are very clever."
+    },
+    {
+      "word": "whale",
+      "phonetic": "weɪl",
+      "meaning": "鲸鱼",
+      "sentence": "The whale is the largest animal."
+    },
+    {
+      "word": "butterfly",
+      "phonetic": "ˈbʌtərflaɪ",
+      "meaning": "蝴蝶",
+      "sentence": "The butterfly is very beautiful."
+    },
+    {
+      "word": "bee",
+      "phonetic": "biː",
+      "meaning": "蜜蜂",
+      "sentence": "The bee makes honey."
+    },
+    {
+      "word": "ant",
+      "phonetic": "ænt",
+      "meaning": "蚂蚁",
+      "sentence": "Ants work very hard."
+    },
+    {
+      "word": "spider",
+      "phonetic": "ˈspaɪdər",
+      "meaning": "蜘蛛",
+      "sentence": "The spider makes a web."
+    },
+    {
+      "word": "apple",
+      "phonetic": "ˈæpəl",
+      "meaning": "苹果",
+      "sentence": "An apple a day keeps the doctor away."
+    },
+    {
+      "word": "banana",
+      "phonetic": "bəˈnænə",
+      "meaning": "香蕉",
+      "sentence": "I like eating bananas."
+    },
+    {
+      "word": "orange",
+      "phonetic": "ˈɔːrɪndʒ",
+      "meaning": "橙子",
+      "sentence": "This orange is very juicy."
+    },
+    {
+      "word": "pear",
+      "phonetic": "per",
+      "meaning": "梨",
+      "sentence": "The pear is sweet and soft."
+    },
+    {
+      "word": "grape",
+      "phonetic": "ɡreɪp",
+      "meaning": "葡萄",
+      "sentence": "Grapes grow on vines."
+    },
+    {
+      "word": "watermelon",
+      "phonetic": "ˈwɔːtərmelən",
+      "meaning": "西瓜",
+      "sentence": "Watermelon is sweet in summer."
+    },
+    {
+      "word": "strawberry",
+      "phonetic": "ˈstrɔːbəri",
+      "meaning": "草莓",
+      "sentence": "Strawberries are red and sweet."
+    },
+    {
+      "word": "pineapple",
+      "phonetic": "ˈpaɪnæpəl",
+      "meaning": "菠萝",
+      "sentence": "Pineapple grows in tropical places."
+    },
+    {
+      "word": "peach",
+      "phonetic": "piːtʃ",
+      "meaning": "桃子",
+      "sentence": "The peach is soft and sweet."
+    },
+    {
+      "word": "lemon",
+      "phonetic": "ˈlemən",
+      "meaning": "柠檬",
+      "sentence": "Lemon is sour."
+    },
+    {
+      "word": "mango",
+      "phonetic": "ˈmæŋɡoʊ",
+      "meaning": "芒果",
+      "sentence": "Mango is a tropical fruit."
+    },
+    {
+      "word": "cherry",
+      "phonetic": "ˈtʃeri",
+      "meaning": "樱桃",
+      "sentence": "Cherries are red and sweet."
+    },
+    {
+      "word": "egg",
+      "phonetic": "eɡ",
+      "meaning": "鸡蛋",
+      "sentence": "I have an egg for breakfast."
+    },
+    {
+      "word": "bread",
+      "phonetic": "bred",
+      "meaning": "面包",
+      "sentence": "I eat bread every morning."
+    },
+    {
+      "word": "rice",
+      "phonetic": "raɪs",
+      "meaning": "米饭",
+      "sentence": "We eat rice with chopsticks."
+    },
+    {
+      "word": "noodles",
+      "phonetic": "ˈnuːdəlz",
+      "meaning": "面条",
+      "sentence": "I love Chinese noodles."
+    },
+    {
+      "word": "dumplings",
+      "phonetic": "ˈdʌmplɪŋz",
+      "meaning": "饺子",
+      "sentence": "Chinese dumplings are delicious."
+    },
+    {
+      "word": "milk",
+      "phonetic": "mɪlk",
+      "meaning": "牛奶",
+      "sentence": "Children should drink more milk."
+    },
+    {
+      "word": "water",
+      "phonetic": "ˈwɔːtər",
+      "meaning": "水",
+      "sentence": "Drink more water every day."
+    },
+    {
+      "word": "juice",
+      "phonetic": "dʒuːs",
+      "meaning": "果汁",
+      "sentence": "I like orange juice."
+    },
+    {
+      "word": "tea",
+      "phonetic": "tiː",
+      "meaning": "茶",
+      "sentence": "Chinese tea is famous worldwide."
+    },
+    {
+      "word": "coffee",
+      "phonetic": "ˈkɔːfi",
+      "meaning": "咖啡",
+      "sentence": "Coffee is popular in the morning."
+    },
+    {
+      "word": "soup",
+      "phonetic": "suːp",
+      "meaning": "汤",
+      "sentence": "The soup is very delicious."
+    },
+    {
+      "word": "meat",
+      "phonetic": "miːt",
+      "meaning": "肉",
+      "sentence": "I eat meat every day."
+    },
+    {
+      "word": "chicken",
+      "phonetic": "ˈtʃɪkɪn",
+      "meaning": "鸡肉",
+      "sentence": "I like fried chicken very much."
+    },
+    {
+      "word": "beef",
+      "phonetic": "biːf",
+      "meaning": "牛肉",
+      "sentence": "Beef comes from cows."
+    },
+    {
+      "word": "pork",
+      "phonetic": "pɔːrk",
+      "meaning": "猪肉",
+      "sentence": "We often eat pork at home."
+    },
+    {
+      "word": "fish",
+      "phonetic": "fɪʃ",
+      "meaning": "鱼肉",
+      "sentence": "Fish is good for your health."
+    },
+    {
+      "word": "vegetables",
+      "phonetic": "ˈvedʒtəbəlz",
+      "meaning": "蔬菜",
+      "sentence": "Eat more vegetables every day."
+    },
+    {
+      "word": "tomato",
+      "phonetic": "təˈmeɪtoʊ",
+      "meaning": "番茄",
+      "sentence": "Tomatoes are red and round."
+    },
+    {
+      "word": "potato",
+      "phonetic": "pəˈteɪtoʊ",
+      "meaning": "土豆",
+      "sentence": "I like French fries."
+    },
+    {
+      "word": "carrot",
+      "phonetic": "ˈkærət",
+      "meaning": "胡萝卜",
+      "sentence": "Rabbits like carrots."
+    },
+    {
+      "word": "onion",
+      "phonetic": "ˈʌnjən",
+      "meaning": "洋葱",
+      "sentence": "The onion makes me cry."
+    },
+    {
+      "word": "garlic",
+      "phonetic": "ˈɡɑːrlɪk",
+      "meaning": "大蒜",
+      "sentence": "Garlic is good for your health."
+    },
+    {
+      "word": "cucumber",
+      "phonetic": "ˈkjuːkʌmbər",
+      "meaning": "黄瓜",
+      "sentence": "Cucumber is cool and refreshing."
+    },
+    {
+      "word": "eggplant",
+      "phonetic": "ˈeɡplænt",
+      "meaning": "茄子",
+      "sentence": "I don't like eggplant."
+    },
+    {
+      "word": "mushroom",
+      "phonetic": "ˈmʌʃrʊm",
+      "meaning": "蘑菇",
+      "sentence": "Mushrooms grow in dark places."
+    },
+    {
+      "word": "corn",
+      "phonetic": "kɔːrn",
+      "meaning": "玉米",
+      "sentence": "Corn is sweet and yellow."
+    },
+    {
+      "word": "pea",
+      "phonetic": "piː",
+      "meaning": "豌豆",
+      "sentence": "Peas are green and round."
+    },
+    {
+      "word": "bean",
+      "phonetic": "biːn",
+      "meaning": "豆子",
+      "sentence": "Green beans are healthy."
+    },
+    {
+      "word": "head",
+      "phonetic": "hed",
+      "meaning": "头",
+      "sentence": "I have a headache today."
+    },
+    {
+      "word": "face",
+      "phonetic": "feɪs",
+      "meaning": "脸",
+      "sentence": "Wash your face every morning."
+    },
+    {
+      "word": "eye",
+      "phonetic": "aɪ",
+      "meaning": "眼睛",
+      "sentence": "She has big bright eyes."
+    },
+    {
+      "word": "ear",
+      "phonetic": "ɪr",
+      "meaning": "耳朵",
+      "sentence": "I can hear with my ears."
+    },
+    {
+      "word": "nose",
+      "phonetic": "noʊz",
+      "meaning": "鼻子",
+      "sentence": "The dog has a wet nose."
+    },
+    {
+      "word": "mouth",
+      "phonetic": "maʊθ",
+      "meaning": "嘴",
+      "sentence": "Open your mouth wide."
+    },
+    {
+      "word": "tooth",
+      "phonetic": "tuːθ",
+      "meaning": "牙齿",
+      "sentence": "Brush your teeth twice a day."
+    },
+    {
+      "word": "hand",
+      "phonetic": "hænd",
+      "meaning": "手",
+      "sentence": "Raise your hand please."
+    },
+    {
+      "word": "finger",
+      "phonetic": "ˈfɪŋɡər",
+      "meaning": "手指",
+      "sentence": "I cut my finger."
+    },
+    {
+      "word": "foot",
+      "phonetic": "fʊt",
+      "meaning": "脚",
+      "sentence": "I hurt my foot."
+    },
+    {
+      "word": "feet",
+      "phonetic": "fiːt",
+      "meaning": "脚（复数）",
+      "sentence": "I stand on my feet."
+    },
+    {
+      "word": "leg",
+      "phonetic": "leɡ",
+      "meaning": "腿",
+      "sentence": "The table has four legs."
+    },
+    {
+      "word": "arm",
+      "phonetic": "ɑːrm",
+      "meaning": "手臂",
+      "sentence": "I broke my arm last year."
+    },
+    {
+      "word": "body",
+      "phonetic": "ˈbɑːdi",
+      "meaning": "身体",
+      "sentence": "Exercise is good for your body."
+    },
+    {
+      "word": "hair",
+      "phonetic": "her",
+      "meaning": "头发",
+      "sentence": "She has long black hair."
+    },
+    {
+      "word": "neck",
+      "phonetic": "nek",
+      "meaning": "脖子",
+      "sentence": "The giraffe has a long neck."
+    },
+    {
+      "word": "back",
+      "phonetic": "bæk",
+      "meaning": "背",
+      "sentence": "I have a pain in my back."
+    },
+    {
+      "word": "school",
+      "phonetic": "skuːl",
+      "meaning": "学校",
+      "sentence": "I go to school every day."
+    },
+    {
+      "word": "class",
+      "phonetic": "klæs",
+      "meaning": "班级",
+      "sentence": "We are in the same class."
+    },
+    {
+      "word": "classroom",
+      "phonetic": "ˈklæsruːm",
+      "meaning": "教室",
+      "sentence": "The classroom is very clean."
+    },
+    {
+      "word": "desk",
+      "phonetic": "desk",
+      "meaning": "书桌",
+      "sentence": "This is my desk."
+    },
+    {
+      "word": "chair",
+      "phonetic": "tʃer",
+      "meaning": "椅子",
+      "sentence": "Sit on the chair."
+    },
+    {
+      "word": "book",
+      "phonetic": "bʊk",
+      "meaning": "书",
+      "sentence": "I read a book every night."
+    },
+    {
+      "word": "pen",
+      "phonetic": "pen",
+      "meaning": "钢笔",
+      "sentence": "Please pass me a pen."
+    },
+    {
+      "word": "pencil",
+      "phonetic": "ˈpensəl",
+      "meaning": "铅笔",
+      "sentence": "I write with a pencil."
+    },
+    {
+      "word": "eraser",
+      "phonetic": "ɪˈreɪsər",
+      "meaning": "橡皮擦",
+      "sentence": "I need an eraser."
+    },
+    {
+      "word": "ruler",
+      "phonetic": "ˈruːlər",
+      "meaning": "尺子",
+      "sentence": "Use a ruler to draw a line."
+    },
+    {
+      "word": "bag",
+      "phonetic": "bæɡ",
+      "meaning": "书包",
+      "sentence": "I carry a bag to school."
+    },
+    {
+      "word": "ball",
+      "phonetic": "bɔːl",
+      "meaning": "球",
+      "sentence": "Let's play ball together."
+    },
+    {
+      "word": "football",
+      "phonetic": "ˈfʊtbɔːl",
+      "meaning": "足球",
+      "sentence": "I like playing football."
+    },
+    {
+      "word": "basketball",
+      "phonetic": "ˈbæskɪtbɔːl",
+      "meaning": "篮球",
+      "sentence": "Basketball is my favorite sport."
+    },
+    {
+      "word": "table",
+      "phonetic": "ˈteɪbəl",
+      "meaning": "桌子",
+      "sentence": "The book is on the table."
+    },
+    {
+      "word": "window",
+      "phonetic": "ˈwɪndoʊ",
+      "meaning": "窗户",
+      "sentence": "Open the window please."
+    },
+    {
+      "word": "door",
+      "phonetic": "dɔːr",
+      "meaning": "门",
+      "sentence": "Close the door behind you."
+    },
+    {
+      "word": "floor",
+      "phonetic": "flɔːr",
+      "meaning": "地板",
+      "sentence": "The floor is very clean."
+    },
+    {
+      "word": "wall",
+      "phonetic": "wɔːl",
+      "meaning": "墙",
+      "sentence": "There is a picture on the wall."
+    },
+    {
+      "word": "blackboard",
+      "phonetic": "ˈblækbɔːrd",
+      "meaning": "黑板",
+      "sentence": "The teacher writes on the blackboard."
+    },
+    {
+      "word": "clock",
+      "phonetic": "klɑːk",
+      "meaning": "时钟",
+      "sentence": "The clock on the wall says eight."
+    },
+    {
+      "word": "photo",
+      "phonetic": "ˈfoʊtoʊ",
+      "meaning": "照片",
+      "sentence": "This is a photo of my family."
+    },
+    {
+      "word": "bus",
+      "phonetic": "bʌs",
+      "meaning": "公共汽车",
+      "sentence": "I take the bus to school."
+    },
+    {
+      "word": "car",
+      "phonetic": "kɑːr",
+      "meaning": "小汽车",
+      "sentence": "My father drives a car."
+    },
+    {
+      "word": "taxi",
+      "phonetic": "ˈtæksi",
+      "meaning": "出租车",
+      "sentence": "Let's take a taxi."
+    },
+    {
+      "word": "train",
+      "phonetic": "treɪn",
+      "meaning": "火车",
+      "sentence": "The train is very fast."
+    },
+    {
+      "word": "ship",
+      "phonetic": "ʃɪp",
+      "meaning": "轮船",
+      "sentence": "The ship sails on the sea."
+    },
+    {
+      "word": "plane",
+      "phonetic": "pleɪn",
+      "meaning": "飞机",
+      "sentence": "We fly to Beijing by plane."
+    },
+    {
+      "word": "bike",
+      "phonetic": "baɪk",
+      "meaning": "自行车",
+      "sentence": "I ride a bike to school."
+    },
+    {
+      "word": "boat",
+      "phonetic": "boʊt",
+      "meaning": "小船",
+      "sentence": "The boat is on the lake."
+    },
+    {
+      "word": "subway",
+      "phonetic": "ˈsʌbweɪ",
+      "meaning": "地铁",
+      "sentence": "The subway is very fast."
+    },
+    {
+      "word": "home",
+      "phonetic": "hoʊm",
+      "meaning": "家",
+      "sentence": "I am home now."
+    },
+    {
+      "word": "house",
+      "phonetic": "haʊs",
+      "meaning": "房子",
+      "sentence": "This is a big house."
+    },
+    {
+      "word": "room",
+      "phonetic": "ruːm",
+      "meaning": "房间",
+      "sentence": "This is my room."
+    },
+    {
+      "word": "kitchen",
+      "phonetic": "ˈkɪtʃɪn",
+      "meaning": "厨房",
+      "sentence": "Mother cooks in the kitchen."
+    },
+    {
+      "word": "bedroom",
+      "phonetic": "ˈbedruːm",
+      "meaning": "卧室",
+      "sentence": "I sleep in my bedroom."
+    },
+    {
+      "word": "bathroom",
+      "phonetic": "ˈbæθruːm",
+      "meaning": "浴室",
+      "sentence": "I take a shower in the bathroom."
+    },
+    {
+      "word": "garden",
+      "phonetic": "ˈɡɑːrdən",
+      "meaning": "花园",
+      "sentence": "There are beautiful flowers in the garden."
+    },
+    {
+      "word": "park",
+      "phonetic": "pɑːrk",
+      "meaning": "公园",
+      "sentence": "We often go to the park on weekends."
+    },
+    {
+      "word": "hospital",
+      "phonetic": "ˈhɑːspɪtəl",
+      "meaning": "医院",
+      "sentence": "The doctor works in a hospital."
+    },
+    {
+      "word": "shop",
+      "phonetic": "ʃɑːp",
+      "meaning": "商店",
+      "sentence": "I buy food at the shop."
+    },
+    {
+      "word": "supermarket",
+      "phonetic": "ˈsuːpərmɑːrkɪt",
+      "meaning": "超市",
+      "sentence": "The supermarket is very big."
+    },
+    {
+      "word": "restaurant",
+      "phonetic": "ˈrestərɑːnt",
+      "meaning": "餐馆",
+      "sentence": "We eat at a restaurant."
+    },
+    {
+      "word": "bank",
+      "phonetic": "bæŋk",
+      "meaning": "银行",
+      "sentence": "I go to the bank with my mother."
+    },
+    {
+      "word": "library",
+      "phonetic": "ˈlaɪbreri",
+      "meaning": "图书馆",
+      "sentence": "I borrow books from the library."
+    },
+    {
+      "word": "morning",
+      "phonetic": "ˈmɔːrnɪŋ",
+      "meaning": "早上",
+      "sentence": "Good morning to you!"
+    },
+    {
+      "word": "afternoon",
+      "phonetic": "ˌæftərˈnuːn",
+      "meaning": "下午",
+      "sentence": "Good afternoon! See you in the afternoon."
+    },
+    {
+      "word": "evening",
+      "phonetic": "ˈiːvnɪŋ",
+      "meaning": "傍晚",
+      "sentence": "Good evening!"
+    },
+    {
+      "word": "night",
+      "phonetic": "naɪt",
+      "meaning": "夜晚",
+      "sentence": "Good night! Sweet dreams."
+    },
+    {
+      "word": "today",
+      "phonetic": "təˈdeɪ",
+      "meaning": "今天",
+      "sentence": "What day is today?"
+    },
+    {
+      "word": "tomorrow",
+      "phonetic": "təˈmɑːroʊ",
+      "meaning": "明天",
+      "sentence": "See you tomorrow!"
+    },
+    {
+      "word": "yesterday",
+      "phonetic": "ˈjestərdeɪ",
+      "meaning": "昨天",
+      "sentence": "Yesterday was Monday."
+    },
+    {
+      "word": "Monday",
+      "phonetic": "ˈmʌndeɪ",
+      "meaning": "星期一",
+      "sentence": "I go to school on Monday."
+    },
+    {
+      "word": "Tuesday",
+      "phonetic": "ˈtuːzdeɪ",
+      "meaning": "星期二",
+      "sentence": "Tuesday comes after Monday."
+    },
+    {
+      "word": "Wednesday",
+      "phonetic": "ˈwenzdeɪ",
+      "meaning": "星期三",
+      "sentence": "Wednesday is the middle of the week."
+    },
+    {
+      "word": "Thursday",
+      "phonetic": "ˈθɜːrzdeɪ",
+      "meaning": "星期四",
+      "sentence": "Thursday is almost the weekend."
+    },
+    {
+      "word": "Friday",
+      "phonetic": "ˈfraɪdeɪ",
+      "meaning": "星期五",
+      "sentence": "Friday is the last school day."
+    },
+    {
+      "word": "Saturday",
+      "phonetic": "ˈsætərdeɪ",
+      "meaning": "星期六",
+      "sentence": "I play football on Saturday."
+    },
+    {
+      "word": "Sunday",
+      "phonetic": "ˈsʌndeɪ",
+      "meaning": "星期日",
+      "sentence": "Sunday is a holiday."
+    },
+    {
+      "word": "weekend",
+      "phonetic": "ˈwiːkend",
+      "meaning": "周末",
+      "sentence": "What do you do on the weekend?"
+    },
+    {
+      "word": "January",
+      "phonetic": "ˈdʒænjuːeri",
+      "meaning": "一月",
+      "sentence": "New Year's Day is in January."
+    },
+    {
+      "word": "February",
+      "phonetic": "ˈfebruːeri",
+      "meaning": "二月",
+      "sentence": "February has 28 or 29 days."
+    },
+    {
+      "word": "March",
+      "phonetic": "mɑːrtʃ",
+      "meaning": "三月",
+      "sentence": "March comes after February."
+    },
+    {
+      "word": "April",
+      "phonetic": "ˈeɪprəl",
+      "meaning": "四月",
+      "sentence": "April is the month of flowers."
+    },
+    {
+      "word": "May",
+      "phonetic": "meɪ",
+      "meaning": "五月",
+      "sentence": "May is a warm and beautiful month."
+    },
+    {
+      "word": "June",
+      "phonetic": "dʒuːn",
+      "meaning": "六月",
+      "sentence": "June is the start of summer."
+    },
+    {
+      "word": "July",
+      "phonetic": "dʒuˈlaɪ",
+      "meaning": "七月",
+      "sentence": "July is the hottest month."
+    },
+    {
+      "word": "August",
+      "phonetic": "ˈɔːɡəst",
+      "meaning": "八月",
+      "sentence": "August is very hot."
+    },
+    {
+      "word": "September",
+      "phonetic": "sepˈtembər",
+      "meaning": "九月",
+      "sentence": "School starts in September."
+    },
+    {
+      "word": "October",
+      "phonetic": "ɑːkˈtoʊbər",
+      "meaning": "十月",
+      "sentence": "October is the month of Halloween."
+    },
+    {
+      "word": "November",
+      "phonetic": "noʊˈvembər",
+      "meaning": "十一月",
+      "sentence": "November comes after October."
+    },
+    {
+      "word": "December",
+      "phonetic": "dɪˈsembər",
+      "meaning": "十二月",
+      "sentence": "Christmas is in December."
+    },
+    {
+      "word": "spring",
+      "phonetic": "sprɪŋ",
+      "meaning": "春天",
+      "sentence": "Flowers bloom in spring."
+    },
+    {
+      "word": "summer",
+      "phonetic": "ˈsʌmər",
+      "meaning": "夏天",
+      "sentence": "Summer is very hot."
+    },
+    {
+      "word": "autumn",
+      "phonetic": "ˈɔːtəm",
+      "meaning": "秋天",
+      "sentence": "Leaves fall in autumn."
+    },
+    {
+      "word": "winter",
+      "phonetic": "ˈwɪntər",
+      "meaning": "冬天",
+      "sentence": "Winter is cold and snowy."
+    },
+    {
+      "word": "weather",
+      "phonetic": "ˈweðər",
+      "meaning": "天气",
+      "sentence": "What is the weather like today?"
+    },
+    {
+      "word": "hot",
+      "phonetic": "hɑːt",
+      "meaning": "热的",
+      "sentence": "It is very hot in summer."
+    },
+    {
+      "word": "cold",
+      "phonetic": "koʊld",
+      "meaning": "冷的",
+      "sentence": "It is very cold in winter."
+    },
+    {
+      "word": "warm",
+      "phonetic": "wɔːrm",
+      "meaning": "暖和的",
+      "sentence": "Spring is warm and nice."
+    },
+    {
+      "word": "cool",
+      "phonetic": "kuːl",
+      "meaning": "凉爽的",
+      "sentence": "Evening is cool in autumn."
+    },
+    {
+      "word": "sunny",
+      "phonetic": "ˈsʌni",
+      "meaning": "晴朗的",
+      "sentence": "It is sunny today."
+    },
+    {
+      "word": "rainy",
+      "phonetic": "ˈreɪni",
+      "meaning": "下雨的",
+      "sentence": "It is rainy today. Take an umbrella."
+    },
+    {
+      "word": "cloudy",
+      "phonetic": "ˈklaʊdi",
+      "meaning": "多云的",
+      "sentence": "It is cloudy this morning."
+    },
+    {
+      "word": "snowy",
+      "phonetic": "ˈsnoʊi",
+      "meaning": "下雪的",
+      "sentence": "It is snowy in winter."
+    },
+    {
+      "word": "windy",
+      "phonetic": "ˈwɪndi",
+      "meaning": "有风的",
+      "sentence": "It is windy today."
+    },
+    {
+      "word": "rain",
+      "phonetic": "reɪn",
+      "meaning": "雨",
+      "sentence": "The rain stopped finally."
+    },
+    {
+      "word": "snow",
+      "phonetic": "snoʊ",
+      "meaning": "雪",
+      "sentence": "The snow covers the ground."
+    },
+    {
+      "word": "wind",
+      "phonetic": "wɪnd",
+      "meaning": "风",
+      "sentence": "The wind blows strongly."
+    },
+    {
+      "word": "cloud",
+      "phonetic": "klaʊd",
+      "meaning": "云",
+      "sentence": "The cloud is white and fluffy."
+    },
+    {
+      "word": "sun",
+      "phonetic": "sʌn",
+      "meaning": "太阳",
+      "sentence": "The sun is very bright."
+    },
+    {
+      "word": "moon",
+      "phonetic": "muːn",
+      "meaning": "月亮",
+      "sentence": "The moon is round tonight."
+    },
+    {
+      "word": "star",
+      "phonetic": "stɑːr",
+      "meaning": "星星",
+      "sentence": "There are many stars in the sky."
+    },
+    {
+      "word": "big",
+      "phonetic": "bɪɡ",
+      "meaning": "大的",
+      "sentence": "The elephant is very big."
+    },
+    {
+      "word": "small",
+      "phonetic": "smɔːl",
+      "meaning": "小的",
+      "sentence": "The mouse is very small."
+    },
+    {
+      "word": "long",
+      "phonetic": "lɔːŋ",
+      "meaning": "长的",
+      "sentence": "The snake is very long."
+    },
+    {
+      "word": "short",
+      "phonetic": "ʃɔːrt",
+      "meaning": "短的",
+      "sentence": "My pencil is too short."
+    },
+    {
+      "word": "tall",
+      "phonetic": "tɔːl",
+      "meaning": "高的",
+      "sentence": "He is very tall."
+    },
+    {
+      "word": "young",
+      "phonetic": "jʌŋ",
+      "meaning": "年轻的",
+      "sentence": "The young man is strong."
+    },
+    {
+      "word": "old",
+      "phonetic": "oʊld",
+      "meaning": "年老的",
+      "sentence": "The old man walks slowly."
+    },
+    {
+      "word": "new",
+      "phonetic": "nuː",
+      "meaning": "新的",
+      "sentence": "I have a new bike."
+    },
+    {
+      "word": "good",
+      "phonetic": "ɡʊd",
+      "meaning": "好的",
+      "sentence": "This is a good book."
+    },
+    {
+      "word": "bad",
+      "phonetic": "bæd",
+      "meaning": "坏的",
+      "sentence": "Smoking is bad for health."
+    },
+    {
+      "word": "happy",
+      "phonetic": "ˈhæpi",
+      "meaning": "快乐的",
+      "sentence": "I am very happy today."
+    },
+    {
+      "word": "sad",
+      "phonetic": "sæd",
+      "meaning": "悲伤的",
+      "sentence": "The movie made me sad."
+    },
+    {
+      "word": "angry",
+      "phonetic": "ˈæŋɡri",
+      "meaning": "生气的",
+      "sentence": "He is very angry."
+    },
+    {
+      "word": "tired",
+      "phonetic": "ˈtaɪərd",
+      "meaning": "累的",
+      "sentence": "I am very tired today."
+    },
+    {
+      "word": "hungry",
+      "phonetic": "ˈhʌŋɡri",
+      "meaning": "饿的",
+      "sentence": "I am hungry. Can I have some food?"
+    },
+    {
+      "word": "thirsty",
+      "phonetic": "ˈθɜːrsti",
+      "meaning": "渴的",
+      "sentence": "I am thirsty. I need some water."
+    },
+    {
+      "word": "ill",
+      "phonetic": "ɪl",
+      "meaning": "生病的",
+      "sentence": "He is ill today."
+    },
+    {
+      "word": "fine",
+      "phonetic": "faɪn",
+      "meaning": "好的",
+      "sentence": "I am fine, thank you."
+    },
+    {
+      "word": "nice",
+      "phonetic": "naɪs",
+      "meaning": "友好的",
+      "sentence": "She is a nice girl."
+    },
+    {
+      "word": "kind",
+      "phonetic": "kaɪnd",
+      "meaning": "善良的",
+      "sentence": "The teacher is very kind."
+    },
+    {
+      "word": "clever",
+      "phonetic": "ˈklevər",
+      "meaning": "聪明的",
+      "sentence": "The clever boy solved the problem."
+    },
+    {
+      "word": "cute",
+      "phonetic": "kjuːt",
+      "meaning": "可爱的",
+      "sentence": "The baby is very cute."
+    },
+    {
+      "word": "beautiful",
+      "phonetic": "ˈbjuːtɪfəl",
+      "meaning": "美丽的",
+      "sentence": "The flower is very beautiful."
+    },
+    {
+      "word": "pretty",
+      "phonetic": "ˈprɪti",
+      "meaning": "漂亮的",
+      "sentence": "She is very pretty."
+    },
+    {
+      "word": "funny",
+      "phonetic": "ˈfʌni",
+      "meaning": "有趣的",
+      "sentence": "The story is very funny."
+    },
+    {
+      "word": "busy",
+      "phonetic": "ˈbɪzi",
+      "meaning": "忙的",
+      "sentence": "I am busy with my homework."
+    },
+    {
+      "word": "free",
+      "phonetic": "friː",
+      "meaning": "空闲的",
+      "sentence": "I am free today."
+    },
+    {
+      "word": "easy",
+      "phonetic": "ˈiːzi",
+      "meaning": "容易的",
+      "sentence": "This question is very easy."
+    },
+    {
+      "word": "difficult",
+      "phonetic": "ˈdɪfɪkəlt",
+      "meaning": "困难的",
+      "sentence": "Math is difficult for me."
+    },
+    {
+      "word": "fast",
+      "phonetic": "fæst",
+      "meaning": "快的",
+      "sentence": "The train is very fast."
+    },
+    {
+      "word": "slow",
+      "phonetic": "sloʊ",
+      "meaning": "慢的",
+      "sentence": "The snail is very slow."
+    },
+    {
+      "word": "clean",
+      "phonetic": "kliːn",
+      "meaning": "干净的",
+      "sentence": "The classroom is very clean."
+    },
+    {
+      "word": "dirty",
+      "phonetic": "ˈdɜːrti",
+      "meaning": "脏的",
+      "sentence": "The floor is dirty."
+    },
+    {
+      "word": "light",
+      "phonetic": "laɪt",
+      "meaning": "轻的",
+      "sentence": "This bag is very light."
+    },
+    {
+      "word": "heavy",
+      "phonetic": "ˈhevi",
+      "meaning": "重的",
+      "sentence": "The box is very heavy."
+    },
+    {
+      "word": "loud",
+      "phonetic": "laʊd",
+      "meaning": "大声的",
+      "sentence": "The music is too loud."
+    },
+    {
+      "word": "quiet",
+      "phonetic": "ˈkwaɪət",
+      "meaning": "安静的",
+      "sentence": "The library is very quiet."
+    },
+    {
+      "word": "right",
+      "phonetic": "raɪt",
+      "meaning": "正确的",
+      "sentence": "Your answer is right."
+    },
+    {
+      "word": "wrong",
+      "phonetic": "rɔːŋ",
+      "meaning": "错误的",
+      "sentence": "That is the wrong answer."
+    },
+    {
+      "word": "love",
+      "phonetic": "lʌv",
+      "meaning": "爱",
+      "sentence": "I love my family."
+    },
+    {
+      "word": "like",
+      "phonetic": "laɪk",
+      "meaning": "喜欢",
+      "sentence": "I like playing football."
+    },
+    {
+      "word": "hate",
+      "phonetic": "heɪt",
+      "meaning": "讨厌",
+      "sentence": "I hate getting up early."
+    },
+    {
+      "word": "want",
+      "phonetic": "wɑːnt",
+      "meaning": "想要",
+      "sentence": "I want an apple."
+    },
+    {
+      "word": "need",
+      "phonetic": "niːd",
+      "meaning": "需要",
+      "sentence": "I need some water."
+    },
+    {
+      "word": "eat",
+      "phonetic": "iːt",
+      "meaning": "吃",
+      "sentence": "I eat breakfast at seven."
+    },
+    {
+      "word": "drink",
+      "phonetic": "drɪŋk",
+      "meaning": "喝",
+      "sentence": "I drink water every day."
+    },
+    {
+      "word": "go",
+      "phonetic": "ɡoʊ",
+      "meaning": "去",
+      "sentence": "I go to school every day."
+    },
+    {
+      "word": "come",
+      "phonetic": "kʌm",
+      "meaning": "来",
+      "sentence": "Come here please."
+    },
+    {
+      "word": "run",
+      "phonetic": "rʌn",
+      "meaning": "跑",
+      "sentence": "I run very fast."
+    },
+    {
+      "word": "walk",
+      "phonetic": "wɔːk",
+      "meaning": "走",
+      "sentence": "I walk to school every day."
+    },
+    {
+      "word": "jump",
+      "phonetic": "dʒʌmp",
+      "meaning": "跳",
+      "sentence": "The frog can jump very high."
+    },
+    {
+      "word": "swim",
+      "phonetic": "swɪm",
+      "meaning": "游泳",
+      "sentence": "I can swim in summer."
+    },
+    {
+      "word": "fly",
+      "phonetic": "flaɪ",
+      "meaning": "飞",
+      "sentence": "Birds can fly."
+    },
+    {
+      "word": "play",
+      "phonetic": "pleɪ",
+      "meaning": "玩",
+      "sentence": "Children like to play games."
+    },
+    {
+      "word": "work",
+      "phonetic": "wɜːrk",
+      "meaning": "工作",
+      "sentence": "My father works in a hospital."
+    },
+    {
+      "word": "read",
+      "phonetic": "riːd",
+      "meaning": "读",
+      "sentence": "I read books every night."
+    },
+    {
+      "word": "write",
+      "phonetic": "raɪt",
+      "meaning": "写",
+      "sentence": "I write with a pen."
+    },
+    {
+      "word": "draw",
+      "phonetic": "drɔː",
+      "meaning": "画画",
+      "sentence": "I like to draw pictures."
+    },
+    {
+      "word": "sing",
+      "phonetic": "sɪŋ",
+      "meaning": "唱歌",
+      "sentence": "She can sing very well."
+    },
+    {
+      "word": "dance",
+      "phonetic": "dæns",
+      "meaning": "跳舞",
+      "sentence": "I like to dance."
+    },
+    {
+      "word": "sleep",
+      "phonetic": "sliːp",
+      "meaning": "睡觉",
+      "sentence": "I sleep eight hours every night."
+    },
+    {
+      "word": "wake",
+      "phonetic": "weɪk",
+      "meaning": "醒来",
+      "sentence": "I wake up at six every morning."
+    },
+    {
+      "word": "sit",
+      "phonetic": "sɪt",
+      "meaning": "坐",
+      "sentence": "Sit down please."
+    },
+    {
+      "word": "stand",
+      "phonetic": "stænd",
+      "meaning": "站",
+      "sentence": "Stand up, please."
+    },
+    {
+      "word": "open",
+      "phonetic": "ˈoʊpən",
+      "meaning": "打开",
+      "sentence": "Open the door please."
+    },
+    {
+      "word": "close",
+      "phonetic": "kloʊz",
+      "meaning": "关闭",
+      "sentence": "Close the window."
+    },
+    {
+      "word": "put",
+      "phonetic": "pʊt",
+      "meaning": "放",
+      "sentence": "Put the book on the table."
+    },
+    {
+      "word": "get",
+      "phonetic": "ɡet",
+      "meaning": "得到",
+      "sentence": "Get up! It's seven o'clock."
+    },
+    {
+      "word": "give",
+      "phonetic": "ɡɪv",
+      "meaning": "给",
+      "sentence": "Give me an apple, please."
+    },
+    {
+      "word": "take",
+      "phonetic": "teɪk",
+      "meaning": "拿",
+      "sentence": "Take this book to the library."
+    },
+    {
+      "word": "have",
+      "phonetic": "hæv",
+      "meaning": "有",
+      "sentence": "I have a new bag."
+    },
+    {
+      "word": "make",
+      "phonetic": "meɪk",
+      "meaning": "做",
+      "sentence": "My mother makes delicious food."
+    },
+    {
+      "word": "cook",
+      "phonetic": "kʊk",
+      "meaning": "做饭",
+      "sentence": "My mother cooks every day."
+    },
+    {
+      "word": "wash",
+      "phonetic": "wɑːʃ",
+      "meaning": "洗",
+      "sentence": "Wash your hands before eating."
+    },
+    {
+      "word": "clean",
+      "phonetic": "kliːn",
+      "meaning": "打扫",
+      "sentence": "Clean your room on weekends."
+    },
+    {
+      "word": "buy",
+      "phonetic": "baɪ",
+      "meaning": "买",
+      "sentence": "I want to buy a new pencil."
+    },
+    {
+      "word": "bring",
+      "phonetic": "brɪŋ",
+      "meaning": "带来",
+      "sentence": "Bring your book tomorrow."
+    },
+    {
+      "word": "help",
+      "phonetic": "help",
+      "meaning": "帮助",
+      "sentence": "Can you help me?"
+    },
+    {
+      "word": "show",
+      "phonetic": "ʃoʊ",
+      "meaning": "展示",
+      "sentence": "Show me your homework."
+    },
+    {
+      "word": "tell",
+      "phonetic": "tel",
+      "meaning": "告诉",
+      "sentence": "Tell me a story."
+    },
+    {
+      "word": "ask",
+      "phonetic": "æsk",
+      "meaning": "问",
+      "sentence": "Ask the teacher if you don't understand."
+    },
+    {
+      "word": "answer",
+      "phonetic": "ˈænsər",
+      "meaning": "回答",
+      "sentence": "Can you answer this question?"
+    },
+    {
+      "word": "think",
+      "phonetic": "θɪŋk",
+      "meaning": "想",
+      "sentence": "Think before you speak."
+    },
+    {
+      "word": "know",
+      "phonetic": "noʊ",
+      "meaning": "知道",
+      "sentence": "I know the answer."
+    },
+    {
+      "word": "learn",
+      "phonetic": "lɜːrn",
+      "meaning": "学习",
+      "sentence": "I learn English at school."
+    },
+    {
+      "word": "study",
+      "phonetic": "ˈstʌdi",
+      "meaning": "学习",
+      "sentence": "I study very hard."
+    },
+    {
+      "word": "remember",
+      "phonetic": "rɪˈmembər",
+      "meaning": "记得",
+      "sentence": "Remember to do your homework."
+    },
+    {
+      "word": "forget",
+      "phonetic": "fərˈɡet",
+      "meaning": "忘记",
+      "sentence": "Don't forget to lock the door."
+    },
+    {
+      "word": "find",
+      "phonetic": "faɪnd",
+      "meaning": "找到",
+      "sentence": "I can't find my pen."
+    },
+    {
+      "word": "lose",
+      "phonetic": "luːz",
+      "meaning": "丢失",
+      "sentence": "I lost my keys."
+    },
+    {
+      "word": "see",
+      "phonetic": "siː",
+      "meaning": "看见",
+      "sentence": "I can see a bird in the tree."
+    },
+    {
+      "word": "watch",
+      "phonetic": "wɑːtʃ",
+      "meaning": "观看",
+      "sentence": "I watch TV on weekends."
+    },
+    {
+      "word": "look",
+      "phonetic": "lʊk",
+      "meaning": "看",
+      "sentence": "Look at the blackboard."
+    },
+    {
+      "word": "hear",
+      "phonetic": "hɪr",
+      "meaning": "听见",
+      "sentence": "I can hear birds singing."
+    },
+    {
+      "word": "feel",
+      "phonetic": "fiːl",
+      "meaning": "感觉",
+      "sentence": "I feel happy today."
+    },
+    {
+      "word": "am",
+      "phonetic": "æm",
+      "meaning": "是（与I连用）",
+      "sentence": "I am a student."
+    },
+    {
+      "word": "is",
+      "phonetic": "ɪz",
+      "meaning": "是（单数）",
+      "sentence": "She is a teacher."
+    },
+    {
+      "word": "are",
+      "phonetic": "ɑːr",
+      "meaning": "是（复数）",
+      "sentence": "We are in the same class."
+    },
+    {
+      "word": "was",
+      "phonetic": "wʌz",
+      "meaning": "是（过去式单数）",
+      "sentence": "She was sick yesterday."
+    },
+    {
+      "word": "were",
+      "phonetic": "wɜːr",
+      "meaning": "是（过去式复数）",
+      "sentence": "They were happy then."
+    },
+    {
+      "word": "do",
+      "phonetic": "duː",
+      "meaning": "做",
+      "sentence": "What do you do?"
+    },
+    {
+      "word": "does",
+      "phonetic": "dʌz",
+      "meaning": "做（第三人称单数）",
+      "sentence": "What does he do?"
+    },
+    {
+      "word": "did",
+      "phonetic": "dɪd",
+      "meaning": "做（过去式）",
+      "sentence": "What did you do yesterday?"
+    },
+    {
+      "word": "will",
+      "phonetic": "wɪl",
+      "meaning": "将要",
+      "sentence": "I will go to Beijing tomorrow."
+    },
+    {
+      "word": "can",
+      "phonetic": "kæn",
+      "meaning": "能",
+      "sentence": "I can swim very well."
+    },
+    {
+      "word": "must",
+      "phonetic": "mʌst",
+      "meaning": "必须",
+      "sentence": "You must finish your homework."
+    },
+    {
+      "word": "should",
+      "phonetic": "ʃʊd",
+      "meaning": "应该",
+      "sentence": "You should study hard."
+    },
+    {
+      "word": "may",
+      "phonetic": "meɪ",
+      "meaning": "可能",
+      "sentence": "You may go now."
+    },
+    {
+      "word": "this",
+      "phonetic": "ðɪs",
+      "meaning": "这",
+      "sentence": "This is my book."
+    },
+    {
+      "word": "that",
+      "phonetic": "ðæt",
+      "meaning": "那",
+      "sentence": "That is his desk."
+    },
+    {
+      "word": "these",
+      "phonetic": "ðiːz",
+      "meaning": "这些",
+      "sentence": "These are my friends."
+    },
+    {
+      "word": "those",
+      "phonetic": "ðoʊz",
+      "meaning": "那些",
+      "sentence": "Those are apple trees."
+    },
+    {
+      "word": "what",
+      "phonetic": "wʌt",
+      "meaning": "什么",
+      "sentence": "What is your name?"
+    },
+    {
+      "word": "which",
+      "phonetic": "wɪtʃ",
+      "meaning": "哪一个",
+      "sentence": "Which book is yours?"
+    },
+    {
+      "word": "who",
+      "phonetic": "huː",
+      "meaning": "谁",
+      "sentence": "Who is that man?"
+    },
+    {
+      "word": "whose",
+      "phonetic": "huːz",
+      "meaning": "谁的",
+      "sentence": "Whose bag is this?"
+    },
+    {
+      "word": "where",
+      "phonetic": "wer",
+      "meaning": "在哪里",
+      "sentence": "Where do you live?"
+    },
+    {
+      "word": "when",
+      "phonetic": "wen",
+      "meaning": "什么时候",
+      "sentence": "When is your birthday?"
+    },
+    {
+      "word": "why",
+      "phonetic": "waɪ",
+      "meaning": "为什么",
+      "sentence": "Why are you late?"
+    },
+    {
+      "word": "how",
+      "phonetic": "haʊ",
+      "meaning": "怎样",
+      "sentence": "How are you today?"
+    },
+    {
+      "word": "and",
+      "phonetic": "ænd",
+      "meaning": "和",
+      "sentence": "I like apples and bananas."
+    },
+    {
+      "word": "but",
+      "phonetic": "bʌt",
+      "meaning": "但是",
+      "sentence": "I like fish but I don't like meat."
+    },
+    {
+      "word": "or",
+      "phonetic": "ɔːr",
+      "meaning": "或者",
+      "sentence": "Do you like tea or coffee?"
+    },
+    {
+      "word": "so",
+      "phonetic": "soʊ",
+      "meaning": "所以",
+      "sentence": "I was late, so I missed the bus."
+    },
+    {
+      "word": "because",
+      "phonetic": "bɪˈkɔːz",
+      "meaning": "因为",
+      "sentence": "I am happy because I got a gift."
+    },
+    {
+      "word": "if",
+      "phonetic": "ɪf",
+      "meaning": "如果",
+      "sentence": "If it rains, I will stay at home."
+    },
+    {
+      "word": "very",
+      "phonetic": "ˈveri",
+      "meaning": "非常",
+      "sentence": "This book is very interesting."
+    },
+    {
+      "word": "really",
+      "phonetic": "ˈriːəli",
+      "meaning": "真正地",
+      "sentence": "I really like this song."
+    },
+    {
+      "word": "too",
+      "phonetic": "tuː",
+      "meaning": "太",
+      "sentence": "The water is too hot."
+    },
+    {
+      "word": "also",
+      "phonetic": "ˈɔːlsoʊ",
+      "meaning": "也",
+      "sentence": "I also like playing basketball."
+    },
+    {
+      "word": "quite",
+      "phonetic": "kwaɪt",
+      "meaning": "相当",
+      "sentence": "The book is quite good."
+    },
+    {
+      "word": "about",
+      "phonetic": "əˈbaʊt",
+      "meaning": "关于",
+      "sentence": "What is the book about?"
+    },
+    {
+      "word": "after",
+      "phonetic": "ˈæftər",
+      "meaning": "在...之后",
+      "sentence": "I will call you after school."
+    },
+    {
+      "word": "before",
+      "phonetic": "bɪˈfɔːr",
+      "meaning": "在...之前",
+      "sentence": "Brush your teeth before sleeping."
+    },
+    {
+      "word": "with",
+      "phonetic": "wɪð",
+      "meaning": "和...一起",
+      "sentence": "I go to school with my friend."
+    },
+    {
+      "word": "for",
+      "phonetic": "fɔːr",
+      "meaning": "为了",
+      "sentence": "This is a gift for you."
+    },
+    {
+      "word": "from",
+      "phonetic": "frʌm",
+      "meaning": "从",
+      "sentence": "Where are you from?"
+    },
+    {
+      "word": "of",
+      "phonetic": "ʌv",
+      "meaning": "的",
+      "sentence": "The color of the sky is blue."
+    },
+    {
+      "word": "to",
+      "phonetic": "tuː",
+      "meaning": "到",
+      "sentence": "Go to school every day."
+    },
+    {
+      "word": "at",
+      "phonetic": "æt",
+      "meaning": "在",
+      "sentence": "I am at home."
+    },
+    {
+      "word": "on",
+      "phonetic": "ɑːn",
+      "meaning": "在...上面",
+      "sentence": "The picture is on the wall."
+    },
+    {
+      "word": "in",
+      "phonetic": "ɪn",
+      "meaning": "在...里面",
+      "sentence": "The book is in the bag."
+    },
+    {
+      "word": "under",
+      "phonetic": "ˈʌndər",
+      "meaning": "在...下面",
+      "sentence": "The cat is under the table."
+    },
+    {
+      "word": "near",
+      "phonetic": "nɪr",
+      "meaning": "在...附近",
+      "sentence": "The school is near my home."
+    },
+    {
+      "word": "no",
+      "phonetic": "noʊ",
+      "meaning": "不/没有",
+      "sentence": "No, I don't like fish."
+    },
+    {
+      "word": "not",
+      "phonetic": "nɑːt",
+      "meaning": "不",
+      "sentence": "I am not hungry."
+    },
+    {
+      "word": "yes",
+      "phonetic": "jes",
+      "meaning": "是",
+      "sentence": "Yes, I like it very much."
+    },
+    {
+      "word": "please",
+      "phonetic": "pliːz",
+      "meaning": "请",
+      "sentence": "Please sit down."
+    },
+    {
+      "word": "thanks",
+      "phonetic": "θæŋks",
+      "meaning": "谢谢",
+      "sentence": "Thanks a lot!"
+    },
+    {
+      "word": "sorry",
+      "phonetic": "ˈsɑːri",
+      "meaning": "对不起",
+      "sentence": "Sorry, I am late."
+    },
+    {
+      "word": "hello",
+      "phonetic": "həˈloʊ",
+      "meaning": "你好",
+      "sentence": "Hello, how are you?"
+    },
+    {
+      "word": "hi",
+      "phonetic": "haɪ",
+      "meaning": "嗨",
+      "sentence": "Hi, nice to meet you."
+    },
+    {
+      "word": "bye",
+      "phonetic": "baɪ",
+      "meaning": "再见",
+      "sentence": "Goodbye! See you tomorrow."
+    },
+    {
+      "word": "again",
+      "phonetic": "əˈɡen",
+      "meaning": "再",
+      "sentence": "Read it again."
+    },
+    {
+      "word": "now",
+      "phonetic": "naʊ",
+      "meaning": "现在",
+      "sentence": "I am busy now."
+    },
+    {
+      "word": "still",
+      "phonetic": "stɪl",
+      "meaning": "仍然",
+      "sentence": "He is still sleeping."
+    },
+    {
+      "word": "already",
+      "phonetic": "ɔːlˈredi",
+      "meaning": "已经",
+      "sentence": "I have already had breakfast."
+    },
+    {
+      "word": "ever",
+      "phonetic": "ˈevər",
+      "meaning": "曾经",
+      "sentence": "Have you ever been to Beijing?"
+    },
+    {
+      "word": "never",
+      "phonetic": "ˈnevər",
+      "meaning": "从未",
+      "sentence": "I have never been to Shanghai."
+    },
+    {
+      "word": "always",
+      "phonetic": "ˈɔːlweɪz",
+      "meaning": "总是",
+      "sentence": "The sun always rises in the east."
+    },
+    {
+      "word": "often",
+      "phonetic": "ˈɔːfən",
+      "meaning": "经常",
+      "sentence": "I often read books before bed."
+    },
+    {
+      "word": "sometimes",
+      "phonetic": "ˈsʌmtaɪmz",
+      "meaning": "有时候",
+      "sentence": "Sometimes I play football on weekends."
+    },
+    {
+      "word": "much",
+      "phonetic": "mʌtʃ",
+      "meaning": "很多",
+      "sentence": "I like it very much."
+    },
+    {
+      "word": "many",
+      "phonetic": "ˈmeni",
+      "meaning": "很多",
+      "sentence": "There are many books in the library."
+    },
+    {
+      "word": "some",
+      "phonetic": "sʌm",
+      "meaning": "一些",
+      "sentence": "I have some good news."
+    },
+    {
+      "word": "any",
+      "phonetic": "ˈeni",
+      "meaning": "任何",
+      "sentence": "Do you have any questions?"
+    },
+    {
+      "word": "all",
+      "phonetic": "ɔːl",
+      "meaning": "全部",
+      "sentence": "All the students are here."
+    },
+    {
+      "word": "time",
+      "phonetic": "taɪm",
+      "meaning": "时间",
+      "sentence": "What time is it?"
+    },
+    {
+      "word": "year",
+      "phonetic": "jɪr",
+      "meaning": "年",
+      "sentence": "This year I am in Grade Six."
+    },
+    {
+      "word": "month",
+      "phonetic": "mʌnθ",
+      "meaning": "月",
+      "sentence": "There are twelve months in a year."
+    },
+    {
+      "word": "week",
+      "phonetic": "wiːk",
+      "meaning": "周",
+      "sentence": "There are seven days in a week."
+    },
+    {
+      "word": "day",
+      "phonetic": "deɪ",
+      "meaning": "天",
+      "sentence": "What day is it today?"
+    },
+    {
+      "word": "hour",
+      "phonetic": "aʊr",
+      "meaning": "小时",
+      "sentence": "There are twenty-four hours in a day."
+    },
+    {
+      "word": "minute",
+      "phonetic": "ˈmɪnɪt",
+      "meaning": "分钟",
+      "sentence": "Wait a minute, please."
+    },
+    {
+      "word": "second",
+      "phonetic": "ˈsekənd",
+      "meaning": "秒",
+      "sentence": "The race only lasts ten seconds."
+    },
+    {
+      "word": "thing",
+      "phonetic": "θɪŋ",
+      "meaning": "事情",
+      "sentence": "I have many things to do."
+    },
+    {
+      "word": "money",
+      "phonetic": "ˈmʌni",
+      "meaning": "钱",
+      "sentence": "Money is important."
+    },
+    {
+      "word": "life",
+      "phonetic": "laɪf",
+      "meaning": "生活",
+      "sentence": "Life is beautiful."
+    },
+    {
+      "word": "party",
+      "phonetic": "ˈpɑːrti",
+      "meaning": "聚会",
+      "sentence": "We had a birthday party."
+    },
+    {
+      "word": "game",
+      "phonetic": "ɡeɪm",
+      "meaning": "游戏",
+      "sentence": "Let's play a game."
+    },
+    {
+      "word": "song",
+      "phonetic": "sɔːŋ",
+      "meaning": "歌曲",
+      "sentence": "I like this song very much."
+    },
+    {
+      "word": "film",
+      "phonetic": "fɪlm",
+      "meaning": "电影",
+      "sentence": "The film is very interesting."
+    },
+    {
+      "word": "TV",
+      "phonetic": "tiːˈviː",
+      "meaning": "电视",
+      "sentence": "I watch TV every evening."
+    },
+    {
+      "word": "computer",
+      "phonetic": "kəmˈpjuːtər",
+      "meaning": "电脑",
+      "sentence": "I use a computer at school."
+    },
+    {
+      "word": "phone",
+      "phonetic": "foʊn",
+      "meaning": "电话",
+      "sentence": "Call me on the phone."
+    },
+    {
+      "word": "toy",
+      "phonetic": "tɔɪ",
+      "meaning": "玩具",
+      "sentence": "Children like toys."
+    },
+    {
+      "word": "gift",
+      "phonetic": "ɡɪft",
+      "meaning": "礼物",
+      "sentence": "This is a gift for you."
+    },
+    {
+      "word": "letter",
+      "phonetic": "ˈletər",
+      "meaning": "信",
+      "sentence": "I wrote a letter to my friend."
+    },
+    {
+      "word": "number",
+      "phonetic": "ˈnʌmbər",
+      "meaning": "数字",
+      "sentence": "What is your phone number?"
+    },
+    {
+      "word": "color",
+      "phonetic": "ˈkʌlər",
+      "meaning": "颜色",
+      "sentence": "What is your favorite color?"
+    },
+    {
+      "word": "shape",
+      "phonetic": "ʃeɪp",
+      "meaning": "形状",
+      "sentence": "A circle is a round shape."
+    },
+    {
+      "word": "size",
+      "phonetic": "saɪz",
+      "meaning": "尺寸",
+      "sentence": "What size shoes do you wear?"
+    },
+    {
+      "word": "price",
+      "phonetic": "praɪs",
+      "meaning": "价格",
+      "sentence": "What is the price of this book?"
+    },
+    {
+      "word": "place",
+      "phonetic": "pleɪs",
+      "meaning": "地方",
+      "sentence": "This is a nice place."
+    },
+    {
+      "word": "way",
+      "phonetic": "weɪ",
+      "meaning": "方式",
+      "sentence": "This is the way I do it."
+    },
+    {
+      "word": "name",
+      "phonetic": "neɪm",
+      "meaning": "名字",
+      "sentence": "What is your name?"
+    },
+    {
+      "word": "birthday",
+      "phonetic": "ˈbɜːrθdeɪ",
+      "meaning": "生日",
+      "sentence": "Happy birthday to you!"
+    },
+    {
+      "word": "China",
+      "phonetic": "ˈtʃaɪnə",
+      "meaning": "中国",
+      "sentence": "Beijing is the capital of China."
+    },
+    {
+      "word": "America",
+      "phonetic": "əˈmerɪkə",
+      "meaning": "美国",
+      "sentence": "New York is a city in America."
+    },
+    {
+      "word": "England",
+      "phonetic": "ˈɪŋɡlənd",
+      "meaning": "英国",
+      "sentence": "London is the capital of England."
+    },
+    {
+      "word": "Japan",
+      "phonetic": "dʒəˈpæn",
+      "meaning": "日本",
+      "sentence": "Sakura blossoms are famous in Japan."
+    },
+    {
+      "word": "left",
+      "phonetic": "left",
+      "meaning": "左边",
+      "sentence": "Turn left at the corner."
+    },
+    {
+      "word": "right",
+      "phonetic": "raɪt",
+      "meaning": "右边",
+      "sentence": "Turn right at the traffic light."
+    },
+    {
+      "word": "up",
+      "phonetic": "ʌp",
+      "meaning": "向上",
+      "sentence": "Look up at the sky."
+    },
+    {
+      "word": "down",
+      "phonetic": "daʊn",
+      "meaning": "向下",
+      "sentence": "Sit down please."
+    },
+    {
+      "word": "out",
+      "phonetic": "aʊt",
+      "meaning": "向外",
+      "sentence": "Go out and play."
+    },
+    {
+      "word": "today",
+      "phonetic": "təˈdeɪ",
+      "meaning": "今天",
+      "sentence": "Today is Monday."
+    }
+  ]
+}
