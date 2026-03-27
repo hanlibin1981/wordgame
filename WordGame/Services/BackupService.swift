@@ -42,7 +42,7 @@ final class BackupService {
 
     private func newBackupFileName() -> String {
         let f = DateFormatter()
-        f.dateFormat = "yyyyMMdd_HHmmss"
+        f.dateFormat = "yyyy-MM-dd_HHmmss"
         return "vocab_backup_\(f.string(from: Date())).sql"
     }
 
