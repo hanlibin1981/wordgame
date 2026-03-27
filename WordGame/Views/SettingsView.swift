@@ -2,11 +2,18 @@ import SwiftUI
 
 /// Settings view for app configuration
 struct SettingsView: View {
+    @EnvironmentObject var wordBookVM: WordBookViewModel
     @AppStorage("soundEnabled") private var soundEnabled = true
     @AppStorage("ttsVoice") private var ttsVoice = "Alex"
     @AppStorage("questionsPerRound") private var questionsPerRound = 10
+    @AppStorage("defaultWordBookId") private var defaultWordBookId: String = ""
     @State private var showResetAlert = false
     @State private var resetMessage: String?
+
+    /// The currently selected default word book, if any.
+    private var selectedDefaultBook: WordBook? {
+        wordBookVM.wordBooks.first { $0.id == defaultWordBookId }
+    }
 
     var body: some View {
         NavigationStack {
@@ -34,6 +41,21 @@ struct SettingsView: View {
                             Spacer()
                             Text("中等")
                                 .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+
+                // Learning Settings
+                Section("学习设置") {
+                    NavigationLink {
+                        DefaultWordBookPickerView()
+                    } label: {
+                        HStack {
+                            Text("默认词书")
+                            Spacer()
+                            Text(selectedDefaultBook?.name ?? "未选择")
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
                         }
                     }
                 }
@@ -92,6 +114,46 @@ struct SettingsView: View {
         } catch {
             resetMessage = "重置失败: \(error.localizedDescription)"
         }
+    }
+}
+
+// MARK: - Default Word Book Picker
+struct DefaultWordBookPickerView: View {
+    @EnvironmentObject var wordBookVM: WordBookViewModel
+    @AppStorage("defaultWordBookId") private var defaultWordBookId: String = ""
+
+    var body: some View {
+        List {
+            Section("选择默认词书") {
+                ForEach(wordBookVM.wordBooks) { book in
+                    Button(action: {
+                        defaultWordBookId = book.id
+                    }) {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(book.name)
+                                    .font(.headline)
+                                    .foregroundColor(.primary)
+                                Text("\(book.wordCount) 词")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+
+                            Spacer()
+
+                            if defaultWordBookId == book.id {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.primaryBlue)
+                            }
+                        }
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .navigationTitle("选择默认词书")
+        .modifier(NavigationBarTitleInlineModifier())
     }
 }
 

@@ -40,7 +40,14 @@ struct MainView: View {
 /// Learning tab with quick access to continue learning
 struct LearningTabView: View {
     @EnvironmentObject var wordBookVM: WordBookViewModel
+    @AppStorage("defaultWordBookId") private var defaultWordBookId: String = ""
     @State private var navigationPath = NavigationPath()
+
+    /// The word book used for "continue learning" — defaults to stored preference, falls back to first book.
+    private var continueLearningBook: WordBook? {
+        wordBookVM.wordBooks.first { $0.id == defaultWordBookId }
+            ?? wordBookVM.wordBooks.first
+    }
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -50,8 +57,8 @@ struct LearningTabView: View {
                     welcomeHeader
 
                     // Continue Learning Card
-                    if let lastBook = wordBookVM.wordBooks.first {
-                        continueLearningCard(book: lastBook)
+                    if let continueBook = continueLearningBook {
+                        continueLearningCard(book: continueBook)
                     }
 
                     // All Word Books Grid
