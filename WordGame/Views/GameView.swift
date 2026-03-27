@@ -164,6 +164,8 @@ struct GameView: View {
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             gamePhase = .playing
         }
+        // Clear studiedWordIds for new game session
+        studiedWordIds = []
         Task {
             await gameVM.startGame(for: book, level: level)
         }
@@ -966,6 +968,7 @@ struct GameView: View {
 
     private func restartGame() {
         visibleStars = 0
+        studiedWordIds = []
         Task {
             await gameVM.startGame(for: book, level: level)
         }

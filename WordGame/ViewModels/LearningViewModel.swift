@@ -1,9 +1,11 @@
 import Foundation
 import SwiftUI
+import os
 
 /// ViewModel for learning/review mode
 @MainActor
 final class LearningViewModel: ObservableObject {
+    private let logger = Logger(subsystem: "com.wordgame.learning", category: "LearningViewModel")
     @Published var currentWord: Word?
     @Published var showAnswer = false
     @Published var isCorrect: Bool?
@@ -42,7 +44,7 @@ final class LearningViewModel: ObservableObject {
             showAnswer = false
             isCorrect = nil
         } catch {
-            print("Failed to load review words: \(error)")
+            logger.error("Failed to load review words: \(error.localizedDescription)")
         }
     }
 

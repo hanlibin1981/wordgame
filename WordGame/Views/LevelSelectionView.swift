@@ -1,7 +1,9 @@
 import SwiftUI
+import os
 
 /// View for selecting game level
 struct LevelSelectionView: View {
+    private let logger = Logger(subsystem: "com.wordgame.ui", category: "LevelSelectionView")
     let book: WordBook
     /// Navigation path for NavigationStack context. If nil, uses sheet dismiss.
     var navigationPath: Binding<NavigationPath>?
@@ -164,10 +166,10 @@ struct LevelSelectionView: View {
                             let locked = isLevelLocked(level)
                             Button {
                                 if !locked {
-                                    print("TAPPED: level=\(level.name), isBoss=\(level.isBossLevel), chapter=\(level.chapter), stage=\(level.stage)")
+                                    logger.debug("TAPPED: level=\(level.name), isBoss=\(level.isBossLevel), chapter=\(level.chapter), stage=\(level.stage)")
                                     navigateToGame(level)
                                 } else {
-                                    print("TAPPED BUT LOCKED: level=\(level.name), isBoss=\(level.isBossLevel)")
+                                    logger.debug("TAPPED BUT LOCKED: level=\(level.name), isBoss=\(level.isBossLevel)")
                                 }
                             } label: {
                                 LevelCard(

@@ -133,6 +133,8 @@ struct LearningWordCard: View {
     let onStudy: () -> Void
     let onPlayAudio: () -> Void
 
+    @State private var isSentenceExpanded = false
+
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .top, spacing: 16) {
@@ -176,30 +178,75 @@ struct LearningWordCard: View {
                         .lineLimit(2)
 
                     if let sentence = word.sentence, !sentence.isEmpty {
-                        HStack(alignment: .top, spacing: 6) {
-                            Text("例句：")
-                                .font(.system(size: 15, weight: .semibold))
-                                .foregroundColor(.warningOrange)
-                                .lineLimit(1)
-
-                            Text(sentence)
-                                .font(.system(size: 15))
-                                .foregroundColor(.secondary)
-                                .italic()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-
-                            Button(action: {
-                                AudioService.shared.speak(sentence)
-                            }) {
-                                Image(systemName: "speaker.wave.2.fill")
-                                    .font(.system(size: 13))
+                        VStack(alignment: .leading, spacing: 4) {
+                            // 可展开的例句区域
+                            HStack(alignment: .top, spacing: 6) {
+                                Text("例句：")
+                                    .font(.system(size: 15, weight: .semibold))
                                     .foregroundColor(.warningOrange)
+                                    .lineLimit(1)
+
+                                Text(sentence)
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.secondary)
+                                    .italic()
+                                    .lineLimit(isSentenceExpanded ? nil : 2)
+
+                                Spacer()
+
+                                HStack(spacing: 8) {
+                                    // 展开/收起按钮
+                                    Button(action: {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            isSentenceExpanded.toggle()
+                                        }
+                                    }) {
+                                        Image(systemName: isSentenceExpanded ? "chevron.up" : "chevron.down")
+                                            .font(.system(size: 12, weight: .semibold))
+                                            .foregroundColor(.warningOrange)
+                                    }
+                                    .buttonStyle(.plain)
+
+                                    // 朗读按钮
+                                    Button(action: {
+                                        AudioService.shared.speak(sentence)
+                                    }) {
+                                        Image(systemName: "speaker.wave.2.fill")
+                                            .font(.system(size: 13))
+                                            .foregroundColor(.warningOrange)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
                             }
-                            .buttonStyle(.plain)
+
+                            // 展开时显示中文翻译
+                            if isSentenceExpanded {
+                                if let translation = word.sentenceTranslation, !translation.isEmpty {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("翻译：")
+                                            .font(.system(size: 12, weight: .semibold))
+                                            .foregroundColor(.primaryBlue)
+                                        Text(translation)
+                                            .font(.system(size: 13))
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .padding(.top, 6)
+                                } else {
+                                    Text("点击音频按钮听例句朗读")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.secondary)
+                                        .padding(.top, 4)
+                                }
+                            }
                         }
                         .padding(8)
                         .background(Color.warningOrange.opacity(0.07))
                         .cornerRadius(6)
+                        .onTapGesture {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                isSentenceExpanded.toggle()
+                            }
+                        }
                     }
                 }
 

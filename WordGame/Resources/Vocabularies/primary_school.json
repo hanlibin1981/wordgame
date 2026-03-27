@@ -6,2677 +6,3123 @@
       "word": "one",
       "phonetic": "wʌn",
       "meaning": "一",
-      "sentence": "I have one apple."
+      "sentence": "I have one apple.",
+      "sentenceTranslation": "我有一个苹果。"
     },
     {
       "word": "two",
       "phonetic": "tuː",
       "meaning": "二",
-      "sentence": "I have two books."
+      "sentence": "I have two books.",
+      "sentenceTranslation": "我有两本书。"
     },
     {
       "word": "three",
       "phonetic": "θriː",
       "meaning": "三",
-      "sentence": "There are three cats."
+      "sentence": "There are three cats.",
+      "sentenceTranslation": "有三只猫。"
     },
     {
       "word": "four",
       "phonetic": "fɔː",
       "meaning": "四",
-      "sentence": "Four plus two is six."
+      "sentence": "Four plus two is six.",
+      "sentenceTranslation": "四加二等于六。"
     },
     {
       "word": "five",
       "phonetic": "faɪv",
       "meaning": "五",
-      "sentence": "I am five years old."
+      "sentence": "I am five years old.",
+      "sentenceTranslation": "我五岁了。"
     },
     {
       "word": "six",
       "phonetic": "sɪks",
       "meaning": "六",
-      "sentence": "Six friends played together."
+      "sentence": "Six friends played together.",
+      "sentenceTranslation": "六个朋友一起玩。"
     },
     {
       "word": "seven",
       "phonetic": "ˈsevən",
       "meaning": "七",
-      "sentence": "She is seven years old."
+      "sentence": "She is seven years old.",
+      "sentenceTranslation": "她七岁了。"
     },
     {
       "word": "eight",
       "phonetic": "eɪt",
       "meaning": "八",
-      "sentence": "Eight o'clock in the morning."
+      "sentence": "Eight o'clock in the morning.",
+      "sentenceTranslation": "早上八点钟。"
     },
     {
       "word": "nine",
       "phonetic": "naɪn",
       "meaning": "九",
-      "sentence": "I have nine pencils."
+      "sentence": "I have nine pencils.",
+      "sentenceTranslation": "我有九支铅笔。"
     },
     {
       "word": "ten",
       "phonetic": "ten",
       "meaning": "十",
-      "sentence": "Count from one to ten."
+      "sentence": "Count from one to ten.",
+      "sentenceTranslation": "从一数到十。"
     },
     {
       "word": "twenty",
       "phonetic": "ˈtwenti",
       "meaning": "二十",
-      "sentence": "There are twenty students in our class."
+      "sentence": "There are twenty students in our class.",
+      "sentenceTranslation": "我们班有二十个学生。"
     },
     {
       "word": "thirty",
       "phonetic": "ˈθɜːrti",
       "meaning": "三十",
-      "sentence": "Thirty people came to the meeting."
+      "sentence": "Thirty people came to the meeting.",
+      "sentenceTranslation": "三十个人来参加会议。"
     },
     {
       "word": "hundred",
       "phonetic": "ˈhʌndrəd",
       "meaning": "百",
-      "sentence": "One hundred is a round number."
+      "sentence": "One hundred is a round number.",
+      "sentenceTranslation": "一百是一个整数。"
     },
     {
       "word": "red",
       "phonetic": "red",
       "meaning": "红色",
-      "sentence": "The apple is red."
+      "sentence": "The apple is red.",
+      "sentenceTranslation": "苹果是红色的。"
     },
     {
       "word": "blue",
       "phonetic": "bluː",
       "meaning": "蓝色",
-      "sentence": "The sky is blue."
+      "sentence": "The sky is blue.",
+      "sentenceTranslation": "天空是蓝色的。"
     },
     {
       "word": "yellow",
       "phonetic": "ˈjeloʊ",
       "meaning": "黄色",
-      "sentence": "The banana is yellow."
+      "sentence": "The banana is yellow.",
+      "sentenceTranslation": "香蕉是黄色的。"
     },
     {
       "word": "green",
       "phonetic": "griːn",
       "meaning": "绿色",
-      "sentence": "The grass is green."
+      "sentence": "The grass is green.",
+      "sentenceTranslation": "草是绿色的。"
     },
     {
       "word": "white",
       "phonetic": "waɪt",
       "meaning": "白色",
-      "sentence": "The snow is white."
+      "sentence": "The snow is white.",
+      "sentenceTranslation": "雪是白色的。"
     },
     {
       "word": "black",
       "phonetic": "blæk",
       "meaning": "黑色",
-      "sentence": "The cat is black."
+      "sentence": "The cat is black.",
+      "sentenceTranslation": "猫是黑色的。"
     },
     {
       "word": "orange",
       "phonetic": "ˈɔːrɪndʒ",
       "meaning": "橙色",
-      "sentence": "The orange is sweet."
+      "sentence": "The orange is sweet.",
+      "sentenceTranslation": "橙子很甜。"
     },
     {
       "word": "pink",
       "phonetic": "pɪŋk",
       "meaning": "粉色",
-      "sentence": "Her bag is pink."
+      "sentence": "Her bag is pink.",
+      "sentenceTranslation": "她的书包是粉色的。"
     },
     {
       "word": "purple",
       "phonetic": "ˈpɜːrpəl",
       "meaning": "紫色",
-      "sentence": "Grapes can be purple."
+      "sentence": "Grapes can be purple.",
+      "sentenceTranslation": "葡萄可以是紫色的。"
     },
     {
       "word": "brown",
       "phonetic": "braʊn",
       "meaning": "棕色",
-      "sentence": "The bear is brown."
+      "sentence": "The bear is brown.",
+      "sentenceTranslation": "熊是棕色的。"
     },
     {
       "word": "gray",
       "phonetic": "ɡreɪ",
       "meaning": "灰色",
-      "sentence": "The cloud is gray."
+      "sentence": "The cloud is gray.",
+      "sentenceTranslation": "云是灰色的。"
     },
     {
       "word": "I",
       "phonetic": "aɪ",
       "meaning": "我",
-      "sentence": "I am a student."
+      "sentence": "I am a student.",
+      "sentenceTranslation": "我是一名学生。"
     },
     {
       "word": "you",
       "phonetic": "juː",
       "meaning": "你",
-      "sentence": "You are my friend."
+      "sentence": "You are my friend.",
+      "sentenceTranslation": "你是我的朋友。"
     },
     {
       "word": "he",
       "phonetic": "hiː",
       "meaning": "他",
-      "sentence": "He is my father."
+      "sentence": "He is my father.",
+      "sentenceTranslation": "他是我爸爸。"
     },
     {
       "word": "she",
       "phonetic": "ʃiː",
       "meaning": "她",
-      "sentence": "She is my mother."
+      "sentence": "She is my mother.",
+      "sentenceTranslation": "她是我妈妈。"
     },
     {
       "word": "it",
       "phonetic": "ɪt",
       "meaning": "它",
-      "sentence": "It is a cat."
+      "sentence": "It is a cat.",
+      "sentenceTranslation": "它是一只猫。"
     },
     {
       "word": "we",
       "phonetic": "wiː",
       "meaning": "我们",
-      "sentence": "We are in the same class."
+      "sentence": "We are in the same class.",
+      "sentenceTranslation": "我们在同一个班。"
     },
     {
       "word": "they",
       "phonetic": "ðeɪ",
       "meaning": "他们",
-      "sentence": "They are playing games."
+      "sentence": "They are playing games.",
+      "sentenceTranslation": "他们在玩游戏。"
     },
     {
       "word": "my",
       "phonetic": "maɪ",
       "meaning": "我的",
-      "sentence": "This is my book."
+      "sentence": "This is my book.",
+      "sentenceTranslation": "这是我的书。"
     },
     {
       "word": "your",
       "phonetic": "jɔːr",
       "meaning": "你的",
-      "sentence": "Is this your bag?"
+      "sentence": "Is this your bag?",
+      "sentenceTranslation": "这是你的书包吗？"
     },
     {
       "word": "his",
       "phonetic": "hɪz",
       "meaning": "他的",
-      "sentence": "This is his desk."
+      "sentence": "This is his desk.",
+      "sentenceTranslation": "这是他的桌子。"
     },
     {
       "word": "her",
       "phonetic": "hɜːr",
       "meaning": "她的",
-      "sentence": "That is her name."
+      "sentence": "That is her name.",
+      "sentenceTranslation": "那是她的名字。"
     },
     {
       "word": "our",
       "phonetic": "aʊr",
       "meaning": "我们的",
-      "sentence": "This is our school."
+      "sentence": "This is our school.",
+      "sentenceTranslation": "这是我们的学校。"
     },
     {
       "word": "their",
       "phonetic": "ðer",
       "meaning": "他们的",
-      "sentence": "These are their books."
+      "sentence": "These are their books.",
+      "sentenceTranslation": "这些是他们的书。"
     },
     {
       "word": "mother",
       "phonetic": "ˈmʌðər",
       "meaning": "妈妈",
-      "sentence": "My mother cooks dinner."
+      "sentence": "My mother cooks dinner.",
+      "sentenceTranslation": "我妈妈做晚饭。"
     },
     {
       "word": "father",
       "phonetic": "ˈfɑːðər",
       "meaning": "爸爸",
-      "sentence": "My father drives a car."
+      "sentence": "My father drives a car.",
+      "sentenceTranslation": "我爸爸开汽车。"
     },
     {
       "word": "brother",
       "phonetic": "ˈbrʌðər",
       "meaning": "哥哥/弟弟",
-      "sentence": "I have one brother."
+      "sentence": "I have one brother.",
+      "sentenceTranslation": "我有一个兄弟。"
     },
     {
       "word": "sister",
       "phonetic": "ˈsɪstər",
       "meaning": "姐姐/妹妹",
-      "sentence": "My sister is tall."
+      "sentence": "My sister is tall.",
+      "sentenceTranslation": "我姐姐很高。"
     },
     {
       "word": "grandma",
       "phonetic": "ˈɡrænmɑː",
       "meaning": "奶奶/外婆",
-      "sentence": "Grandma makes cookies."
+      "sentence": "Grandma makes cookies.",
+      "sentenceTranslation": "奶奶做饼干。"
     },
     {
       "word": "grandpa",
       "phonetic": "ˈɡrænpɑː",
       "meaning": "爷爷/外公",
-      "sentence": "Grandpa reads newspapers."
+      "sentence": "Grandpa reads newspapers.",
+      "sentenceTranslation": "爷爷看报纸。"
     },
     {
       "word": "friend",
       "phonetic": "frend",
       "meaning": "朋友",
-      "sentence": "She is my best friend."
+      "sentence": "She is my best friend.",
+      "sentenceTranslation": "她是我最好的朋友。"
     },
     {
       "word": "family",
       "phonetic": "ˈfæməli",
       "meaning": "家庭",
-      "sentence": "I love my family."
+      "sentence": "I love my family.",
+      "sentenceTranslation": "我爱我的家庭。"
     },
     {
       "word": "boy",
       "phonetic": "bɔɪ",
       "meaning": "男孩",
-      "sentence": "The boy is playing football."
+      "sentence": "The boy is playing football.",
+      "sentenceTranslation": "那个男孩在踢足球。"
     },
     {
       "word": "girl",
       "phonetic": "ɡɜːrl",
       "meaning": "女孩",
-      "sentence": "The girl is reading a book."
+      "sentence": "The girl is reading a book.",
+      "sentenceTranslation": "那个女孩在读书。"
     },
     {
       "word": "man",
       "phonetic": "mæn",
       "meaning": "男人",
-      "sentence": "The man is a teacher."
+      "sentence": "The man is a teacher.",
+      "sentenceTranslation": "那个男人是老师。"
     },
     {
       "word": "woman",
       "phonetic": "ˈwʊmən",
       "meaning": "女人",
-      "sentence": "The woman is a doctor."
+      "sentence": "The woman is a doctor.",
+      "sentenceTranslation": "那个女人是医生。"
     },
     {
       "word": "child",
       "phonetic": "tʃaɪld",
       "meaning": "孩子",
-      "sentence": "The child is sleeping."
+      "sentence": "The child is sleeping.",
+      "sentenceTranslation": "孩子在睡觉。"
     },
     {
       "word": "children",
       "phonetic": "ˈtʃɪldrən",
       "meaning": "孩子们",
-      "sentence": "The children are playing outside."
+      "sentence": "The children are playing outside.",
+      "sentenceTranslation": "孩子们在外面玩。"
     },
     {
       "word": "people",
       "phonetic": "ˈpiːpəl",
       "meaning": "人们",
-      "sentence": "Many people like playing football."
+      "sentence": "Many people like playing football.",
+      "sentenceTranslation": "许多人喜欢踢足球。"
     },
     {
       "word": "teacher",
       "phonetic": "ˈtiːtʃər",
       "meaning": "老师",
-      "sentence": "Our teacher is very kind."
+      "sentence": "Our teacher is very kind.",
+      "sentenceTranslation": "我们的老师很和善。"
     },
     {
       "word": "doctor",
       "phonetic": "ˈdɑːktər",
       "meaning": "医生",
-      "sentence": "The doctor helps sick people."
+      "sentence": "The doctor helps sick people.",
+      "sentenceTranslation": "医生帮助生病的人。"
     },
     {
       "word": "nurse",
       "phonetic": "nɜːrs",
       "meaning": "护士",
-      "sentence": "The nurse is very caring."
+      "sentence": "The nurse is very caring.",
+      "sentenceTranslation": "护士很贴心。"
     },
     {
       "word": "policeman",
       "phonetic": "pəˈliːsmən",
       "meaning": "警察",
-      "sentence": "The policeman directs traffic."
+      "sentence": "The policeman directs traffic.",
+      "sentenceTranslation": "警察指挥交通。"
     },
     {
       "word": "driver",
       "phonetic": "ˈdraɪvər",
       "meaning": "司机",
-      "sentence": "The bus driver is careful."
+      "sentence": "The bus driver is careful.",
+      "sentenceTranslation": "公交车司机很小心。"
     },
     {
       "word": "farmer",
       "phonetic": "ˈfɑːrmər",
       "meaning": "农民",
-      "sentence": "The farmer grows vegetables."
+      "sentence": "The farmer grows vegetables.",
+      "sentenceTranslation": "农民种植蔬菜。"
     },
     {
       "word": "student",
       "phonetic": "ˈstuːdənt",
       "meaning": "学生",
-      "sentence": "I am a student in Class One."
+      "sentence": "I am a student in Class One.",
+      "sentenceTranslation": "我是一班的学生。"
     },
     {
       "word": "worker",
       "phonetic": "ˈwɜːrkər",
       "meaning": "工人",
-      "sentence": "The worker builds houses."
+      "sentence": "The worker builds houses.",
+      "sentenceTranslation": "工人建造房子。"
     },
     {
       "word": "cat",
       "phonetic": "kæt",
       "meaning": "猫",
-      "sentence": "The cat likes fish."
+      "sentence": "The cat likes fish.",
+      "sentenceTranslation": "猫喜欢吃鱼。"
     },
     {
       "word": "dog",
       "phonetic": "dɔːɡ",
       "meaning": "狗",
-      "sentence": "The dog barks loudly."
+      "sentence": "The dog barks loudly.",
+      "sentenceTranslation": "狗大声吠叫。"
     },
     {
       "word": "bird",
       "phonetic": "bɜːrd",
       "meaning": "鸟",
-      "sentence": "The bird sings sweetly."
+      "sentence": "The bird sings sweetly.",
+      "sentenceTranslation": "鸟儿甜美地歌唱。"
     },
     {
       "word": "fish",
       "phonetic": "fɪʃ",
       "meaning": "鱼",
-      "sentence": "The fish swims in water."
+      "sentence": "The fish swims in water.",
+      "sentenceTranslation": "鱼在水中游泳。"
     },
     {
       "word": "rabbit",
       "phonetic": "ˈræbɪt",
       "meaning": "兔子",
-      "sentence": "The rabbit has long ears."
+      "sentence": "The rabbit has long ears.",
+      "sentenceTranslation": "兔子有长长的耳朵。"
     },
     {
       "word": "mouse",
       "phonetic": "maʊs",
       "meaning": "老鼠",
-      "sentence": "The mouse is very small."
+      "sentence": "The mouse is very small.",
+      "sentenceTranslation": "老鼠很小。"
     },
     {
       "word": "elephant",
       "phonetic": "ˈelɪfənt",
       "meaning": "大象",
-      "sentence": "The elephant is very big."
+      "sentence": "The elephant is very big.",
+      "sentenceTranslation": "大象很大。"
     },
     {
       "word": "monkey",
       "phonetic": "ˈmʌŋki",
       "meaning": "猴子",
-      "sentence": "The monkey swings on trees."
+      "sentence": "The monkey swings on trees.",
+      "sentenceTranslation": "猴子在树上荡来荡去。"
     },
     {
       "word": "panda",
       "phonetic": "ˈpændə",
       "meaning": "熊猫",
-      "sentence": "Pandas only live in China."
+      "sentence": "Pandas only live in China.",
+      "sentenceTranslation": "熊猫只生活在中国。"
     },
     {
       "word": "tiger",
       "phonetic": "ˈtaɪɡər",
       "meaning": "老虎",
-      "sentence": "The tiger runs very fast."
+      "sentence": "The tiger runs very fast.",
+      "sentenceTranslation": "老虎跑得很快。"
     },
     {
       "word": "lion",
       "phonetic": "ˈlaɪən",
       "meaning": "狮子",
-      "sentence": "The lion is called the king of animals."
+      "sentence": "The lion is called the king of animals.",
+      "sentenceTranslation": "狮子被称为百兽之王。"
     },
     {
       "word": "zebra",
       "phonetic": "ˈziːbrə",
       "meaning": "斑马",
-      "sentence": "The zebra has black and white stripes."
+      "sentence": "The zebra has black and white stripes.",
+      "sentenceTranslation": "斑马有黑白条纹。"
     },
     {
       "word": "giraffe",
       "phonetic": "dʒəˈræf",
       "meaning": "长颈鹿",
-      "sentence": "The giraffe has a very long neck."
+      "sentence": "The giraffe has a very long neck.",
+      "sentenceTranslation": "长颈鹿有很长的脖子。"
     },
     {
       "word": "pig",
       "phonetic": "pɪɡ",
       "meaning": "猪",
-      "sentence": "The pig likes eating."
+      "sentence": "The pig likes eating.",
+      "sentenceTranslation": "猪喜欢吃。"
     },
     {
       "word": "cow",
       "phonetic": "kaʊ",
       "meaning": "奶牛",
-      "sentence": "The cow gives us milk."
+      "sentence": "The cow gives us milk.",
+      "sentenceTranslation": "奶牛给我们提供牛奶。"
     },
     {
       "word": "sheep",
       "phonetic": "ʃiːp",
       "meaning": "绵羊",
-      "sentence": "The sheep is fluffy and white."
+      "sentence": "The sheep is fluffy and white.",
+      "sentenceTranslation": "绵羊毛茸茸的，是白色的。"
     },
     {
       "word": "duck",
       "phonetic": "dʌk",
       "meaning": "鸭子",
-      "sentence": "The duck swims in the pond."
+      "sentence": "The duck swims in the pond.",
+      "sentenceTranslation": "鸭子在池塘里游泳。"
     },
     {
       "word": "chicken",
       "phonetic": "ˈtʃɪkɪn",
       "meaning": "鸡",
-      "sentence": "The chicken lays eggs."
+      "sentence": "The chicken lays eggs.",
+      "sentenceTranslation": "鸡下蛋。"
     },
     {
       "word": "snake",
       "phonetic": "sneɪk",
       "meaning": "蛇",
-      "sentence": "The snake can be dangerous."
+      "sentence": "The snake can be dangerous.",
+      "sentenceTranslation": "蛇可能有危险。"
     },
     {
       "word": "frog",
       "phonetic": "frɔːɡ",
       "meaning": "青蛙",
-      "sentence": "The frog catches flies."
+      "sentence": "The frog catches flies.",
+      "sentenceTranslation": "青蛙捉苍蝇。"
     },
     {
       "word": "horse",
       "phonetic": "hɔːrs",
       "meaning": "马",
-      "sentence": "The horse runs very fast."
+      "sentence": "The horse runs very fast.",
+      "sentenceTranslation": "马跑得很快。"
     },
     {
       "word": "bear",
       "phonetic": "ber",
       "meaning": "熊",
-      "sentence": "The bear likes honey."
+      "sentence": "The bear likes honey.",
+      "sentenceTranslation": "熊喜欢蜂蜜。"
     },
     {
       "word": "deer",
       "phonetic": "dɪr",
       "meaning": "鹿",
-      "sentence": "The deer runs very fast."
+      "sentence": "The deer runs very fast.",
+      "sentenceTranslation": "鹿跑得很快。"
     },
     {
       "word": "dolphin",
       "phonetic": "ˈdɑːlfɪn",
       "meaning": "海豚",
-      "sentence": "Dolphins are very clever."
+      "sentence": "Dolphins are very clever.",
+      "sentenceTranslation": "海豚很聪明。"
     },
     {
       "word": "whale",
       "phonetic": "weɪl",
       "meaning": "鲸鱼",
-      "sentence": "The whale is the largest animal."
+      "sentence": "The whale is the largest animal.",
+      "sentenceTranslation": "鲸鱼是最大的动物。"
     },
     {
       "word": "butterfly",
       "phonetic": "ˈbʌtərflaɪ",
       "meaning": "蝴蝶",
-      "sentence": "The butterfly is very beautiful."
+      "sentence": "The butterfly is very beautiful.",
+      "sentenceTranslation": "蝴蝶很美丽。"
     },
     {
       "word": "bee",
       "phonetic": "biː",
       "meaning": "蜜蜂",
-      "sentence": "The bee makes honey."
+      "sentence": "The bee makes honey.",
+      "sentenceTranslation": "蜜蜂酿蜜。"
     },
     {
       "word": "ant",
       "phonetic": "ænt",
       "meaning": "蚂蚁",
-      "sentence": "Ants work very hard."
+      "sentence": "Ants work very hard.",
+      "sentenceTranslation": "蚂蚁工作很努力。"
     },
     {
       "word": "spider",
       "phonetic": "ˈspaɪdər",
       "meaning": "蜘蛛",
-      "sentence": "The spider makes a web."
+      "sentence": "The spider makes a web.",
+      "sentenceTranslation": "蜘蛛织网。"
     },
     {
       "word": "apple",
       "phonetic": "ˈæpəl",
       "meaning": "苹果",
-      "sentence": "An apple a day keeps the doctor away."
+      "sentence": "An apple a day keeps the doctor away.",
+      "sentenceTranslation": "一天一苹果，医生远离我。"
     },
     {
       "word": "banana",
       "phonetic": "bəˈnænə",
       "meaning": "香蕉",
-      "sentence": "I like eating bananas."
+      "sentence": "I like eating bananas.",
+      "sentenceTranslation": "我喜欢吃香蕉。"
     },
     {
       "word": "orange",
       "phonetic": "ˈɔːrɪndʒ",
       "meaning": "橙子",
-      "sentence": "This orange is very juicy."
+      "sentence": "This orange is very juicy.",
+      "sentenceTranslation": "这个橙子很多汁。"
     },
     {
       "word": "pear",
       "phonetic": "per",
       "meaning": "梨",
-      "sentence": "The pear is sweet and soft."
+      "sentence": "The pear is sweet and soft.",
+      "sentenceTranslation": "梨又甜又软。"
     },
     {
       "word": "grape",
       "phonetic": "ɡreɪp",
       "meaning": "葡萄",
-      "sentence": "Grapes grow on vines."
+      "sentence": "Grapes grow on vines.",
+      "sentenceTranslation": "葡萄长在藤上。"
     },
     {
       "word": "watermelon",
       "phonetic": "ˈwɔːtərmelən",
       "meaning": "西瓜",
-      "sentence": "Watermelon is sweet in summer."
+      "sentence": "Watermelon is sweet in summer.",
+      "sentenceTranslation": "西瓜在夏天很甜。"
     },
     {
       "word": "strawberry",
       "phonetic": "ˈstrɔːbəri",
       "meaning": "草莓",
-      "sentence": "Strawberries are red and sweet."
+      "sentence": "Strawberries are red and sweet.",
+      "sentenceTranslation": "草莓又红又甜。"
     },
     {
       "word": "pineapple",
       "phonetic": "ˈpaɪnæpəl",
       "meaning": "菠萝",
-      "sentence": "Pineapple grows in tropical places."
+      "sentence": "Pineapple grows in tropical places.",
+      "sentenceTranslation": "菠萝生长在热带地区。"
     },
     {
       "word": "peach",
       "phonetic": "piːtʃ",
       "meaning": "桃子",
-      "sentence": "The peach is soft and sweet."
+      "sentence": "The peach is soft and sweet.",
+      "sentenceTranslation": "桃子又软又甜。"
     },
     {
       "word": "lemon",
       "phonetic": "ˈlemən",
       "meaning": "柠檬",
-      "sentence": "Lemon is sour."
+      "sentence": "Lemon is sour.",
+      "sentenceTranslation": "柠檬是酸的。"
     },
     {
       "word": "mango",
       "phonetic": "ˈmæŋɡoʊ",
       "meaning": "芒果",
-      "sentence": "Mango is a tropical fruit."
+      "sentence": "Mango is a tropical fruit.",
+      "sentenceTranslation": "芒果是一种热带水果。"
     },
     {
       "word": "cherry",
       "phonetic": "ˈtʃeri",
       "meaning": "樱桃",
-      "sentence": "Cherries are red and sweet."
+      "sentence": "Cherries are red and sweet.",
+      "sentenceTranslation": "樱桃又红又甜。"
     },
     {
       "word": "egg",
       "phonetic": "eɡ",
       "meaning": "鸡蛋",
-      "sentence": "I have an egg for breakfast."
+      "sentence": "I have an egg for breakfast.",
+      "sentenceTranslation": "我早餐吃一个鸡蛋。"
     },
     {
       "word": "bread",
       "phonetic": "bred",
       "meaning": "面包",
-      "sentence": "I eat bread every morning."
+      "sentence": "I eat bread every morning.",
+      "sentenceTranslation": "我每天早上吃面包。"
     },
     {
       "word": "rice",
       "phonetic": "raɪs",
       "meaning": "米饭",
-      "sentence": "We eat rice with chopsticks."
+      "sentence": "We eat rice with chopsticks.",
+      "sentenceTranslation": "我们用筷子吃米饭。"
     },
     {
       "word": "noodles",
       "phonetic": "ˈnuːdəlz",
       "meaning": "面条",
-      "sentence": "I love Chinese noodles."
+      "sentence": "I love Chinese noodles.",
+      "sentenceTranslation": "我喜欢中国面条。"
     },
     {
       "word": "dumplings",
       "phonetic": "ˈdʌmplɪŋz",
       "meaning": "饺子",
-      "sentence": "Chinese dumplings are delicious."
+      "sentence": "Chinese dumplings are delicious.",
+      "sentenceTranslation": "中国饺子很好吃。"
     },
     {
       "word": "milk",
       "phonetic": "mɪlk",
       "meaning": "牛奶",
-      "sentence": "Children should drink more milk."
+      "sentence": "Children should drink more milk.",
+      "sentenceTranslation": "孩子应该多喝牛奶。"
     },
     {
       "word": "water",
       "phonetic": "ˈwɔːtər",
       "meaning": "水",
-      "sentence": "Drink more water every day."
+      "sentence": "Drink more water every day.",
+      "sentenceTranslation": "每天多喝水。"
     },
     {
       "word": "juice",
       "phonetic": "dʒuːs",
       "meaning": "果汁",
-      "sentence": "I like orange juice."
+      "sentence": "I like orange juice.",
+      "sentenceTranslation": "我喜欢橙汁。"
     },
     {
       "word": "tea",
       "phonetic": "tiː",
       "meaning": "茶",
-      "sentence": "Chinese tea is famous worldwide."
+      "sentence": "Chinese tea is famous worldwide.",
+      "sentenceTranslation": "中国茶世界闻名。"
     },
     {
       "word": "coffee",
       "phonetic": "ˈkɔːfi",
       "meaning": "咖啡",
-      "sentence": "Coffee is popular in the morning."
+      "sentence": "Coffee is popular in the morning.",
+      "sentenceTranslation": "咖啡在早上很受欢迎。"
     },
     {
       "word": "soup",
       "phonetic": "suːp",
       "meaning": "汤",
-      "sentence": "The soup is very delicious."
+      "sentence": "The soup is very delicious.",
+      "sentenceTranslation": "汤很好喝。"
     },
     {
       "word": "meat",
       "phonetic": "miːt",
       "meaning": "肉",
-      "sentence": "I eat meat every day."
+      "sentence": "I eat meat every day.",
+      "sentenceTranslation": "我每天吃肉。"
     },
     {
       "word": "chicken",
       "phonetic": "ˈtʃɪkɪn",
       "meaning": "鸡肉",
-      "sentence": "I like fried chicken very much."
+      "sentence": "I like fried chicken very much.",
+      "sentenceTranslation": "我非常喜欢炸鸡。"
     },
     {
       "word": "beef",
       "phonetic": "biːf",
       "meaning": "牛肉",
-      "sentence": "Beef comes from cows."
+      "sentence": "Beef comes from cows.",
+      "sentenceTranslation": "牛肉来自奶牛。"
     },
     {
       "word": "pork",
       "phonetic": "pɔːrk",
       "meaning": "猪肉",
-      "sentence": "We often eat pork at home."
+      "sentence": "We often eat pork at home.",
+      "sentenceTranslation": "我们在家常吃猪肉。"
     },
     {
       "word": "fish",
       "phonetic": "fɪʃ",
       "meaning": "鱼肉",
-      "sentence": "Fish is good for your health."
+      "sentence": "Fish is good for your health.",
+      "sentenceTranslation": "鱼肉对你的健康有益。"
     },
     {
       "word": "vegetables",
       "phonetic": "ˈvedʒtəbəlz",
       "meaning": "蔬菜",
-      "sentence": "Eat more vegetables every day."
+      "sentence": "Eat more vegetables every day.",
+      "sentenceTranslation": "每天多吃蔬菜。"
     },
     {
       "word": "tomato",
       "phonetic": "təˈmeɪtoʊ",
       "meaning": "番茄",
-      "sentence": "Tomatoes are red and round."
+      "sentence": "Tomatoes are red and round.",
+      "sentenceTranslation": "番茄又红又圆。"
     },
     {
       "word": "potato",
       "phonetic": "pəˈteɪtoʊ",
       "meaning": "土豆",
-      "sentence": "I like French fries."
+      "sentence": "I like French fries.",
+      "sentenceTranslation": "我喜欢薯条。"
     },
     {
       "word": "carrot",
       "phonetic": "ˈkærət",
       "meaning": "胡萝卜",
-      "sentence": "Rabbits like carrots."
+      "sentence": "Rabbits like carrots.",
+      "sentenceTranslation": "兔子喜欢吃胡萝卜。"
     },
     {
       "word": "onion",
       "phonetic": "ˈʌnjən",
       "meaning": "洋葱",
-      "sentence": "The onion makes me cry."
+      "sentence": "The onion makes me cry.",
+      "sentenceTranslation": "洋葱让我流泪。"
     },
     {
       "word": "garlic",
       "phonetic": "ˈɡɑːrlɪk",
       "meaning": "大蒜",
-      "sentence": "Garlic is good for your health."
+      "sentence": "Garlic is good for your health.",
+      "sentenceTranslation": "大蒜对你的健康有益。"
     },
     {
       "word": "cucumber",
       "phonetic": "ˈkjuːkʌmbər",
       "meaning": "黄瓜",
-      "sentence": "Cucumber is cool and refreshing."
+      "sentence": "Cucumber is cool and refreshing.",
+      "sentenceTranslation": "黄瓜清凉爽口。"
     },
     {
       "word": "eggplant",
       "phonetic": "ˈeɡplænt",
       "meaning": "茄子",
-      "sentence": "I don't like eggplant."
+      "sentence": "I don't like eggplant.",
+      "sentenceTranslation": "我不喜欢茄子。"
     },
     {
       "word": "mushroom",
       "phonetic": "ˈmʌʃrʊm",
       "meaning": "蘑菇",
-      "sentence": "Mushrooms grow in dark places."
+      "sentence": "Mushrooms grow in dark places.",
+      "sentenceTranslation": "蘑菇生长在阴暗的地方。"
     },
     {
       "word": "corn",
       "phonetic": "kɔːrn",
       "meaning": "玉米",
-      "sentence": "Corn is sweet and yellow."
+      "sentence": "Corn is sweet and yellow.",
+      "sentenceTranslation": "玉米是甜的，黄色的。"
     },
     {
       "word": "pea",
       "phonetic": "piː",
       "meaning": "豌豆",
-      "sentence": "Peas are green and round."
+      "sentence": "Peas are green and round.",
+      "sentenceTranslation": "豌豆是绿色的，圆圆的。"
     },
     {
       "word": "bean",
       "phonetic": "biːn",
       "meaning": "豆子",
-      "sentence": "Green beans are healthy."
+      "sentence": "Green beans are healthy.",
+      "sentenceTranslation": "青豆是健康的。"
     },
     {
       "word": "head",
       "phonetic": "hed",
       "meaning": "头",
-      "sentence": "I have a headache today."
+      "sentence": "I have a headache today.",
+      "sentenceTranslation": "我今天头疼。"
     },
     {
       "word": "face",
       "phonetic": "feɪs",
       "meaning": "脸",
-      "sentence": "Wash your face every morning."
+      "sentence": "Wash your face every morning.",
+      "sentenceTranslation": "每天早上洗脸。"
     },
     {
       "word": "eye",
       "phonetic": "aɪ",
       "meaning": "眼睛",
-      "sentence": "She has big bright eyes."
+      "sentence": "She has big bright eyes.",
+      "sentenceTranslation": "她有一双明亮的大眼睛。"
     },
     {
       "word": "ear",
       "phonetic": "ɪr",
       "meaning": "耳朵",
-      "sentence": "I can hear with my ears."
+      "sentence": "I can hear with my ears.",
+      "sentenceTranslation": "我用耳朵听。"
     },
     {
       "word": "nose",
       "phonetic": "noʊz",
       "meaning": "鼻子",
-      "sentence": "The dog has a wet nose."
+      "sentence": "The dog has a wet nose.",
+      "sentenceTranslation": "狗的鼻子是湿的。"
     },
     {
       "word": "mouth",
       "phonetic": "maʊθ",
       "meaning": "嘴",
-      "sentence": "Open your mouth wide."
+      "sentence": "Open your mouth wide.",
+      "sentenceTranslation": "把嘴张大。"
     },
     {
       "word": "tooth",
       "phonetic": "tuːθ",
       "meaning": "牙齿",
-      "sentence": "Brush your teeth twice a day."
+      "sentence": "Brush your teeth twice a day.",
+      "sentenceTranslation": "每天刷牙两次。"
     },
     {
       "word": "hand",
       "phonetic": "hænd",
       "meaning": "手",
-      "sentence": "Raise your hand please."
+      "sentence": "Raise your hand please.",
+      "sentenceTranslation": "请举手。"
     },
     {
       "word": "finger",
       "phonetic": "ˈfɪŋɡər",
       "meaning": "手指",
-      "sentence": "I cut my finger."
+      "sentence": "I cut my finger.",
+      "sentenceTranslation": "我切到了手指。"
     },
     {
       "word": "foot",
       "phonetic": "fʊt",
       "meaning": "脚",
-      "sentence": "I hurt my foot."
+      "sentence": "I hurt my foot.",
+      "sentenceTranslation": "我伤了脚。"
     },
     {
       "word": "feet",
       "phonetic": "fiːt",
       "meaning": "脚（复数）",
-      "sentence": "I stand on my feet."
+      "sentence": "I stand on my feet.",
+      "sentenceTranslation": "我用脚站立。"
     },
     {
       "word": "leg",
       "phonetic": "leɡ",
       "meaning": "腿",
-      "sentence": "The table has four legs."
+      "sentence": "The table has four legs.",
+      "sentenceTranslation": "桌子有四条腿。"
     },
     {
       "word": "arm",
       "phonetic": "ɑːrm",
       "meaning": "手臂",
-      "sentence": "I broke my arm last year."
+      "sentence": "I broke my arm last year.",
+      "sentenceTranslation": "我去年手臂骨折了。"
     },
     {
       "word": "body",
       "phonetic": "ˈbɑːdi",
       "meaning": "身体",
-      "sentence": "Exercise is good for your body."
+      "sentence": "Exercise is good for your body.",
+      "sentenceTranslation": "锻炼对你的身体有益。"
     },
     {
       "word": "hair",
       "phonetic": "her",
       "meaning": "头发",
-      "sentence": "She has long black hair."
+      "sentence": "She has long black hair.",
+      "sentenceTranslation": "她有长长的黑发。"
     },
     {
       "word": "neck",
       "phonetic": "nek",
       "meaning": "脖子",
-      "sentence": "The giraffe has a long neck."
+      "sentence": "The giraffe has a long neck.",
+      "sentenceTranslation": "长颈鹿有长脖子。"
     },
     {
       "word": "back",
       "phonetic": "bæk",
       "meaning": "背",
-      "sentence": "I have a pain in my back."
+      "sentence": "I have a pain in my back.",
+      "sentenceTranslation": "我背疼。"
     },
     {
       "word": "school",
       "phonetic": "skuːl",
       "meaning": "学校",
-      "sentence": "I go to school every day."
+      "sentence": "I go to school every day.",
+      "sentenceTranslation": "我每天去学校。"
     },
     {
       "word": "class",
       "phonetic": "klæs",
       "meaning": "班级",
-      "sentence": "We are in the same class."
+      "sentence": "We are in the same class.",
+      "sentenceTranslation": "我们在同一个班。"
     },
     {
       "word": "classroom",
       "phonetic": "ˈklæsruːm",
       "meaning": "教室",
-      "sentence": "The classroom is very clean."
+      "sentence": "The classroom is very clean.",
+      "sentenceTranslation": "教室很干净。"
     },
     {
       "word": "desk",
       "phonetic": "desk",
       "meaning": "书桌",
-      "sentence": "This is my desk."
+      "sentence": "This is my desk.",
+      "sentenceTranslation": "这是我的书桌。"
     },
     {
       "word": "chair",
       "phonetic": "tʃer",
       "meaning": "椅子",
-      "sentence": "Sit on the chair."
+      "sentence": "Sit on the chair.",
+      "sentenceTranslation": "坐在椅子上。"
     },
     {
       "word": "book",
       "phonetic": "bʊk",
       "meaning": "书",
-      "sentence": "I read a book every night."
+      "sentence": "I read a book every night.",
+      "sentenceTranslation": "我每晚读书。"
     },
     {
       "word": "pen",
       "phonetic": "pen",
       "meaning": "钢笔",
-      "sentence": "Please pass me a pen."
+      "sentence": "Please pass me a pen.",
+      "sentenceTranslation": "请递给我一支钢笔。"
     },
     {
       "word": "pencil",
       "phonetic": "ˈpensəl",
       "meaning": "铅笔",
-      "sentence": "I write with a pencil."
+      "sentence": "I write with a pencil.",
+      "sentenceTranslation": "我用铅笔写字。"
     },
     {
       "word": "eraser",
       "phonetic": "ɪˈreɪsər",
       "meaning": "橡皮擦",
-      "sentence": "I need an eraser."
+      "sentence": "I need an eraser.",
+      "sentenceTranslation": "我需要一块橡皮擦。"
     },
     {
       "word": "ruler",
       "phonetic": "ˈruːlər",
       "meaning": "尺子",
-      "sentence": "Use a ruler to draw a line."
+      "sentence": "Use a ruler to draw a line.",
+      "sentenceTranslation": "用尺子画一条线。"
     },
     {
       "word": "bag",
       "phonetic": "bæɡ",
       "meaning": "书包",
-      "sentence": "I carry a bag to school."
+      "sentence": "I carry a bag to school.",
+      "sentenceTranslation": "我背着书包去学校。"
     },
     {
       "word": "ball",
       "phonetic": "bɔːl",
       "meaning": "球",
-      "sentence": "Let's play ball together."
+      "sentence": "Let's play ball together.",
+      "sentenceTranslation": "我们一起玩球吧。"
     },
     {
       "word": "football",
       "phonetic": "ˈfʊtbɔːl",
       "meaning": "足球",
-      "sentence": "I like playing football."
+      "sentence": "I like playing football.",
+      "sentenceTranslation": "我喜欢踢足球。"
     },
     {
       "word": "basketball",
       "phonetic": "ˈbæskɪtbɔːl",
       "meaning": "篮球",
-      "sentence": "Basketball is my favorite sport."
+      "sentence": "Basketball is my favorite sport.",
+      "sentenceTranslation": "篮球是我最喜欢的运动。"
     },
     {
       "word": "table",
       "phonetic": "ˈteɪbəl",
       "meaning": "桌子",
-      "sentence": "The book is on the table."
+      "sentence": "The book is on the table.",
+      "sentenceTranslation": "书在桌子上。"
     },
     {
       "word": "window",
       "phonetic": "ˈwɪndoʊ",
       "meaning": "窗户",
-      "sentence": "Open the window please."
+      "sentence": "Open the window please.",
+      "sentenceTranslation": "请打开窗户。"
     },
     {
       "word": "door",
       "phonetic": "dɔːr",
       "meaning": "门",
-      "sentence": "Close the door behind you."
+      "sentence": "Close the door behind you.",
+      "sentenceTranslation": "随手关门。"
     },
     {
       "word": "floor",
       "phonetic": "flɔːr",
       "meaning": "地板",
-      "sentence": "The floor is very clean."
+      "sentence": "The floor is very clean.",
+      "sentenceTranslation": "地板很干净。"
     },
     {
       "word": "wall",
       "phonetic": "wɔːl",
       "meaning": "墙",
-      "sentence": "There is a picture on the wall."
+      "sentence": "There is a picture on the wall.",
+      "sentenceTranslation": "墙上有幅画。"
     },
     {
       "word": "blackboard",
       "phonetic": "ˈblækbɔːrd",
       "meaning": "黑板",
-      "sentence": "The teacher writes on the blackboard."
+      "sentence": "The teacher writes on the blackboard.",
+      "sentenceTranslation": "老师在黑板上写字。"
     },
     {
       "word": "clock",
       "phonetic": "klɑːk",
       "meaning": "时钟",
-      "sentence": "The clock on the wall says eight."
+      "sentence": "The clock on the wall says eight.",
+      "sentenceTranslation": "墙上的钟指向八点。"
     },
     {
       "word": "photo",
       "phonetic": "ˈfoʊtoʊ",
       "meaning": "照片",
-      "sentence": "This is a photo of my family."
+      "sentence": "This is a photo of my family.",
+      "sentenceTranslation": "这是一张我的全家福。"
     },
     {
       "word": "bus",
       "phonetic": "bʌs",
       "meaning": "公共汽车",
-      "sentence": "I take the bus to school."
+      "sentence": "I take the bus to school.",
+      "sentenceTranslation": "我乘公共汽车去学校。"
     },
     {
       "word": "car",
       "phonetic": "kɑːr",
       "meaning": "小汽车",
-      "sentence": "My father drives a car."
+      "sentence": "My father drives a car.",
+      "sentenceTranslation": "我爸爸开小汽车。"
     },
     {
       "word": "taxi",
       "phonetic": "ˈtæksi",
       "meaning": "出租车",
-      "sentence": "Let's take a taxi."
+      "sentence": "Let's take a taxi.",
+      "sentenceTranslation": "我们坐出租车吧。"
     },
     {
       "word": "train",
       "phonetic": "treɪn",
       "meaning": "火车",
-      "sentence": "The train is very fast."
+      "sentence": "The train is very fast.",
+      "sentenceTranslation": "火车很快。"
     },
     {
       "word": "ship",
       "phonetic": "ʃɪp",
       "meaning": "轮船",
-      "sentence": "The ship sails on the sea."
+      "sentence": "The ship sails on the sea.",
+      "sentenceTranslation": "轮船在海上航行。"
     },
     {
       "word": "plane",
       "phonetic": "pleɪn",
       "meaning": "飞机",
-      "sentence": "We fly to Beijing by plane."
+      "sentence": "We fly to Beijing by plane.",
+      "sentenceTranslation": "我们乘飞机去北京。"
     },
     {
       "word": "bike",
       "phonetic": "baɪk",
       "meaning": "自行车",
-      "sentence": "I ride a bike to school."
+      "sentence": "I ride a bike to school.",
+      "sentenceTranslation": "我骑自行车去学校。"
     },
     {
       "word": "boat",
       "phonetic": "boʊt",
       "meaning": "小船",
-      "sentence": "The boat is on the lake."
+      "sentence": "The boat is on the lake.",
+      "sentenceTranslation": "小船在湖上。"
     },
     {
       "word": "subway",
       "phonetic": "ˈsʌbweɪ",
       "meaning": "地铁",
-      "sentence": "The subway is very fast."
+      "sentence": "The subway is very fast.",
+      "sentenceTranslation": "地铁很快。"
     },
     {
       "word": "home",
       "phonetic": "hoʊm",
       "meaning": "家",
-      "sentence": "I am home now."
+      "sentence": "I am home now.",
+      "sentenceTranslation": "我现在在家。"
     },
     {
       "word": "house",
       "phonetic": "haʊs",
       "meaning": "房子",
-      "sentence": "This is a big house."
+      "sentence": "This is a big house.",
+      "sentenceTranslation": "这是一所大房子。"
     },
     {
       "word": "room",
       "phonetic": "ruːm",
       "meaning": "房间",
-      "sentence": "This is my room."
+      "sentence": "This is my room.",
+      "sentenceTranslation": "这是我的房间。"
     },
     {
       "word": "kitchen",
       "phonetic": "ˈkɪtʃɪn",
       "meaning": "厨房",
-      "sentence": "Mother cooks in the kitchen."
+      "sentence": "Mother cooks in the kitchen.",
+      "sentenceTranslation": "妈妈在厨房做饭。"
     },
     {
       "word": "bedroom",
       "phonetic": "ˈbedruːm",
       "meaning": "卧室",
-      "sentence": "I sleep in my bedroom."
+      "sentence": "I sleep in my bedroom.",
+      "sentenceTranslation": "我在卧室睡觉。"
     },
     {
       "word": "bathroom",
       "phonetic": "ˈbæθruːm",
       "meaning": "浴室",
-      "sentence": "I take a shower in the bathroom."
+      "sentence": "I take a shower in the bathroom.",
+      "sentenceTranslation": "我在浴室洗澡。"
     },
     {
       "word": "garden",
       "phonetic": "ˈɡɑːrdən",
       "meaning": "花园",
-      "sentence": "There are beautiful flowers in the garden."
+      "sentence": "There are beautiful flowers in the garden.",
+      "sentenceTranslation": "花园里有美丽的花。"
     },
     {
       "word": "park",
       "phonetic": "pɑːrk",
       "meaning": "公园",
-      "sentence": "We often go to the park on weekends."
+      "sentence": "We often go to the park on weekends.",
+      "sentenceTranslation": "我们周末常去公园。"
     },
     {
       "word": "hospital",
       "phonetic": "ˈhɑːspɪtəl",
       "meaning": "医院",
-      "sentence": "The doctor works in a hospital."
+      "sentence": "The doctor works in a hospital.",
+      "sentenceTranslation": "医生在医院工作。"
     },
     {
       "word": "shop",
       "phonetic": "ʃɑːp",
       "meaning": "商店",
-      "sentence": "I buy food at the shop."
+      "sentence": "I buy food at the shop.",
+      "sentenceTranslation": "我在商店买食物。"
     },
     {
       "word": "supermarket",
       "phonetic": "ˈsuːpərmɑːrkɪt",
       "meaning": "超市",
-      "sentence": "The supermarket is very big."
+      "sentence": "The supermarket is very big.",
+      "sentenceTranslation": "超市很大。"
     },
     {
       "word": "restaurant",
       "phonetic": "ˈrestərɑːnt",
       "meaning": "餐馆",
-      "sentence": "We eat at a restaurant."
+      "sentence": "We eat at a restaurant.",
+      "sentenceTranslation": "我们在餐馆吃饭。"
     },
     {
       "word": "bank",
       "phonetic": "bæŋk",
       "meaning": "银行",
-      "sentence": "I go to the bank with my mother."
+      "sentence": "I go to the bank with my mother.",
+      "sentenceTranslation": "我和妈妈去银行。"
     },
     {
       "word": "library",
       "phonetic": "ˈlaɪbreri",
       "meaning": "图书馆",
-      "sentence": "I borrow books from the library."
+      "sentence": "I borrow books from the library.",
+      "sentenceTranslation": "我从图书馆借书。"
     },
     {
       "word": "morning",
       "phonetic": "ˈmɔːrnɪŋ",
       "meaning": "早上",
-      "sentence": "Good morning to you!"
+      "sentence": "Good morning to you!",
+      "sentenceTranslation": "早上好！"
     },
     {
       "word": "afternoon",
       "phonetic": "ˌæftərˈnuːn",
       "meaning": "下午",
-      "sentence": "Good afternoon! See you in the afternoon."
+      "sentence": "Good afternoon! See you in the afternoon.",
+      "sentenceTranslation": "下午好！下午见。"
     },
     {
       "word": "evening",
       "phonetic": "ˈiːvnɪŋ",
       "meaning": "傍晚",
-      "sentence": "Good evening!"
+      "sentence": "Good evening!",
+      "sentenceTranslation": "晚上好！"
     },
     {
       "word": "night",
       "phonetic": "naɪt",
       "meaning": "夜晚",
-      "sentence": "Good night! Sweet dreams."
+      "sentence": "Good night! Sweet dreams.",
+      "sentenceTranslation": "晚安！做个好梦。"
     },
     {
       "word": "today",
       "phonetic": "təˈdeɪ",
       "meaning": "今天",
-      "sentence": "What day is today?"
+      "sentence": "What day is today?",
+      "sentenceTranslation": "今天是几号？"
     },
     {
       "word": "tomorrow",
       "phonetic": "təˈmɑːroʊ",
       "meaning": "明天",
-      "sentence": "See you tomorrow!"
+      "sentence": "See you tomorrow!",
+      "sentenceTranslation": "明天见！"
     },
     {
       "word": "yesterday",
       "phonetic": "ˈjestərdeɪ",
       "meaning": "昨天",
-      "sentence": "Yesterday was Monday."
+      "sentence": "Yesterday was Monday.",
+      "sentenceTranslation": "昨天是星期一。"
     },
     {
       "word": "Monday",
       "phonetic": "ˈmʌndeɪ",
       "meaning": "星期一",
-      "sentence": "I go to school on Monday."
+      "sentence": "I go to school on Monday.",
+      "sentenceTranslation": "我星期一去学校。"
     },
     {
       "word": "Tuesday",
       "phonetic": "ˈtuːzdeɪ",
       "meaning": "星期二",
-      "sentence": "Tuesday comes after Monday."
+      "sentence": "Tuesday comes after Monday.",
+      "sentenceTranslation": "星期二在星期一之后。"
     },
     {
       "word": "Wednesday",
       "phonetic": "ˈwenzdeɪ",
       "meaning": "星期三",
-      "sentence": "Wednesday is the middle of the week."
+      "sentence": "Wednesday is the middle of the week.",
+      "sentenceTranslation": "星期三是一周的中期。"
     },
     {
       "word": "Thursday",
       "phonetic": "ˈθɜːrzdeɪ",
       "meaning": "星期四",
-      "sentence": "Thursday is almost the weekend."
+      "sentence": "Thursday is almost the weekend.",
+      "sentenceTranslation": "星期四几乎是周末了。"
     },
     {
       "word": "Friday",
       "phonetic": "ˈfraɪdeɪ",
       "meaning": "星期五",
-      "sentence": "Friday is the last school day."
+      "sentence": "Friday is the last school day.",
+      "sentenceTranslation": "星期五是最后一个上学日。"
     },
     {
       "word": "Saturday",
       "phonetic": "ˈsætərdeɪ",
       "meaning": "星期六",
-      "sentence": "I play football on Saturday."
+      "sentence": "I play football on Saturday.",
+      "sentenceTranslation": "我星期六踢足球。"
     },
     {
       "word": "Sunday",
       "phonetic": "ˈsʌndeɪ",
       "meaning": "星期日",
-      "sentence": "Sunday is a holiday."
+      "sentence": "Sunday is a holiday.",
+      "sentenceTranslation": "星期日是假日。"
     },
     {
       "word": "weekend",
       "phonetic": "ˈwiːkend",
       "meaning": "周末",
-      "sentence": "What do you do on the weekend?"
+      "sentence": "What do you do on the weekend?",
+      "sentenceTranslation": "你周末做什么？"
     },
     {
       "word": "January",
       "phonetic": "ˈdʒænjuːeri",
       "meaning": "一月",
-      "sentence": "New Year's Day is in January."
+      "sentence": "New Year's Day is in January.",
+      "sentenceTranslation": "元旦在一月。"
     },
     {
       "word": "February",
       "phonetic": "ˈfebruːeri",
       "meaning": "二月",
-      "sentence": "February has 28 or 29 days."
+      "sentence": "February has 28 or 29 days.",
+      "sentenceTranslation": "二月有28或29天。"
     },
     {
       "word": "March",
       "phonetic": "mɑːrtʃ",
       "meaning": "三月",
-      "sentence": "March comes after February."
+      "sentence": "March comes after February.",
+      "sentenceTranslation": "三月在二月之后。"
     },
     {
       "word": "April",
       "phonetic": "ˈeɪprəl",
       "meaning": "四月",
-      "sentence": "April is the month of flowers."
+      "sentence": "April is the month of flowers.",
+      "sentenceTranslation": "四月是花的月份。"
     },
     {
       "word": "May",
       "phonetic": "meɪ",
       "meaning": "五月",
-      "sentence": "May is a warm and beautiful month."
+      "sentence": "May is a warm and beautiful month.",
+      "sentenceTranslation": "五月是一个温暖而美丽的月份。"
     },
     {
       "word": "June",
       "phonetic": "dʒuːn",
       "meaning": "六月",
-      "sentence": "June is the start of summer."
+      "sentence": "June is the start of summer.",
+      "sentenceTranslation": "六月是夏天的开始。"
     },
     {
       "word": "July",
       "phonetic": "dʒuˈlaɪ",
       "meaning": "七月",
-      "sentence": "July is the hottest month."
+      "sentence": "July is the hottest month.",
+      "sentenceTranslation": "七月是最热的月份。"
     },
     {
       "word": "August",
       "phonetic": "ˈɔːɡəst",
       "meaning": "八月",
-      "sentence": "August is very hot."
+      "sentence": "August is very hot.",
+      "sentenceTranslation": "八月很热。"
     },
     {
       "word": "September",
       "phonetic": "sepˈtembər",
       "meaning": "九月",
-      "sentence": "School starts in September."
+      "sentence": "School starts in September.",
+      "sentenceTranslation": "九月开学。"
     },
     {
       "word": "October",
       "phonetic": "ɑːkˈtoʊbər",
       "meaning": "十月",
-      "sentence": "October is the month of Halloween."
+      "sentence": "October is the month of Halloween.",
+      "sentenceTranslation": "十月是万圣节的月份。"
     },
     {
       "word": "November",
       "phonetic": "noʊˈvembər",
       "meaning": "十一月",
-      "sentence": "November comes after October."
+      "sentence": "November comes after October.",
+      "sentenceTranslation": "十一月在十月之后。"
     },
     {
       "word": "December",
       "phonetic": "dɪˈsembər",
       "meaning": "十二月",
-      "sentence": "Christmas is in December."
+      "sentence": "Christmas is in December.",
+      "sentenceTranslation": "圣诞节在十二月。"
     },
     {
       "word": "spring",
       "phonetic": "sprɪŋ",
       "meaning": "春天",
-      "sentence": "Flowers bloom in spring."
+      "sentence": "Flowers bloom in spring.",
+      "sentenceTranslation": "春天花开了。"
     },
     {
       "word": "summer",
       "phonetic": "ˈsʌmər",
       "meaning": "夏天",
-      "sentence": "Summer is very hot."
+      "sentence": "Summer is very hot.",
+      "sentenceTranslation": "夏天很热。"
     },
     {
       "word": "autumn",
       "phonetic": "ˈɔːtəm",
       "meaning": "秋天",
-      "sentence": "Leaves fall in autumn."
+      "sentence": "Leaves fall in autumn.",
+      "sentenceTranslation": "秋天叶子落下。"
     },
     {
       "word": "winter",
       "phonetic": "ˈwɪntər",
       "meaning": "冬天",
-      "sentence": "Winter is cold and snowy."
+      "sentence": "Winter is cold and snowy.",
+      "sentenceTranslation": "冬天寒冷下雪。"
     },
     {
       "word": "weather",
       "phonetic": "ˈweðər",
       "meaning": "天气",
-      "sentence": "What is the weather like today?"
+      "sentence": "What is the weather like today?",
+      "sentenceTranslation": "今天天气怎么样？"
     },
     {
       "word": "hot",
       "phonetic": "hɑːt",
       "meaning": "热的",
-      "sentence": "It is very hot in summer."
+      "sentence": "It is very hot in summer.",
+      "sentenceTranslation": "夏天很热。"
     },
     {
       "word": "cold",
       "phonetic": "koʊld",
       "meaning": "冷的",
-      "sentence": "It is very cold in winter."
+      "sentence": "It is very cold in winter.",
+      "sentenceTranslation": "冬天很冷。"
     },
     {
       "word": "warm",
       "phonetic": "wɔːrm",
       "meaning": "暖和的",
-      "sentence": "Spring is warm and nice."
+      "sentence": "Spring is warm and nice.",
+      "sentenceTranslation": "春天温暖舒适。"
     },
     {
       "word": "cool",
       "phonetic": "kuːl",
       "meaning": "凉爽的",
-      "sentence": "Evening is cool in autumn."
+      "sentence": "Evening is cool in autumn.",
+      "sentenceTranslation": "秋天傍晚凉爽。"
     },
     {
       "word": "sunny",
       "phonetic": "ˈsʌni",
       "meaning": "晴朗的",
-      "sentence": "It is sunny today."
+      "sentence": "It is sunny today.",
+      "sentenceTranslation": "今天天气晴朗。"
     },
     {
       "word": "rainy",
       "phonetic": "ˈreɪni",
       "meaning": "下雨的",
-      "sentence": "It is rainy today. Take an umbrella."
+      "sentence": "It is rainy today. Take an umbrella.",
+      "sentenceTranslation": "今天下雨。带上雨伞。"
     },
     {
       "word": "cloudy",
       "phonetic": "ˈklaʊdi",
       "meaning": "多云的",
-      "sentence": "It is cloudy this morning."
+      "sentence": "It is cloudy this morning.",
+      "sentenceTranslation": "今天上午多云。"
     },
     {
       "word": "snowy",
       "phonetic": "ˈsnoʊi",
       "meaning": "下雪的",
-      "sentence": "It is snowy in winter."
+      "sentence": "It is snowy in winter.",
+      "sentenceTranslation": "冬天下雪。"
     },
     {
       "word": "windy",
       "phonetic": "ˈwɪndi",
       "meaning": "有风的",
-      "sentence": "It is windy today."
+      "sentence": "It is windy today.",
+      "sentenceTranslation": "今天有风。"
     },
     {
       "word": "rain",
       "phonetic": "reɪn",
       "meaning": "雨",
-      "sentence": "The rain stopped finally."
+      "sentence": "The rain stopped finally.",
+      "sentenceTranslation": "雨终于停了。"
     },
     {
       "word": "snow",
       "phonetic": "snoʊ",
       "meaning": "雪",
-      "sentence": "The snow covers the ground."
+      "sentence": "The snow covers the ground.",
+      "sentenceTranslation": "雪覆盖了地面。"
     },
     {
       "word": "wind",
       "phonetic": "wɪnd",
       "meaning": "风",
-      "sentence": "The wind blows strongly."
+      "sentence": "The wind blows strongly.",
+      "sentenceTranslation": "风吹得很猛。"
     },
     {
       "word": "cloud",
       "phonetic": "klaʊd",
       "meaning": "云",
-      "sentence": "The cloud is white and fluffy."
+      "sentence": "The cloud is white and fluffy.",
+      "sentenceTranslation": "云又白又软。"
     },
     {
       "word": "sun",
       "phonetic": "sʌn",
       "meaning": "太阳",
-      "sentence": "The sun is very bright."
+      "sentence": "The sun is very bright.",
+      "sentenceTranslation": "太阳很亮。"
     },
     {
       "word": "moon",
       "phonetic": "muːn",
       "meaning": "月亮",
-      "sentence": "The moon is round tonight."
+      "sentence": "The moon is round tonight.",
+      "sentenceTranslation": "今晚月亮是圆的。"
     },
     {
       "word": "star",
       "phonetic": "stɑːr",
       "meaning": "星星",
-      "sentence": "There are many stars in the sky."
+      "sentence": "There are many stars in the sky.",
+      "sentenceTranslation": "天空中有许多星星。"
     },
     {
       "word": "big",
       "phonetic": "bɪɡ",
       "meaning": "大的",
-      "sentence": "The elephant is very big."
+      "sentence": "The elephant is very big.",
+      "sentenceTranslation": "大象很大。"
     },
     {
       "word": "small",
       "phonetic": "smɔːl",
       "meaning": "小的",
-      "sentence": "The mouse is very small."
+      "sentence": "The mouse is very small.",
+      "sentenceTranslation": "老鼠很小。"
     },
     {
       "word": "long",
       "phonetic": "lɔːŋ",
       "meaning": "长的",
-      "sentence": "The snake is very long."
+      "sentence": "The snake is very long.",
+      "sentenceTranslation": "蛇很长。"
     },
     {
       "word": "short",
       "phonetic": "ʃɔːrt",
       "meaning": "短的",
-      "sentence": "My pencil is too short."
+      "sentence": "My pencil is too short.",
+      "sentenceTranslation": "我的铅笔太短了。"
     },
     {
       "word": "tall",
       "phonetic": "tɔːl",
       "meaning": "高的",
-      "sentence": "He is very tall."
+      "sentence": "He is very tall.",
+      "sentenceTranslation": "他很高。"
     },
     {
       "word": "young",
       "phonetic": "jʌŋ",
       "meaning": "年轻的",
-      "sentence": "The young man is strong."
+      "sentence": "The young man is strong.",
+      "sentenceTranslation": "那个年轻人很强壮。"
     },
     {
       "word": "old",
       "phonetic": "oʊld",
       "meaning": "年老的",
-      "sentence": "The old man walks slowly."
+      "sentence": "The old man walks slowly.",
+      "sentenceTranslation": "老人走得很慢。"
     },
     {
       "word": "new",
       "phonetic": "nuː",
       "meaning": "新的",
-      "sentence": "I have a new bike."
+      "sentence": "I have a new bike.",
+      "sentenceTranslation": "我有一辆新自行车。"
     },
     {
       "word": "good",
       "phonetic": "ɡʊd",
       "meaning": "好的",
-      "sentence": "This is a good book."
+      "sentence": "This is a good book.",
+      "sentenceTranslation": "这是一本好书。"
     },
     {
       "word": "bad",
       "phonetic": "bæd",
       "meaning": "坏的",
-      "sentence": "Smoking is bad for health."
+      "sentence": "Smoking is bad for health.",
+      "sentenceTranslation": "吸烟对健康有害。"
     },
     {
       "word": "happy",
       "phonetic": "ˈhæpi",
       "meaning": "快乐的",
-      "sentence": "I am very happy today."
+      "sentence": "I am very happy today.",
+      "sentenceTranslation": "我今天很开心。"
     },
     {
       "word": "sad",
       "phonetic": "sæd",
       "meaning": "悲伤的",
-      "sentence": "The movie made me sad."
+      "sentence": "The movie made me sad.",
+      "sentenceTranslation": "这部电影让我难过。"
     },
     {
       "word": "angry",
       "phonetic": "ˈæŋɡri",
       "meaning": "生气的",
-      "sentence": "He is very angry."
+      "sentence": "He is very angry.",
+      "sentenceTranslation": "他很生气。"
     },
     {
       "word": "tired",
       "phonetic": "ˈtaɪərd",
       "meaning": "累的",
-      "sentence": "I am very tired today."
+      "sentence": "I am very tired today.",
+      "sentenceTranslation": "我今天很累。"
     },
     {
       "word": "hungry",
       "phonetic": "ˈhʌŋɡri",
       "meaning": "饿的",
-      "sentence": "I am hungry. Can I have some food?"
+      "sentence": "I am hungry. Can I have some food?",
+      "sentenceTranslation": "我饿了。我能吃点东西吗？"
     },
     {
       "word": "thirsty",
       "phonetic": "ˈθɜːrsti",
       "meaning": "渴的",
-      "sentence": "I am thirsty. I need some water."
+      "sentence": "I am thirsty. I need some water.",
+      "sentenceTranslation": "我渴了。我需要水。"
     },
     {
       "word": "ill",
       "phonetic": "ɪl",
       "meaning": "生病的",
-      "sentence": "He is ill today."
+      "sentence": "He is ill today.",
+      "sentenceTranslation": "他今天生病了。"
     },
     {
       "word": "fine",
       "phonetic": "faɪn",
       "meaning": "好的",
-      "sentence": "I am fine, thank you."
+      "sentence": "I am fine, thank you.",
+      "sentenceTranslation": "我很好，谢谢你。"
     },
     {
       "word": "nice",
       "phonetic": "naɪs",
       "meaning": "友好的",
-      "sentence": "She is a nice girl."
+      "sentence": "She is a nice girl.",
+      "sentenceTranslation": "她是一个好女孩。"
     },
     {
       "word": "kind",
       "phonetic": "kaɪnd",
       "meaning": "善良的",
-      "sentence": "The teacher is very kind."
+      "sentence": "The teacher is very kind.",
+      "sentenceTranslation": "老师很善良。"
     },
     {
       "word": "clever",
       "phonetic": "ˈklevər",
       "meaning": "聪明的",
-      "sentence": "The clever boy solved the problem."
+      "sentence": "The clever boy solved the problem.",
+      "sentenceTranslation": "那个聪明的男孩解决了问题。"
     },
     {
       "word": "cute",
       "phonetic": "kjuːt",
       "meaning": "可爱的",
-      "sentence": "The baby is very cute."
+      "sentence": "The baby is very cute.",
+      "sentenceTranslation": "宝宝很可爱。"
     },
     {
       "word": "beautiful",
       "phonetic": "ˈbjuːtɪfəl",
       "meaning": "美丽的",
-      "sentence": "The flower is very beautiful."
+      "sentence": "The flower is very beautiful.",
+      "sentenceTranslation": "花很美丽。"
     },
     {
       "word": "pretty",
       "phonetic": "ˈprɪti",
       "meaning": "漂亮的",
-      "sentence": "She is very pretty."
+      "sentence": "She is very pretty.",
+      "sentenceTranslation": "她很漂亮。"
     },
     {
       "word": "funny",
       "phonetic": "ˈfʌni",
       "meaning": "有趣的",
-      "sentence": "The story is very funny."
+      "sentence": "The story is very funny.",
+      "sentenceTranslation": "故事很有趣。"
     },
     {
       "word": "busy",
       "phonetic": "ˈbɪzi",
       "meaning": "忙的",
-      "sentence": "I am busy with my homework."
+      "sentence": "I am busy with my homework.",
+      "sentenceTranslation": "我忙着做作业。"
     },
     {
       "word": "free",
       "phonetic": "friː",
       "meaning": "空闲的",
-      "sentence": "I am free today."
+      "sentence": "I am free today.",
+      "sentenceTranslation": "我今天有空。"
     },
     {
       "word": "easy",
       "phonetic": "ˈiːzi",
       "meaning": "容易的",
-      "sentence": "This question is very easy."
+      "sentence": "This question is very easy.",
+      "sentenceTranslation": "这个问题很容易。"
     },
     {
       "word": "difficult",
       "phonetic": "ˈdɪfɪkəlt",
       "meaning": "困难的",
-      "sentence": "Math is difficult for me."
+      "sentence": "Math is difficult for me.",
+      "sentenceTranslation": "数学对我来说很难。"
     },
     {
       "word": "fast",
       "phonetic": "fæst",
       "meaning": "快的",
-      "sentence": "The train is very fast."
+      "sentence": "The train is very fast.",
+      "sentenceTranslation": "火车很快。"
     },
     {
       "word": "slow",
       "phonetic": "sloʊ",
       "meaning": "慢的",
-      "sentence": "The snail is very slow."
+      "sentence": "The snail is very slow.",
+      "sentenceTranslation": "蜗牛很慢。"
     },
     {
       "word": "clean",
       "phonetic": "kliːn",
       "meaning": "干净的",
-      "sentence": "The classroom is very clean."
+      "sentence": "The classroom is very clean.",
+      "sentenceTranslation": "教室很干净。"
     },
     {
       "word": "dirty",
       "phonetic": "ˈdɜːrti",
       "meaning": "脏的",
-      "sentence": "The floor is dirty."
+      "sentence": "The floor is dirty.",
+      "sentenceTranslation": "地板很脏。"
     },
     {
       "word": "light",
       "phonetic": "laɪt",
       "meaning": "轻的",
-      "sentence": "This bag is very light."
+      "sentence": "This bag is very light.",
+      "sentenceTranslation": "这个包很轻。"
     },
     {
       "word": "heavy",
       "phonetic": "ˈhevi",
       "meaning": "重的",
-      "sentence": "The box is very heavy."
+      "sentence": "The box is very heavy.",
+      "sentenceTranslation": "盒子很重。"
     },
     {
       "word": "loud",
       "phonetic": "laʊd",
       "meaning": "大声的",
-      "sentence": "The music is too loud."
+      "sentence": "The music is too loud.",
+      "sentenceTranslation": "音乐太大了。"
     },
     {
       "word": "quiet",
       "phonetic": "ˈkwaɪət",
       "meaning": "安静的",
-      "sentence": "The library is very quiet."
+      "sentence": "The library is very quiet.",
+      "sentenceTranslation": "图书馆很安静。"
     },
     {
       "word": "right",
       "phonetic": "raɪt",
       "meaning": "正确的",
-      "sentence": "Your answer is right."
+      "sentence": "Your answer is right.",
+      "sentenceTranslation": "你的答案是正确的。"
     },
     {
       "word": "wrong",
       "phonetic": "rɔːŋ",
       "meaning": "错误的",
-      "sentence": "That is the wrong answer."
+      "sentence": "That is the wrong answer.",
+      "sentenceTranslation": "那是错误的答案。"
     },
     {
       "word": "love",
       "phonetic": "lʌv",
       "meaning": "爱",
-      "sentence": "I love my family."
+      "sentence": "I love my family.",
+      "sentenceTranslation": "我爱我的家人。"
     },
     {
       "word": "like",
       "phonetic": "laɪk",
       "meaning": "喜欢",
-      "sentence": "I like playing football."
+      "sentence": "I like playing football.",
+      "sentenceTranslation": "我喜欢踢足球。"
     },
     {
       "word": "hate",
       "phonetic": "heɪt",
       "meaning": "讨厌",
-      "sentence": "I hate getting up early."
+      "sentence": "I hate getting up early.",
+      "sentenceTranslation": "我讨厌早起。"
     },
     {
       "word": "want",
       "phonetic": "wɑːnt",
       "meaning": "想要",
-      "sentence": "I want an apple."
+      "sentence": "I want an apple.",
+      "sentenceTranslation": "我想要一个苹果。"
     },
     {
       "word": "need",
       "phonetic": "niːd",
       "meaning": "需要",
-      "sentence": "I need some water."
+      "sentence": "I need some water.",
+      "sentenceTranslation": "我需要一些水。"
     },
     {
       "word": "eat",
       "phonetic": "iːt",
       "meaning": "吃",
-      "sentence": "I eat breakfast at seven."
+      "sentence": "I eat breakfast at seven.",
+      "sentenceTranslation": "我七点吃早餐。"
     },
     {
       "word": "drink",
       "phonetic": "drɪŋk",
       "meaning": "喝",
-      "sentence": "I drink water every day."
+      "sentence": "I drink water every day.",
+      "sentenceTranslation": "我每天喝水。"
     },
     {
       "word": "go",
       "phonetic": "ɡoʊ",
       "meaning": "去",
-      "sentence": "I go to school every day."
+      "sentence": "I go to school every day.",
+      "sentenceTranslation": "我每天去学校。"
     },
     {
       "word": "come",
       "phonetic": "kʌm",
       "meaning": "来",
-      "sentence": "Come here please."
+      "sentence": "Come here please.",
+      "sentenceTranslation": "请到这里来。"
     },
     {
       "word": "run",
       "phonetic": "rʌn",
       "meaning": "跑",
-      "sentence": "I run very fast."
+      "sentence": "I run very fast.",
+      "sentenceTranslation": "我跑得很快。"
     },
     {
       "word": "walk",
       "phonetic": "wɔːk",
       "meaning": "走",
-      "sentence": "I walk to school every day."
+      "sentence": "I walk to school every day.",
+      "sentenceTranslation": "我每天步行去学校。"
     },
     {
       "word": "jump",
       "phonetic": "dʒʌmp",
       "meaning": "跳",
-      "sentence": "The frog can jump very high."
+      "sentence": "The frog can jump very high.",
+      "sentenceTranslation": "青蛙能跳得很高。"
     },
     {
       "word": "swim",
       "phonetic": "swɪm",
       "meaning": "游泳",
-      "sentence": "I can swim in summer."
+      "sentence": "I can swim in summer.",
+      "sentenceTranslation": "我夏天会游泳。"
     },
     {
       "word": "fly",
       "phonetic": "flaɪ",
       "meaning": "飞",
-      "sentence": "Birds can fly."
+      "sentence": "Birds can fly.",
+      "sentenceTranslation": "鸟会飞。"
     },
     {
       "word": "play",
       "phonetic": "pleɪ",
       "meaning": "玩",
-      "sentence": "Children like to play games."
+      "sentence": "Children like to play games.",
+      "sentenceTranslation": "孩子们喜欢玩游戏。"
     },
     {
       "word": "work",
       "phonetic": "wɜːrk",
       "meaning": "工作",
-      "sentence": "My father works in a hospital."
+      "sentence": "My father works in a hospital.",
+      "sentenceTranslation": "我爸爸在医院工作。"
     },
     {
       "word": "read",
       "phonetic": "riːd",
       "meaning": "读",
-      "sentence": "I read books every night."
+      "sentence": "I read books every night.",
+      "sentenceTranslation": "我每晚读书。"
     },
     {
       "word": "write",
       "phonetic": "raɪt",
       "meaning": "写",
-      "sentence": "I write with a pen."
+      "sentence": "I write with a pen.",
+      "sentenceTranslation": "我用钢笔写。"
     },
     {
       "word": "draw",
       "phonetic": "drɔː",
       "meaning": "画画",
-      "sentence": "I like to draw pictures."
+      "sentence": "I like to draw pictures.",
+      "sentenceTranslation": "我喜欢画画。"
     },
     {
       "word": "sing",
       "phonetic": "sɪŋ",
       "meaning": "唱歌",
-      "sentence": "She can sing very well."
+      "sentence": "She can sing very well.",
+      "sentenceTranslation": "她唱歌很好听。"
     },
     {
       "word": "dance",
       "phonetic": "dæns",
       "meaning": "跳舞",
-      "sentence": "I like to dance."
+      "sentence": "I like to dance.",
+      "sentenceTranslation": "我喜欢跳舞。"
     },
     {
       "word": "sleep",
       "phonetic": "sliːp",
       "meaning": "睡觉",
-      "sentence": "I sleep eight hours every night."
+      "sentence": "I sleep eight hours every night.",
+      "sentenceTranslation": "我每晚睡八个小时。"
     },
     {
       "word": "wake",
       "phonetic": "weɪk",
       "meaning": "醒来",
-      "sentence": "I wake up at six every morning."
+      "sentence": "I wake up at six every morning.",
+      "sentenceTranslation": "我每天早上六点醒来。"
     },
     {
       "word": "sit",
       "phonetic": "sɪt",
       "meaning": "坐",
-      "sentence": "Sit down please."
+      "sentence": "Sit down please.",
+      "sentenceTranslation": "请坐下。"
     },
     {
       "word": "stand",
       "phonetic": "stænd",
       "meaning": "站",
-      "sentence": "Stand up, please."
+      "sentence": "Stand up, please.",
+      "sentenceTranslation": "请站起来。"
     },
     {
       "word": "open",
       "phonetic": "ˈoʊpən",
       "meaning": "打开",
-      "sentence": "Open the door please."
+      "sentence": "Open the door please.",
+      "sentenceTranslation": "请开门。"
     },
     {
       "word": "close",
       "phonetic": "kloʊz",
       "meaning": "关闭",
-      "sentence": "Close the window."
+      "sentence": "Close the window.",
+      "sentenceTranslation": "关窗户。"
     },
     {
       "word": "put",
       "phonetic": "pʊt",
       "meaning": "放",
-      "sentence": "Put the book on the table."
+      "sentence": "Put the book on the table.",
+      "sentenceTranslation": "把书放在桌子上。"
     },
     {
       "word": "get",
       "phonetic": "ɡet",
       "meaning": "得到",
-      "sentence": "Get up! It's seven o'clock."
+      "sentence": "Get up! It's seven o'clock.",
+      "sentenceTranslation": "起床！七点了。"
     },
     {
       "word": "give",
       "phonetic": "ɡɪv",
       "meaning": "给",
-      "sentence": "Give me an apple, please."
+      "sentence": "Give me an apple, please.",
+      "sentenceTranslation": "请给我一个苹果。"
     },
     {
       "word": "take",
       "phonetic": "teɪk",
       "meaning": "拿",
-      "sentence": "Take this book to the library."
+      "sentence": "Take this book to the library.",
+      "sentenceTranslation": "把这本书带到图书馆。"
     },
     {
       "word": "have",
       "phonetic": "hæv",
       "meaning": "有",
-      "sentence": "I have a new bag."
+      "sentence": "I have a new bag.",
+      "sentenceTranslation": "我有一个新书包。"
     },
     {
       "word": "make",
       "phonetic": "meɪk",
       "meaning": "做",
-      "sentence": "My mother makes delicious food."
+      "sentence": "My mother makes delicious food.",
+      "sentenceTranslation": "我妈妈做美味的食物。"
     },
     {
       "word": "cook",
       "phonetic": "kʊk",
       "meaning": "做饭",
-      "sentence": "My mother cooks every day."
+      "sentence": "My mother cooks every day.",
+      "sentenceTranslation": "我妈妈每天做饭。"
     },
     {
       "word": "wash",
       "phonetic": "wɑːʃ",
       "meaning": "洗",
-      "sentence": "Wash your hands before eating."
+      "sentence": "Wash your hands before eating.",
+      "sentenceTranslation": "饭前洗手。"
     },
     {
       "word": "clean",
       "phonetic": "kliːn",
       "meaning": "打扫",
-      "sentence": "Clean your room on weekends."
+      "sentence": "Clean your room on weekends.",
+      "sentenceTranslation": "周末打扫你的房间。"
     },
     {
       "word": "buy",
       "phonetic": "baɪ",
       "meaning": "买",
-      "sentence": "I want to buy a new pencil."
+      "sentence": "I want to buy a new pencil.",
+      "sentenceTranslation": "我想买一支新铅笔。"
     },
     {
       "word": "bring",
       "phonetic": "brɪŋ",
       "meaning": "带来",
-      "sentence": "Bring your book tomorrow."
+      "sentence": "Bring your book tomorrow.",
+      "sentenceTranslation": "明天带你的书来。"
     },
     {
       "word": "help",
       "phonetic": "help",
       "meaning": "帮助",
-      "sentence": "Can you help me?"
+      "sentence": "Can you help me?",
+      "sentenceTranslation": "你能帮我吗？"
     },
     {
       "word": "show",
       "phonetic": "ʃoʊ",
       "meaning": "展示",
-      "sentence": "Show me your homework."
+      "sentence": "Show me your homework.",
+      "sentenceTranslation": "给我看看你的作业。"
     },
     {
       "word": "tell",
       "phonetic": "tel",
       "meaning": "告诉",
-      "sentence": "Tell me a story."
+      "sentence": "Tell me a story.",
+      "sentenceTranslation": "给我讲个故事。"
     },
     {
       "word": "ask",
       "phonetic": "æsk",
       "meaning": "问",
-      "sentence": "Ask the teacher if you don't understand."
+      "sentence": "Ask the teacher if you don't understand.",
+      "sentenceTranslation": "如果你不懂就问老师。"
     },
     {
       "word": "answer",
       "phonetic": "ˈænsər",
       "meaning": "回答",
-      "sentence": "Can you answer this question?"
+      "sentence": "Can you answer this question?",
+      "sentenceTranslation": "你能回答这个问题吗？"
     },
     {
       "word": "think",
       "phonetic": "θɪŋk",
       "meaning": "想",
-      "sentence": "Think before you speak."
+      "sentence": "Think before you speak.",
+      "sentenceTranslation": "三思而后言。"
     },
     {
       "word": "know",
       "phonetic": "noʊ",
       "meaning": "知道",
-      "sentence": "I know the answer."
+      "sentence": "I know the answer.",
+      "sentenceTranslation": "我知道答案。"
     },
     {
       "word": "learn",
       "phonetic": "lɜːrn",
       "meaning": "学习",
-      "sentence": "I learn English at school."
+      "sentence": "I learn English at school.",
+      "sentenceTranslation": "我在学校学英语。"
     },
     {
       "word": "study",
       "phonetic": "ˈstʌdi",
       "meaning": "学习",
-      "sentence": "I study very hard."
+      "sentence": "I study very hard.",
+      "sentenceTranslation": "我学习很努力。"
     },
     {
       "word": "remember",
       "phonetic": "rɪˈmembər",
       "meaning": "记得",
-      "sentence": "Remember to do your homework."
+      "sentence": "Remember to do your homework.",
+      "sentenceTranslation": "记得做作业。"
     },
     {
       "word": "forget",
       "phonetic": "fərˈɡet",
       "meaning": "忘记",
-      "sentence": "Don't forget to lock the door."
+      "sentence": "Don't forget to lock the door.",
+      "sentenceTranslation": "别忘了锁门。"
     },
     {
       "word": "find",
       "phonetic": "faɪnd",
       "meaning": "找到",
-      "sentence": "I can't find my pen."
+      "sentence": "I can't find my pen.",
+      "sentenceTranslation": "我找不到我的钢笔。"
     },
     {
       "word": "lose",
       "phonetic": "luːz",
       "meaning": "丢失",
-      "sentence": "I lost my keys."
+      "sentence": "I lost my keys.",
+      "sentenceTranslation": "我丢了钥匙。"
     },
     {
       "word": "see",
       "phonetic": "siː",
       "meaning": "看见",
-      "sentence": "I can see a bird in the tree."
+      "sentence": "I can see a bird in the tree.",
+      "sentenceTranslation": "我能看见树上有只鸟。"
     },
     {
       "word": "watch",
       "phonetic": "wɑːtʃ",
       "meaning": "观看",
-      "sentence": "I watch TV on weekends."
+      "sentence": "I watch TV on weekends.",
+      "sentenceTranslation": "我周末看电视。"
     },
     {
       "word": "look",
       "phonetic": "lʊk",
       "meaning": "看",
-      "sentence": "Look at the blackboard."
+      "sentence": "Look at the blackboard.",
+      "sentenceTranslation": "看黑板。"
     },
     {
       "word": "hear",
       "phonetic": "hɪr",
       "meaning": "听见",
-      "sentence": "I can hear birds singing."
+      "sentence": "I can hear birds singing.",
+      "sentenceTranslation": "我能听见鸟在唱歌。"
     },
     {
       "word": "feel",
       "phonetic": "fiːl",
       "meaning": "感觉",
-      "sentence": "I feel happy today."
+      "sentence": "I feel happy today.",
+      "sentenceTranslation": "我今天感觉很开心。"
     },
     {
       "word": "am",
       "phonetic": "æm",
       "meaning": "是（与I连用）",
-      "sentence": "I am a student."
+      "sentence": "I am a student.",
+      "sentenceTranslation": "我是一名学生。"
     },
     {
       "word": "is",
       "phonetic": "ɪz",
       "meaning": "是（单数）",
-      "sentence": "She is a teacher."
+      "sentence": "She is a teacher.",
+      "sentenceTranslation": "她是一名老师。"
     },
     {
       "word": "are",
       "phonetic": "ɑːr",
       "meaning": "是（复数）",
-      "sentence": "We are in the same class."
+      "sentence": "We are in the same class.",
+      "sentenceTranslation": "我们在同一个班。"
     },
     {
       "word": "was",
       "phonetic": "wʌz",
       "meaning": "是（过去式单数）",
-      "sentence": "She was sick yesterday."
+      "sentence": "She was sick yesterday.",
+      "sentenceTranslation": "她昨天生病了。"
     },
     {
       "word": "were",
       "phonetic": "wɜːr",
       "meaning": "是（过去式复数）",
-      "sentence": "They were happy then."
+      "sentence": "They were happy then.",
+      "sentenceTranslation": "他们那时很开心。"
     },
     {
       "word": "do",
       "phonetic": "duː",
       "meaning": "做",
-      "sentence": "What do you do?"
+      "sentence": "What do you do?",
+      "sentenceTranslation": "你是做什么的？"
     },
     {
       "word": "does",
       "phonetic": "dʌz",
       "meaning": "做（第三人称单数）",
-      "sentence": "What does he do?"
+      "sentence": "What does he do?",
+      "sentenceTranslation": "他是做什么的？"
     },
     {
       "word": "did",
       "phonetic": "dɪd",
       "meaning": "做（过去式）",
-      "sentence": "What did you do yesterday?"
+      "sentence": "What did you do yesterday?",
+      "sentenceTranslation": "你昨天做了什么？"
     },
     {
       "word": "will",
       "phonetic": "wɪl",
       "meaning": "将要",
-      "sentence": "I will go to Beijing tomorrow."
+      "sentence": "I will go to Beijing tomorrow.",
+      "sentenceTranslation": "我明天将去北京。"
     },
     {
       "word": "can",
       "phonetic": "kæn",
       "meaning": "能",
-      "sentence": "I can swim very well."
+      "sentence": "I can swim very well.",
+      "sentenceTranslation": "我游泳很好。"
     },
     {
       "word": "must",
       "phonetic": "mʌst",
       "meaning": "必须",
-      "sentence": "You must finish your homework."
+      "sentence": "You must finish your homework.",
+      "sentenceTranslation": "你必须完成作业。"
     },
     {
       "word": "should",
       "phonetic": "ʃʊd",
       "meaning": "应该",
-      "sentence": "You should study hard."
+      "sentence": "You should study hard.",
+      "sentenceTranslation": "你应该努力学习。"
     },
     {
       "word": "may",
       "phonetic": "meɪ",
       "meaning": "可能",
-      "sentence": "You may go now."
+      "sentence": "You may go now.",
+      "sentenceTranslation": "你现在可以走了。"
     },
     {
       "word": "this",
       "phonetic": "ðɪs",
       "meaning": "这",
-      "sentence": "This is my book."
+      "sentence": "This is my book.",
+      "sentenceTranslation": "这是我的书。"
     },
     {
       "word": "that",
       "phonetic": "ðæt",
       "meaning": "那",
-      "sentence": "That is his desk."
+      "sentence": "That is his desk.",
+      "sentenceTranslation": "那是他的桌子。"
     },
     {
       "word": "these",
       "phonetic": "ðiːz",
       "meaning": "这些",
-      "sentence": "These are my friends."
+      "sentence": "These are my friends.",
+      "sentenceTranslation": "这些是我的朋友。"
     },
     {
       "word": "those",
       "phonetic": "ðoʊz",
       "meaning": "那些",
-      "sentence": "Those are apple trees."
+      "sentence": "Those are apple trees.",
+      "sentenceTranslation": "那些是苹果树。"
     },
     {
       "word": "what",
       "phonetic": "wʌt",
       "meaning": "什么",
-      "sentence": "What is your name?"
+      "sentence": "What is your name?",
+      "sentenceTranslation": "你叫什么名字？"
     },
     {
       "word": "which",
       "phonetic": "wɪtʃ",
       "meaning": "哪一个",
-      "sentence": "Which book is yours?"
+      "sentence": "Which book is yours?",
+      "sentenceTranslation": "哪本书是你的？"
     },
     {
       "word": "who",
       "phonetic": "huː",
       "meaning": "谁",
-      "sentence": "Who is that man?"
+      "sentence": "Who is that man?",
+      "sentenceTranslation": "那个男人是谁？"
     },
     {
       "word": "whose",
       "phonetic": "huːz",
       "meaning": "谁的",
-      "sentence": "Whose bag is this?"
+      "sentence": "Whose bag is this?",
+      "sentenceTranslation": "这是谁的书包？"
     },
     {
       "word": "where",
       "phonetic": "wer",
       "meaning": "在哪里",
-      "sentence": "Where do you live?"
+      "sentence": "Where do you live?",
+      "sentenceTranslation": "你住在哪里？"
     },
     {
       "word": "when",
       "phonetic": "wen",
       "meaning": "什么时候",
-      "sentence": "When is your birthday?"
+      "sentence": "When is your birthday?",
+      "sentenceTranslation": "你的生日是什么时候？"
     },
     {
       "word": "why",
       "phonetic": "waɪ",
       "meaning": "为什么",
-      "sentence": "Why are you late?"
+      "sentence": "Why are you late?",
+      "sentenceTranslation": "你为什么迟到？"
     },
     {
       "word": "how",
       "phonetic": "haʊ",
       "meaning": "怎样",
-      "sentence": "How are you today?"
+      "sentence": "How are you today?",
+      "sentenceTranslation": "你今天怎么样？"
     },
     {
       "word": "and",
       "phonetic": "ænd",
       "meaning": "和",
-      "sentence": "I like apples and bananas."
+      "sentence": "I like apples and bananas.",
+      "sentenceTranslation": "我喜欢苹果和香蕉。"
     },
     {
       "word": "but",
       "phonetic": "bʌt",
       "meaning": "但是",
-      "sentence": "I like fish but I don't like meat."
+      "sentence": "I like fish but I don't like meat.",
+      "sentenceTranslation": "我喜欢鱼肉但不喜欢肉。"
     },
     {
       "word": "or",
       "phonetic": "ɔːr",
       "meaning": "或者",
-      "sentence": "Do you like tea or coffee?"
+      "sentence": "Do you like tea or coffee?",
+      "sentenceTranslation": "你喜欢茶还是咖啡？"
     },
     {
       "word": "so",
       "phonetic": "soʊ",
       "meaning": "所以",
-      "sentence": "I was late, so I missed the bus."
+      "sentence": "I was late, so I missed the bus.",
+      "sentenceTranslation": "我迟到了，所以错过了公交车。"
     },
     {
       "word": "because",
       "phonetic": "bɪˈkɔːz",
       "meaning": "因为",
-      "sentence": "I am happy because I got a gift."
+      "sentence": "I am happy because I got a gift.",
+      "sentenceTranslation": "我很开心因为我收到了一份礼物。"
     },
     {
       "word": "if",
       "phonetic": "ɪf",
       "meaning": "如果",
-      "sentence": "If it rains, I will stay at home."
+      "sentence": "If it rains, I will stay at home.",
+      "sentenceTranslation": "如果下雨，我就待在家里。"
     },
     {
       "word": "very",
       "phonetic": "ˈveri",
       "meaning": "非常",
-      "sentence": "This book is very interesting."
+      "sentence": "This book is very interesting.",
+      "sentenceTranslation": "这本书非常有趣。"
     },
     {
       "word": "really",
       "phonetic": "ˈriːəli",
       "meaning": "真正地",
-      "sentence": "I really like this song."
+      "sentence": "I really like this song.",
+      "sentenceTranslation": "我真的很喜欢这首歌。"
     },
     {
       "word": "too",
       "phonetic": "tuː",
       "meaning": "太",
-      "sentence": "The water is too hot."
+      "sentence": "The water is too hot.",
+      "sentenceTranslation": "水太烫了。"
     },
     {
       "word": "also",
       "phonetic": "ˈɔːlsoʊ",
       "meaning": "也",
-      "sentence": "I also like playing basketball."
+      "sentence": "I also like playing basketball.",
+      "sentenceTranslation": "我也喜欢打篮球。"
     },
     {
       "word": "quite",
       "phonetic": "kwaɪt",
       "meaning": "相当",
-      "sentence": "The book is quite good."
+      "sentence": "The book is quite good.",
+      "sentenceTranslation": "这本书相当好。"
     },
     {
       "word": "about",
       "phonetic": "əˈbaʊt",
       "meaning": "关于",
-      "sentence": "What is the book about?"
+      "sentence": "What is the book about?",
+      "sentenceTranslation": "这本书是关于什么的？"
     },
     {
       "word": "after",
       "phonetic": "ˈæftər",
       "meaning": "在...之后",
-      "sentence": "I will call you after school."
+      "sentence": "I will call you after school.",
+      "sentenceTranslation": "放学后我会打电话给你。"
     },
     {
       "word": "before",
       "phonetic": "bɪˈfɔːr",
       "meaning": "在...之前",
-      "sentence": "Brush your teeth before sleeping."
+      "sentence": "Brush your teeth before sleeping.",
+      "sentenceTranslation": "睡前刷牙。"
     },
     {
       "word": "with",
       "phonetic": "wɪð",
       "meaning": "和...一起",
-      "sentence": "I go to school with my friend."
+      "sentence": "I go to school with my friend.",
+      "sentenceTranslation": "我和朋友一起去学校。"
     },
     {
       "word": "for",
       "phonetic": "fɔːr",
       "meaning": "为了",
-      "sentence": "This is a gift for you."
+      "sentence": "This is a gift for you.",
+      "sentenceTranslation": "这是给你的礼物。"
     },
     {
       "word": "from",
       "phonetic": "frʌm",
       "meaning": "从",
-      "sentence": "Where are you from?"
+      "sentence": "Where are you from?",
+      "sentenceTranslation": "你从哪里来？"
     },
     {
       "word": "of",
       "phonetic": "ʌv",
       "meaning": "的",
-      "sentence": "The color of the sky is blue."
+      "sentence": "The color of the sky is blue.",
+      "sentenceTranslation": "天空的颜色是蓝色的。"
     },
     {
       "word": "to",
       "phonetic": "tuː",
       "meaning": "到",
-      "sentence": "Go to school every day."
+      "sentence": "Go to school every day.",
+      "sentenceTranslation": "每天去学校。"
     },
     {
       "word": "at",
       "phonetic": "æt",
       "meaning": "在",
-      "sentence": "I am at home."
+      "sentence": "I am at home.",
+      "sentenceTranslation": "我在家。"
     },
     {
       "word": "on",
       "phonetic": "ɑːn",
       "meaning": "在...上面",
-      "sentence": "The picture is on the wall."
+      "sentence": "The picture is on the wall.",
+      "sentenceTranslation": "画在墙上。"
     },
     {
       "word": "in",
       "phonetic": "ɪn",
       "meaning": "在...里面",
-      "sentence": "The book is in the bag."
+      "sentence": "The book is in the bag.",
+      "sentenceTranslation": "书在书包里。"
     },
     {
       "word": "under",
       "phonetic": "ˈʌndər",
       "meaning": "在...下面",
-      "sentence": "The cat is under the table."
+      "sentence": "The cat is under the table.",
+      "sentenceTranslation": "猫在桌子下面。"
     },
     {
       "word": "near",
       "phonetic": "nɪr",
       "meaning": "在...附近",
-      "sentence": "The school is near my home."
+      "sentence": "The school is near my home.",
+      "sentenceTranslation": "学校在我家附近。"
     },
     {
       "word": "no",
       "phonetic": "noʊ",
       "meaning": "不/没有",
-      "sentence": "No, I don't like fish."
+      "sentence": "No, I don't like fish.",
+      "sentenceTranslation": "不，我不喜欢鱼。"
     },
     {
       "word": "not",
       "phonetic": "nɑːt",
       "meaning": "不",
-      "sentence": "I am not hungry."
+      "sentence": "I am not hungry.",
+      "sentenceTranslation": "我不饿。"
     },
     {
       "word": "yes",
       "phonetic": "jes",
       "meaning": "是",
-      "sentence": "Yes, I like it very much."
+      "sentence": "Yes, I like it very much.",
+      "sentenceTranslation": "是的，我非常喜欢。"
     },
     {
       "word": "please",
       "phonetic": "pliːz",
       "meaning": "请",
-      "sentence": "Please sit down."
+      "sentence": "Please sit down.",
+      "sentenceTranslation": "请坐下。"
     },
     {
       "word": "thanks",
       "phonetic": "θæŋks",
       "meaning": "谢谢",
-      "sentence": "Thanks a lot!"
+      "sentence": "Thanks a lot!",
+      "sentenceTranslation": "非常感谢！"
     },
     {
       "word": "sorry",
       "phonetic": "ˈsɑːri",
       "meaning": "对不起",
-      "sentence": "Sorry, I am late."
+      "sentence": "Sorry, I am late.",
+      "sentenceTranslation": "对不起，我迟到了。"
     },
     {
       "word": "hello",
       "phonetic": "həˈloʊ",
       "meaning": "你好",
-      "sentence": "Hello, how are you?"
+      "sentence": "Hello, how are you?",
+      "sentenceTranslation": "你好，你好吗？"
     },
     {
       "word": "hi",
       "phonetic": "haɪ",
       "meaning": "嗨",
-      "sentence": "Hi, nice to meet you."
+      "sentence": "Hi, nice to meet you.",
+      "sentenceTranslation": "嗨，很高兴认识你。"
     },
     {
       "word": "bye",
       "phonetic": "baɪ",
       "meaning": "再见",
-      "sentence": "Goodbye! See you tomorrow."
+      "sentence": "Goodbye! See you tomorrow.",
+      "sentenceTranslation": "再见！明天见。"
     },
     {
       "word": "again",
       "phonetic": "əˈɡen",
       "meaning": "再",
-      "sentence": "Read it again."
+      "sentence": "Read it again.",
+      "sentenceTranslation": "再读一遍。"
     },
     {
       "word": "now",
       "phonetic": "naʊ",
       "meaning": "现在",
-      "sentence": "I am busy now."
+      "sentence": "I am busy now.",
+      "sentenceTranslation": "我现在很忙。"
     },
     {
       "word": "still",
       "phonetic": "stɪl",
       "meaning": "仍然",
-      "sentence": "He is still sleeping."
+      "sentence": "He is still sleeping.",
+      "sentenceTranslation": "他还在睡觉。"
     },
     {
       "word": "already",
       "phonetic": "ɔːlˈredi",
       "meaning": "已经",
-      "sentence": "I have already had breakfast."
+      "sentence": "I have already had breakfast.",
+      "sentenceTranslation": "我已经吃过早餐了。"
     },
     {
       "word": "ever",
       "phonetic": "ˈevər",
       "meaning": "曾经",
-      "sentence": "Have you ever been to Beijing?"
+      "sentence": "Have you ever been to Beijing?",
+      "sentenceTranslation": "你去过北京吗？"
     },
     {
       "word": "never",
       "phonetic": "ˈnevər",
       "meaning": "从未",
-      "sentence": "I have never been to Shanghai."
+      "sentence": "I have never been to Shanghai.",
+      "sentenceTranslation": "我从没去过上海。"
     },
     {
       "word": "always",
       "phonetic": "ˈɔːlweɪz",
       "meaning": "总是",
-      "sentence": "The sun always rises in the east."
+      "sentence": "The sun always rises in the east.",
+      "sentenceTranslation": "太阳总是从东方升起。"
     },
     {
       "word": "often",
       "phonetic": "ˈɔːfən",
       "meaning": "经常",
-      "sentence": "I often read books before bed."
+      "sentence": "I often read books before bed.",
+      "sentenceTranslation": "我经常睡前读书。"
     },
     {
       "word": "sometimes",
       "phonetic": "ˈsʌmtaɪmz",
       "meaning": "有时候",
-      "sentence": "Sometimes I play football on weekends."
+      "sentence": "Sometimes I play football on weekends.",
+      "sentenceTranslation": "有时候我周末踢足球。"
     },
     {
       "word": "much",
       "phonetic": "mʌtʃ",
       "meaning": "很多",
-      "sentence": "I like it very much."
+      "sentence": "I like it very much.",
+      "sentenceTranslation": "我非常喜欢它。"
     },
     {
       "word": "many",
       "phonetic": "ˈmeni",
       "meaning": "很多",
-      "sentence": "There are many books in the library."
+      "sentence": "There are many books in the library.",
+      "sentenceTranslation": "图书馆里有很多书。"
     },
     {
       "word": "some",
       "phonetic": "sʌm",
       "meaning": "一些",
-      "sentence": "I have some good news."
+      "sentence": "I have some good news.",
+      "sentenceTranslation": "我有一些好消息。"
     },
     {
       "word": "any",
       "phonetic": "ˈeni",
       "meaning": "任何",
-      "sentence": "Do you have any questions?"
+      "sentence": "Do you have any questions?",
+      "sentenceTranslation": "你有什么问题吗？"
     },
     {
       "word": "all",
       "phonetic": "ɔːl",
       "meaning": "全部",
-      "sentence": "All the students are here."
+      "sentence": "All the students are here.",
+      "sentenceTranslation": "所有的学生都在这里。"
     },
     {
       "word": "time",
       "phonetic": "taɪm",
       "meaning": "时间",
-      "sentence": "What time is it?"
+      "sentence": "What time is it?",
+      "sentenceTranslation": "现在几点了？"
     },
     {
       "word": "year",
       "phonetic": "jɪr",
       "meaning": "年",
-      "sentence": "This year I am in Grade Six."
+      "sentence": "This year I am in Grade Six.",
+      "sentenceTranslation": "今年我上六年级。"
     },
     {
       "word": "month",
       "phonetic": "mʌnθ",
       "meaning": "月",
-      "sentence": "There are twelve months in a year."
+      "sentence": "There are twelve months in a year.",
+      "sentenceTranslation": "一年有十二个月。"
     },
     {
       "word": "week",
       "phonetic": "wiːk",
       "meaning": "周",
-      "sentence": "There are seven days in a week."
+      "sentence": "There are seven days in a week.",
+      "sentenceTranslation": "一周有七天。"
     },
     {
       "word": "day",
       "phonetic": "deɪ",
       "meaning": "天",
-      "sentence": "What day is it today?"
+      "sentence": "What day is it today?",
+      "sentenceTranslation": "今天星期几？"
     },
     {
       "word": "hour",
       "phonetic": "aʊr",
       "meaning": "小时",
-      "sentence": "There are twenty-four hours in a day."
+      "sentence": "There are twenty-four hours in a day.",
+      "sentenceTranslation": "一天有二十四个小时。"
     },
     {
       "word": "minute",
       "phonetic": "ˈmɪnɪt",
       "meaning": "分钟",
-      "sentence": "Wait a minute, please."
+      "sentence": "Wait a minute, please.",
+      "sentenceTranslation": "请等一下。"
     },
     {
       "word": "second",
       "phonetic": "ˈsekənd",
       "meaning": "秒",
-      "sentence": "The race only lasts ten seconds."
+      "sentence": "The race only lasts ten seconds.",
+      "sentenceTranslation": "比赛只持续十秒。"
     },
     {
       "word": "thing",
       "phonetic": "θɪŋ",
       "meaning": "事情",
-      "sentence": "I have many things to do."
+      "sentence": "I have many things to do.",
+      "sentenceTranslation": "我有很多事情要做。"
     },
     {
       "word": "money",
       "phonetic": "ˈmʌni",
       "meaning": "钱",
-      "sentence": "Money is important."
+      "sentence": "Money is important.",
+      "sentenceTranslation": "钱很重要。"
     },
     {
       "word": "life",
       "phonetic": "laɪf",
       "meaning": "生活",
-      "sentence": "Life is beautiful."
+      "sentence": "Life is beautiful.",
+      "sentenceTranslation": "生活是美丽的。"
     },
     {
       "word": "party",
       "phonetic": "ˈpɑːrti",
       "meaning": "聚会",
-      "sentence": "We had a birthday party."
+      "sentence": "We had a birthday party.",
+      "sentenceTranslation": "我们举办了一个生日聚会。"
     },
     {
       "word": "game",
       "phonetic": "ɡeɪm",
       "meaning": "游戏",
-      "sentence": "Let's play a game."
+      "sentence": "Let's play a game.",
+      "sentenceTranslation": "我们玩游戏吧。"
     },
     {
       "word": "song",
       "phonetic": "sɔːŋ",
       "meaning": "歌曲",
-      "sentence": "I like this song very much."
+      "sentence": "I like this song very much.",
+      "sentenceTranslation": "我非常喜欢这首歌。"
     },
     {
       "word": "film",
       "phonetic": "fɪlm",
       "meaning": "电影",
-      "sentence": "The film is very interesting."
+      "sentence": "The film is very interesting.",
+      "sentenceTranslation": "电影很有趣。"
     },
     {
       "word": "TV",
       "phonetic": "tiːˈviː",
       "meaning": "电视",
-      "sentence": "I watch TV every evening."
+      "sentence": "I watch TV every evening.",
+      "sentenceTranslation": "我每天晚上看电视。"
     },
     {
       "word": "computer",
       "phonetic": "kəmˈpjuːtər",
       "meaning": "电脑",
-      "sentence": "I use a computer at school."
+      "sentence": "I use a computer at school.",
+      "sentenceTranslation": "我在学校用电脑。"
     },
     {
       "word": "phone",
       "phonetic": "foʊn",
       "meaning": "电话",
-      "sentence": "Call me on the phone."
+      "sentence": "Call me on the phone.",
+      "sentenceTranslation": "打电话给我。"
     },
     {
       "word": "toy",
       "phonetic": "tɔɪ",
       "meaning": "玩具",
-      "sentence": "Children like toys."
+      "sentence": "Children like toys.",
+      "sentenceTranslation": "孩子喜欢玩具。"
     },
     {
       "word": "gift",
       "phonetic": "ɡɪft",
       "meaning": "礼物",
-      "sentence": "This is a gift for you."
+      "sentence": "This is a gift for you.",
+      "sentenceTranslation": "这是给你的礼物。"
     },
     {
       "word": "letter",
       "phonetic": "ˈletər",
       "meaning": "信",
-      "sentence": "I wrote a letter to my friend."
+      "sentence": "I wrote a letter to my friend.",
+      "sentenceTranslation": "我给我的朋友写了一封信。"
     },
     {
       "word": "number",
       "phonetic": "ˈnʌmbər",
       "meaning": "数字",
-      "sentence": "What is your phone number?"
+      "sentence": "What is your phone number?",
+      "sentenceTranslation": "你的电话号码是多少？"
     },
     {
       "word": "color",
       "phonetic": "ˈkʌlər",
       "meaning": "颜色",
-      "sentence": "What is your favorite color?"
+      "sentence": "What is your favorite color?",
+      "sentenceTranslation": "你最喜欢什么颜色？"
     },
     {
       "word": "shape",
       "phonetic": "ʃeɪp",
       "meaning": "形状",
-      "sentence": "A circle is a round shape."
+      "sentence": "A circle is a round shape.",
+      "sentenceTranslation": "圆是一种圆形的形状。"
     },
     {
       "word": "size",
       "phonetic": "saɪz",
       "meaning": "尺寸",
-      "sentence": "What size shoes do you wear?"
+      "sentence": "What size shoes do you wear?",
+      "sentenceTranslation": "你穿多大尺码的鞋？"
     },
     {
       "word": "price",
       "phonetic": "praɪs",
       "meaning": "价格",
-      "sentence": "What is the price of this book?"
+      "sentence": "What is the price of this book?",
+      "sentenceTranslation": "这本书的价格是多少？"
     },
     {
       "word": "place",
       "phonetic": "pleɪs",
       "meaning": "地方",
-      "sentence": "This is a nice place."
+      "sentence": "This is a nice place.",
+      "sentenceTranslation": "这是一个好地方。"
     },
     {
       "word": "way",
       "phonetic": "weɪ",
       "meaning": "方式",
-      "sentence": "This is the way I do it."
+      "sentence": "This is the way I do it.",
+      "sentenceTranslation": "这就是我做事的方式。"
     },
     {
       "word": "name",
       "phonetic": "neɪm",
       "meaning": "名字",
-      "sentence": "What is your name?"
+      "sentence": "What is your name?",
+      "sentenceTranslation": "你叫什么名字？"
     },
     {
       "word": "birthday",
       "phonetic": "ˈbɜːrθdeɪ",
       "meaning": "生日",
-      "sentence": "Happy birthday to you!"
+      "sentence": "Happy birthday to you!",
+      "sentenceTranslation": "祝你生日快乐！"
     },
     {
       "word": "China",
       "phonetic": "ˈtʃaɪnə",
       "meaning": "中国",
-      "sentence": "Beijing is the capital of China."
+      "sentence": "Beijing is the capital of China.",
+      "sentenceTranslation": "北京是中国的首都。"
     },
     {
       "word": "America",
       "phonetic": "əˈmerɪkə",
       "meaning": "美国",
-      "sentence": "New York is a city in America."
+      "sentence": "New York is a city in America.",
+      "sentenceTranslation": "纽约是美国的城市。"
     },
     {
       "word": "England",
       "phonetic": "ˈɪŋɡlənd",
       "meaning": "英国",
-      "sentence": "London is the capital of England."
+      "sentence": "London is the capital of England.",
+      "sentenceTranslation": "伦敦是英国的首都。"
     },
     {
       "word": "Japan",
       "phonetic": "dʒəˈpæn",
       "meaning": "日本",
-      "sentence": "Sakura blossoms are famous in Japan."
+      "sentence": "Sakura blossoms are famous in Japan.",
+      "sentenceTranslation": "樱花在日本很有名。"
     },
     {
       "word": "left",
       "phonetic": "left",
       "meaning": "左边",
-      "sentence": "Turn left at the corner."
+      "sentence": "Turn left at the corner.",
+      "sentenceTranslation": "在拐角处左转。"
     },
     {
       "word": "right",
       "phonetic": "raɪt",
       "meaning": "右边",
-      "sentence": "Turn right at the traffic light."
+      "sentence": "Turn right at the traffic light.",
+      "sentenceTranslation": "在红绿灯处右转。"
     },
     {
       "word": "up",
       "phonetic": "ʌp",
       "meaning": "向上",
-      "sentence": "Look up at the sky."
+      "sentence": "Look up at the sky.",
+      "sentenceTranslation": "抬头看天空。"
     },
     {
       "word": "down",
       "phonetic": "daʊn",
       "meaning": "向下",
-      "sentence": "Sit down please."
+      "sentence": "Sit down please.",
+      "sentenceTranslation": "请坐下。"
     },
     {
       "word": "out",
       "phonetic": "aʊt",
       "meaning": "向外",
-      "sentence": "Go out and play."
+      "sentence": "Go out and play.",
+      "sentenceTranslation": "出去玩耍吧。"
     },
     {
       "word": "today",
       "phonetic": "təˈdeɪ",
       "meaning": "今天",
-      "sentence": "Today is Monday."
+      "sentence": "Today is Monday.",
+      "sentenceTranslation": "今天是星期一。"
     }
   ]
 }

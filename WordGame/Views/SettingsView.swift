@@ -62,6 +62,15 @@ struct SettingsView: View {
 
                 // Data Management
                 Section("数据管理") {
+                    NavigationLink {
+                        BackupView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "arrow.clockwise.icloud")
+                            Text("备份与恢复词书")
+                        }
+                    }
+
                     Button(action: { showResetAlert = true }) {
                         Text("重置所有进度")
                             .foregroundColor(.errorRed)

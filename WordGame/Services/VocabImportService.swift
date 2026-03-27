@@ -1,8 +1,10 @@
 import Foundation
+import os
 
 /// Service for importing vocabulary from JSON files and CSV files
 final class VocabImportService {
     static let shared = VocabImportService()
+    private let logger = Logger(subsystem: "com.wordgame.vocab", category: "VocabImportService")
 
     private init() {}
 
@@ -33,21 +35,21 @@ final class VocabImportService {
             case .cet4:
                 // CET-4: if word count matches, skip; otherwise re-import.
                 if existingBook.wordCount == expectedWordCount {
-                    print("Preset '\(preset.displayName)' already up-to-date (\(expectedWordCount) words), skipping.")
+                    logger.info("Preset '\(preset.displayName)' already up-to-date (\(expectedWordCount) words), skipping.")
                     return
                 }
                 // Word count mismatch (e.g. old stub with 20 words) → re-import.
-                print("Preset '\(preset.displayName)' word count mismatch (\(existingBook.wordCount) → \(expectedWordCount)), re-importing...")
+                logger.info("Preset '\(preset.displayName)' word count mismatch (\(existingBook.wordCount) → \(expectedWordCount)), re-importing...")
                 try DatabaseService.shared.deleteWordBook(byId: existingBook.id)
 
             case .primarySchool, .highSchool3500, .juniorHigh:
                 // high_school_3500 is versioned — detect version change via word count.
                 if existingBook.wordCount == expectedWordCount {
-                    print("Preset '\(preset.displayName)' already up-to-date (\(expectedWordCount) words), skipping.")
+                    logger.info("Preset '\(preset.displayName)' already up-to-date (\(expectedWordCount) words), skipping.")
                     return
                 }
                 // Word count changed → delete old and re-import.
-                print("Preset '\(preset.displayName)' version changed (\(existingBook.wordCount) → \(expectedWordCount)), re-importing...")
+                logger.info("Preset '\(preset.displayName)' version changed (\(existingBook.wordCount) → \(expectedWordCount)), re-importing...")
                 try DatabaseService.shared.deleteWordBook(byId: existingBook.id)
             }
         }
@@ -67,7 +69,8 @@ final class VocabImportService {
                 word: vocabWord.word,
                 phonetic: vocabWord.phonetic,
                 meaning: vocabWord.meaning,
-                sentence: vocabWord.sentence
+                sentence: vocabWord.sentence,
+                sentenceTranslation: vocabWord.sentenceTranslation
             )
         }
         try DatabaseService.shared.createWords(words)
@@ -78,9 +81,9 @@ final class VocabImportService {
         for preset in PresetVocabulary.allCases {
             do {
                 try await importPresetVocabulary(preset)
-                print("Imported vocabulary: \(preset.displayName)")
+                logger.info("Imported vocabulary: \(preset.displayName)")
             } catch {
-                print("Failed to import \(preset.displayName): \(error)")
+                logger.error("Failed to import \(preset.displayName): \(error.localizedDescription)")
             }
         }
     }
@@ -120,7 +123,8 @@ final class VocabImportService {
                 word: parts[0].trimmingCharacters(in: .whitespaces),
                 phonetic: parts.count > 1 ? parts[1].trimmingCharacters(in: .whitespaces) : nil,
                 meaning: parts.count > 2 ? parts[2].trimmingCharacters(in: .whitespaces) : parts[1].trimmingCharacters(in: .whitespaces),
-                sentence: parts.count > 3 ? parts[3].trimmingCharacters(in: .whitespaces) : nil
+                sentence: parts.count > 3 ? parts[3].trimmingCharacters(in: .whitespaces) : nil,
+                sentenceTranslation: parts.count > 4 ? parts[4].trimmingCharacters(in: .whitespaces) : nil
             )
 
             if word.word.isEmpty {
@@ -132,7 +136,7 @@ final class VocabImportService {
         }
 
         if !errors.isEmpty {
-            print("CSV Import warnings: \(errors.prefix(5).joined(separator: "; "))")
+            logger.warning("CSV Import warnings: \(errors.prefix(5).joined(separator: "; "))")
         }
 
         // Create word book
@@ -216,6 +220,7 @@ struct VocabularyWord: Codable {
     let phonetic: String?
     let meaning: String
     let sentence: String?
+    let sentenceTranslation: String?
 }
 
 enum VocabImportError: Error, LocalizedError {

@@ -8,6 +8,7 @@ struct Word: Identifiable, Codable, Equatable, Hashable {
     var phonetic: String?
     var meaning: String
     var sentence: String?
+    var sentenceTranslation: String?  // 例句中文翻译
     var audioUrl: String?
     var masteryLevel: Int  // 0-5 scale
     var wrongCount: Int
@@ -21,6 +22,7 @@ struct Word: Identifiable, Codable, Equatable, Hashable {
         phonetic: String? = nil,
         meaning: String,
         sentence: String? = nil,
+        sentenceTranslation: String? = nil,
         audioUrl: String? = nil,
         masteryLevel: Int = 0,
         wrongCount: Int = 0,
@@ -33,6 +35,7 @@ struct Word: Identifiable, Codable, Equatable, Hashable {
         self.phonetic = phonetic
         self.meaning = meaning
         self.sentence = sentence
+        self.sentenceTranslation = sentenceTranslation
         self.audioUrl = audioUrl
         self.masteryLevel = masteryLevel
         self.wrongCount = wrongCount

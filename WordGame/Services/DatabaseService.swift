@@ -1,13 +1,15 @@
 import Foundation
 import SQLite
+import os
 
 /// DatabaseService manages all SQLite database operations
 /// Singleton pattern ensures single database connection throughout the app
 final class DatabaseService: ObservableObject {
     static let shared = DatabaseService()
+    private let logger = Logger(subsystem: "com.wordgame.database", category: "DatabaseService")
 
     private var db: Connection?
-    private let dbPath: String
+    let dbPath: String
 
     // MARK: - Table Definitions
     private let wordBooks = Table("word_books")
@@ -32,6 +34,7 @@ final class DatabaseService: ObservableObject {
     private let wPhonetic = Expression<String?>("phonetic")
     private let wMeaning = Expression<String>("meaning")
     private let wSentence = Expression<String?>("sentence")
+    private let wSentenceTranslation = Expression<String?>("sentence_translation")
     private let wAudioUrl = Expression<String?>("audio_url")
     private let wMasteryLevel = Expression<Int>("mastery_level")
     private let wWrongCount = Expression<Int>("wrong_count")
@@ -80,8 +83,34 @@ final class DatabaseService: ObservableObject {
         do {
             db = try Connection(dbPath)
             createTables()
+            migrateTablesIfNeeded()
         } catch {
-            print("Database connection failed: \(error)")
+            logger.error("Database connection failed: \(error.localizedDescription)")
+        }
+    }
+
+    // MARK: - Table Migration
+    /// Migrate existing tables to add new columns
+    private func migrateTablesIfNeeded() {
+        guard let db = db else { return }
+
+        do {
+            // Check if sentence_translation column exists, add if not
+            let tableInfo = try db.prepare("PRAGMA table_info(words)")
+            var hasSentenceTranslation = false
+            for row in tableInfo {
+                if let name = row[1] as? String, name == "sentence_translation" {
+                    hasSentenceTranslation = true
+                    break
+                }
+            }
+
+            if !hasSentenceTranslation {
+                try db.run("ALTER TABLE words ADD COLUMN sentence_translation TEXT")
+                logger.info("Migrated words table: added sentence_translation column")
+            }
+        } catch {
+            logger.error("Migration failed: \(error.localizedDescription)")
         }
     }
 
@@ -109,6 +138,7 @@ final class DatabaseService: ObservableObject {
                 t.column(wPhonetic)
                 t.column(wMeaning)
                 t.column(wSentence)
+                t.column(wSentenceTranslation)
                 t.column(wAudioUrl)
                 t.column(wMasteryLevel, defaultValue: 0)
                 t.column(wWrongCount, defaultValue: 0)
@@ -160,7 +190,7 @@ final class DatabaseService: ObservableObject {
             try db.run(learningRecords.createIndex(lrBookId, ifNotExists: true))
 
         } catch {
-            print("Table creation failed: \(error)")
+            logger.error("Table creation failed: \(error.localizedDescription)")
         }
     }
 
@@ -280,6 +310,7 @@ final class DatabaseService: ObservableObject {
             wPhonetic <- word.phonetic,
             wMeaning <- word.meaning,
             wSentence <- word.sentence,
+            wSentenceTranslation <- word.sentenceTranslation,
             wAudioUrl <- word.audioUrl,
             wMasteryLevel <- word.masteryLevel,
             wWrongCount <- word.wrongCount,
@@ -314,6 +345,7 @@ final class DatabaseService: ObservableObject {
                 phonetic: row[wPhonetic],
                 meaning: row[wMeaning],
                 sentence: row[wSentence],
+                sentenceTranslation: row[wSentenceTranslation],
                 audioUrl: row[wAudioUrl],
                 masteryLevel: row[wMasteryLevel],
                 wrongCount: row[wWrongCount],
@@ -340,6 +372,7 @@ final class DatabaseService: ObservableObject {
             phonetic: row[wPhonetic],
             meaning: row[wMeaning],
             sentence: row[wSentence],
+            sentenceTranslation: row[wSentenceTranslation],
             audioUrl: row[wAudioUrl],
             masteryLevel: row[wMasteryLevel],
             wrongCount: row[wWrongCount],
@@ -357,6 +390,7 @@ final class DatabaseService: ObservableObject {
             wPhonetic <- word.phonetic,
             wMeaning <- word.meaning,
             wSentence <- word.sentence,
+            wSentenceTranslation <- word.sentenceTranslation,
             wAudioUrl <- word.audioUrl,
             wMasteryLevel <- word.masteryLevel,
             wWrongCount <- word.wrongCount,
@@ -392,6 +426,7 @@ final class DatabaseService: ObservableObject {
                 phonetic: row[wPhonetic],
                 meaning: row[wMeaning],
                 sentence: row[wSentence],
+                sentenceTranslation: row[wSentenceTranslation],
                 audioUrl: row[wAudioUrl],
                 masteryLevel: row[wMasteryLevel],
                 wrongCount: row[wWrongCount],

@@ -1,9 +1,11 @@
 import Foundation
 import SwiftUI
+import os
 
 /// ViewModel for game/learning session management
 @MainActor
 final class GameViewModel: ObservableObject {
+    private let logger = Logger(subsystem: "com.wordgame.game", category: "GameViewModel")
     // MARK: - Published Properties
     @Published var currentBook: WordBook?
     @Published var currentLevel: GameLevel?
@@ -56,6 +58,15 @@ final class GameViewModel: ObservableObject {
         questions.count
     }
 
+    /// Current passing threshold based on selected difficulty
+    var passingThreshold: Int {
+        guard let rawValue = UserDefaults.standard.string(forKey: "gameDifficulty"),
+              let difficulty = GameDifficulty(rawValue: rawValue) else {
+            return 60  // Default to medium
+        }
+        return difficulty.passingThreshold
+    }
+
     // MARK: - Game Lifecycle
     /// Start a new game for the given word book.
     /// Clears progress/state immediately but keeps the previous questions visible
@@ -79,13 +90,13 @@ final class GameViewModel: ObservableObject {
         do {
             allWords = try database.fetchWords(forBookId: book.id)
         } catch {
-            print("Failed to load words: \(error)")
+            logger.error("Failed to load words: \(error.localizedDescription)")
             return
         }
 
         // Check if we have words
         guard !allWords.isEmpty else {
-            print("No words found in book: \(book.name)")
+            logger.warning("No words found in book: \(book.name)")
             // Clear questions so empty state shows instead of stale content
             questions = []
             return
@@ -314,7 +325,7 @@ final class GameViewModel: ObservableObject {
             score: score,
             starsEarned: starsEarned,
             accuracy: accuracy,
-            isPassed: accuracy >= 60
+            isPassed: accuracy >= Double(passingThreshold)
         )
 
         // Update progress
@@ -400,7 +411,7 @@ final class GameViewModel: ObservableObject {
 
             try database.updateGameProgress(progress)
         } catch {
-            print("Failed to update progress: \(error)")
+            logger.error("Failed to update progress: \(error.localizedDescription)")
         }
     }
 
@@ -456,7 +467,7 @@ final class GameViewModel: ObservableObject {
             let words = try database.fetchWords(forBookId: book.id)
             return generateLevelsFromWords(words, bookId: book.id)
         } catch {
-            print("Failed to generate levels: \(error)")
+            logger.error("Failed to generate levels: \(error.localizedDescription)")
             return []
         }
     }
