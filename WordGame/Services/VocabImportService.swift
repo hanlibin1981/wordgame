@@ -40,7 +40,7 @@ final class VocabImportService {
                 print("Preset '\(preset.displayName)' word count mismatch (\(existingBook.wordCount) → \(expectedWordCount)), re-importing...")
                 try DatabaseService.shared.deleteWordBook(byId: existingBook.id)
 
-            case .primarySchool, .highSchool3500:
+            case .primarySchool, .highSchool3500, .juniorHigh:
                 // high_school_3500 is versioned — detect version change via word count.
                 if existingBook.wordCount == expectedWordCount {
                     print("Preset '\(preset.displayName)' already up-to-date (\(expectedWordCount) words), skipping.")
