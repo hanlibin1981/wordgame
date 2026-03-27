@@ -12,6 +12,9 @@ enum GamePhase {
 struct GameView: View {
     let book: WordBook
     let level: GameLevel?
+    /// Callback when user wants to continue to the next level.
+    /// Called with (book, nextLevel) when tapped, nil when no next level.
+    var onContinueToNext: ((WordBook, GameLevel) -> Void)?
     @Environment(\.dismiss) private var dismiss
     @StateObject private var gameVM = GameViewModel()
     @State private var userAnswer = ""
@@ -840,6 +843,20 @@ struct GameView: View {
         }
     }
 
+    // MARK: - Next Level
+    /// The next level to continue to, based on current progress.
+    /// Nil when all levels are completed.
+    private var nextLevel: GameLevel? {
+        guard gameVM.gameResult?.isPassed == true else { return nil }
+        let allLevels = gameVM.generateLevels(for: book)
+        return allLevels.first { lvl in
+            let record = try? DatabaseService.shared.fetchLevelRecord(
+                bookId: book.id, chapter: lvl.chapter, stage: lvl.isBossLevel ? 4 : lvl.stage
+            )
+            return !(record?.isPassed ?? false)
+        }
+    }
+
     // MARK: - Action Buttons
     private var actionButtons: some View {
         VStack(spacing: 10) {
@@ -858,8 +875,27 @@ struct GameView: View {
                 .padding(.vertical, 14)
             } else {
                 VStack(spacing: 8) {
+                    if let lvl = nextLevel {
+                        Button(action: {
+                            onContinueToNext?(book, lvl)
+                            dismiss()
+                        }) {
+                            HStack {
+                                Text("下一关")
+                                    .font(.system(size: 16, weight: .semibold))
+                                Image(systemName: "arrow.right.circle.fill")
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 13)
+                            .background(Color.successGreen)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                        }
+                        .buttonStyle(.plain)
+                    }
+
                     Button(action: restartGame) {
-                        Text("再玩一次")
+                        Text(gameVM.gameResult?.isPassed == true ? "再玩一次" : "重新挑战")
                             .font(.system(size: 16, weight: .semibold))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 13)

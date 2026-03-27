@@ -1,0 +1,4 @@
+Words needing sentences: 6969
+Unique words: 4935
+
+Done! Updated: 111, Remaining (no API entry): 6858
