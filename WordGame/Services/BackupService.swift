@@ -101,7 +101,7 @@ final class BackupService {
 
         try exportTable("word_books", "id,name,description,word_count,is_preset,created_at,updated_at")
         try exportTable("words", "id,book_id,word,phonetic,meaning,sentence,audio_url,mastery_level,wrong_count,last_reviewed_at,created_at,sentence_translation")
-        try exportTable("game_progress", "id,book_id,current_chapter,current_stage,stars_earned,total_correct,total_answered,is_completed,updated_at")
+        try exportTable("game_progress", "id,book_id,current_chapter,current_stage,stars_earned,total_correct,total_answered,is_completed,updated_at", "updated_at")
 
         sql += "COMMIT;\n"
 
