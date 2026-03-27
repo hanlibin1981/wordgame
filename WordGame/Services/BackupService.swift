@@ -20,7 +20,7 @@ struct BackupFile: Identifiable, Equatable {
 
     var shortDate: String {
         let f = DateFormatter()
-        f.dateFormat = "MM-dd HH:mm"
+        f.dateFormat = "yyyy-MM-dd HH:mm"
         return f.string(from: date)
     }
 }
