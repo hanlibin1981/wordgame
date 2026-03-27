@@ -12,6 +12,7 @@ struct BackupView: View {
     @State private var selectedRestore: BackupFile?
     @State private var showRestoreConfirm = false
     @State private var isDeleting = false
+    @State private var isEditing = false
 
     var body: some View {
         List {
@@ -100,11 +101,18 @@ struct BackupView: View {
                         }
                         .padding(.vertical, 4)
                     }
-                    .onDelete(perform: deleteBackups)
+                    .onDelete(perform: isEditing ? deleteBackups : nil)
                 }
             }
         }
         .navigationTitle("备份与恢复")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(isEditing ? "完成" : "编辑") {
+                    isEditing.toggle()
+                }
+            }
+        }
         .modifier(NavigationBarTitleInlineModifier())
         .onAppear(perform: loadBackups)
         .alert("恢复备份", isPresented: $showRestoreConfirm) {
