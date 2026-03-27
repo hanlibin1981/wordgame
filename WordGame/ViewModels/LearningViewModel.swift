@@ -134,4 +134,78 @@ final class LearningViewModel: ObservableObject {
             return [:]
         }
     }
+
+    // MARK: - Ebbinghaus Review Method
+
+    /// Maximum number of words per review session
+    private let maxReviewWords = 30
+
+    /// Review intervals in days for each mastery level (Ebbinghaus forgetting curve)
+    /// Level 0: review immediately, Level 1: 1 day, Level 2: 3 days, Level 3: 7 days, Level 4: 14 days, Level 5: 30 days
+    private let reviewIntervalDays: [Int: Int] = [
+        0: 0,   // Immediate review
+        1: 1,   // 1 day
+        2: 3,   // 3 days
+        3: 7,   // 7 days
+        4: 14,  // 14 days
+        5: 30   // 30 days
+    ]
+
+    /// Calculate the next review date for a word based on its mastery level and last review date.
+    private func nextReviewDate(for word: Word) -> Date? {
+        guard let lastReviewed = word.lastReviewedAt else {
+            // Never reviewed, needs review now
+            return Date()
+        }
+        let intervalDays = reviewIntervalDays[word.masteryLevel] ?? 1
+        return Calendar.current.date(byAdding: .day, value: intervalDays, to: lastReviewed)
+    }
+
+    /// Check if a word is due for review based on Ebbinghaus method.
+    private func isDueForReview(_ word: Word) -> Bool {
+        guard let nextDate = nextReviewDate(for: word) else { return true }
+        return Date() >= nextDate
+    }
+
+    /// Load words for Ebbinghaus review - only passed level words, due for review, max 30.
+    func loadEbbinghausReviewWords(for book: WordBook, levels: [GameLevel]) async {
+        do {
+            // Get all passed level records
+            let levelRecords = try database.fetchAllLevelRecords(forBookId: book.id)
+            let passedLevels = Set(levelRecords.filter { $0.isPassed }.map { "\($0.chapter)-\($0.stage)" })
+
+            // Collect words from passed levels
+            var passedWords: [Word] = []
+            for level in levels {
+                let levelKey = "\(level.chapter)-\(level.stage)"
+                if passedLevels.contains(levelKey) {
+                    let levelWordIds = Set(level.wordIds)
+                    let words = try database.fetchWords(forBookId: book.id)
+                    passedWords.append(contentsOf: words.filter { levelWordIds.contains($0.id) })
+                }
+            }
+
+            // Filter words due for review using Ebbinghaus method
+            let dueWords = passedWords.filter { isDueForReview($0) }
+
+            // Sort by urgency: overdue longest first, then by mastery level (lowest first)
+            let sortedDueWords = dueWords.sorted { word1, word2 in
+                let next1 = nextReviewDate(for: word1) ?? Date.distantPast
+                let next2 = nextReviewDate(for: word2) ?? Date.distantPast
+                if next1 != next2 {
+                    return next1 < next2  // More overdue first
+                }
+                return word1.masteryLevel < word2.masteryLevel
+            }
+
+            // Limit to maxReviewWords
+            reviewWords = Array(sortedDueWords.prefix(maxReviewWords))
+            currentIndex = 0
+            currentWord = reviewWords.first
+            showAnswer = false
+            isCorrect = nil
+        } catch {
+            logger.error("Failed to load Ebbinghaus review words: \(error.localizedDescription)")
+        }
+    }
 }

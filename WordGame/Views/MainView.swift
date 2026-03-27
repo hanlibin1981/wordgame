@@ -4,6 +4,7 @@ import SwiftUI
 enum LearningNavDestination: Hashable {
     case levelSelection(WordBook)
     case game(book: WordBook, level: GameLevel)
+    case review(book: WordBook)
 }
 
 /// Main tab view for the app navigation
@@ -62,6 +63,8 @@ struct LearningTabView: View {
                     if let continueBook = continueLearningBook {
                         continueLearningCard(book: continueBook, gameVM: gameVM, isFindingLevel: $isFindingLevel) { level in
                             navigationPath.append(LearningNavDestination.game(book: continueBook, level: level))
+                        } onStartReview: {
+                            navigationPath.append(LearningNavDestination.review(book: continueBook))
                         }
                     }
 
@@ -82,6 +85,8 @@ struct LearningTabView: View {
                     GameView(book: book, level: level) { nextBook, nextLevel in
                         navigationPath.append(LearningNavDestination.game(book: nextBook, level: nextLevel))
                     }
+                case .review(let book):
+                    ReviewView(book: book)
                 }
             }
         }
@@ -98,7 +103,7 @@ struct LearningTabView: View {
         }
     }
 
-    private func continueLearningCard(book: WordBook, gameVM: GameViewModel, isFindingLevel: Binding<Bool>, onLevelFound: @escaping (GameLevel) -> Void) -> some View {
+    private func continueLearningCard(book: WordBook, gameVM: GameViewModel, isFindingLevel: Binding<Bool>, onLevelFound: @escaping (GameLevel) -> Void, onStartReview: @escaping () -> Void) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Text("继续学习")
@@ -109,41 +114,58 @@ struct LearningTabView: View {
                     .foregroundStyle(.secondary)
             }
 
-            Button(action: {
-                isFindingLevel.wrappedValue = true
-                Task {
-                    if let level = await gameVM.findCurrentLevel(for: book) {
-                        await MainActor.run {
-                            onLevelFound(level)
-                            isFindingLevel.wrappedValue = false
-                        }
-                    } else {
-                        await MainActor.run {
-                            isFindingLevel.wrappedValue = false
+            HStack(spacing: 12) {
+                // 复习按钮
+                Button(action: onStartReview) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "book.fill")
+                            .font(.system(size: 14, weight: .semibold))
+                        Text("复习")
+                            .font(.system(size: 15, weight: .bold))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(Color.warningOrange)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                }
+
+                // 开始闯关按钮
+                Button(action: {
+                    isFindingLevel.wrappedValue = true
+                    Task {
+                        if let level = await gameVM.findCurrentLevel(for: book) {
+                            await MainActor.run {
+                                onLevelFound(level)
+                                isFindingLevel.wrappedValue = false
+                            }
+                        } else {
+                            await MainActor.run {
+                                isFindingLevel.wrappedValue = false
+                            }
                         }
                     }
-                }
-            }) {
-                HStack {
-                    if isFindingLevel.wrappedValue {
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                            .scaleEffect(0.8)
-                    } else {
-                        Image(systemName: "play.circle.fill")
-                            .font(DesignFont.title2)
+                }) {
+                    HStack(spacing: 6) {
+                        if isFindingLevel.wrappedValue {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .scaleEffect(0.8)
+                        } else {
+                            Image(systemName: "play.circle.fill")
+                                .font(.system(size: 14, weight: .semibold))
+                        }
+                        Text(isFindingLevel.wrappedValue ? "加载中..." : "开始闯关")
+                            .font(.system(size: 15, weight: .bold))
                     }
-                    Text(isFindingLevel.wrappedValue ? "加载中..." : "开始闯关")
-                        .font(DesignFont.headline)
-                    Spacer()
-                    Image(systemName: "chevron.right")
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(Color.primaryBlue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
                 }
-                .padding()
-                .background(Color.primaryBlue)
-                .foregroundColor(.white)
-                .cornerRadius(12)
+                .disabled(isFindingLevel.wrappedValue)
             }
-            .disabled(isFindingLevel.wrappedValue)
         }
         .padding()
         .background(Color.cardBackground)
