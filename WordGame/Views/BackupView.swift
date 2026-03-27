@@ -12,7 +12,6 @@ struct BackupView: View {
     @State private var selectedRestore: BackupFile?
     @State private var showRestoreConfirm = false
     @State private var isDeleting = false
-    @State private var isEditing = false
 
     var body: some View {
         List {
@@ -68,51 +67,18 @@ struct BackupView: View {
             } else {
                 Section("已备份文件（\(backups.count) 个）") {
                     ForEach(backups) { backup in
-                        HStack(spacing: 12) {
-                            Image(systemName: "doc.text")
-                                .foregroundColor(.primaryBlue)
-                                .frame(width: 24)
-
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(backup.shortDate)
-                                    .font(.subheadline)
-                                Text("\(backup.formattedSize)")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-
-                            Spacer()
-
-                            // 恢复按钮
-                            Button {
-                                selectedRestore = backup
-                                showRestoreConfirm = true
-                            } label: {
-                                Text("恢复")
-                                    .font(.caption)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 4)
-                                    .background(Color.primaryBlue.opacity(0.12))
-                                    .foregroundColor(.primaryBlue)
-                                    .clipShape(Capsule())
-                            }
-                            .buttonStyle(.plain)
-                            .disabled(isRestoring)
-                        }
-                        .padding(.vertical, 4)
+                        BackupRowItem(
+                            backup: backup,
+                            isRestoring: isRestoring,
+                            isDeleting: isDeleting,
+                            onRestore: { self.selectedRestore = backup },
+                            onDelete: { self.deleteBackupById(backup.id) }
+                        )
                     }
-                    .onDelete(perform: isEditing ? deleteBackups : nil)
                 }
             }
         }
         .navigationTitle("备份与恢复")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(isEditing ? "完成" : "编辑") {
-                    isEditing.toggle()
-                }
-            }
-        }
         .modifier(NavigationBarTitleInlineModifier())
         .onAppear(perform: loadBackups)
         .alert("恢复备份", isPresented: $showRestoreConfirm) {
@@ -200,6 +166,15 @@ struct BackupView: View {
         }
     }
 
+    private func deleteBackupById(_ id: String) {
+        isDeleting = true
+        if let backup = backups.first(where: { $0.id == id }) {
+            try? BackupService.shared.deleteBackup(backup)
+        }
+        isDeleting = false
+        loadBackups()
+    }
+
     private func deleteBackups(at offsets: IndexSet) {
         isDeleting = true
         for i in offsets {
@@ -210,6 +185,54 @@ struct BackupView: View {
             isDeleting = false
             loadBackups()
         }
+    }
+}
+
+// MARK: - Backup Row
+struct BackupRowItem: View {
+    let backup: BackupFile
+    let isRestoring: Bool
+    let isDeleting: Bool
+    let onRestore: () -> Void
+    let onDelete: () -> Void
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "doc.text")
+                .foregroundColor(.primaryBlue)
+                .frame(width: 24)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(backup.shortDate)
+                    .font(.subheadline)
+                Text(backup.formattedSize)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+
+            Button(action: onDelete) {
+                Image(systemName: "trash")
+                    .font(.caption)
+                    .foregroundColor(.red)
+            }
+            .buttonStyle(.plain)
+            .disabled(isRestoring || isDeleting)
+
+            Button(action: onRestore) {
+                Text("恢复")
+                    .font(.caption)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(Color.primaryBlue.opacity(0.12))
+                    .foregroundColor(.primaryBlue)
+                    .clipShape(Capsule())
+            }
+            .buttonStyle(.plain)
+            .disabled(isRestoring || isDeleting)
+        }
+        .padding(.vertical, 4)
     }
 }
 
