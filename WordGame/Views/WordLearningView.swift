@@ -176,7 +176,7 @@ struct LearningWordCard: View {
                         .lineLimit(2)
 
                     if let sentence = word.sentence, !sentence.isEmpty {
-                        HStack(alignment: .top, spacing: 4) {
+                        HStack(alignment: .top, spacing: 6) {
                             Text("例句：")
                                 .font(.system(size: 15, weight: .semibold))
                                 .foregroundColor(.warningOrange)
@@ -187,6 +187,15 @@ struct LearningWordCard: View {
                                 .foregroundColor(.secondary)
                                 .italic()
                                 .frame(maxWidth: .infinity, alignment: .leading)
+
+                            Button(action: {
+                                AudioService.shared.speak(sentence)
+                            }) {
+                                Image(systemName: "speaker.wave.2.fill")
+                                    .font(.system(size: 13))
+                                    .foregroundColor(.warningOrange)
+                            }
+                            .buttonStyle(.plain)
                         }
                         .padding(8)
                         .background(Color.warningOrange.opacity(0.07))
