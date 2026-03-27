@@ -18,6 +18,8 @@ struct GameView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var gameVM = GameViewModel()
     @State private var userAnswer = ""
+    /// Focus state for spelling/listening input field auto-focus after audio.
+    @FocusState private var isInputFocused: Bool
     @State private var showResult = false
     /// Tracks whether audio is currently playing
     @State private var isAudioPlaying = false
@@ -387,9 +389,11 @@ struct GameView: View {
             }
             .onAppear {
                 isAudioPlaying = true
+                isInputFocused = false
                 AudioService.shared.playWordAudio(word: question.word) {
                     DispatchQueue.main.async {
                         self.isAudioPlaying = false
+                        self.isInputFocused = true
                     }
                 }
             }
@@ -424,6 +428,7 @@ struct GameView: View {
                         .textFieldStyle(.roundedBorder)
                         .frame(maxWidth: 300)
                         .disabled(isAudioPlaying || showResult)
+                        .focused($isInputFocused)
                         .overlay {
                             if showResult, let correct = lastAnswerCorrect {
                                 RoundedRectangle(cornerRadius: 6)
@@ -504,9 +509,11 @@ struct GameView: View {
                 .frame(width: 1, height: 1)
                 .onAppear {
                     isAudioPlaying = true
+                    isInputFocused = false
                     AudioService.shared.playWordAudio(word: question.word) {
                         DispatchQueue.main.async {
                             self.isAudioPlaying = false
+                            self.isInputFocused = true
                         }
                     }
                 }
@@ -545,6 +552,7 @@ struct GameView: View {
                         .textFieldStyle(.roundedBorder)
                         .frame(maxWidth: 300)
                         .disabled(isAudioPlaying || showResult)
+                        .focused($isInputFocused)
                         .overlay {
                             if showResult, let correct = lastAnswerCorrect {
                                 RoundedRectangle(cornerRadius: 6)
