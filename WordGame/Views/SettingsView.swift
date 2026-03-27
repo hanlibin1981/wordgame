@@ -477,25 +477,9 @@ enum GameDifficulty: String, CaseIterable {
 
     var description: String {
         switch self {
-        case .easy: return "每关10题，无时间限制"
-        case .medium: return "每关10题，轻度时间限制"
-        case .hard: return "每关15题，严格时间限制"
-        }
-    }
-
-    var questionCount: Int {
-        switch self {
-        case .easy: return 10
-        case .medium: return 10
-        case .hard: return 15
-        }
-    }
-
-    var timeLimit: Int? {
-        switch self {
-        case .easy: return nil
-        case .medium: return 30
-        case .hard: return 15
+        case .easy: return "及格线 60%"
+        case .medium: return "及格线 70%"
+        case .hard: return "及格线 80%"
         }
     }
 

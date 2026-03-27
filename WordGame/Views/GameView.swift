@@ -43,6 +43,8 @@ struct GameView: View {
     @State private var gamePhase: GamePhase = .learning
     /// Set of word IDs that have been marked as studied in the learning phase
     @State private var studiedWordIds: Set<String> = []
+    /// Prevent duplicate auto-play when SwiftUI re-renders the same question view.
+    @State private var lastAutoPlayedQuestionID: String?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -88,6 +90,7 @@ struct GameView: View {
                 // Apply any pending reset from the previous question's answer processing
                 pendingReset?()
                 pendingReset = nil
+                lastAutoPlayedQuestionID = nil
                 // Reset UI state for the new question
                 userAnswer = ""
                 showResult = false
@@ -166,8 +169,24 @@ struct GameView: View {
         }
         // Clear studiedWordIds for new game session
         studiedWordIds = []
-        Task {
-            await gameVM.startGame(for: book, level: level)
+        lastAutoPlayedQuestionID = nil
+        gameVM.markCurrentQuestionPresented()
+    }
+
+    private func autoPlayAudioIfNeeded(for question: GameQuestion, focusInputAfterPlayback: Bool = false) {
+        guard lastAutoPlayedQuestionID != question.id else { return }
+        lastAutoPlayedQuestionID = question.id
+        isAudioPlaying = true
+        if focusInputAfterPlayback {
+            isInputFocused = false
+        }
+        AudioService.shared.playWordAudio(word: question.word) {
+            DispatchQueue.main.async {
+                self.isAudioPlaying = false
+                if focusInputAfterPlayback {
+                    self.isInputFocused = true
+                }
+            }
         }
     }
 
@@ -263,12 +282,7 @@ struct GameView: View {
                 }
             }
             .onAppear {
-                isAudioPlaying = true
-                AudioService.shared.playWordAudio(word: question.word) {
-                    DispatchQueue.main.async {
-                        self.isAudioPlaying = false
-                    }
-                }
+                autoPlayAudioIfNeeded(for: question)
             }
 
             Text("请选择正确的中文释义")
@@ -390,14 +404,7 @@ struct GameView: View {
                     .font(DesignFont.title3)
             }
             .onAppear {
-                isAudioPlaying = true
-                isInputFocused = false
-                AudioService.shared.playWordAudio(word: question.word) {
-                    DispatchQueue.main.async {
-                        self.isAudioPlaying = false
-                        self.isInputFocused = true
-                    }
-                }
+                autoPlayAudioIfNeeded(for: question, focusInputAfterPlayback: true)
             }
 
             // Sentence if available
@@ -510,14 +517,7 @@ struct GameView: View {
             Color.clear
                 .frame(width: 1, height: 1)
                 .onAppear {
-                    isAudioPlaying = true
-                    isInputFocused = false
-                    AudioService.shared.playWordAudio(word: question.word) {
-                        DispatchQueue.main.async {
-                            self.isAudioPlaying = false
-                            self.isInputFocused = true
-                        }
-                    }
+                    autoPlayAudioIfNeeded(for: question, focusInputAfterPlayback: true)
                 }
 
             Text("听录音，写出单词")
@@ -969,6 +969,7 @@ struct GameView: View {
     private func restartGame() {
         visibleStars = 0
         studiedWordIds = []
+        lastAutoPlayedQuestionID = nil
         Task {
             await gameVM.startGame(for: book, level: level)
         }

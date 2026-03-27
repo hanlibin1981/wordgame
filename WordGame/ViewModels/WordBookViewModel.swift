@@ -22,12 +22,12 @@ final class WordBookViewModel: ObservableObject {
         defer { isLoading = false }
 
         do {
-            // Always ensure preset vocabularies exist (idempotent skip if already imported).
-            await vocabImport.initializePresetVocabularies()
+            let fetchedBooks = try await Task.detached(priority: .userInitiated) {
+                await VocabImportService.shared.initializePresetVocabularies()
+                return try DatabaseService.shared.fetchAllWordBooks()
+            }.value
 
-            // Load all word books (presets + custom) in a single query after import.
-            wordBooks = try database.fetchAllWordBooks()
-
+            wordBooks = fetchedBooks
             isInitialized = true
         } catch {
             errorMessage = "初始化失败: \(error.localizedDescription)"

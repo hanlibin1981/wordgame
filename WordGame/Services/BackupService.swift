@@ -20,7 +20,7 @@ struct BackupFile: Identifiable, Equatable {
 
     var shortDate: String {
         let f = DateFormatter()
-        f.dateFormat = "yyyy-MM-dd HH:mm"
+        f.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return f.string(from: date)
     }
 }
@@ -78,9 +78,10 @@ final class BackupService {
 
             sql += "-- TABLE: \(table)\n"
             let colCount = sqlite3_column_count(stmt)
+            let columnList = cols
 
             while sqlite3_step(stmt) == SQLITE_ROW {
-                sql += "INSERT INTO \(table) VALUES("
+                sql += "INSERT INTO \(table) (\(columnList)) VALUES("
                 for i in 0..<colCount {
                     if i > 0 { sql += "," }
                     let type = sqlite3_column_type(stmt, i)
@@ -100,8 +101,10 @@ final class BackupService {
         }
 
         try exportTable("word_books", "id,name,description,word_count,is_preset,created_at,updated_at")
-        try exportTable("words", "id,book_id,word,phonetic,meaning,sentence,audio_url,mastery_level,wrong_count,last_reviewed_at,created_at,sentence_translation")
+        try exportTable("words", "id,book_id,word,phonetic,meaning,sentence,sentence_translation,audio_url,mastery_level,wrong_count,last_reviewed_at,created_at")
         try exportTable("game_progress", "id,book_id,current_chapter,current_stage,stars_earned,total_correct,total_answered,is_completed,updated_at", "updated_at")
+        try exportTable("learning_records", "id,word_id,book_id,result,question_type,answer_time_ms,created_at")
+        try exportTable("level_records", "id,book_id,chapter,stage,is_passed,stars_earned,completed_at", "completed_at")
 
         sql += "COMMIT;\n"
 
@@ -118,7 +121,7 @@ final class BackupService {
         }
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd_HHmmss"
+        dateFormatter.dateFormat = "yyyy-MM-dd_HHmmss"
 
         return files
             .filter { $0.pathExtension == "sql" }
@@ -152,7 +155,24 @@ final class BackupService {
         }
         defer { sqlite3_close(db) }
 
+        let cleanupSQL = """
+        PRAGMA foreign_keys = OFF;
+        DELETE FROM learning_records;
+        DELETE FROM level_records;
+        DELETE FROM game_progress;
+        DELETE FROM words;
+        DELETE FROM word_books;
+        PRAGMA foreign_keys = ON;
+        """
+
         var errMsg: UnsafeMutablePointer<CChar>?
+        let cleanupCode = sqlite3_exec(db, cleanupSQL, nil, nil, &errMsg)
+        if cleanupCode != SQLITE_OK {
+            let msg = errMsg != nil ? String(cString: errMsg!) : "Unknown error"
+            sqlite3_free(errMsg)
+            throw NSError(domain: "BackupService", code: Int(cleanupCode), userInfo: [NSLocalizedDescriptionKey: msg])
+        }
+
         let code = sqlite3_exec(db, sql, nil, nil, &errMsg)
         if code != SQLITE_OK {
             let msg = errMsg != nil ? String(cString: errMsg!) : "Unknown error"

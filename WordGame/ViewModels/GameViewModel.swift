@@ -373,16 +373,26 @@ final class GameViewModel: ObservableObject {
         try? database.createLearningRecord(record)
     }
 
+    /// Reset answer timing baseline when a question is actually presented to the user.
+    func markCurrentQuestionPresented() {
+        currentQuestionStartTime = Date()
+    }
+
     /// Update game progress
     private func updateProgress() async {
         guard let book = currentBook, let result = gameResult, let level = currentLevel else { return }
 
         do {
             var progress = try database.fetchOrCreateProgress(forBookId: book.id)
+            let existingRecord = try database.fetchLevelRecord(
+                bookId: book.id,
+                chapter: level.chapter,
+                stage: level.isBossLevel ? 4 : level.stage
+            )
+            let previousBestStars = existingRecord?.starsEarned ?? 0
 
             progress.totalCorrect += result.correctCount
             progress.totalAnswered += result.totalQuestions
-            progress.starsEarned += result.starsEarned
 
             // Record this level's completion (always record, even if failed)
             let levelRecord = LevelRecord(
@@ -393,6 +403,7 @@ final class GameViewModel: ObservableObject {
                 starsEarned: result.starsEarned
             )
             try database.saveLevelRecord(levelRecord)
+            progress.starsEarned += max(0, result.starsEarned - previousBestStars)
 
             // Advance to next level if passed
             if result.isPassed {

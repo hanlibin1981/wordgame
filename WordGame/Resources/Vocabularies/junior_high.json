@@ -1,0 +1,2848 @@
+{
+  "name": "初中英语词汇",
+  "description": "初中阶段必备词汇，中考备考核心词汇",
+  "words": [
+    {
+      "word": "America",
+      "phonetic": "America",
+      "meaning": "美国",
+      "sentence": "America.",
+      "sentenceTranslation": "美国。"
+    },
+    {
+      "word": "American",
+      "phonetic": "American",
+      "meaning": "美国人",
+      "sentence": "American team.",
+      "sentenceTranslation": "美国队。"
+    },
+    {
+      "word": "August",
+      "phonetic": "August",
+      "meaning": "八月",
+      "sentence": "August.",
+      "sentenceTranslation": "八月。"
+    },
+    {
+      "word": "abandon",
+      "phonetic": "aban",
+      "meaning": "放弃",
+      "sentence": "Don't abandon dreams.",
+      "sentenceTranslation": "不要放弃梦想。"
+    },
+    {
+      "word": "ability",
+      "phonetic": "abili",
+      "meaning": "能力",
+      "sentence": "She has ability to speak.",
+      "sentenceTranslation": "她有能力说话。"
+    },
+    {
+      "word": "able",
+      "phonetic": "able",
+      "meaning": "能够的",
+      "sentence": "He is able to swim.",
+      "sentenceTranslation": "他会游泳。"
+    },
+    {
+      "word": "aboard",
+      "phonetic": "aboard",
+      "meaning": "上船/车/飞机",
+      "sentence": "Welcome aboard!",
+      "sentenceTranslation": "欢迎登机/船！"
+    },
+    {
+      "word": "abolish",
+      "phonetic": "abol",
+      "meaning": "废除",
+      "sentence": "Slavery was abolished.",
+      "sentenceTranslation": "奴隶制被废除了。"
+    },
+    {
+      "word": "about",
+      "phonetic": "about",
+      "meaning": "关于",
+      "sentence": "We talked about plan.",
+      "sentenceTranslation": "我们讨论了计划。"
+    },
+    {
+      "word": "above",
+      "phonetic": "above",
+      "meaning": "在...上面",
+      "sentence": "Bird flew above.",
+      "sentenceTranslation": "鸟儿从上方飞过。"
+    },
+    {
+      "word": "abroad",
+      "phonetic": "abroad",
+      "meaning": "到国外",
+      "sentence": "She studied abroad.",
+      "sentenceTranslation": "她在国外学习。"
+    },
+    {
+      "word": "absence",
+      "phonetic": "absence",
+      "meaning": "缺席",
+      "sentence": "His absence noticed.",
+      "sentenceTranslation": "他的缺席被注意到了。"
+    },
+    {
+      "word": "absent",
+      "phonetic": "absent",
+      "meaning": "缺席的",
+      "sentence": "He was absent.",
+      "sentenceTranslation": "他缺席了。"
+    },
+    {
+      "word": "absorb",
+      "phonetic": "absorb",
+      "meaning": "吸收",
+      "sentence": "Plants absorb water.",
+      "sentenceTranslation": "植物吸收水分。"
+    },
+    {
+      "word": "abundant",
+      "phonetic": "abundant",
+      "meaning": "丰富的",
+      "sentence": "China has abundant.",
+      "sentenceTranslation": "中国有丰富的资源。"
+    },
+    {
+      "word": "academic",
+      "phonetic": "academic",
+      "meaning": "学术的",
+      "sentence": "He is academic.",
+      "sentenceTranslation": "他很有学术气质。"
+    },
+    {
+      "word": "accelerate",
+      "phonetic": "accelerate",
+      "meaning": "加速",
+      "sentence": "Car accelerated.",
+      "sentenceTranslation": "汽车加速了。"
+    },
+    {
+      "word": "accept",
+      "phonetic": "accept",
+      "meaning": "接受",
+      "sentence": "Please accept.",
+      "sentenceTranslation": "请接受。"
+    },
+    {
+      "word": "access",
+      "phonetic": "access",
+      "meaning": "进入",
+      "sentence": "Need access.",
+      "sentenceTranslation": "需要进入。"
+    },
+    {
+      "word": "accident",
+      "phonetic": "accident",
+      "meaning": "事故",
+      "sentence": "No one hurt.",
+      "sentenceTranslation": "没有人受伤。"
+    },
+    {
+      "word": "account",
+      "phonetic": "account",
+      "meaning": "账户",
+      "sentence": "He opened account.",
+      "sentenceTranslation": "他开了一个账户。"
+    },
+    {
+      "word": "accurate",
+      "phonetic": "accurate",
+      "meaning": "准确的",
+      "sentence": "Answer accurate.",
+      "sentenceTranslation": "答案很准确。"
+    },
+    {
+      "word": "accuse",
+      "phonetic": "accuse",
+      "meaning": "指控",
+      "sentence": "Police accused him.",
+      "sentenceTranslation": "警察指控了他。"
+    },
+    {
+      "word": "achieve",
+      "phonetic": "achieve",
+      "meaning": "实现",
+      "sentence": "She achieved goals.",
+      "sentenceTranslation": "她实现了目标。"
+    },
+    {
+      "word": "achievement",
+      "phonetic": "achievement",
+      "meaning": "成就",
+      "sentence": "Great achievement.",
+      "sentenceTranslation": "伟大的成就。"
+    },
+    {
+      "word": "acquire",
+      "phonetic": "acquire",
+      "meaning": "获得",
+      "sentence": "She acquired English.",
+      "sentenceTranslation": "她学到了英语。"
+    },
+    {
+      "word": "across",
+      "phonetic": "across",
+      "meaning": "穿过",
+      "sentence": "Bridge goes across.",
+      "sentenceTranslation": "桥横跨而过。"
+    },
+    {
+      "word": "act",
+      "phonetic": "act",
+      "meaning": "行动",
+      "sentence": "Think before act.",
+      "sentenceTranslation": "行动前三思。"
+    },
+    {
+      "word": "action",
+      "phonetic": "action",
+      "meaning": "行动",
+      "sentence": "Take action.",
+      "sentenceTranslation": "采取行动。"
+    },
+    {
+      "word": "active",
+      "phonetic": "active",
+      "meaning": "积极的",
+      "sentence": "He is active.",
+      "sentenceTranslation": "他很积极。"
+    },
+    {
+      "word": "activity",
+      "phonetic": "activity",
+      "meaning": "活动",
+      "sentence": "What activities?",
+      "sentenceTranslation": "有什么活动？"
+    },
+    {
+      "word": "actor",
+      "phonetic": "actor",
+      "meaning": "演员",
+      "sentence": "He is actor.",
+      "sentenceTranslation": "他是演员。"
+    },
+    {
+      "word": "actress",
+      "phonetic": "actress",
+      "meaning": "女演员",
+      "sentence": "She is actress.",
+      "sentenceTranslation": "她是女演员。"
+    },
+    {
+      "word": "adapt",
+      "phonetic": "adapt",
+      "meaning": "适应",
+      "sentence": "Must adapt.",
+      "sentenceTranslation": "必须适应"
+    },
+    {
+      "word": "add",
+      "phonetic": "add",
+      "meaning": "添加",
+      "sentence": "Add sugar.",
+      "sentenceTranslation": "加糖。"
+    },
+    {
+      "word": "addition",
+      "phonetic": "addition",
+      "meaning": "加法",
+      "sentence": "In addition.",
+      "sentenceTranslation": "此外。"
+    },
+    {
+      "word": "address",
+      "phonetic": "address",
+      "meaning": "地址",
+      "sentence": "Home address.",
+      "sentenceTranslation": "家庭住址。"
+    },
+    {
+      "word": "adjust",
+      "phonetic": "adjust",
+      "meaning": "调整",
+      "sentence": "Adjust schedule.",
+      "sentenceTranslation": "调整日程。"
+    },
+    {
+      "word": "admire",
+      "phonetic": "admire",
+      "meaning": "钦佩",
+      "sentence": "I admire her.",
+      "sentenceTranslation": "我钦佩她。"
+    },
+    {
+      "word": "admit",
+      "phonetic": "admit",
+      "meaning": "承认",
+      "sentence": "He admitted wrong.",
+      "sentenceTranslation": "他承认错了。"
+    },
+    {
+      "word": "adopt",
+      "phonetic": "adopt",
+      "meaning": "采用",
+      "sentence": "They adopted method.",
+      "sentenceTranslation": "他们采用了这种方法。"
+    },
+    {
+      "word": "adult",
+      "phonetic": "adult",
+      "meaning": "成年人",
+      "sentence": "Every adult.",
+      "sentenceTranslation": "每个成年人。"
+    },
+    {
+      "word": "advance",
+      "phonetic": "advance",
+      "meaning": "前进",
+      "sentence": "Science advanced.",
+      "sentenceTranslation": "科学进步了。"
+    },
+    {
+      "word": "advantage",
+      "phonetic": "advantage",
+      "meaning": "优势",
+      "sentence": "Many advantages.",
+      "sentenceTranslation": "许多优势。"
+    },
+    {
+      "word": "adventure",
+      "phonetic": "adventure",
+      "meaning": "冒险",
+      "sentence": "Exciting adventure!",
+      "sentenceTranslation": "惊险的冒险！"
+    },
+    {
+      "word": "advertisement",
+      "phonetic": "advertisement",
+      "meaning": "广告",
+      "sentence": "Saw advertisement.",
+      "sentenceTranslation": "看到了广告。"
+    },
+    {
+      "word": "advice",
+      "phonetic": "advice",
+      "meaning": "建议",
+      "sentence": "Give me advice.",
+      "sentenceTranslation": "给我建议。"
+    },
+    {
+      "word": "advise",
+      "phonetic": "advise",
+      "meaning": "建议",
+      "sentence": "Doctor advised.",
+      "sentenceTranslation": "医生提出了建议。"
+    },
+    {
+      "word": "affair",
+      "phonetic": "affair",
+      "meaning": "事件",
+      "sentence": "Public affair.",
+      "sentenceTranslation": "公共事务。"
+    },
+    {
+      "word": "affect",
+      "phonetic": "affect",
+      "meaning": "影响",
+      "sentence": "Climate affects.",
+      "sentenceTranslation": "气候会产生影响。"
+    },
+    {
+      "word": "afford",
+      "phonetic": "afford",
+      "meaning": "负担",
+      "sentence": "Can't afford.",
+      "sentenceTranslation": "能够负担得起"
+    },
+    {
+      "word": "afraid",
+      "phonetic": "afraid",
+      "meaning": "害怕",
+      "sentence": "Don't be afraid.",
+      "sentenceTranslation": "不要害怕。"
+    },
+    {
+      "word": "after",
+      "phonetic": "after",
+      "meaning": "在...之后",
+      "sentence": "After school.",
+      "sentenceTranslation": "放学后。"
+    },
+    {
+      "word": "afternoon",
+      "phonetic": "afternoon",
+      "meaning": "下午",
+      "sentence": "Good afternoon!",
+      "sentenceTranslation": "下午好！"
+    },
+    {
+      "word": "afterwards",
+      "phonetic": "afterwards",
+      "meaning": "之后",
+      "sentence": "Afterwards.",
+      "sentenceTranslation": "之后。"
+    },
+    {
+      "word": "again",
+      "phonetic": "again",
+      "meaning": "再",
+      "sentence": "Again.",
+      "sentenceTranslation": "再。"
+    },
+    {
+      "word": "against",
+      "phonetic": "against",
+      "meaning": "反对",
+      "sentence": "Against rivals.",
+      "sentenceTranslation": "对抗对手。"
+    },
+    {
+      "word": "age",
+      "phonetic": "age",
+      "meaning": "年龄",
+      "sentence": "What age?",
+      "sentenceTranslation": "多大年龄？"
+    },
+    {
+      "word": "agency",
+      "phonetic": "agency",
+      "meaning": "机构",
+      "sentence": "Travel agency.",
+      "sentenceTranslation": "旅行社。"
+    },
+    {
+      "word": "agent",
+      "phonetic": "agent",
+      "meaning": "代理人",
+      "sentence": "Insurance agent.",
+      "sentenceTranslation": "保险代理人。"
+    },
+    {
+      "word": "agree",
+      "phonetic": "agree",
+      "meaning": "同意",
+      "sentence": "I agree.",
+      "sentenceTranslation": "我同意。"
+    },
+    {
+      "word": "agreement",
+      "phonetic": "agreement",
+      "meaning": "协议",
+      "sentence": "Agreement reached.",
+      "sentenceTranslation": "达成了协议。"
+    },
+    {
+      "word": "agriculture",
+      "phonetic": "agriculture",
+      "meaning": "农业",
+      "sentence": "Agriculture.",
+      "sentenceTranslation": "农业。"
+    },
+    {
+      "word": "ahead",
+      "phonetic": "ahead",
+      "meaning": "向前",
+      "sentence": "Go ahead.",
+      "sentenceTranslation": "继续吧。"
+    },
+    {
+      "word": "aid",
+      "phonetic": "aid",
+      "meaning": "帮助",
+      "sentence": "First aid.",
+      "sentenceTranslation": "急救。"
+    },
+    {
+      "word": "aim",
+      "phonetic": "aim",
+      "meaning": "瞄准",
+      "sentence": "He aimed.",
+      "sentenceTranslation": "他瞄准了。"
+    },
+    {
+      "word": "air",
+      "phonetic": "air",
+      "meaning": "空气",
+      "sentence": "Fresh air.",
+      "sentenceTranslation": "新鲜空气。"
+    },
+    {
+      "word": "aircraft",
+      "phonetic": "aircraft",
+      "meaning": "飞机",
+      "sentence": "Aircraft fly.",
+      "sentenceTranslation": "飞机在飞行。"
+    },
+    {
+      "word": "airline",
+      "phonetic": "airline",
+      "meaning": "航空公司",
+      "sentence": "Which airline?",
+      "sentenceTranslation": "哪家航空公司？"
+    },
+    {
+      "word": "airport",
+      "phonetic": "airport",
+      "meaning": "机场",
+      "sentence": "At airport.",
+      "sentenceTranslation": "在机场。"
+    },
+    {
+      "word": "alarm",
+      "phonetic": "alarm",
+      "meaning": "警报",
+      "sentence": "Alarm off.",
+      "sentenceTranslation": "警报解除了。"
+    },
+    {
+      "word": "album",
+      "phonetic": "album",
+      "meaning": "相册",
+      "sentence": "Photo album.",
+      "sentenceTranslation": "相册。"
+    },
+    {
+      "word": "alcohol",
+      "phonetic": "alcohol",
+      "meaning": "酒精",
+      "sentence": "Alcohol bad.",
+      "sentenceTranslation": "酒精有害。"
+    },
+    {
+      "word": "alike",
+      "phonetic": "alike",
+      "meaning": "相像的",
+      "sentence": "Look alike.",
+      "sentenceTranslation": "看起来很像。"
+    },
+    {
+      "word": "alive",
+      "phonetic": "alive",
+      "meaning": "活着的",
+      "sentence": "Still alive.",
+      "sentenceTranslation": "仍然活着。"
+    },
+    {
+      "word": "allow",
+      "phonetic": "allow",
+      "meaning": "允许",
+      "sentence": "Not allowed.",
+      "sentenceTranslation": "不被允许。"
+    },
+    {
+      "word": "almost",
+      "phonetic": "almost",
+      "meaning": "几乎",
+      "sentence": "Almost done.",
+      "sentenceTranslation": "几乎完成了。"
+    },
+    {
+      "word": "alone",
+      "phonetic": "alone",
+      "meaning": "单独的",
+      "sentence": "Walk alone.",
+      "sentenceTranslation": "独自行走。"
+    },
+    {
+      "word": "along",
+      "phonetic": "along",
+      "meaning": "沿着",
+      "sentence": "Walk along.",
+      "sentenceTranslation": "沿着走。"
+    },
+    {
+      "word": "aloud",
+      "phonetic": "aloud",
+      "meaning": "大声地",
+      "sentence": "Read aloud.",
+      "sentenceTranslation": "大声朗读。"
+    },
+    {
+      "word": "alphabet",
+      "phonetic": "alphabet",
+      "meaning": "字母表",
+      "sentence": "26 letters.",
+      "sentenceTranslation": "字母表。"
+    },
+    {
+      "word": "already",
+      "phonetic": "already",
+      "meaning": "已经",
+      "sentence": "Already done.",
+      "sentenceTranslation": "已经完成了。"
+    },
+    {
+      "word": "also",
+      "phonetic": "also",
+      "meaning": "也",
+      "sentence": "She also.",
+      "sentenceTranslation": "她也是。"
+    },
+    {
+      "word": "alter",
+      "phonetic": "alter",
+      "meaning": "改变",
+      "sentence": "Alter plan.",
+      "sentenceTranslation": "改变计划。"
+    },
+    {
+      "word": "alternative",
+      "phonetic": "alternative",
+      "meaning": "替代的",
+      "sentence": "Alt solution.",
+      "sentenceTranslation": "替代方案。"
+    },
+    {
+      "word": "although",
+      "phonetic": "although",
+      "meaning": "虽然",
+      "sentence": "Although raining.",
+      "sentenceTranslation": "虽然在下雨。"
+    },
+    {
+      "word": "altogether",
+      "phonetic": "altogether",
+      "meaning": "总共",
+      "sentence": "50 students.",
+      "sentenceTranslation": "总共。"
+    },
+    {
+      "word": "always",
+      "phonetic": "always",
+      "meaning": "总是",
+      "sentence": "Always east.",
+      "sentenceTranslation": "一直向东。"
+    },
+    {
+      "word": "amaze",
+      "phonetic": "amaze",
+      "meaning": "使惊讶",
+      "sentence": "Magic amazed.",
+      "sentenceTranslation": "魔术令人惊叹。"
+    },
+    {
+      "word": "ambition",
+      "phonetic": "ambition",
+      "meaning": "雄心",
+      "sentence": "Ambition scientist.",
+      "sentenceTranslation": "成为科学家的抱负。"
+    },
+    {
+      "word": "ambulance",
+      "phonetic": "ambulance",
+      "meaning": "救护车",
+      "sentence": "Call ambulance!",
+      "sentenceTranslation": "叫救护车！"
+    },
+    {
+      "word": "among",
+      "phonetic": "among",
+      "meaning": "在...之中",
+      "sentence": "Among best.",
+      "sentenceTranslation": "名列前茅。"
+    },
+    {
+      "word": "amount",
+      "phonetic": "amount",
+      "meaning": "数量",
+      "sentence": "Large amount.",
+      "sentenceTranslation": "大量。"
+    },
+    {
+      "word": "amuse",
+      "phonetic": "amuse",
+      "meaning": "使娱乐",
+      "sentence": "Clown amused.",
+      "sentenceTranslation": "小丑把人逗乐了。"
+    },
+    {
+      "word": "analyze",
+      "phonetic": "analyze",
+      "meaning": "分析",
+      "sentence": "Analyze data.",
+      "sentenceTranslation": "分析数据。"
+    },
+    {
+      "word": "ancestor",
+      "phonetic": "ancestor",
+      "meaning": "祖先",
+      "sentence": "Ancestors.",
+      "sentenceTranslation": "祖先。"
+    },
+    {
+      "word": "ancient",
+      "phonetic": "ancient",
+      "meaning": "古代的",
+      "sentence": "Ancient country.",
+      "sentenceTranslation": "古老的国家。"
+    },
+    {
+      "word": "anger",
+      "phonetic": "anger",
+      "meaning": "愤怒",
+      "sentence": "Hide anger.",
+      "sentenceTranslation": "隐藏愤怒。"
+    },
+    {
+      "word": "angle",
+      "phonetic": "angle",
+      "meaning": "角度",
+      "sentence": "90 degrees.",
+      "sentenceTranslation": "角度。"
+    },
+    {
+      "word": "angry",
+      "phonetic": "angry",
+      "meaning": "生气的",
+      "sentence": "Very angry.",
+      "sentenceTranslation": "非常生气。"
+    },
+    {
+      "word": "animal",
+      "phonetic": "animal",
+      "meaning": "动物",
+      "sentence": "Domestic animals.",
+      "sentenceTranslation": "家养动物。"
+    },
+    {
+      "word": "announce",
+      "phonetic": "announce",
+      "meaning": "宣布",
+      "sentence": "Result announced.",
+      "sentenceTranslation": "结果公布了。"
+    },
+    {
+      "word": "annoy",
+      "phonetic": "annoy",
+      "meaning": "使烦恼",
+      "sentence": "Noise annoyed.",
+      "sentenceTranslation": "噪音让人烦恼。"
+    },
+    {
+      "word": "another",
+      "phonetic": "another",
+      "meaning": "另一个",
+      "sentence": "Another one.",
+      "sentenceTranslation": "另一个。"
+    },
+    {
+      "word": "answer",
+      "phonetic": "answer",
+      "meaning": "回答",
+      "sentence": "Can answer?",
+      "sentenceTranslation": "能够回答"
+    },
+    {
+      "word": "ant",
+      "phonetic": "ant",
+      "meaning": "蚂蚁",
+      "sentence": "Ants.",
+      "sentenceTranslation": "蚂蚁。"
+    },
+    {
+      "word": "anxious",
+      "phonetic": "anxious",
+      "meaning": "焦虑的",
+      "sentence": "Anxious.",
+      "sentenceTranslation": "焦虑的。"
+    },
+    {
+      "word": "any",
+      "phonetic": "any",
+      "meaning": "任何一个",
+      "sentence": "Any questions?",
+      "sentenceTranslation": "有什么问题吗？"
+    },
+    {
+      "word": "anybody",
+      "phonetic": "anybody",
+      "meaning": "任何人",
+      "sentence": "Anybody home?",
+      "sentenceTranslation": "有人在家吗？"
+    },
+    {
+      "word": "anything",
+      "phonetic": "anything",
+      "meaning": "任何事",
+      "sentence": "Don't want anything.",
+      "sentenceTranslation": "什么都不想要。"
+    },
+    {
+      "word": "anyway",
+      "phonetic": "anyway",
+      "meaning": "反正",
+      "sentence": "Anyway.",
+      "sentenceTranslation": "反正。"
+    },
+    {
+      "word": "anywhere",
+      "phonetic": "anywhere",
+      "meaning": "任何地方",
+      "sentence": "Sit anywhere.",
+      "sentenceTranslation": "随便坐。"
+    },
+    {
+      "word": "apart",
+      "phonetic": "apart",
+      "meaning": "分开",
+      "sentence": "Far apart.",
+      "sentenceTranslation": "相距很远。"
+    },
+    {
+      "word": "apartment",
+      "phonetic": "apartment",
+      "meaning": "公寓",
+      "sentence": "Small apartment.",
+      "sentenceTranslation": "小公寓。"
+    },
+    {
+      "word": "apologize",
+      "phonetic": "apologize",
+      "meaning": "道歉",
+      "sentence": "Apologize late.",
+      "sentenceTranslation": "为迟到道歉。"
+    },
+    {
+      "word": "apology",
+      "phonetic": "apology",
+      "meaning": "道歉",
+      "sentence": "Owe apology.",
+      "sentenceTranslation": "应该道歉。"
+    },
+    {
+      "word": "appear",
+      "phonetic": "appear",
+      "meaning": "出现",
+      "sentence": "Strange appeared.",
+      "sentenceTranslation": "奇怪的事出现了。"
+    },
+    {
+      "word": "appearance",
+      "phonetic": "appearance",
+      "meaning": "外表",
+      "sentence": "Judge appearances.",
+      "sentenceTranslation": "评判外表。"
+    },
+    {
+      "word": "apple",
+      "phonetic": "apple",
+      "meaning": "苹果",
+      "sentence": "Apple day.",
+      "sentenceTranslation": "苹果日。"
+    },
+    {
+      "word": "apply",
+      "phonetic": "apply",
+      "meaning": "申请",
+      "sentence": "Applied job.",
+      "sentenceTranslation": "申请了工作。"
+    },
+    {
+      "word": "appoint",
+      "phonetic": "appoint",
+      "meaning": "任命",
+      "sentence": "Appointed.",
+      "sentenceTranslation": "任命。"
+    },
+    {
+      "word": "appointment",
+      "phonetic": "appointment",
+      "meaning": "预约",
+      "sentence": "Appointment.",
+      "sentenceTranslation": "预约。"
+    },
+    {
+      "word": "appreciate",
+      "phonetic": "appreciate",
+      "meaning": "感激",
+      "sentence": "Appreciate help.",
+      "sentenceTranslation": "感谢帮助。"
+    },
+    {
+      "word": "approach",
+      "phonetic": "approach",
+      "meaning": "接近",
+      "sentence": "Approaching.",
+      "sentenceTranslation": "接近。"
+    },
+    {
+      "word": "appropriate",
+      "phonetic": "appropriate",
+      "meaning": "适当的",
+      "sentence": "Not appropriate.",
+      "sentenceTranslation": "不合适。"
+    },
+    {
+      "word": "approve",
+      "phonetic": "approve",
+      "meaning": "批准",
+      "sentence": "Approved.",
+      "sentenceTranslation": "批准。"
+    },
+    {
+      "word": "arch",
+      "phonetic": "arch",
+      "meaning": "拱门",
+      "sentence": "Arch.",
+      "sentenceTranslation": "拱门。"
+    },
+    {
+      "word": "architect",
+      "phonetic": "architect",
+      "meaning": "建筑师",
+      "sentence": "Architect.",
+      "sentenceTranslation": "建筑师。"
+    },
+    {
+      "word": "area",
+      "phonetic": "area",
+      "meaning": "区域",
+      "sentence": "Area room.",
+      "sentenceTranslation": "房间的面积。"
+    },
+    {
+      "word": "argue",
+      "phonetic": "argue",
+      "meaning": "争论",
+      "sentence": "Don't argue.",
+      "sentenceTranslation": "不要争论"
+    },
+    {
+      "word": "argument",
+      "phonetic": "argument",
+      "meaning": "论点",
+      "sentence": "Argument.",
+      "sentenceTranslation": "论点。"
+    },
+    {
+      "word": "arise",
+      "phonetic": "arise",
+      "meaning": "出现",
+      "sentence": "Problems arose.",
+      "sentenceTranslation": "问题出现了。"
+    },
+    {
+      "word": "arm",
+      "phonetic": "arm",
+      "meaning": "手臂",
+      "sentence": "Broke arm.",
+      "sentenceTranslation": "胳膊骨折了。"
+    },
+    {
+      "word": "army",
+      "phonetic": "army",
+      "meaning": "军队",
+      "sentence": "Army.",
+      "sentenceTranslation": "军队。"
+    },
+    {
+      "word": "around",
+      "phonetic": "around",
+      "meaning": "在周围",
+      "sentence": "Walk around.",
+      "sentenceTranslation": "四处走走。"
+    },
+    {
+      "word": "arrange",
+      "phonetic": "arrange",
+      "meaning": "安排",
+      "sentence": "Arrange.",
+      "sentenceTranslation": "安排。"
+    },
+    {
+      "word": "arrangement",
+      "phonetic": "arrangement",
+      "meaning": "安排",
+      "sentence": "Arrangements?",
+      "sentenceTranslation": "安排？"
+    },
+    {
+      "word": "arrest",
+      "phonetic": "arrest",
+      "meaning": "逮捕",
+      "sentence": "Arrested thief.",
+      "sentenceTranslation": "逮捕了小偷。"
+    },
+    {
+      "word": "arrival",
+      "phonetic": "arrival",
+      "meaning": "到达",
+      "sentence": "Await arrival.",
+      "sentenceTranslation": "等待到来。"
+    },
+    {
+      "word": "arrive",
+      "phonetic": "arrive",
+      "meaning": "到达",
+      "sentence": "Arrive?",
+      "sentenceTranslation": "到达？"
+    },
+    {
+      "word": "article",
+      "phonetic": "article",
+      "meaning": "文章",
+      "sentence": "Article.",
+      "sentenceTranslation": "文章。"
+    },
+    {
+      "word": "artificial",
+      "phonetic": "artificial",
+      "meaning": "人工的",
+      "sentence": "Artificial.",
+      "sentenceTranslation": "人工的。"
+    },
+    {
+      "word": "artist",
+      "phonetic": "artist",
+      "meaning": "艺术家",
+      "sentence": "Artist.",
+      "sentenceTranslation": "艺术家。"
+    },
+    {
+      "word": "artistic",
+      "phonetic": "artistic",
+      "meaning": "艺术的",
+      "sentence": "Artistic.",
+      "sentenceTranslation": "艺术的。"
+    },
+    {
+      "word": "aside",
+      "phonetic": "aside",
+      "meaning": "在一边",
+      "sentence": "Put aside.",
+      "sentenceTranslation": "放在一边。"
+    },
+    {
+      "word": "ask",
+      "phonetic": "ask",
+      "meaning": "问",
+      "sentence": "Ask teacher.",
+      "sentenceTranslation": "问老师。"
+    },
+    {
+      "word": "asleep",
+      "phonetic": "asleep",
+      "meaning": "睡着的",
+      "sentence": "Baby asleep.",
+      "sentenceTranslation": "婴儿睡着了。"
+    },
+    {
+      "word": "aspect",
+      "phonetic": "aspect",
+      "meaning": "方面",
+      "sentence": "Aspect.",
+      "sentenceTranslation": "方面。"
+    },
+    {
+      "word": "assign",
+      "phonetic": "assign",
+      "meaning": "分配",
+      "sentence": "Assigned.",
+      "sentenceTranslation": "分配。"
+    },
+    {
+      "word": "assistant",
+      "phonetic": "assistant",
+      "meaning": "助手",
+      "sentence": "Assistant.",
+      "sentenceTranslation": "助手。"
+    },
+    {
+      "word": "associate",
+      "phonetic": "associate",
+      "meaning": "联系",
+      "sentence": "Associate.",
+      "sentenceTranslation": "联系。"
+    },
+    {
+      "word": "assume",
+      "phonetic": "assume",
+      "meaning": "假设",
+      "sentence": "Assume.",
+      "sentenceTranslation": "假设。"
+    },
+    {
+      "word": "assure",
+      "phonetic": "assure",
+      "meaning": "保证",
+      "sentence": "Can assure.",
+      "sentenceTranslation": "能保证。"
+    },
+    {
+      "word": "astonish",
+      "phonetic": "astonish",
+      "meaning": "使惊讶",
+      "sentence": "Astonished.",
+      "sentenceTranslation": "使惊讶。"
+    },
+    {
+      "word": "astronaut",
+      "phonetic": "astronaut",
+      "meaning": "宇航员",
+      "sentence": "Astronaut.",
+      "sentenceTranslation": "宇航员。"
+    },
+    {
+      "word": "at",
+      "phonetic": "at",
+      "meaning": "在",
+      "sentence": "At gate.",
+      "sentenceTranslation": "在门口。"
+    },
+    {
+      "word": "athlete",
+      "phonetic": "athlete",
+      "meaning": "运动员",
+      "sentence": "Athlete.",
+      "sentenceTranslation": "运动员。"
+    },
+    {
+      "word": "atmosphere",
+      "phonetic": "atmosphere",
+      "meaning": "大气层",
+      "sentence": "Atmosphere.",
+      "sentenceTranslation": "大气层。"
+    },
+    {
+      "word": "atom",
+      "phonetic": "atom",
+      "meaning": "原子",
+      "sentence": "Atoms.",
+      "sentenceTranslation": "原子。"
+    },
+    {
+      "word": "attach",
+      "phonetic": "attach",
+      "meaning": "附上",
+      "sentence": "Attach file.",
+      "sentenceTranslation": "附上文件。"
+    },
+    {
+      "word": "attack",
+      "phonetic": "attack",
+      "meaning": "攻击",
+      "sentence": "Attacked.",
+      "sentenceTranslation": "攻击。"
+    },
+    {
+      "word": "attempt",
+      "phonetic": "attempt",
+      "meaning": "尝试",
+      "sentence": "Attempt.",
+      "sentenceTranslation": "尝试。"
+    },
+    {
+      "word": "attend",
+      "phonetic": "attend",
+      "meaning": "参加",
+      "sentence": "Attend.",
+      "sentenceTranslation": "参加。"
+    },
+    {
+      "word": "attention",
+      "phonetic": "attention",
+      "meaning": "注意力",
+      "sentence": "Attention.",
+      "sentenceTranslation": "注意力。"
+    },
+    {
+      "word": "attitude",
+      "phonetic": "attitude",
+      "meaning": "态度",
+      "sentence": "Attitude.",
+      "sentenceTranslation": "态度。"
+    },
+    {
+      "word": "attorney",
+      "phonetic": "attorney",
+      "meaning": "律师",
+      "sentence": "Attorney.",
+      "sentenceTranslation": "律师。"
+    },
+    {
+      "word": "attract",
+      "phonetic": "attract",
+      "meaning": "吸引",
+      "sentence": "Attract.",
+      "sentenceTranslation": "吸引。"
+    },
+    {
+      "word": "attractive",
+      "phonetic": "attractive",
+      "meaning": "有吸引力的",
+      "sentence": "Attractive.",
+      "sentenceTranslation": "有吸引力的。"
+    },
+    {
+      "word": "audience",
+      "phonetic": "audience",
+      "meaning": "观众",
+      "sentence": "Audience applauded.",
+      "sentenceTranslation": "观众鼓掌了。"
+    },
+    {
+      "word": "aunt",
+      "phonetic": "aunt",
+      "meaning": "姑妈",
+      "sentence": "Aunt.",
+      "sentenceTranslation": "姑妈。"
+    },
+    {
+      "word": "author",
+      "phonetic": "author",
+      "meaning": "作者",
+      "sentence": "Author.",
+      "sentenceTranslation": "作者。"
+    },
+    {
+      "word": "authority",
+      "phonetic": "authority",
+      "meaning": "权威",
+      "sentence": "Authority.",
+      "sentenceTranslation": "权威。"
+    },
+    {
+      "word": "automatic",
+      "phonetic": "automatic",
+      "meaning": "自动的",
+      "sentence": "Automatic.",
+      "sentenceTranslation": "自动的。"
+    },
+    {
+      "word": "available",
+      "phonetic": "available",
+      "meaning": "可用的",
+      "sentence": "Available.",
+      "sentenceTranslation": "可用的。"
+    },
+    {
+      "word": "avenue",
+      "phonetic": "avenue",
+      "meaning": "林荫道",
+      "sentence": "Avenue.",
+      "sentenceTranslation": "林荫道。"
+    },
+    {
+      "word": "average",
+      "phonetic": "average",
+      "meaning": "平均的",
+      "sentence": "Average 20.",
+      "sentenceTranslation": "平均的。"
+    },
+    {
+      "word": "avoid",
+      "phonetic": "avoid",
+      "meaning": "避免",
+      "sentence": "Avoid.",
+      "sentenceTranslation": "避免。"
+    },
+    {
+      "word": "awake",
+      "phonetic": "awake",
+      "meaning": "醒着的",
+      "sentence": "Awake.",
+      "sentenceTranslation": "醒着的。"
+    },
+    {
+      "word": "award",
+      "phonetic": "award",
+      "meaning": "奖励",
+      "sentence": "Award.",
+      "sentenceTranslation": "奖励。"
+    },
+    {
+      "word": "aware",
+      "phonetic": "aware",
+      "meaning": "意识到的",
+      "sentence": "Aware?",
+      "sentenceTranslation": "意识到的？"
+    },
+    {
+      "word": "away",
+      "phonetic": "away",
+      "meaning": "离开",
+      "sentence": "Go away.",
+      "sentenceTranslation": "走开。"
+    },
+    {
+      "word": "awful",
+      "phonetic": "awful",
+      "meaning": "糟糕的",
+      "sentence": "Awful.",
+      "sentenceTranslation": "糟糕的。"
+    },
+    {
+      "word": "awkward",
+      "phonetic": "awkward",
+      "meaning": "尴尬的",
+      "sentence": "Awkward.",
+      "sentenceTranslation": "尴尬的。"
+    },
+    {
+      "word": "baby",
+      "phonetic": "baby",
+      "meaning": "婴儿",
+      "sentence": "Baby.",
+      "sentenceTranslation": "婴儿。"
+    },
+    {
+      "word": "back",
+      "phonetic": "back",
+      "meaning": "背部",
+      "sentence": "Back pain.",
+      "sentenceTranslation": "背痛。"
+    },
+    {
+      "word": "background",
+      "phonetic": "background",
+      "meaning": "背景",
+      "sentence": "Background.",
+      "sentenceTranslation": "背景。"
+    },
+    {
+      "word": "backward",
+      "phonetic": "backward",
+      "meaning": "向后的",
+      "sentence": "Backward.",
+      "sentenceTranslation": "向后的。"
+    },
+    {
+      "word": "bacteria",
+      "phonetic": "bacteria",
+      "meaning": "细菌",
+      "sentence": "Bacteria.",
+      "sentenceTranslation": "细菌。"
+    },
+    {
+      "word": "bad",
+      "phonetic": "bad",
+      "meaning": "坏的",
+      "sentence": "Bad.",
+      "sentenceTranslation": "坏的。"
+    },
+    {
+      "word": "badly",
+      "phonetic": "badly",
+      "meaning": "差地",
+      "sentence": "Badly.",
+      "sentenceTranslation": "差地。"
+    },
+    {
+      "word": "badminton",
+      "phonetic": "badminton",
+      "meaning": "羽毛球",
+      "sentence": "Badminton.",
+      "sentenceTranslation": "羽毛球。"
+    },
+    {
+      "word": "bag",
+      "phonetic": "bag",
+      "meaning": "包",
+      "sentence": "Bag.",
+      "sentenceTranslation": "包。"
+    },
+    {
+      "word": "baggage",
+      "phonetic": "baggage",
+      "meaning": "行李",
+      "sentence": "Baggage.",
+      "sentenceTranslation": "行李。"
+    },
+    {
+      "word": "bake",
+      "phonetic": "bake",
+      "meaning": "烘烤",
+      "sentence": "Bakes.",
+      "sentenceTranslation": "烘烤。"
+    },
+    {
+      "word": "balance",
+      "phonetic": "balance",
+      "meaning": "平衡",
+      "sentence": "Balance.",
+      "sentenceTranslation": "平衡。"
+    },
+    {
+      "word": "ball",
+      "phonetic": "ball",
+      "meaning": "球",
+      "sentence": "Ball.",
+      "sentenceTranslation": "球。"
+    },
+    {
+      "word": "balloon",
+      "phonetic": "balloon",
+      "meaning": "气球",
+      "sentence": "Balloons.",
+      "sentenceTranslation": "气球。"
+    },
+    {
+      "word": "ban",
+      "phonetic": "ban",
+      "meaning": "禁止",
+      "sentence": "Banned.",
+      "sentenceTranslation": "禁止。"
+    },
+    {
+      "word": "banana",
+      "phonetic": "banana",
+      "meaning": "香蕉",
+      "sentence": "Bananas.",
+      "sentenceTranslation": "香蕉。"
+    },
+    {
+      "word": "band",
+      "phonetic": "band",
+      "meaning": "乐队",
+      "sentence": "Band.",
+      "sentenceTranslation": "乐队。"
+    },
+    {
+      "word": "bang",
+      "phonetic": "bang",
+      "meaning": "猛击",
+      "sentence": "Banged.",
+      "sentenceTranslation": "猛击。"
+    },
+    {
+      "word": "bank",
+      "phonetic": "bank",
+      "meaning": "银行",
+      "sentence": "Bank.",
+      "sentenceTranslation": "银行。"
+    },
+    {
+      "word": "banner",
+      "phonetic": "banner",
+      "meaning": "旗帜",
+      "sentence": "Banner.",
+      "sentenceTranslation": "旗帜。"
+    },
+    {
+      "word": "bar",
+      "phonetic": "bar",
+      "meaning": "酒吧",
+      "sentence": "Bar.",
+      "sentenceTranslation": "酒吧。"
+    },
+    {
+      "word": "barber",
+      "phonetic": "barber",
+      "meaning": "理发师",
+      "sentence": "Barber.",
+      "sentenceTranslation": "理发师。"
+    },
+    {
+      "word": "barely",
+      "phonetic": "barely",
+      "meaning": "几乎不",
+      "sentence": "Barely.",
+      "sentenceTranslation": "几乎不。"
+    },
+    {
+      "word": "bargain",
+      "phonetic": "bargain",
+      "meaning": "便宜货",
+      "sentence": "Bargain.",
+      "sentenceTranslation": "便宜货。"
+    },
+    {
+      "word": "bark",
+      "phonetic": "bark",
+      "meaning": "狗吠",
+      "sentence": "Barked.",
+      "sentenceTranslation": "狗吠。"
+    },
+    {
+      "word": "barrier",
+      "phonetic": "barrier",
+      "meaning": "障碍",
+      "sentence": "Barrier.",
+      "sentenceTranslation": "障碍。"
+    },
+    {
+      "word": "base",
+      "phonetic": "base",
+      "meaning": "基础",
+      "sentence": "Base.",
+      "sentenceTranslation": "基础。"
+    },
+    {
+      "word": "baseball",
+      "phonetic": "baseball",
+      "meaning": "棒球",
+      "sentence": "Baseball.",
+      "sentenceTranslation": "棒球。"
+    },
+    {
+      "word": "basic",
+      "phonetic": "basic",
+      "meaning": "基本的",
+      "sentence": "Basic.",
+      "sentenceTranslation": "基本的。"
+    },
+    {
+      "word": "basin",
+      "phonetic": "basin",
+      "meaning": "盆地",
+      "sentence": "Basin.",
+      "sentenceTranslation": "盆地。"
+    },
+    {
+      "word": "basis",
+      "phonetic": "basis",
+      "meaning": "基础",
+      "sentence": "Basis.",
+      "sentenceTranslation": "基础。"
+    },
+    {
+      "word": "basket",
+      "phonetic": "basket",
+      "meaning": "篮子",
+      "sentence": "Basket.",
+      "sentenceTranslation": "篮子。"
+    },
+    {
+      "word": "basketball",
+      "phonetic": "basketball",
+      "meaning": "篮球",
+      "sentence": "Basketball.",
+      "sentenceTranslation": "篮球。"
+    },
+    {
+      "word": "bath",
+      "phonetic": "bath",
+      "meaning": "洗澡",
+      "sentence": "Bath.",
+      "sentenceTranslation": "洗澡。"
+    },
+    {
+      "word": "bathroom",
+      "phonetic": "bathroom",
+      "meaning": "浴室",
+      "sentence": "Bathroom.",
+      "sentenceTranslation": "浴室。"
+    },
+    {
+      "word": "battery",
+      "phonetic": "battery",
+      "meaning": "电池",
+      "sentence": "Battery.",
+      "sentenceTranslation": "电池。"
+    },
+    {
+      "word": "battle",
+      "phonetic": "battle",
+      "meaning": "战斗",
+      "sentence": "Battle.",
+      "sentenceTranslation": "战斗。"
+    },
+    {
+      "word": "bay",
+      "phonetic": "bay",
+      "meaning": "海湾",
+      "sentence": "Bay.",
+      "sentenceTranslation": "海湾。"
+    },
+    {
+      "word": "beach",
+      "phonetic": "beach",
+      "meaning": "海滩",
+      "sentence": "Beach.",
+      "sentenceTranslation": "海滩。"
+    },
+    {
+      "word": "beam",
+      "phonetic": "beam",
+      "meaning": "光线",
+      "sentence": "Beam.",
+      "sentenceTranslation": "光线。"
+    },
+    {
+      "word": "bean",
+      "phonetic": "bean",
+      "meaning": "豆子",
+      "sentence": "Beans.",
+      "sentenceTranslation": "豆子。"
+    },
+    {
+      "word": "bear",
+      "phonetic": "bear",
+      "meaning": "熊",
+      "sentence": "Bear.",
+      "sentenceTranslation": "熊。"
+    },
+    {
+      "word": "beard",
+      "phonetic": "beard",
+      "meaning": "胡须",
+      "sentence": "Beard.",
+      "sentenceTranslation": "胡须。"
+    },
+    {
+      "word": "beast",
+      "phonetic": "beast",
+      "meaning": "野兽",
+      "sentence": "Beasts.",
+      "sentenceTranslation": "野兽。"
+    },
+    {
+      "word": "beat",
+      "phonetic": "beat",
+      "meaning": "打败",
+      "sentence": "Beat 3-1.",
+      "sentenceTranslation": "打败。"
+    },
+    {
+      "word": "beautiful",
+      "phonetic": "beautiful",
+      "meaning": "美丽的",
+      "sentence": "Beautiful!",
+      "sentenceTranslation": "美丽的！"
+    },
+    {
+      "word": "beauty",
+      "phonetic": "beauty",
+      "meaning": "美丽",
+      "sentence": "Beauty.",
+      "sentenceTranslation": "美丽。"
+    },
+    {
+      "word": "because",
+      "phonetic": "because",
+      "meaning": "因为",
+      "sentence": "Because.",
+      "sentenceTranslation": "因为。"
+    },
+    {
+      "word": "become",
+      "phonetic": "become",
+      "meaning": "变成",
+      "sentence": "Become doctor.",
+      "sentenceTranslation": "成为医生。"
+    },
+    {
+      "word": "bed",
+      "phonetic": "bed",
+      "meaning": "床",
+      "sentence": "Bed.",
+      "sentenceTranslation": "床。"
+    },
+    {
+      "word": "bedroom",
+      "phonetic": "bedroom",
+      "meaning": "卧室",
+      "sentence": "Bedroom.",
+      "sentenceTranslation": "卧室。"
+    },
+    {
+      "word": "bee",
+      "phonetic": "bee",
+      "meaning": "蜜蜂",
+      "sentence": "Bees.",
+      "sentenceTranslation": "蜜蜂。"
+    },
+    {
+      "word": "beef",
+      "phonetic": "beef",
+      "meaning": "牛肉",
+      "sentence": "Beef.",
+      "sentenceTranslation": "牛肉。"
+    },
+    {
+      "word": "beer",
+      "phonetic": "beer",
+      "meaning": "啤酒",
+      "sentence": "Beer.",
+      "sentenceTranslation": "啤酒。"
+    },
+    {
+      "word": "before",
+      "phonetic": "before",
+      "meaning": "在...之前",
+      "sentence": "Before dinner.",
+      "sentenceTranslation": "晚饭前。"
+    },
+    {
+      "word": "beg",
+      "phonetic": "beg",
+      "meaning": "乞求",
+      "sentence": "Beg help.",
+      "sentenceTranslation": "乞求帮助。"
+    },
+    {
+      "word": "begin",
+      "phonetic": "begin",
+      "meaning": "开始",
+      "sentence": "Begin.",
+      "sentenceTranslation": "开始。"
+    },
+    {
+      "word": "beginning",
+      "phonetic": "beginning",
+      "meaning": "开始",
+      "sentence": "Beginning.",
+      "sentenceTranslation": "开始。"
+    },
+    {
+      "word": "behalf",
+      "phonetic": "behalf",
+      "meaning": "代表",
+      "sentence": "Behalf.",
+      "sentenceTranslation": "代表。"
+    },
+    {
+      "word": "behave",
+      "phonetic": "behave",
+      "meaning": "表现",
+      "sentence": "Behave.",
+      "sentenceTranslation": "表现。"
+    },
+    {
+      "word": "behavior",
+      "phonetic": "behavior",
+      "meaning": "行为",
+      "sentence": "Behavior.",
+      "sentenceTranslation": "行为。"
+    },
+    {
+      "word": "behind",
+      "phonetic": "behind",
+      "meaning": "在...后面",
+      "sentence": "Behind.",
+      "sentenceTranslation": "在...后面。"
+    },
+    {
+      "word": "being",
+      "phonetic": "being",
+      "meaning": "生物",
+      "sentence": "Being.",
+      "sentenceTranslation": "生物。"
+    },
+    {
+      "word": "belief",
+      "phonetic": "belief",
+      "meaning": "信念",
+      "sentence": "Belief.",
+      "sentenceTranslation": "信念。"
+    },
+    {
+      "word": "believe",
+      "phonetic": "believe",
+      "meaning": "相信",
+      "sentence": "Believe.",
+      "sentenceTranslation": "相信。"
+    },
+    {
+      "word": "bell",
+      "phonetic": "bell",
+      "meaning": "钟",
+      "sentence": "Bell.",
+      "sentenceTranslation": "钟。"
+    },
+    {
+      "word": "belong",
+      "phonetic": "belong",
+      "meaning": "属于",
+      "sentence": "Belong.",
+      "sentenceTranslation": "属于。"
+    },
+    {
+      "word": "below",
+      "phonetic": "below",
+      "meaning": "在...下面",
+      "sentence": "Below.",
+      "sentenceTranslation": "在...下面。"
+    },
+    {
+      "word": "belt",
+      "phonetic": "belt",
+      "meaning": "皮带",
+      "sentence": "Belt.",
+      "sentenceTranslation": "皮带。"
+    },
+    {
+      "word": "bench",
+      "phonetic": "bench",
+      "meaning": "长凳",
+      "sentence": "Bench.",
+      "sentenceTranslation": "长凳。"
+    },
+    {
+      "word": "bend",
+      "phonetic": "bend",
+      "meaning": "弯腰",
+      "sentence": "Bent.",
+      "sentenceTranslation": "弯腰。"
+    },
+    {
+      "word": "beneath",
+      "phonetic": "beneath",
+      "meaning": "在...之下",
+      "sentence": "Beneath.",
+      "sentenceTranslation": "在...之下。"
+    },
+    {
+      "word": "beneficial",
+      "phonetic": "beneficial",
+      "meaning": "有益的",
+      "sentence": "Beneficial.",
+      "sentenceTranslation": "有益的。"
+    },
+    {
+      "word": "benefit",
+      "phonetic": "benefit",
+      "meaning": "益处",
+      "sentence": "Benefit.",
+      "sentenceTranslation": "益处。"
+    },
+    {
+      "word": "beside",
+      "phonetic": "beside",
+      "meaning": "在...旁边",
+      "sentence": "Beside.",
+      "sentenceTranslation": "在...旁边。"
+    },
+    {
+      "word": "besides",
+      "phonetic": "besides",
+      "meaning": "此外",
+      "sentence": "Besides.",
+      "sentenceTranslation": "此外。"
+    },
+    {
+      "word": "best",
+      "phonetic": "best",
+      "meaning": "最好的",
+      "sentence": "Best.",
+      "sentenceTranslation": "最好的。"
+    },
+    {
+      "word": "bet",
+      "phonetic": "bet",
+      "meaning": "打赌",
+      "sentence": "Bet.",
+      "sentenceTranslation": "打赌。"
+    },
+    {
+      "word": "better",
+      "phonetic": "better",
+      "meaning": "更好的",
+      "sentence": "Better.",
+      "sentenceTranslation": "更好的。"
+    },
+    {
+      "word": "between",
+      "phonetic": "between",
+      "meaning": "在...之间",
+      "sentence": "Between.",
+      "sentenceTranslation": "在...之间。"
+    },
+    {
+      "word": "beyond",
+      "phonetic": "beyond",
+      "meaning": "超出",
+      "sentence": "Beyond.",
+      "sentenceTranslation": "超出。"
+    },
+    {
+      "word": "bicycle",
+      "phonetic": "bicycle",
+      "meaning": "自行车",
+      "sentence": "Bicycle.",
+      "sentenceTranslation": "自行车。"
+    },
+    {
+      "word": "big",
+      "phonetic": "big",
+      "meaning": "大的",
+      "sentence": "Big city.",
+      "sentenceTranslation": "大城市。"
+    },
+    {
+      "word": "bike",
+      "phonetic": "bike",
+      "meaning": "自行车",
+      "sentence": "Bike.",
+      "sentenceTranslation": "自行车。"
+    },
+    {
+      "word": "bill",
+      "phonetic": "bill",
+      "meaning": "账单",
+      "sentence": "Bill.",
+      "sentenceTranslation": "账单。"
+    },
+    {
+      "word": "billion",
+      "phonetic": "billion",
+      "meaning": "十亿",
+      "sentence": "Billion.",
+      "sentenceTranslation": "十亿。"
+    },
+    {
+      "word": "biology",
+      "phonetic": "biology",
+      "meaning": "生物学",
+      "sentence": "Biology.",
+      "sentenceTranslation": "生物学。"
+    },
+    {
+      "word": "bird",
+      "phonetic": "bird",
+      "meaning": "鸟",
+      "sentence": "Bird.",
+      "sentenceTranslation": "鸟。"
+    },
+    {
+      "word": "birth",
+      "phonetic": "birth",
+      "meaning": "出生",
+      "sentence": "Birth.",
+      "sentenceTranslation": "出生。"
+    },
+    {
+      "word": "birthday",
+      "phonetic": "birthday",
+      "meaning": "生日",
+      "sentence": "Birthday!",
+      "sentenceTranslation": "生日！"
+    },
+    {
+      "word": "biscuit",
+      "phonetic": "biscuit",
+      "meaning": "饼干",
+      "sentence": "Biscuits.",
+      "sentenceTranslation": "饼干。"
+    },
+    {
+      "word": "bit",
+      "phonetic": "bit",
+      "meaning": "一点",
+      "sentence": "Bit water.",
+      "sentenceTranslation": "一点水。"
+    },
+    {
+      "word": "bite",
+      "phonetic": "bite",
+      "meaning": "咬",
+      "sentence": "Bite.",
+      "sentenceTranslation": "咬。"
+    },
+    {
+      "word": "bitter",
+      "phonetic": "bitter",
+      "meaning": "苦的",
+      "sentence": "Bitter.",
+      "sentenceTranslation": "苦的。"
+    },
+    {
+      "word": "black",
+      "phonetic": "black",
+      "meaning": "黑色",
+      "sentence": "Black.",
+      "sentenceTranslation": "黑色。"
+    },
+    {
+      "word": "blackboard",
+      "phonetic": "blackboard",
+      "meaning": "黑板",
+      "sentence": "Blackboard.",
+      "sentenceTranslation": "黑板。"
+    },
+    {
+      "word": "blame",
+      "phonetic": "blame",
+      "meaning": "责备",
+      "sentence": "Blame.",
+      "sentenceTranslation": "责备。"
+    },
+    {
+      "word": "blank",
+      "phonetic": "blank",
+      "meaning": "空白的",
+      "sentence": "Blank.",
+      "sentenceTranslation": "空白的。"
+    },
+    {
+      "word": "blanket",
+      "phonetic": "blanket",
+      "meaning": "毯子",
+      "sentence": "Blanket.",
+      "sentenceTranslation": "毯子。"
+    },
+    {
+      "word": "blast",
+      "phonetic": "blast",
+      "meaning": "爆炸",
+      "sentence": "Blast.",
+      "sentenceTranslation": "爆炸。"
+    },
+    {
+      "word": "bleed",
+      "phonetic": "bleed",
+      "meaning": "流血",
+      "sentence": "Bleeding.",
+      "sentenceTranslation": "流血。"
+    },
+    {
+      "word": "blend",
+      "phonetic": "blend",
+      "meaning": "混合",
+      "sentence": "Blend.",
+      "sentenceTranslation": "混合。"
+    },
+    {
+      "word": "blind",
+      "phonetic": "blind",
+      "meaning": "瞎的",
+      "sentence": "Blind.",
+      "sentenceTranslation": "瞎的。"
+    },
+    {
+      "word": "block",
+      "phonetic": "block",
+      "meaning": "块",
+      "sentence": "Block.",
+      "sentenceTranslation": "块。"
+    },
+    {
+      "word": "blood",
+      "phonetic": "blood",
+      "meaning": "血",
+      "sentence": "Blood.",
+      "sentenceTranslation": "血。"
+    },
+    {
+      "word": "bloom",
+      "phonetic": "bloom",
+      "meaning": "开花",
+      "sentence": "Bloom.",
+      "sentenceTranslation": "开花。"
+    },
+    {
+      "word": "blow",
+      "phonetic": "blow",
+      "meaning": "吹",
+      "sentence": "Blew.",
+      "sentenceTranslation": "吹。"
+    },
+    {
+      "word": "blue",
+      "phonetic": "blue",
+      "meaning": "蓝色",
+      "sentence": "Blue.",
+      "sentenceTranslation": "蓝色。"
+    },
+    {
+      "word": "blush",
+      "phonetic": "blush",
+      "meaning": "脸红",
+      "sentence": "Blushed.",
+      "sentenceTranslation": "脸红。"
+    },
+    {
+      "word": "board",
+      "phonetic": "board",
+      "meaning": "木板",
+      "sentence": "Board.",
+      "sentenceTranslation": "木板。"
+    },
+    {
+      "word": "boast",
+      "phonetic": "boast",
+      "meaning": "吹嘘",
+      "sentence": "Boasted.",
+      "sentenceTranslation": "吹嘘。"
+    },
+    {
+      "word": "boat",
+      "phonetic": "boat",
+      "meaning": "船",
+      "sentence": "Boating.",
+      "sentenceTranslation": "船。"
+    },
+    {
+      "word": "body",
+      "phonetic": "body",
+      "meaning": "身体",
+      "sentence": "Body.",
+      "sentenceTranslation": "身体。"
+    },
+    {
+      "word": "boil",
+      "phonetic": "boil",
+      "meaning": "沸腾",
+      "sentence": "Boil.",
+      "sentenceTranslation": "沸腾。"
+    },
+    {
+      "word": "bold",
+      "phonetic": "bold",
+      "meaning": "大胆的",
+      "sentence": "Bold.",
+      "sentenceTranslation": "大胆的。"
+    },
+    {
+      "word": "bolt",
+      "phonetic": "bolt",
+      "meaning": "螺栓",
+      "sentence": "Bolt.",
+      "sentenceTranslation": "螺栓。"
+    },
+    {
+      "word": "bomb",
+      "phonetic": "bomb",
+      "meaning": "炸弹",
+      "sentence": "Bomb.",
+      "sentenceTranslation": "炸弹。"
+    },
+    {
+      "word": "bond",
+      "phonetic": "bond",
+      "meaning": "纽带",
+      "sentence": "Bond.",
+      "sentenceTranslation": "纽带。"
+    },
+    {
+      "word": "bone",
+      "phonetic": "bone",
+      "meaning": "骨头",
+      "sentence": "Bone.",
+      "sentenceTranslation": "骨头。"
+    },
+    {
+      "word": "book",
+      "phonetic": "book",
+      "meaning": "书",
+      "sentence": "Book.",
+      "sentenceTranslation": "书。"
+    },
+    {
+      "word": "boom",
+      "phonetic": "boom",
+      "meaning": "繁荣",
+      "sentence": "Boom.",
+      "sentenceTranslation": "繁荣。"
+    },
+    {
+      "word": "boost",
+      "phonetic": "boost",
+      "meaning": "提高",
+      "sentence": "Boost.",
+      "sentenceTranslation": "提高。"
+    },
+    {
+      "word": "boot",
+      "phonetic": "boot",
+      "meaning": "靴子",
+      "sentence": "Boots.",
+      "sentenceTranslation": "靴子。"
+    },
+    {
+      "word": "border",
+      "phonetic": "border",
+      "meaning": "边界",
+      "sentence": "Border.",
+      "sentenceTranslation": "边界。"
+    },
+    {
+      "word": "bore",
+      "phonetic": "bore",
+      "meaning": "使厌烦",
+      "sentence": "Bored.",
+      "sentenceTranslation": "使厌烦。"
+    },
+    {
+      "word": "bored",
+      "phonetic": "bored",
+      "meaning": "无聊的",
+      "sentence": "Bored.",
+      "sentenceTranslation": "无聊的。"
+    },
+    {
+      "word": "boring",
+      "phonetic": "boring",
+      "meaning": "无聊的",
+      "sentence": "Boring!",
+      "sentenceTranslation": "无聊的！"
+    },
+    {
+      "word": "born",
+      "phonetic": "born",
+      "meaning": "出生",
+      "sentence": "Born 2000.",
+      "sentenceTranslation": "出生。"
+    },
+    {
+      "word": "borrow",
+      "phonetic": "borrow",
+      "meaning": "借",
+      "sentence": "Borrowed.",
+      "sentenceTranslation": "借。"
+    },
+    {
+      "word": "boss",
+      "phonetic": "boss",
+      "meaning": "老板",
+      "sentence": "Boss.",
+      "sentenceTranslation": "老板。"
+    },
+    {
+      "word": "both",
+      "phonetic": "both",
+      "meaning": "两者都",
+      "sentence": "Both.",
+      "sentenceTranslation": "两者都。"
+    },
+    {
+      "word": "bother",
+      "phonetic": "bother",
+      "meaning": "打扰",
+      "sentence": "Bother.",
+      "sentenceTranslation": "打扰。"
+    },
+    {
+      "word": "bottle",
+      "phonetic": "bottle",
+      "meaning": "瓶子",
+      "sentence": "Bottle.",
+      "sentenceTranslation": "瓶子。"
+    },
+    {
+      "word": "bottom",
+      "phonetic": "bottom",
+      "meaning": "底部",
+      "sentence": "Bottom.",
+      "sentenceTranslation": "底部。"
+    },
+    {
+      "word": "bounce",
+      "phonetic": "bounce",
+      "meaning": "弹跳",
+      "sentence": "Bounced.",
+      "sentenceTranslation": "弹跳。"
+    },
+    {
+      "word": "bound",
+      "phonetic": "bound",
+      "meaning": "跳",
+      "sentence": "Bounded.",
+      "sentenceTranslation": "跳。"
+    },
+    {
+      "word": "boundary",
+      "phonetic": "boundary",
+      "meaning": "边界",
+      "sentence": "Boundary.",
+      "sentenceTranslation": "边界。"
+    },
+    {
+      "word": "bow",
+      "phonetic": "bow",
+      "meaning": "鞠躬",
+      "sentence": "Bowed.",
+      "sentenceTranslation": "鞠躬。"
+    },
+    {
+      "word": "bowl",
+      "phonetic": "bowl",
+      "meaning": "碗",
+      "sentence": "Bowl rice.",
+      "sentenceTranslation": "一碗米饭。"
+    },
+    {
+      "word": "box",
+      "phonetic": "box",
+      "meaning": "盒子",
+      "sentence": "Box.",
+      "sentenceTranslation": "盒子。"
+    },
+    {
+      "word": "boxing",
+      "phonetic": "boxing",
+      "meaning": "拳击",
+      "sentence": "Boxing.",
+      "sentenceTranslation": "拳击。"
+    },
+    {
+      "word": "boy",
+      "phonetic": "boy",
+      "meaning": "男孩",
+      "sentence": "Boy.",
+      "sentenceTranslation": "男孩。"
+    },
+    {
+      "word": "brain",
+      "phonetic": "brain",
+      "meaning": "大脑",
+      "sentence": "Brain.",
+      "sentenceTranslation": "大脑。"
+    },
+    {
+      "word": "brake",
+      "phonetic": "brake",
+      "meaning": "刹车",
+      "sentence": "Brake.",
+      "sentenceTranslation": "刹车。"
+    },
+    {
+      "word": "branch",
+      "phonetic": "branch",
+      "meaning": "树枝",
+      "sentence": "Branch.",
+      "sentenceTranslation": "树枝。"
+    },
+    {
+      "word": "brand",
+      "phonetic": "brand",
+      "meaning": "品牌",
+      "sentence": "Brand.",
+      "sentenceTranslation": "品牌。"
+    },
+    {
+      "word": "brave",
+      "phonetic": "brave",
+      "meaning": "勇敢的",
+      "sentence": "Brave.",
+      "sentenceTranslation": "勇敢的。"
+    },
+    {
+      "word": "bread",
+      "phonetic": "bread",
+      "meaning": "面包",
+      "sentence": "Bread.",
+      "sentenceTranslation": "面包。"
+    },
+    {
+      "word": "break",
+      "phonetic": "break",
+      "meaning": "打破",
+      "sentence": "Break.",
+      "sentenceTranslation": "打破。"
+    },
+    {
+      "word": "breakfast",
+      "phonetic": "breakfast",
+      "meaning": "早餐",
+      "sentence": "Breakfast?",
+      "sentenceTranslation": "早餐？"
+    },
+    {
+      "word": "breath",
+      "phonetic": "breath",
+      "meaning": "呼吸",
+      "sentence": "Breath.",
+      "sentenceTranslation": "呼吸。"
+    },
+    {
+      "word": "breathe",
+      "phonetic": "breathe",
+      "meaning": "呼吸",
+      "sentence": "Breathe.",
+      "sentenceTranslation": "呼吸。"
+    },
+    {
+      "word": "breed",
+      "phonetic": "breed",
+      "meaning": "品种",
+      "sentence": "Breed.",
+      "sentenceTranslation": "品种。"
+    },
+    {
+      "word": "breeze",
+      "phonetic": "breeze",
+      "meaning": "微风",
+      "sentence": "Breeze.",
+      "sentenceTranslation": "微风。"
+    },
+    {
+      "word": "brick",
+      "phonetic": "brick",
+      "meaning": "砖头",
+      "sentence": "Bricks.",
+      "sentenceTranslation": "砖头。"
+    },
+    {
+      "word": "bride",
+      "phonetic": "bride",
+      "meaning": "新娘",
+      "sentence": "Bride.",
+      "sentenceTranslation": "新娘。"
+    },
+    {
+      "word": "bridge",
+      "phonetic": "bridge",
+      "meaning": "桥",
+      "sentence": "Bridge.",
+      "sentenceTranslation": "桥。"
+    },
+    {
+      "word": "brief",
+      "phonetic": "brief",
+      "meaning": "简短的",
+      "sentence": "Brief.",
+      "sentenceTranslation": "简短的。"
+    },
+    {
+      "word": "bright",
+      "phonetic": "bright",
+      "meaning": "明亮的",
+      "sentence": "Bright.",
+      "sentenceTranslation": "明亮的。"
+    },
+    {
+      "word": "brilliant",
+      "phonetic": "brilliant",
+      "meaning": "聪明的",
+      "sentence": "Brilliant.",
+      "sentenceTranslation": "聪明的。"
+    },
+    {
+      "word": "bring",
+      "phonetic": "bring",
+      "meaning": "带来",
+      "sentence": "Bring.",
+      "sentenceTranslation": "带来。"
+    },
+    {
+      "word": "broad",
+      "phonetic": "broad",
+      "meaning": "宽阔的",
+      "sentence": "Broad.",
+      "sentenceTranslation": "宽阔的。"
+    },
+    {
+      "word": "broadcast",
+      "phonetic": "broadcast",
+      "meaning": "广播",
+      "sentence": "Broadcast.",
+      "sentenceTranslation": "广播。"
+    },
+    {
+      "word": "broken",
+      "phonetic": "broken",
+      "meaning": "坏的",
+      "sentence": "Broken.",
+      "sentenceTranslation": "坏的。"
+    },
+    {
+      "word": "broom",
+      "phonetic": "broom",
+      "meaning": "扫帚",
+      "sentence": "Broom.",
+      "sentenceTranslation": "扫帚。"
+    },
+    {
+      "word": "brother",
+      "phonetic": "brother",
+      "meaning": "兄弟",
+      "sentence": "Brother.",
+      "sentenceTranslation": "兄弟。"
+    },
+    {
+      "word": "brown",
+      "phonetic": "brown",
+      "meaning": "棕色",
+      "sentence": "Brown.",
+      "sentenceTranslation": "棕色。"
+    },
+    {
+      "word": "browse",
+      "phonetic": "browse",
+      "meaning": "浏览",
+      "sentence": "Browsed.",
+      "sentenceTranslation": "浏览。"
+    },
+    {
+      "word": "browser",
+      "phonetic": "browser",
+      "meaning": "浏览器",
+      "sentence": "Browser.",
+      "sentenceTranslation": "浏览器。"
+    },
+    {
+      "word": "brush",
+      "phonetic": "brush",
+      "meaning": "刷子",
+      "sentence": "Brush.",
+      "sentenceTranslation": "刷子。"
+    },
+    {
+      "word": "bubble",
+      "phonetic": "bubble",
+      "meaning": "气泡",
+      "sentence": "Bubble.",
+      "sentenceTranslation": "气泡。"
+    },
+    {
+      "word": "bucket",
+      "phonetic": "bucket",
+      "meaning": "水桶",
+      "sentence": "Bucket.",
+      "sentenceTranslation": "水桶。"
+    },
+    {
+      "word": "budget",
+      "phonetic": "budget",
+      "meaning": "预算",
+      "sentence": "Budget.",
+      "sentenceTranslation": "预算。"
+    },
+    {
+      "word": "buffet",
+      "phonetic": "buffet",
+      "meaning": "自助餐",
+      "sentence": "Buffet.",
+      "sentenceTranslation": "自助餐。"
+    },
+    {
+      "word": "build",
+      "phonetic": "build",
+      "meaning": "建造",
+      "sentence": "Building.",
+      "sentenceTranslation": "建造。"
+    },
+    {
+      "word": "building",
+      "phonetic": "building",
+      "meaning": "建筑物",
+      "sentence": "Building.",
+      "sentenceTranslation": "建筑物。"
+    },
+    {
+      "word": "bunch",
+      "phonetic": "bunch",
+      "meaning": "束",
+      "sentence": "Bunch.",
+      "sentenceTranslation": "束。"
+    },
+    {
+      "word": "bundle",
+      "phonetic": "bundle",
+      "meaning": "捆",
+      "sentence": "Bundle.",
+      "sentenceTranslation": "捆。"
+    },
+    {
+      "word": "burden",
+      "phonetic": "burden",
+      "meaning": "负担",
+      "sentence": "Burden.",
+      "sentenceTranslation": "负担。"
+    },
+    {
+      "word": "burn",
+      "phonetic": "burn",
+      "meaning": "燃烧",
+      "sentence": "Burned.",
+      "sentenceTranslation": "燃烧。"
+    },
+    {
+      "word": "burst",
+      "phonetic": "burst",
+      "meaning": "爆发",
+      "sentence": "Burst.",
+      "sentenceTranslation": "爆发。"
+    },
+    {
+      "word": "bury",
+      "phonetic": "bury",
+      "meaning": "埋葬",
+      "sentence": "Buried.",
+      "sentenceTranslation": "埋葬。"
+    },
+    {
+      "word": "bus",
+      "phonetic": "bus",
+      "meaning": "公共汽车",
+      "sentence": "Bus.",
+      "sentenceTranslation": "公共汽车。"
+    },
+    {
+      "word": "bush",
+      "phonetic": "bush",
+      "meaning": "灌木",
+      "sentence": "Bush.",
+      "sentenceTranslation": "灌木。"
+    },
+    {
+      "word": "business",
+      "phonetic": "business",
+      "meaning": "商业",
+      "sentence": "Business.",
+      "sentenceTranslation": "商业。"
+    },
+    {
+      "word": "busy",
+      "phonetic": "busy",
+      "meaning": "忙的",
+      "sentence": "Busy.",
+      "sentenceTranslation": "忙的。"
+    },
+    {
+      "word": "but",
+      "phonetic": "but",
+      "meaning": "但是",
+      "sentence": "Fish but meat.",
+      "sentenceTranslation": "这是鱼肉。"
+    },
+    {
+      "word": "butter",
+      "phonetic": "butter",
+      "meaning": "黄油",
+      "sentence": "Butter.",
+      "sentenceTranslation": "黄油。"
+    },
+    {
+      "word": "butterfly",
+      "phonetic": "butterfly",
+      "meaning": "蝴蝶",
+      "sentence": "Butterfly.",
+      "sentenceTranslation": "蝴蝶。"
+    },
+    {
+      "word": "button",
+      "phonetic": "button",
+      "meaning": "按钮",
+      "sentence": "Button.",
+      "sentenceTranslation": "按钮。"
+    },
+    {
+      "word": "buy",
+      "phonetic": "buy",
+      "meaning": "买",
+      "sentence": "Buy dress?",
+      "sentenceTranslation": "买裙子吗？"
+    },
+    {
+      "word": "by",
+      "phonetic": "by",
+      "meaning": "通过",
+      "sentence": "By bike.",
+      "sentenceTranslation": "骑自行车。"
+    },
+    {
+      "word": "cabbage",
+      "phonetic": "cabbage",
+      "meaning": "卷心菜",
+      "sentence": "Cabbage.",
+      "sentenceTranslation": "卷心菜。"
+    },
+    {
+      "word": "cabinet",
+      "phonetic": "cabinet",
+      "meaning": "内阁",
+      "sentence": "Cabinet.",
+      "sentenceTranslation": "内阁。"
+    },
+    {
+      "word": "cable",
+      "phonetic": "cable",
+      "meaning": "电缆",
+      "sentence": "Cable.",
+      "sentenceTranslation": "电缆。"
+    },
+    {
+      "word": "cafe",
+      "phonetic": "cafe",
+      "meaning": "咖啡馆",
+      "sentence": "Cafe.",
+      "sentenceTranslation": "咖啡馆。"
+    },
+    {
+      "word": "cage",
+      "phonetic": "cage",
+      "meaning": "笼子",
+      "sentence": "Cage.",
+      "sentenceTranslation": "笼子。"
+    },
+    {
+      "word": "cake",
+      "phonetic": "cake",
+      "meaning": "蛋糕",
+      "sentence": "Cake.",
+      "sentenceTranslation": "蛋糕。"
+    },
+    {
+      "word": "calculate",
+      "phonetic": "calculate",
+      "meaning": "计算",
+      "sentence": "Calculate.",
+      "sentenceTranslation": "计算。"
+    },
+    {
+      "word": "calendar",
+      "phonetic": "calendar",
+      "meaning": "日历",
+      "sentence": "Calendar.",
+      "sentenceTranslation": "日历。"
+    },
+    {
+      "word": "call",
+      "phonetic": "call",
+      "meaning": "叫；打电话",
+      "sentence": "Call.",
+      "sentenceTranslation": "叫。"
+    },
+    {
+      "word": "calm",
+      "phonetic": "calm",
+      "meaning": "平静的",
+      "sentence": "Calm.",
+      "sentenceTranslation": "平静的。"
+    },
+    {
+      "word": "camel",
+      "phonetic": "camel",
+      "meaning": "骆驼",
+      "sentence": "Camel.",
+      "sentenceTranslation": "骆驼。"
+    },
+    {
+      "word": "camera",
+      "phonetic": "camera",
+      "meaning": "相机",
+      "sentence": "Camera.",
+      "sentenceTranslation": "相机。"
+    },
+    {
+      "word": "camp",
+      "phonetic": "camp",
+      "meaning": "野营",
+      "sentence": "Camping.",
+      "sentenceTranslation": "野营。"
+    },
+    {
+      "word": "campaign",
+      "phonetic": "campaign",
+      "meaning": "运动",
+      "sentence": "Campaign.",
+      "sentenceTranslation": "运动。"
+    },
+    {
+      "word": "campus",
+      "phonetic": "campus",
+      "meaning": "校园",
+      "sentence": "Campus.",
+      "sentenceTranslation": "校园。"
+    },
+    {
+      "word": "can",
+      "phonetic": "can",
+      "meaning": "能",
+      "sentence": "Can swim.",
+      "sentenceTranslation": "会游泳。"
+    },
+    {
+      "word": "canal",
+      "phonetic": "canal",
+      "meaning": "运河",
+      "sentence": "Canal.",
+      "sentenceTranslation": "运河。"
+    },
+    {
+      "word": "cancel",
+      "phonetic": "cancel",
+      "meaning": "取消",
+      "sentence": "Cancel.",
+      "sentenceTranslation": "能够取消"
+    },
+    {
+      "word": "cancer",
+      "phonetic": "cancer",
+      "meaning": "癌症",
+      "sentence": "Cancer.",
+      "sentenceTranslation": "癌症。"
+    },
+    {
+      "word": "candidate",
+      "phonetic": "candidate",
+      "meaning": "候选人",
+      "sentence": "Candidate.",
+      "sentenceTranslation": "候选人。"
+    },
+    {
+      "word": "candle",
+      "phonetic": "candle",
+      "meaning": "蜡烛",
+      "sentence": "Candle.",
+      "sentenceTranslation": "蜡烛。"
+    },
+    {
+      "word": "candy",
+      "phonetic": "candy",
+      "meaning": "糖果",
+      "sentence": "Candy.",
+      "sentenceTranslation": "糖果。"
+    },
+    {
+      "word": "cannon",
+      "phonetic": "cannon",
+      "meaning": "大炮",
+      "sentence": "Cannon.",
+      "sentenceTranslation": "大炮。"
+    },
+    {
+      "word": "canoe",
+      "phonetic": "canoe",
+      "meaning": "独木舟",
+      "sentence": "Canoe.",
+      "sentenceTranslation": "独木舟。"
+    },
+    {
+      "word": "cap",
+      "phonetic": "cap",
+      "meaning": "帽子",
+      "sentence": "Cap.",
+      "sentenceTranslation": "帽子。"
+    },
+    {
+      "word": "capable",
+      "phonetic": "capable",
+      "meaning": "有能力的",
+      "sentence": "Capable.",
+      "sentenceTranslation": "有能力的。"
+    },
+    {
+      "word": "capacity",
+      "phonetic": "capacity",
+      "meaning": "容量",
+      "sentence": "Capacity.",
+      "sentenceTranslation": "容量。"
+    },
+    {
+      "word": "cape",
+      "phonetic": "cape",
+      "meaning": "海角",
+      "sentence": "Cape.",
+      "sentenceTranslation": "海角。"
+    },
+    {
+      "word": "capital",
+      "phonetic": "capital",
+      "meaning": "首都",
+      "sentence": "Capital.",
+      "sentenceTranslation": "首都。"
+    },
+    {
+      "word": "captain",
+      "phonetic": "captain",
+      "meaning": "队长",
+      "sentence": "Captain.",
+      "sentenceTranslation": "队长。"
+    },
+    {
+      "word": "capture",
+      "phonetic": "capture",
+      "meaning": "捕获",
+      "sentence": "Captured.",
+      "sentenceTranslation": "捕获。"
+    }
+  ]
+}

@@ -95,19 +95,22 @@ final class DatabaseService: ObservableObject {
         guard let db = db else { return }
 
         do {
-            // Check if sentence_translation column exists, add if not
             let tableInfo = try db.prepare("PRAGMA table_info(words)")
-            var hasSentenceTranslation = false
+            var existingColumns = Set<String>()
             for row in tableInfo {
-                if let name = row[1] as? String, name == "sentence_translation" {
-                    hasSentenceTranslation = true
-                    break
+                if let name = row[1] as? String {
+                    existingColumns.insert(name)
                 }
             }
 
-            if !hasSentenceTranslation {
+            if !existingColumns.contains("sentence_translation") {
                 try db.run("ALTER TABLE words ADD COLUMN sentence_translation TEXT")
                 logger.info("Migrated words table: added sentence_translation column")
+            }
+
+            if !existingColumns.contains("audio_url") {
+                try db.run("ALTER TABLE words ADD COLUMN audio_url TEXT")
+                logger.info("Migrated words table: added audio_url column")
             }
         } catch {
             logger.error("Migration failed: \(error.localizedDescription)")
@@ -592,11 +595,14 @@ final class DatabaseService: ObservableObject {
         )
 
         if let existing = try db.pluck(query) {
-            // Only update if the new record has more stars (better result)
-            if record.starsEarned > existing[lvlStarsEarned] {
+            let existingStars = existing[lvlStarsEarned]
+            let existingPassed = existing[lvlIsPassed]
+            let shouldUpdate = record.starsEarned > existingStars || (!existingPassed && record.isPassed)
+
+            if shouldUpdate {
                 try db.run(query.update(
-                    lvlIsPassed <- record.isPassed,
-                    lvlStarsEarned <- record.starsEarned,
+                    lvlIsPassed <- (existingPassed || record.isPassed),
+                    lvlStarsEarned <- max(existingStars, record.starsEarned),
                     lvlCompletedAt <- record.completedAt.timeIntervalSince1970
                 ))
             }

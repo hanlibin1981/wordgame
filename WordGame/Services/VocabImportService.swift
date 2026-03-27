@@ -8,6 +8,24 @@ final class VocabImportService {
 
     private init() {}
 
+    private func needsPresetReimport(existingBook: WordBook, expectedWordCount: Int) throws -> Bool {
+        if existingBook.wordCount != expectedWordCount {
+            return true
+        }
+
+        let words = try DatabaseService.shared.fetchWords(forBookId: existingBook.id)
+        if words.count != expectedWordCount {
+            return true
+        }
+
+        return words.contains {
+            let hasSentence = !($0.sentence?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
+            let hasTranslation = !($0.sentenceTranslation?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
+            let hasPlaceholderTranslation = ($0.sentenceTranslation ?? "").range(of: #"[A-Za-z]|的翻译"#, options: .regularExpression) != nil
+            return (hasSentence && !hasTranslation) || hasPlaceholderTranslation
+        }
+    }
+
     // MARK: - JSON Import
     /// Import vocabulary from a JSON file in the app bundle.
     ///
@@ -31,26 +49,12 @@ final class VocabImportService {
 
         // Check if this preset already exists in the database.
         if let existingBook = try DatabaseService.shared.fetchPresetVocabulary(preset) {
-            switch preset {
-            case .cet4:
-                // CET-4: if word count matches, skip; otherwise re-import.
-                if existingBook.wordCount == expectedWordCount {
-                    logger.info("Preset '\(preset.displayName)' already up-to-date (\(expectedWordCount) words), skipping.")
-                    return
-                }
-                // Word count mismatch (e.g. old stub with 20 words) → re-import.
-                logger.info("Preset '\(preset.displayName)' word count mismatch (\(existingBook.wordCount) → \(expectedWordCount)), re-importing...")
+            if try needsPresetReimport(existingBook: existingBook, expectedWordCount: expectedWordCount) {
+                logger.info("Preset '\(preset.displayName)' is outdated or incomplete, re-importing...")
                 try DatabaseService.shared.deleteWordBook(byId: existingBook.id)
-
-            case .primarySchool, .highSchool3500, .juniorHigh:
-                // high_school_3500 is versioned — detect version change via word count.
-                if existingBook.wordCount == expectedWordCount {
-                    logger.info("Preset '\(preset.displayName)' already up-to-date (\(expectedWordCount) words), skipping.")
-                    return
-                }
-                // Word count changed → delete old and re-import.
-                logger.info("Preset '\(preset.displayName)' version changed (\(existingBook.wordCount) → \(expectedWordCount)), re-importing...")
-                try DatabaseService.shared.deleteWordBook(byId: existingBook.id)
+            } else {
+                logger.info("Preset '\(preset.displayName)' already up-to-date (\(expectedWordCount) words), skipping.")
+                return
             }
         }
 
@@ -157,7 +161,8 @@ final class VocabImportService {
                 word: word.word,
                 phonetic: word.phonetic,
                 meaning: word.meaning,
-                sentence: word.sentence
+                sentence: word.sentence,
+                sentenceTranslation: word.sentenceTranslation
             )
         }
 

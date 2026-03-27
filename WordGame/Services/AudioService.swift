@@ -41,10 +41,20 @@ final class AudioService: ObservableObject {
         return UserDefaults.standard.bool(forKey: "soundEnabled")
     }
 
+    private var preferredVoice: String {
+        UserDefaults.standard.string(forKey: "ttsVoice") ?? "Alex"
+    }
+
     // MARK: - Text-to-Speech
     /// Speak a word using system TTS
     func speak(_ text: String, language: String = "en-US") {
         guard isSoundEnabled else { return }
+
+        #if os(macOS)
+        speakWithSay(text)
+        return
+        #endif
+
         stop()
 
         let utterance = AVSpeechUtterance(string: text)
@@ -66,13 +76,13 @@ final class AudioService: ObservableObject {
     }
 
     /// Speak a word using the `say` command (macOS native)
-    func speakWithSay(_ text: String, voice: String = "Alex") {
+    func speakWithSay(_ text: String, voice: String? = nil) {
         guard isSoundEnabled else { return }
         stop()
 
         let task = Process()
         task.executableURL = URL(fileURLWithPath: "/usr/bin/say")
-        task.arguments = ["-v", voice, text]
+        task.arguments = ["-v", voice ?? preferredVoice, text]
 
         isPlaying = true
 
@@ -139,7 +149,7 @@ final class AudioService: ObservableObject {
     private func playTTSFallback(word: Word, onFinish: (() -> Void)? = nil) {
         let task = Process()
         task.executableURL = URL(fileURLWithPath: "/usr/bin/say")
-        task.arguments = ["-v", "Alex", word.word]
+        task.arguments = ["-v", preferredVoice, word.word]
 
         isPlaying = true
 

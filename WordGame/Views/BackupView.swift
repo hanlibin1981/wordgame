@@ -71,7 +71,10 @@ struct BackupView: View {
                             backup: backup,
                             isRestoring: isRestoring,
                             isDeleting: isDeleting,
-                            onRestore: { self.selectedRestore = backup },
+                            onRestore: {
+                                self.selectedRestore = backup
+                                self.showRestoreConfirm = true
+                            },
                             onDelete: { self.deleteBackupById(backup.id) }
                         )
                     }
@@ -129,7 +132,7 @@ struct BackupView: View {
         isCreating = true
         DispatchQueue.global(qos: .userInitiated).async {
             do {
-                let url = try BackupService.shared.createBackup()
+                _ = try BackupService.shared.createBackup()
                 DispatchQueue.main.async {
                     isCreating = false
                     loadBackups()
@@ -155,12 +158,14 @@ struct BackupView: View {
                     isRestoring = false
                     successMessage = "已从备份恢复"
                     showSuccess = true
+                    selectedRestore = nil
                 }
             } catch {
                 DispatchQueue.main.async {
                     isRestoring = false
                     errorMessage = error.localizedDescription
                     showError = true
+                    selectedRestore = nil
                 }
             }
         }

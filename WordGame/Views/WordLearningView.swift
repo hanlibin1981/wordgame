@@ -14,7 +14,7 @@ struct WordLearningView: View {
     @State private var localAudioPlaying: [String: Bool] = [:]
 
     private var allStudied: Bool {
-        learningWords.allSatisfy { studiedWordIds.contains($0.id) }
+        !learningWords.isEmpty && learningWords.allSatisfy { studiedWordIds.contains($0.id) }
     }
 
     var body: some View {
@@ -65,13 +65,26 @@ struct WordLearningView: View {
     // MARK: - Word Card List
     private var wordCardList: some View {
         ScrollView {
-            LazyVStack(spacing: 12) {
-                ForEach(Array(learningWords.enumerated()), id: \.element.id) { idx, word in
-                    wordCard(for: word, index: idx)
+            if learningWords.isEmpty {
+                VStack(spacing: 12) {
+                    Image(systemName: "tray")
+                        .font(.system(size: 40))
+                        .foregroundStyle(.tertiary)
+                    Text("本关暂无可学习单词")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundStyle(.secondary)
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.top, 48)
+            } else {
+                LazyVStack(spacing: 12) {
+                    ForEach(Array(learningWords.enumerated()), id: \.element.id) { idx, word in
+                        wordCard(for: word, index: idx)
+                    }
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 100)
             }
-            .padding(.horizontal, 24)
-            .padding(.bottom, 100)
         }
     }
 
@@ -182,15 +195,24 @@ struct LearningWordCard: View {
                             // 可展开的例句区域
                             HStack(alignment: .top, spacing: 6) {
                                 Text("例句：")
-                                    .font(.system(size: 15, weight: .semibold))
+                                    .font(.system(size: 16, weight: .semibold))
                                     .foregroundColor(.warningOrange)
                                     .lineLimit(1)
 
-                                Text(sentence)
-                                    .font(.system(size: 15))
-                                    .foregroundColor(.secondary)
-                                    .italic()
-                                    .lineLimit(isSentenceExpanded ? nil : 2)
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text(sentence)
+                                        .font(.system(size: 22, weight: .regular))
+                                        .foregroundColor(.secondary)
+                                        .italic()
+                                        .lineLimit(isSentenceExpanded ? nil : 2)
+
+                                    if isSentenceExpanded, let translation = word.sentenceTranslation, !translation.isEmpty {
+                                        Text(translation)
+                                            .font(.system(size: 22, weight: .regular))
+                                            .foregroundColor(.primaryBlue)
+                                            .lineLimit(nil)
+                                    }
+                                }
 
                                 Spacer()
 
@@ -216,26 +238,6 @@ struct LearningWordCard: View {
                                             .foregroundColor(.warningOrange)
                                     }
                                     .buttonStyle(.plain)
-                                }
-                            }
-
-                            // 展开时显示中文翻译
-                            if isSentenceExpanded {
-                                if let translation = word.sentenceTranslation, !translation.isEmpty {
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text("翻译：")
-                                            .font(.system(size: 12, weight: .semibold))
-                                            .foregroundColor(.primaryBlue)
-                                        Text(translation)
-                                            .font(.system(size: 13))
-                                            .foregroundColor(.secondary)
-                                    }
-                                    .padding(.top, 6)
-                                } else {
-                                    Text("点击音频按钮听例句朗读")
-                                        .font(.system(size: 12))
-                                        .foregroundColor(.secondary)
-                                        .padding(.top, 4)
                                 }
                             }
                         }
