@@ -405,6 +405,51 @@ final class GameViewModel: ObservableObject {
     }
 
     // MARK: - Level Generation
+    /// Find the first unlocked-but-not-passed level to continue from.
+    /// Starts from gameProgress position and scans forward.
+    func findCurrentLevel(for book: WordBook) async -> GameLevel? {
+        do {
+            let progress = try database.fetchOrCreateProgress(forBookId: book.id)
+            let records = try database.fetchAllLevelRecords(forBookId: book.id)
+            let levels = generateLevels(for: book)
+            guard !levels.isEmpty else { return nil }
+
+            // Build a set of passed (chapter, stage) keys
+            var passedKeys: Set<String> = []
+            for r in records where r.isPassed {
+                passedKeys.insert("\(r.chapter)-\(r.stage)")
+            }
+
+            // Start scanning from the game's current position
+            var chapter = progress.currentChapter
+            var stage = progress.currentStage
+
+            // Limit scan to avoid infinite loop (scan up to 50 levels)
+            for _ in 0..<50 {
+                let key = "\(chapter)-\(stage)"
+                // If this level exists and hasn't been passed, it's the one to play
+                if let level = levels.first(where: { $0.chapter == chapter && $0.stage == stage }), !passedKeys.contains(key) {
+                    return level
+                }
+                // Advance to next level
+                if stage < 4 {
+                    stage += 1
+                } else {
+                    chapter += 1
+                    stage = 1
+                }
+                // If we've gone beyond all generated levels, use the last one
+                if chapter > (levels.map { $0.chapter }.max() ?? 1) {
+                    return levels.last
+                }
+            }
+
+            return levels.first
+        } catch {
+            return nil
+        }
+    }
+
     /// Generate levels for a word book based on word count
     func generateLevels(for book: WordBook) -> [GameLevel] {
         do {

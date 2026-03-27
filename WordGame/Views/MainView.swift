@@ -42,6 +42,8 @@ struct LearningTabView: View {
     @EnvironmentObject var wordBookVM: WordBookViewModel
     @AppStorage("defaultWordBookId") private var defaultWordBookId: String = ""
     @State private var navigationPath = NavigationPath()
+    @StateObject private var gameVM = GameViewModel()
+    @State private var isFindingLevel = false
 
     /// The word book used for "continue learning" — defaults to stored preference, falls back to first book.
     private var continueLearningBook: WordBook? {
@@ -58,7 +60,9 @@ struct LearningTabView: View {
 
                     // Continue Learning Card
                     if let continueBook = continueLearningBook {
-                        continueLearningCard(book: continueBook)
+                        continueLearningCard(book: continueBook, gameVM: gameVM, isFindingLevel: $isFindingLevel) { level in
+                            navigationPath.append(LearningNavDestination.game(book: continueBook, level: level))
+                        }
                     }
 
                     // All Word Books Grid
@@ -92,7 +96,7 @@ struct LearningTabView: View {
         }
     }
 
-    private func continueLearningCard(book: WordBook) -> some View {
+    private func continueLearningCard(book: WordBook, gameVM: GameViewModel, isFindingLevel: Binding<Bool>, onLevelFound: @escaping (GameLevel) -> Void) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Text("继续学习")
@@ -104,12 +108,30 @@ struct LearningTabView: View {
             }
 
             Button(action: {
-                navigationPath.append(LearningNavDestination.levelSelection(book))
+                isFindingLevel.wrappedValue = true
+                Task {
+                    if let level = await gameVM.findCurrentLevel(for: book) {
+                        await MainActor.run {
+                            onLevelFound(level)
+                            isFindingLevel.wrappedValue = false
+                        }
+                    } else {
+                        await MainActor.run {
+                            isFindingLevel.wrappedValue = false
+                        }
+                    }
+                }
             }) {
                 HStack {
-                    Image(systemName: "play.circle.fill")
-                        .font(DesignFont.title2)
-                    Text("开始闯关")
+                    if isFindingLevel.wrappedValue {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .scaleEffect(0.8)
+                    } else {
+                        Image(systemName: "play.circle.fill")
+                            .font(DesignFont.title2)
+                    }
+                    Text(isFindingLevel.wrappedValue ? "加载中..." : "开始闯关")
                         .font(DesignFont.headline)
                     Spacer()
                     Image(systemName: "chevron.right")
@@ -119,6 +141,7 @@ struct LearningTabView: View {
                 .foregroundColor(.white)
                 .cornerRadius(12)
             }
+            .disabled(isFindingLevel.wrappedValue)
         }
         .padding()
         .background(Color.cardBackground)
