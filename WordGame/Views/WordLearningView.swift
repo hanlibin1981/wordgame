@@ -14,7 +14,8 @@ struct WordLearningView: View {
     @State private var localAudioPlaying: [String: Bool] = [:]
 
     private var allStudied: Bool {
-        !learningWords.isEmpty && learningWords.allSatisfy { studiedWordIds.contains($0.id) }
+        guard !learningWords.isEmpty else { return false }
+        return learningWords.allSatisfy { studiedWordIds.contains($0.id) }
     }
 
     var body: some View {

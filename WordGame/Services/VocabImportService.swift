@@ -21,8 +21,7 @@ final class VocabImportService {
         return words.contains {
             let hasSentence = !($0.sentence?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
             let hasTranslation = !($0.sentenceTranslation?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
-            let hasPlaceholderTranslation = ($0.sentenceTranslation ?? "").range(of: #"[A-Za-z]|的翻译"#, options: .regularExpression) != nil
-            return (hasSentence && !hasTranslation) || hasPlaceholderTranslation
+            return hasSentence && !hasTranslation  // reimport if sentence exists but translation is truly missing
         }
     }
 
@@ -171,23 +170,35 @@ final class VocabImportService {
         return book
     }
 
-    /// Parse a CSV line handling quoted values
+    /// Parse a CSV line properly handling quoted values and escaped quotes ("") within fields.
     private func parseCSVLine(_ line: String) -> [String] {
         var result: [String] = []
         var current = ""
         var inQuotes = false
-
-        for char in line {
+        var chars = Array(line)
+        var i = 0
+        while i < chars.count {
+            let char = chars[i]
             if char == "\"" {
-                inQuotes.toggle()
+                if inQuotes {
+                    // Check for escaped double quote: "" inside quoted field
+                    if i + 1 < chars.count && chars[i + 1] == "\"" {
+                        current.append("\"")
+                        i += 1
+                    } else {
+                        inQuotes = false
+                    }
+                } else {
+                    inQuotes = true
+                }
             } else if char == "," && !inQuotes {
                 result.append(current)
                 current = ""
             } else {
                 current.append(char)
             }
+            i += 1
         }
-
         result.append(current)
         return result
     }
@@ -204,12 +215,6 @@ final class VocabImportService {
         )
 
         try DatabaseService.shared.createWord(newWord)
-
-        // Update word count in book
-        if var book = try DatabaseService.shared.fetchWordBook(byId: bookId) {
-            book.wordCount += 1
-            try DatabaseService.shared.updateWordBook(book)
-        }
     }
 }
 

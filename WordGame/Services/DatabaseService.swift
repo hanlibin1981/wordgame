@@ -51,6 +51,7 @@ final class DatabaseService: ObservableObject {
     private let gpTotalAnswered = Expression<Int>("total_answered")
     private let gpIsCompleted = Expression<Bool>("is_completed")
     private let gpUpdatedAt = Expression<Double>("updated_at")
+    private let gpLastPassedBossChapter = Expression<Int>("last_passed_boss_chapter")
 
     // MARK: - LearningRecords Columns
     private let lrId = Expression<String>("id")
@@ -111,6 +112,19 @@ final class DatabaseService: ObservableObject {
             if !existingColumns.contains("audio_url") {
                 try db.run("ALTER TABLE words ADD COLUMN audio_url TEXT")
                 logger.info("Migrated words table: added audio_url column")
+            }
+
+            // Migrate game_progress table for lastPassedBossChapter
+            let progressTableInfo = try db.prepare("PRAGMA table_info(game_progress)")
+            var progressColumns = Set<String>()
+            for row in progressTableInfo {
+                if let name = row[1] as? String {
+                    progressColumns.insert(name)
+                }
+            }
+            if !progressColumns.contains("last_passed_boss_chapter") {
+                try db.run("ALTER TABLE game_progress ADD COLUMN last_passed_boss_chapter INTEGER DEFAULT 0")
+                logger.info("Migrated game_progress table: added last_passed_boss_chapter column")
             }
         } catch {
             logger.error("Migration failed: \(error.localizedDescription)")
@@ -322,6 +336,10 @@ final class DatabaseService: ObservableObject {
         )
 
         try db.run(insert)
+
+        // Atomically increment word_count
+        try db.run("UPDATE word_books SET word_count = word_count + 1, updated_at = ? WHERE id = ?",
+                   Date().timeIntervalSince1970, word.bookId)
     }
 
     func createWords(_ wordList: [Word]) throws {
@@ -404,8 +422,15 @@ final class DatabaseService: ObservableObject {
     func deleteWord(byId id: String) throws {
         guard let db = db else { throw DatabaseError.connectionFailed }
 
+        // Fetch word to get its bookId before deleting
+        guard let word = try fetchWord(byId: id) else { return }
+
         let query = words.filter(wId == id)
         try db.run(query.delete())
+
+        // Atomically decrement word_count
+        try db.run("UPDATE word_books SET word_count = MAX(0, word_count - 1), updated_at = ? WHERE id = ?",
+                   Date().timeIntervalSince1970, word.bookId)
     }
 
     func fetchRandomWords(forBookId bookId: String, count: Int, excludingIds: [String] = []) throws -> [Word] {
@@ -458,7 +483,8 @@ final class DatabaseService: ObservableObject {
                 totalCorrect: row[gpTotalCorrect],
                 totalAnswered: row[gpTotalAnswered],
                 isCompleted: row[gpIsCompleted],
-                updatedAt: Date(timeIntervalSince1970: row[gpUpdatedAt])
+                updatedAt: Date(timeIntervalSince1970: row[gpUpdatedAt]),
+                lastPassedBossChapter: row[gpLastPassedBossChapter]
             )
         }
 
@@ -480,7 +506,8 @@ final class DatabaseService: ObservableObject {
             gpTotalCorrect <- progress.totalCorrect,
             gpTotalAnswered <- progress.totalAnswered,
             gpIsCompleted <- progress.isCompleted,
-            gpUpdatedAt <- progress.updatedAt.timeIntervalSince1970
+            gpUpdatedAt <- progress.updatedAt.timeIntervalSince1970,
+            gpLastPassedBossChapter <- progress.lastPassedBossChapter
         )
 
         try db.run(insert)
@@ -497,7 +524,8 @@ final class DatabaseService: ObservableObject {
             gpTotalCorrect <- progress.totalCorrect,
             gpTotalAnswered <- progress.totalAnswered,
             gpIsCompleted <- progress.isCompleted,
-            gpUpdatedAt <- Date().timeIntervalSince1970
+            gpUpdatedAt <- Date().timeIntervalSince1970,
+            gpLastPassedBossChapter <- progress.lastPassedBossChapter
         ))
     }
 

@@ -12,6 +12,10 @@ enum GamePhase {
 struct GameView: View {
     let book: WordBook
     let level: GameLevel?
+    /// When true, runs in review mode — skips learning phase, uses provided word pool
+    var isReviewMode: Bool = false
+    /// Words to use in review mode (only used when isReviewMode == true)
+    var reviewWords: [Word] = []
     /// Callback when user wants to continue to the next level.
     /// Called with (book, nextLevel) when tapped, nil when no next level.
     var onContinueToNext: ((WordBook, GameLevel) -> Void)?
@@ -40,6 +44,7 @@ struct GameView: View {
     /// Prevents state from being cleared while an async auto-advance Task is running.
     @State private var pendingReset: (() -> Void)?
     /// Current game phase: learning → playing → completed
+    /// In review mode, start directly at .playing (skip learning phase)
     @State private var gamePhase: GamePhase = .learning
     /// Set of word IDs that have been marked as studied in the learning phase
     @State private var studiedWordIds: Set<String> = []
@@ -101,9 +106,15 @@ struct GameView: View {
             }
         }
         .onAppear {
-            // Load words for the learning phase (no game start yet)
             Task {
-                await gameVM.startGame(for: book, level: level)
+                if isReviewMode {
+                    // Review mode: skip learning phase, start questions immediately
+                    gamePhase = .playing
+                    await gameVM.startReviewGame(for: book, level: level!, reviewWords: reviewWords)
+                } else {
+                    // Normal mode: start with learning phase
+                    await gameVM.startGame(for: book, level: level)
+                }
             }
         }
         .onChange(of: gameVM.isGameCompleted) { _, completed in
@@ -163,7 +174,9 @@ struct GameView: View {
     }
 
     /// Transition from learning phase to playing phase and start the game.
+    /// No-op in review mode since we start directly in playing phase.
     private func startGameplay() {
+        guard !isReviewMode else { return }
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             gamePhase = .playing
         }
@@ -726,7 +739,9 @@ struct GameView: View {
             .animation(.spring(response: 0.5, dampingFraction: 0.6), value: visibleStars)
 
             // Title
-            Text(result.isPassed ? "恭喜通关!" : "继续加油!")
+            Text(result.isPassed
+                 ? (isReviewMode ? "复习完成!" : "恭喜通关!")
+                 : (isReviewMode ? "继续加油!" : "继续加油!"))
                 .font(.system(size: 28, weight: .bold))
                 .foregroundColor(result.isPassed ? .successGreen : .errorRed)
 
@@ -905,7 +920,9 @@ struct GameView: View {
                     }
 
                     Button(action: restartGame) {
-                        Text(gameVM.gameResult?.isPassed == true ? "再玩一次" : "重新挑战")
+                        Text(isReviewMode
+                             ? (gameVM.gameResult?.isPassed == true ? "再复习一次" : "重新挑战")
+                             : (gameVM.gameResult?.isPassed == true ? "再玩一次" : "重新挑战"))
                             .font(.system(size: 16, weight: .semibold))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 13)
@@ -971,7 +988,12 @@ struct GameView: View {
         studiedWordIds = []
         lastAutoPlayedQuestionID = nil
         Task {
-            await gameVM.startGame(for: book, level: level)
+            if isReviewMode {
+                gamePhase = .playing
+                await gameVM.startReviewGame(for: book, level: level!, reviewWords: reviewWords)
+            } else {
+                await gameVM.startGame(for: book, level: level)
+            }
         }
     }
 }

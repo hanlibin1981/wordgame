@@ -8,6 +8,17 @@ enum ReviewContentState: Equatable {
     case fallbackWords
 }
 
+/// A review "level" — groups review words into a playable unit.
+struct ReviewLevel: Identifiable, Equatable {
+    let id: Int          // 1-based index
+    let wordIds: [String]
+    let totalWords: Int
+    /// How many of these words are already studied this session
+    var studiedCount: Int = 0
+
+    var isAllStudied: Bool { studiedCount >= totalWords }
+}
+
 /// ViewModel for learning/review mode
 @MainActor
 final class LearningViewModel: ObservableObject {
@@ -19,6 +30,8 @@ final class LearningViewModel: ObservableObject {
     @Published var currentIndex = 0
     @Published var masteryFilter: Int? = nil
     @Published var reviewContentState: ReviewContentState = .noPassedLevels
+    /// Review levels generated from the loaded review words
+    @Published var reviewLevels: [ReviewLevel] = []
 
     private let database = DatabaseService.shared
 
@@ -237,6 +250,9 @@ final class LearningViewModel: ObservableObject {
                 reviewContentState = .noPassedLevels
             }
 
+            // Generate review levels from loaded words
+            reviewLevels = generateReviewLevels(from: reviewWords)
+
             currentIndex = 0
             currentWord = reviewWords.first
             showAnswer = false
@@ -244,7 +260,33 @@ final class LearningViewModel: ObservableObject {
         } catch {
             logger.error("Failed to load Ebbinghaus review words: \(error.localizedDescription)")
             reviewWords = []
+            reviewLevels = []
             reviewContentState = .noPassedLevels
+        }
+    }
+
+    /// Chunk review words into ReviewLevel groups (10 words per level).
+    private func generateReviewLevels(from words: [Word]) -> [ReviewLevel] {
+        let wordsPerLevel = 10
+        return words.chunked(into: wordsPerLevel).enumerated().map { index, chunk in
+            ReviewLevel(
+                id: index + 1,
+                wordIds: chunk.map { $0.id },
+                totalWords: chunk.count,
+                studiedCount: 0
+            )
+        }
+    }
+
+    /// Get the words for a specific review level.
+    func words(forReviewLevel level: ReviewLevel) -> [Word] {
+        reviewWords.filter { level.wordIds.contains($0.id) }
+    }
+
+    /// Increment the studied count for a review level.
+    func markLevelStudied(_ levelId: Int) {
+        if let index = reviewLevels.firstIndex(where: { $0.id == levelId }) {
+            reviewLevels[index].studiedCount = reviewLevels[index].totalWords
         }
     }
 }

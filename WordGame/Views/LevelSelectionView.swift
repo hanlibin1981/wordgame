@@ -47,51 +47,51 @@ struct LevelSelectionView: View {
     }
 
     /// Returns true if the given level is locked (cannot be played yet).
-    /// Uses gameProgress as the primary unlock tracker — LevelRecord is only
-    /// consulted for boss stage completion (which is never advanced via progress).
+    /// Uses lastPassedBossChapter to determine if a chapter's regular levels (1-3)
+    /// are unlocked — this avoids the bug where passing a boss (currentStage=4)
+    /// would incorrectly unlock all regular stages in the same chapter.
     ///
     /// Locking rules:
-    /// - Chapter 1, Stage 1: always unlocked (first level)
-    /// - Regular stage n (1-3): unlocked if gameProgress shows the user has reached
-    ///   at least stage n-1 in this chapter (currentChapter > chapter OR same chapter
-    ///   with currentStage >= stage-1)
-    /// - Boss (stage=4, isBossLevel=true): unlocked only when LevelRecord confirms
-    ///   the preceding stage-3 boss has been beaten
+    /// - Chapter 1, Stage 1: always unlocked
+    /// - Regular stage (1-3): unlocked when lastPassedBossChapter >= level.chapter - 1
+    ///   (i.e., the boss of the previous chapter has been passed)
+    /// - Boss (stage=4): unlocked only when the LevelRecord confirms stage-3 was beaten
     private func isLevelLocked(_ level: GameLevel) -> Bool {
         // First level is always accessible
         if level.chapter == 1 && level.stage == 1 && !level.isBossLevel {
             return false
         }
 
-        // Use gameProgress as the primary unlock signal
         if let gp = gameProgress {
             if level.isBossLevel {
-                // Boss unlocks when the user has progressed past stage 3 of this chapter
-                // AND the boss LevelRecord confirms it was beaten
+                // Boss unlocks when stage 3 of the same chapter is passed
                 let stage3Passed = isStagePassed(level.chapter, 3)
                 return !stage3Passed
             } else {
-                // Regular stage: unlocked if gameProgress indicates the user has
-                // advanced far enough. currentStage >= level.stage means the user
-                // has completed stage (level.stage - 1) already.
+                // Regular stage: unlocked when the boss of the previous chapter has been passed.
+                // lastPassedBossChapter >= level.chapter - 1 means that chapter's boss is done.
+                // Special case: chapter 1 stage 1 is already handled above.
+                if level.chapter > 1 {
+                    // For stage 1: requires previous chapter's boss (lastPassedBossChapter >= chapter - 1)
+                    // For stage 2-3: also requires previous chapter's boss since stage 1
+                    // is gated by same rule.
+                    return gp.lastPassedBossChapter < level.chapter - 1
+                }
+                // Chapter 1, stages 2-3: unlocked by currentStage progression
                 if gp.currentChapter > level.chapter {
-                    return false  // Past this chapter entirely
+                    return false
                 }
                 if gp.currentChapter == level.chapter && gp.currentStage >= level.stage {
-                    return false  // Reached this stage or beyond in same chapter
+                    return false
                 }
-                // Need to check if a previous stage in the same chapter was beaten
+                // Need previous stage in same chapter to be beaten
                 let prevStage = level.stage - 1
                 if prevStage == 0 { return false }
-                // For stage 1 of chapter > 1: require previous chapter's boss (stage 4)
-                if prevStage == 1 && level.chapter > 1 {
-                    return !isChapterCompleted(level.chapter - 1)
-                }
                 return !isStagePassed(level.chapter, prevStage)
             }
         }
 
-        // No progress yet: stage 1-1 is only unlocked thing
+        // No progress yet: only stage 1-1 is unlocked
         return !(level.chapter == 1 && level.stage == 1 && !level.isBossLevel)
     }
 

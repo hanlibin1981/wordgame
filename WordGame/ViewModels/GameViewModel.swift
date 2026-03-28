@@ -28,6 +28,10 @@ final class GameViewModel: ObservableObject {
     /// Time when the current question was shown to the user (for accurate answer time tracking)
     private var currentQuestionStartTime: Date?
     private let database = DatabaseService.shared
+    /// When true, the game is in review mode (no learning phase, uses provided word set)
+    private var isReviewMode = false
+    /// Pool of words to use when in review mode (set by startReviewGame)
+    private var reviewWordsPool: [Word] = []
 
     // MARK: - Computed Properties
     /// Words available for the current level's pre-game learning phase.
@@ -125,6 +129,16 @@ final class GameViewModel: ObservableObject {
         _ = try? database.fetchOrCreateProgress(forBookId: book.id)
     }
 
+    /// Start a review game session for a specific review level.
+    /// In review mode there is no learning phase — questions begin immediately.
+    func startReviewGame(for book: WordBook, level: GameLevel, reviewWords: [Word]) async {
+        isReviewMode = true
+        reviewWordsPool = reviewWords
+        await startGame(for: book, level: level)
+        isReviewMode = false
+        reviewWordsPool = []
+    }
+
     /// Generate questions for a specific level.
     /// Respects questionsPerRound from UserSettings (Bug 8 fix).
     private func generateQuestions(for level: GameLevel?) {
@@ -137,10 +151,15 @@ final class GameViewModel: ObservableObject {
         // Determine which words to use
         let wordsToUse: [Word]
         if let level = level {
-            // Use words for this specific level, limited to questionsPerRound
-            let levelWordIds = Set(level.wordIds)
-            let filtered = allWords.filter { levelWordIds.contains($0.id) }
-            wordsToUse = Array(filtered.prefix(targetCount))
+            // In review mode, use the provided review word pool filtered by level.wordIds
+            if !reviewWordsPool.isEmpty {
+                let levelWordIds = Set(level.wordIds)
+                wordsToUse = Array(reviewWordsPool.filter { levelWordIds.contains($0.id) }.prefix(targetCount))
+            } else {
+                let levelWordIds = Set(level.wordIds)
+                let filtered = allWords.filter { levelWordIds.contains($0.id) }
+                wordsToUse = Array(filtered.prefix(targetCount))
+            }
         } else {
             // Use random words for practice, capped at questionsPerRound
             wordsToUse = Array(allWords.shuffled().prefix(targetCount))
@@ -408,7 +427,9 @@ final class GameViewModel: ObservableObject {
             // Advance to next level if passed
             if result.isPassed {
                 if level.isBossLevel {
-                    // Boss passed, move to next chapter
+                    // Boss passed: record which chapter's boss was cleared
+                    progress.lastPassedBossChapter = max(progress.lastPassedBossChapter, level.chapter)
+                    // Move to next chapter's stage 1
                     progress.currentChapter += 1
                     progress.currentStage = 1
                 } else if level.stage == 3 {

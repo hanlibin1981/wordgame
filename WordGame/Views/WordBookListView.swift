@@ -355,30 +355,18 @@ struct ImportCSVView: View {
         errorMessage = nil
 
         Task {
-            var securityResourceAcquired = false
             do {
-                // Access security scoped resource
-                guard url.startAccessingSecurityScopedResource() else {
-                    throw VocabImportError.importFailed("无法访问文件")
-                }
-                securityResourceAcquired = true
-
+                // VocabImportService.importCSV(from:) handles security-scoped resource
+                // access internally. Do NOT pre-access here — that would cause double-access
+                // and potential resource leaks if the inner call throws.
                 try await wordBookVM.importCSV(
                     from: url,
                     bookName: bookName,
                     description: bookDescription.isEmpty ? nil : bookDescription
                 )
 
-                // Clean up resource if we acquired it
-                if securityResourceAcquired {
-                    url.stopAccessingSecurityScopedResource()
-                }
                 dismiss()
             } catch {
-                // Only release if we actually acquired the resource
-                if securityResourceAcquired {
-                    url.stopAccessingSecurityScopedResource()
-                }
                 errorMessage = error.localizedDescription
                 isImporting = false
             }

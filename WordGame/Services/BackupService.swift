@@ -108,7 +108,9 @@ final class BackupService {
 
         sql += "COMMIT;\n"
 
-        try sql.write(to: fileURL, atomically: true, encoding: .utf8)
+        let tempURL = backupsDirectory.appendingPathComponent("temp_\(fileName)")
+        try sql.write(to: tempURL, atomically: true, encoding: .utf8)
+        try FileManager.default.moveItem(at: tempURL, to: fileURL)
         return fileURL
     }
 
@@ -155,6 +157,18 @@ final class BackupService {
         }
         defer { sqlite3_close(db) }
 
+        // Wrap everything in an exclusive transaction so cleanup+restore is atomic.
+        // On any failure we roll back, leaving the DB untouched.
+        var errMsg: UnsafeMutablePointer<CChar>?
+
+        defer { sqlite3_free(errMsg) }
+
+        let beginCode = sqlite3_exec(db, "BEGIN EXCLUSIVE TRANSACTION;", nil, nil, &errMsg)
+        if beginCode != SQLITE_OK {
+            let msg = errMsg != nil ? String(cString: errMsg!) : "Unknown error"
+            throw NSError(domain: "BackupService", code: Int(beginCode), userInfo: [NSLocalizedDescriptionKey: "BEGIN EXCLUSIVE TRANSACTION failed: \(msg)"])
+        }
+
         let cleanupSQL = """
         PRAGMA foreign_keys = OFF;
         DELETE FROM learning_records;
@@ -165,19 +179,25 @@ final class BackupService {
         PRAGMA foreign_keys = ON;
         """
 
-        var errMsg: UnsafeMutablePointer<CChar>?
         let cleanupCode = sqlite3_exec(db, cleanupSQL, nil, nil, &errMsg)
         if cleanupCode != SQLITE_OK {
+            sqlite3_exec(db, "ROLLBACK;", nil, nil, nil)
             let msg = errMsg != nil ? String(cString: errMsg!) : "Unknown error"
-            sqlite3_free(errMsg)
             throw NSError(domain: "BackupService", code: Int(cleanupCode), userInfo: [NSLocalizedDescriptionKey: msg])
         }
 
         let code = sqlite3_exec(db, sql, nil, nil, &errMsg)
         if code != SQLITE_OK {
+            sqlite3_exec(db, "ROLLBACK;", nil, nil, nil)
             let msg = errMsg != nil ? String(cString: errMsg!) : "Unknown error"
-            sqlite3_free(errMsg)
             throw NSError(domain: "BackupService", code: Int(code), userInfo: [NSLocalizedDescriptionKey: msg])
+        }
+
+        let commitCode = sqlite3_exec(db, "COMMIT;", nil, nil, &errMsg)
+        if commitCode != SQLITE_OK {
+            sqlite3_exec(db, "ROLLBACK;", nil, nil, nil)
+            let msg = errMsg != nil ? String(cString: errMsg!) : "Unknown error"
+            throw NSError(domain: "BackupService", code: Int(commitCode), userInfo: [NSLocalizedDescriptionKey: msg])
         }
     }
 }

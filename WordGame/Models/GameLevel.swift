@@ -38,6 +38,10 @@ struct GameProgress: Identifiable, Codable, Equatable {
     var totalAnswered: Int
     var isCompleted: Bool
     var updatedAt: Date
+    /// Tracks the highest chapter whose boss has been passed.
+    /// Used for unlocking regular levels (1-3) of each chapter.
+    /// Default=0 means no boss passed yet.
+    var lastPassedBossChapter: Int
 
     init(
         id: String = UUID().uuidString,
@@ -48,7 +52,8 @@ struct GameProgress: Identifiable, Codable, Equatable {
         totalCorrect: Int = 0,
         totalAnswered: Int = 0,
         isCompleted: Bool = false,
-        updatedAt: Date = Date()
+        updatedAt: Date = Date(),
+        lastPassedBossChapter: Int = 0
     ) {
         self.id = id
         self.bookId = bookId
@@ -59,6 +64,7 @@ struct GameProgress: Identifiable, Codable, Equatable {
         self.totalAnswered = totalAnswered
         self.isCompleted = isCompleted
         self.updatedAt = updatedAt
+        self.lastPassedBossChapter = lastPassedBossChapter
     }
 
     var accuracy: Double {

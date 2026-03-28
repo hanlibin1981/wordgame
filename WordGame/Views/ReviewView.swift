@@ -1,16 +1,81 @@
 import SwiftUI
 
-/// Review view using Ebbinghaus spaced repetition method
+/// Review view — presents review words as individual game-like levels.
 struct ReviewView: View {
     let book: WordBook
     @StateObject private var learningVM = LearningViewModel()
     @StateObject private var gameVM = GameViewModel()
     @Environment(\.dismiss) private var dismiss
-    @State private var studiedWordIds: Set<String> = []
+    @State private var isLoadingLevels = true
+    /// The review level currently being played (nil = not in game)
+    @State private var activeLevel: ReviewLevel?
 
-    private var allStudied: Bool {
-        !learningVM.reviewWords.isEmpty &&
-        learningVM.reviewWords.allSatisfy { studiedWordIds.contains($0.id) }
+    var body: some View {
+        VStack(spacing: 0) {
+            // Header
+            headerSection
+
+            Divider()
+
+            // Level grid
+            if isLoadingLevels {
+                Spacer()
+                VStack(spacing: 16) {
+                    ProgressView()
+                    Text("加载复习关卡...")
+                        .font(.system(size: 14))
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if learningVM.reviewLevels.isEmpty {
+                emptyStateView
+            } else {
+                levelGrid
+            }
+        }
+        .frame(minWidth: 600, minHeight: 480)
+        .background(Color.backgroundMain)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("返回") { dismiss() }
+            }
+        }
+        .sheet(item: $activeLevel) { level in
+            ReviewGameView(
+                book: book,
+                level: level,
+                reviewWords: learningVM.reviewWords,
+                onComplete: { handleLevelComplete(level) }
+            )
+        }
+        .onAppear {
+            loadReviewLevels()
+        }
+    }
+
+    // MARK: - Header
+    private var headerSection: some View {
+        VStack(spacing: 8) {
+            Text("选择复习关卡")
+                .font(.system(size: 20, weight: .bold))
+
+            Text(subtitleText)
+                .font(.system(size: 14))
+                .foregroundStyle(.secondary)
+
+            if !learningVM.reviewLevels.isEmpty {
+                let completed = learningVM.reviewLevels.filter { $0.isAllStudied }.count
+                HStack(spacing: 8) {
+                    ProgressView(value: Double(completed), total: Double(learningVM.reviewLevels.count))
+                        .tint(completed == learningVM.reviewLevels.count ? Color.successGreen : Color.warningOrange)
+
+                    Text("\(completed)/\(learningVM.reviewLevels.count) 关")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .padding()
     }
 
     private var subtitleText: String {
@@ -26,12 +91,9 @@ struct ReviewView: View {
 
     private var emptyStateTitle: String {
         switch learningVM.reviewContentState {
-        case .dueWords:
-            return "暂无需要复习的单词"
-        case .fallbackWords:
-            return "当前没有到期内容"
-        case .noPassedLevels:
-            return "还没有可复习的内容"
+        case .dueWords:   return "暂无需要复习的单词"
+        case .fallbackWords: return "当前没有到期内容"
+        case .noPassedLevels: return "还没有可复习的内容"
         }
     }
 
@@ -46,309 +108,197 @@ struct ReviewView: View {
         }
     }
 
-    var body: some View {
-        VStack(spacing: 0) {
-            headerSection
-            wordCardList
-            bottomButton
-        }
-        .background(Color.backgroundMain)
-        .onAppear {
-            Task {
-                let levels = gameVM.generateLevels(for: book)
-                await learningVM.loadEbbinghausReviewWords(for: book, levels: levels)
-            }
-        }
-    }
-
-    // MARK: - Header
-    private var headerSection: some View {
-        VStack(spacing: 8) {
-            HStack {
-                Button(action: { dismiss() }) {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 22))
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-            }
-
-            Text("艾宾浩斯复习")
-                .font(.system(size: 22, weight: .bold))
-
-            Text(subtitleText)
+    // MARK: - Empty State
+    private var emptyStateView: some View {
+        VStack(spacing: 16) {
+            Spacer()
+            Image(systemName: "checkmark.circle")
+                .font(.system(size: 48))
+                .foregroundColor(.successGreen)
+            Text(emptyStateTitle)
+                .font(.system(size: 16, weight: .medium))
+            Text(emptyStateDescription)
                 .font(.system(size: 14))
                 .foregroundStyle(.secondary)
-
-            if learningVM.reviewWords.isEmpty {
-                Text(emptyStateTitle)
-                    .font(.system(size: 14))
-                    .foregroundStyle(.secondary)
-            } else {
-                let studied = studiedWordIds.count
-                let total = learningVM.reviewWords.count
-                HStack(spacing: 8) {
-                    ProgressView(value: Double(studied), total: Double(total))
-                        .tint(studied == total ? Color.successGreen : Color.warningOrange)
-
-                    Text("\(studied)/\(total)")
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(studied == total ? Color.successGreen : .secondary)
-                }
-            }
+                .multilineTextAlignment(.center)
+            Spacer()
         }
-        .padding(.horizontal, 24)
-        .padding(.top, 20)
-        .padding(.bottom, 16)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
     }
 
-    // MARK: - Word Card List
-    private var wordCardList: some View {
+    // MARK: - Level Grid
+    private var levelGrid: some View {
         ScrollView {
-            if learningVM.reviewWords.isEmpty {
-                VStack(spacing: 12) {
-                    Image(systemName: "checkmark.circle")
-                        .font(.system(size: 40))
-                        .foregroundColor(.successGreen)
-                    Text(emptyStateTitle)
-                        .font(.system(size: 16, weight: .medium))
-                    Text(emptyStateDescription)
-                        .font(.system(size: 14))
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.top, 48)
-            } else {
-                LazyVStack(spacing: 12) {
-                    ForEach(Array(learningVM.reviewWords.enumerated()), id: \.element.id) { idx, word in
-                        reviewWordCard(for: word, index: idx)
+            LazyVGrid(columns: [
+                GridItem(.flexible()),
+                GridItem(.flexible()),
+                GridItem(.flexible())
+            ], spacing: 16) {
+                ForEach(Array(learningVM.reviewLevels.enumerated()), id: \.element.id) { index, level in
+                    ReviewLevelCard(
+                        level: level,
+                        isCompleted: level.isAllStudied,
+                        isLocked: false
+                    )
+                    .onTapGesture {
+                        activeLevel = level
                     }
+                    .transitionEffect(index: index)
                 }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 100)
             }
+            .padding()
         }
     }
 
-    @ViewBuilder
-    private func reviewWordCard(for word: Word, index: Int) -> some View {
-        ReviewWordCard(
-            word: word,
-            index: index,
-            isStudied: studiedWordIds.contains(word.id)
-        )
+    // MARK: - Data Loading
+    private func loadReviewLevels() {
+        isLoadingLevels = true
+        Task {
+            let levels = gameVM.generateLevels(for: book)
+            await learningVM.loadEbbinghausReviewWords(for: book, levels: levels)
+            isLoadingLevels = false
+        }
     }
 
-    // MARK: - Bottom Button
-    private var bottomButton: some View {
-        VStack(spacing: 0) {
-            Divider()
-
-            HStack(spacing: 12) {
-                Button(action: {
-                    // Mark all as studied
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                        studiedWordIds = Set(learningVM.reviewWords.map { $0.id })
-                    }
-                }) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size: 14, weight: .semibold))
-                        Text("全部标记")
-                            .font(.system(size: 15, weight: .bold))
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .background(Color.successGreen)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-                }
-
-                Button(action: {
-                    dismiss()
-                }) {
-                    HStack(spacing: 8) {
-                        Image(systemName: "house.fill")
-                            .font(.system(size: 15, weight: .semibold))
-                        Text("返回首页")
-                            .font(.system(size: 16, weight: .bold))
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .background(allStudied ? Color.primaryBlue : Color.gray.opacity(0.3))
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-                }
-                .disabled(!allStudied)
-            }
-            .padding(.horizontal, 24)
-            .padding(.vertical, 14)
-            .background(Rectangle().fill(Color.cardBackground))
-        }
-        .onChange(of: learningVM.reviewWords) { _, _ in
-            studiedWordIds = []
-        }
+    // MARK: - Level Completion
+    private func handleLevelComplete(_ level: ReviewLevel) {
+        learningVM.markLevelStudied(level.id)
     }
 }
 
-/// Word card for review mode
-struct ReviewWordCard: View {
-    let word: Word
-    let index: Int
-    let isStudied: Bool
+// MARK: - Review Level Card
+struct ReviewLevelCard: View {
+    let level: ReviewLevel
+    let isCompleted: Bool
+    let isLocked: Bool
 
-    @State private var isSentenceExpanded = false
+    @State private var isHovered = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack(alignment: .top, spacing: 16) {
-                // Studied checkmark / number
-                ZStack {
-                    Circle()
-                        .fill(isStudied ? Color.successGreen : Color.warningOrange.opacity(0.15))
-                        .frame(width: 28, height: 28)
+        VStack(spacing: 10) {
+            ZStack {
+                Circle()
+                    .fill(circleBackgroundColor)
+                    .frame(width: 64, height: 64)
+                    .scaleEffect(isHovered && !isLocked ? 1.1 : 1.0)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isHovered)
 
-                    if isStudied {
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(.white)
-                    } else {
-                        Text("\(index + 1)")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(.warningOrange)
-                    }
+                if isLocked {
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 22))
+                        .foregroundStyle(.secondary)
+                } else if isCompleted {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundStyle(.white)
+                } else {
+                    Text("\(level.id)")
+                        .font(.system(size: 22, weight: .bold))
+                        .foregroundStyle(.white)
                 }
 
-                // Word + phonetic + meaning
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack(spacing: 10) {
-                        Text(word.word)
-                            .font(.system(size: 22, weight: .bold))
-                            .foregroundColor(.primary)
-
-                        if let phonetic = word.phonetic, !phonetic.isEmpty {
-                            Text("/\(phonetic)/")
-                                .font(.system(size: 14))
-                                .foregroundColor(.secondary)
-                        }
-                    }
-
-                    Text(word.meaning)
-                        .font(.system(size: 15))
-                        .foregroundColor(.secondary)
-                        .lineLimit(2)
-
-                    // Mastery level indicator
-                    HStack(spacing: 4) {
-                        ForEach(0..<6, id: \.self) { level in
-                            Circle()
-                                .fill(level <= word.masteryLevel ? Color.successGreen : Color.gray.opacity(0.2))
-                                .frame(width: 8, height: 8)
-                        }
-                        Text("掌握度")
-                            .font(.system(size: 11))
-                            .foregroundColor(.secondary)
-                    }
-
-                    if let sentence = word.sentence, !sentence.isEmpty {
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack(alignment: .top, spacing: 6) {
-                                Text("例句：")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.warningOrange)
-                                    .lineLimit(1)
-
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text(sentence)
-                                        .font(.system(size: 22, weight: .regular))
-                                        .foregroundColor(.secondary)
-                                        .italic()
-                                        .lineLimit(isSentenceExpanded ? nil : 2)
-
-                                    if isSentenceExpanded, let translation = word.sentenceTranslation, !translation.isEmpty {
-                                        Text(translation)
-                                            .font(.system(size: 22, weight: .regular))
-                                            .foregroundColor(.primaryBlue)
-                                            .lineLimit(nil)
-                                    }
-                                }
-
-                                Spacer()
-
-                                HStack(spacing: 8) {
-                                    Button(action: {
-                                        withAnimation(.easeInOut(duration: 0.2)) {
-                                            isSentenceExpanded.toggle()
-                                        }
-                                    }) {
-                                        Image(systemName: isSentenceExpanded ? "chevron.up" : "chevron.down")
-                                            .font(.system(size: 12, weight: .semibold))
-                                            .foregroundColor(.warningOrange)
-                                    }
-                                    .buttonStyle(.plain)
-
-                                    Button(action: {
-                                        AudioService.shared.speak(sentence)
-                                    }) {
-                                        Image(systemName: "speaker.wave.2.fill")
-                                            .font(.system(size: 13))
-                                            .foregroundColor(.warningOrange)
-                                    }
-                                    .buttonStyle(.plain)
-                                }
-                            }
-                        }
-                        .padding(8)
-                        .background(Color.warningOrange.opacity(0.07))
-                        .cornerRadius(6)
-                        .onTapGesture {
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                isSentenceExpanded.toggle()
-                            }
-                        }
-                    }
+                // Completion badge
+                if isCompleted {
+                    Image(systemName: "seal.fill")
+                        .font(.system(size: 18))
+                        .foregroundColor(Color.successGreen)
+                        .background(Circle().fill(Color.white).frame(width: 18, height: 18))
+                        .offset(x: 24, y: -24)
                 }
-
-                Spacer()
-
-                // Audio button
-                Button(action: {
-                    AudioService.shared.playWordAudio(word: word) { }
-                }) {
-                    ZStack {
-                        Circle()
-                            .fill(Color.primaryBlue.opacity(0.1))
-                            .frame(width: 40, height: 40)
-
-                        Image(systemName: "speaker.wave.2.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(.primaryBlue)
-                    }
-                }
-                .buttonStyle(.plain)
             }
-            .padding(16)
 
-            if isStudied {
-                HStack {
-                    Spacer()
-                    Text("已复习 ✓")
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(.successGreen)
-                    Spacer()
+            Text("第\(level.id)关")
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(isLocked ? .secondary : .primary)
+
+            HStack(spacing: 2) {
+                Image(systemName: "text.book.closed")
+                    .font(.system(size: 10))
+                Text("\(level.totalWords) 词")
+                    .font(.system(size: 11))
+            }
+            .foregroundStyle(.secondary)
+
+            if isCompleted {
+                HStack(spacing: 2) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 11))
+                    Text("已完成")
+                        .font(.system(size: 11))
                 }
-                .padding(.vertical, 8)
-                .background(Color.successGreen.opacity(0.06))
+                .foregroundColor(.successGreen)
             }
         }
-        .background(Color.cardBackground)
-        .cornerRadius(14)
+        .padding(12)
+        .frame(maxWidth: .infinity)
+        .background(cardBackgroundColor)
+        .cornerRadius(12)
         .overlay(
-            RoundedRectangle(cornerRadius: 14)
-                .stroke(isStudied ? Color.successGreen.opacity(0.3) : Color.warningOrange.opacity(0.2), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(cardBorderColor, lineWidth: isCompleted ? 1.5 : 0.5)
         )
-        .shadow(color: .black.opacity(isStudied ? 0.06 : 0.04), radius: 6, x: 0, y: 2)
-        .opacity(isStudied ? 0.85 : 1.0)
+        .shadow(
+            color: isHovered && !isLocked ? circleBackgroundColor.opacity(0.25) : .black.opacity(0.06),
+            radius: isHovered && !isLocked ? 12 : 5,
+            x: 0, y: isHovered && !isLocked ? 6 : 2
+        )
+        .scaleEffect(isHovered && !isLocked ? 1.03 : 1.0)
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isHovered)
+        .onHover { hovering in isHovered = hovering }
+    }
+
+    private var circleBackgroundColor: Color {
+        if isCompleted { return .successGreen }
+        if isLocked { return .gray }
+        return .warningOrange
+    }
+
+    private var cardBackgroundColor: Color {
+        if isCompleted { return Color.successGreen.opacity(0.06) }
+        return Color.cardBackground
+    }
+
+    private var cardBorderColor: Color {
+        if isCompleted { return Color.successGreen.opacity(0.3) }
+        return Color.clear
+    }
+}
+
+// MARK: - Review Game View (full-screen game experience)
+/// Wraps GameView in full-screen cover for review mode.
+struct ReviewGameView: View {
+    let book: WordBook
+    let level: ReviewLevel
+    let reviewWords: [Word]
+    let onComplete: () -> Void
+
+    @Environment(\.dismiss) private var dismiss
+
+    /// Converts ReviewLevel to GameLevel for use with GameView
+    private var gameLevel: GameLevel {
+        GameLevel(
+            id: level.id,
+            bookId: book.id,
+            chapter: 0,
+            stage: 0,
+            name: "复习第\(level.id)关",
+            wordIds: level.wordIds,
+            passingScore: 0,
+            isBossLevel: false
+        )
+    }
+
+    var body: some View {
+        GameView(
+            book: book,
+            level: gameLevel,
+            isReviewMode: true,
+            reviewWords: reviewWords,
+            onContinueToNext: nil
+        )
+        .onDisappear {
+            onComplete()
+        }
     }
 }
