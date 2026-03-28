@@ -78,13 +78,8 @@ final class LearningViewModel: ObservableObject {
         guard let word = currentWord else { return }
 
         isCorrect = true
-        var updatedWord = word
-        updatedWord.masteryLevel = min(5, word.masteryLevel + 1)
-        updatedWord.lastReviewedAt = Date()
-
-        try? database.updateWord(updatedWord)
-
-        await recordAnswer(for: updatedWord, correct: true)
+        let updatedWord = await applyReviewResult(for: word, correct: true)
+        currentWord = updatedWord
 
         await moveToNext()
     }
@@ -94,16 +89,29 @@ final class LearningViewModel: ObservableObject {
         guard let word = currentWord else { return }
 
         isCorrect = false
+        let updatedWord = await applyReviewResult(for: word, correct: false)
+        currentWord = updatedWord
+
+        await moveToNext()
+    }
+
+    /// Apply and persist the result of a review answer.
+    private func applyReviewResult(for word: Word, correct: Bool) async -> Word {
         var updatedWord = word
-        updatedWord.masteryLevel = max(0, word.masteryLevel - 1)
-        updatedWord.wrongCount = word.wrongCount + 1
+
+        if correct {
+            updatedWord.masteryLevel = min(5, word.masteryLevel + 1)
+            updatedWord.wrongCount = 0
+        } else {
+            updatedWord.masteryLevel = max(0, word.masteryLevel - 1)
+            updatedWord.wrongCount = word.wrongCount + 1
+        }
         updatedWord.lastReviewedAt = Date()
 
         try? database.updateWord(updatedWord)
 
-        await recordAnswer(for: updatedWord, correct: false)
-
-        await moveToNext()
+        await recordAnswer(for: updatedWord, correct: correct)
+        return updatedWord
     }
 
     /// Move to the next word
@@ -193,15 +201,20 @@ final class LearningViewModel: ObservableObject {
             // Get all passed level records
             let levelRecords = try database.fetchAllLevelRecords(forBookId: book.id)
             let passedLevels = Set(levelRecords.filter { $0.isPassed }.map { "\($0.chapter)-\($0.stage)" })
+            let words = try database.fetchWords(forBookId: book.id)
+            let wordsById = Dictionary(uniqueKeysWithValues: words.map { ($0.id, $0) })
 
             // Collect words from passed levels
             var passedWords: [Word] = []
+            var seenWordIds = Set<String>()
             for level in levels {
                 let levelKey = "\(level.chapter)-\(level.stage)"
                 if passedLevels.contains(levelKey) {
-                    let levelWordIds = Set(level.wordIds)
-                    let words = try database.fetchWords(forBookId: book.id)
-                    passedWords.append(contentsOf: words.filter { levelWordIds.contains($0.id) })
+                    for wordId in level.wordIds where seenWordIds.insert(wordId).inserted {
+                        if let word = wordsById[wordId] {
+                            passedWords.append(word)
+                        }
+                    }
                 }
             }
 
@@ -250,8 +263,11 @@ final class LearningViewModel: ObservableObject {
                 reviewContentState = .noPassedLevels
             }
 
-            // Generate review levels from loaded words
-            reviewLevels = generateReviewLevels(from: reviewWords)
+            // Load persisted completed review level IDs from database
+            let completedIds = try database.fetchCompletedReviewLevelIds(bookId: book.id)
+
+            // Generate review levels from loaded words, marking completed ones as studied
+            reviewLevels = generateReviewLevels(from: reviewWords, completedIds: completedIds)
 
             currentIndex = 0
             currentWord = reviewWords.first
@@ -266,16 +282,24 @@ final class LearningViewModel: ObservableObject {
     }
 
     /// Chunk review words into ReviewLevel groups (10 words per level).
-    private func generateReviewLevels(from words: [Word]) -> [ReviewLevel] {
+    /// Completed levels are marked with studiedCount == totalWords so they show as "已完成".
+    private func generateReviewLevels(from words: [Word], completedIds: Set<Int> = []) -> [ReviewLevel] {
         let wordsPerLevel = 10
         return words.chunked(into: wordsPerLevel).enumerated().map { index, chunk in
-            ReviewLevel(
-                id: index + 1,
+            let levelId = index + 1
+            let isCompleted = completedIds.contains(levelId)
+            return ReviewLevel(
+                id: levelId,
                 wordIds: chunk.map { $0.id },
                 totalWords: chunk.count,
-                studiedCount: 0
+                studiedCount: isCompleted ? chunk.count : 0
             )
         }
+    }
+
+    /// Persist a completed review level to the database.
+    func markReviewLevelCompleted(bookId: String, levelId: Int) {
+        try? database.saveReviewLevelRecord(bookId: bookId, levelId: levelId)
     }
 
     /// Get the words for a specific review level.

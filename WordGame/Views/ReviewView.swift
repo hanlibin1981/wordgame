@@ -45,7 +45,9 @@ struct ReviewView: View {
                 book: book,
                 level: level,
                 reviewWords: learningVM.reviewWords,
-                onComplete: { handleLevelComplete(level) }
+                onComplete: { result in
+                    handleLevelComplete(level, result: result)
+                }
             )
         }
         .onAppear {
@@ -136,14 +138,18 @@ struct ReviewView: View {
                 GridItem(.flexible())
             ], spacing: 16) {
                 ForEach(Array(learningVM.reviewLevels.enumerated()), id: \.element.id) { index, level in
-                    ReviewLevelCard(
-                        level: level,
-                        isCompleted: level.isAllStudied,
-                        isLocked: false
-                    )
-                    .onTapGesture {
+                    Button(action: {
                         activeLevel = level
+                    }) {
+                        ReviewLevelCard(
+                            level: level,
+                            isCompleted: level.isAllStudied,
+                            isLocked: false
+                        )
                     }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("复习第\(level.id)关")
+                    .accessibilityValue(level.isAllStudied ? "已完成" : "未完成")
                     .transitionEffect(index: index)
                 }
             }
@@ -162,8 +168,10 @@ struct ReviewView: View {
     }
 
     // MARK: - Level Completion
-    private func handleLevelComplete(_ level: ReviewLevel) {
+    private func handleLevelComplete(_ level: ReviewLevel, result: GameResult) {
+        guard result.isPassed else { return }
         learningVM.markLevelStudied(level.id)
+        learningVM.markReviewLevelCompleted(bookId: book.id, levelId: level.id)
     }
 }
 
@@ -271,17 +279,15 @@ struct ReviewGameView: View {
     let book: WordBook
     let level: ReviewLevel
     let reviewWords: [Word]
-    let onComplete: () -> Void
-
-    @Environment(\.dismiss) private var dismiss
+    let onComplete: (GameResult) -> Void
 
     /// Converts ReviewLevel to GameLevel for use with GameView
     private var gameLevel: GameLevel {
         GameLevel(
             id: level.id,
             bookId: book.id,
-            chapter: 0,
-            stage: 0,
+            chapter: 99,           // 99 denotes a review level (outside normal chapter range)
+            stage: level.id,
             name: "复习第\(level.id)关",
             wordIds: level.wordIds,
             passingScore: 0,
@@ -295,10 +301,8 @@ struct ReviewGameView: View {
             level: gameLevel,
             isReviewMode: true,
             reviewWords: reviewWords,
+            onGameCompleted: onComplete,
             onContinueToNext: nil
         )
-        .onDisappear {
-            onComplete()
-        }
     }
 }

@@ -16,6 +16,8 @@ struct GameView: View {
     var isReviewMode: Bool = false
     /// Words to use in review mode (only used when isReviewMode == true)
     var reviewWords: [Word] = []
+    /// Called when the game reaches a completed state and a result is available.
+    var onGameCompleted: ((GameResult) -> Void)?
     /// Callback when user wants to continue to the next level.
     /// Called with (book, nextLevel) when tapped, nil when no next level.
     var onContinueToNext: ((WordBook, GameLevel) -> Void)?
@@ -120,6 +122,9 @@ struct GameView: View {
         .onChange(of: gameVM.isGameCompleted) { _, completed in
             if completed {
                 gamePhase = .completed
+                if let result = gameVM.gameResult {
+                    onGameCompleted?(result)
+                }
             }
         }
     }

@@ -82,9 +82,9 @@ struct LearningTabView: View {
                 case .levelSelection(let book):
                     LevelSelectionView(book: book, navigationPath: $navigationPath)
                 case .game(let book, let level):
-                    GameView(book: book, level: level) { nextBook, nextLevel in
+                    GameView(book: book, level: level, onContinueToNext: { nextBook, nextLevel in
                         navigationPath.append(LearningNavDestination.game(book: nextBook, level: nextLevel))
-                    }
+                    })
                 case .review(let book):
                     ReviewView(book: book)
                 }

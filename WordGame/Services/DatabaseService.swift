@@ -17,6 +17,7 @@ final class DatabaseService: ObservableObject {
     private let gameProgress = Table("game_progress")
     private let learningRecords = Table("learning_records")
     private let levelRecords = Table("level_records")
+    private let reviewLevelRecords = Table("review_level_records")
 
     // MARK: - WordBooks Columns
     private let wbId = Expression<String>("id")
@@ -70,6 +71,12 @@ final class DatabaseService: ObservableObject {
     private let lvlIsPassed = Expression<Bool>("is_passed")
     private let lvlStarsEarned = Expression<Int>("stars_earned")
     private let lvlCompletedAt = Expression<Double>("completed_at")
+
+    // MARK: - ReviewLevelRecords Columns
+    private let rlrId = Expression<String>("id")
+    private let rlrBookId = Expression<String>("book_id")
+    private let rlrLevelId = Expression<Int>("level_id")
+    private let rlrCompletedAt = Expression<Double>("completed_at")
 
     private init() {
         // Setup database path in Application Support directory
@@ -201,10 +208,19 @@ final class DatabaseService: ObservableObject {
                 t.column(lvlCompletedAt)
             })
 
+            // ReviewLevelRecords table (per review-level completion tracking)
+            try db.run(reviewLevelRecords.create(ifNotExists: true) { t in
+                t.column(rlrId, primaryKey: true)
+                t.column(rlrBookId)
+                t.column(rlrLevelId)
+                t.column(rlrCompletedAt)
+            })
+
             // Create indexes for better query performance
             try db.run(words.createIndex(wBookId, ifNotExists: true))
             try db.run(learningRecords.createIndex(lrWordId, ifNotExists: true))
             try db.run(learningRecords.createIndex(lrBookId, ifNotExists: true))
+            try db.run(reviewLevelRecords.createIndex(rlrBookId, ifNotExists: true))
 
         } catch {
             logger.error("Table creation failed: \(error.localizedDescription)")
@@ -648,6 +664,38 @@ final class DatabaseService: ObservableObject {
         }
     }
 
+    // MARK: - ReviewLevelRecord Operations
+
+    /// Save a completed review level record. Idempotent — replaces if already exists.
+    func saveReviewLevelRecord(bookId: String, levelId: Int) throws {
+        guard let db = db else { throw DatabaseError.connectionFailed }
+
+        let query = reviewLevelRecords.filter(rlrBookId == bookId && rlrLevelId == levelId)
+        if try db.pluck(query) != nil {
+            // Already recorded, just update timestamp
+            try db.run(query.update(rlrCompletedAt <- Date().timeIntervalSince1970))
+        } else {
+            try db.run(reviewLevelRecords.insert(
+                rlrId <- UUID().uuidString,
+                rlrBookId <- bookId,
+                rlrLevelId <- levelId,
+                rlrCompletedAt <- Date().timeIntervalSince1970
+            ))
+        }
+    }
+
+    /// Fetch all completed review level IDs for a book.
+    func fetchCompletedReviewLevelIds(bookId: String) throws -> Set<Int> {
+        guard let db = db else { throw DatabaseError.connectionFailed }
+
+        var result = Set<Int>()
+        let query = reviewLevelRecords.filter(rlrBookId == bookId)
+        for row in try db.prepare(query) {
+            result.insert(row[rlrLevelId])
+        }
+        return result
+    }
+
     /// Reset all game progress, level records, and learning records for a specific book.
     /// Preset vocabularies are also reset (user progress cleared, words remain).
     func resetAllProgress(forBookId bookId: String) throws {
@@ -655,6 +703,7 @@ final class DatabaseService: ObservableObject {
         try db.run(learningRecords.filter(lrBookId == bookId).delete())
         try db.run(gameProgress.filter(gpBookId == bookId).delete())
         try db.run(levelRecords.filter(lvlBookId == bookId).delete())
+        try db.run(reviewLevelRecords.filter(rlrBookId == bookId).delete())
     }
 
     /// Reset all progress for ALL books (used by settings reset).

@@ -35,6 +35,19 @@ targets:
       - package: SQLite.swift
         product: SQLite
 
+  WordGameTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: WordGameTests
+    dependencies:
+      - target: WordGame
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.wordgame.tests
+        INFOPLIST_FILE: WordGameTests/Info.plist
+        LD_RUNPATH_SEARCH_PATHS: "@test_runner_path/../Frameworks @loader_path/../Frameworks"
+
 packages:
   SQLite.swift:
     url: https://github.com/stephencelis/SQLite.swift.git
