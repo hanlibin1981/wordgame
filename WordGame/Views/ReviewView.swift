@@ -13,6 +13,39 @@ struct ReviewView: View {
         learningVM.reviewWords.allSatisfy { studiedWordIds.contains($0.id) }
     }
 
+    private var subtitleText: String {
+        switch learningVM.reviewContentState {
+        case .dueWords:
+            return "根据记忆曲线，科学安排复习时间"
+        case .fallbackWords:
+            return "当前没有到期内容，先做一轮已学词汇巩固"
+        case .noPassedLevels:
+            return "通关后会自动生成可复习词汇"
+        }
+    }
+
+    private var emptyStateTitle: String {
+        switch learningVM.reviewContentState {
+        case .dueWords:
+            return "暂无需要复习的单词"
+        case .fallbackWords:
+            return "当前没有到期内容"
+        case .noPassedLevels:
+            return "还没有可复习的内容"
+        }
+    }
+
+    private var emptyStateDescription: String {
+        switch learningVM.reviewContentState {
+        case .dueWords:
+            return "已通关词汇暂时都不在本轮复习时间点"
+        case .fallbackWords:
+            return "已自动切换为巩固复习"
+        case .noPassedLevels:
+            return "先完成至少一个已通关关卡，再来这里集中复习"
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             headerSection
@@ -43,12 +76,12 @@ struct ReviewView: View {
             Text("艾宾浩斯复习")
                 .font(.system(size: 22, weight: .bold))
 
-            Text("根据记忆曲线，科学安排复习时间")
+            Text(subtitleText)
                 .font(.system(size: 14))
                 .foregroundStyle(.secondary)
 
             if learningVM.reviewWords.isEmpty {
-                Text("暂无需要复习的单词")
+                Text(emptyStateTitle)
                     .font(.system(size: 14))
                     .foregroundStyle(.secondary)
             } else {
@@ -77,11 +110,12 @@ struct ReviewView: View {
                     Image(systemName: "checkmark.circle")
                         .font(.system(size: 40))
                         .foregroundColor(.successGreen)
-                    Text("太棒了！")
+                    Text(emptyStateTitle)
                         .font(.system(size: 16, weight: .medium))
-                    Text("所有单词都已掌握，暂不需要复习")
+                    Text(emptyStateDescription)
                         .font(.system(size: 14))
                         .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, 48)
@@ -151,6 +185,9 @@ struct ReviewView: View {
             .padding(.horizontal, 24)
             .padding(.vertical, 14)
             .background(Rectangle().fill(Color.cardBackground))
+        }
+        .onChange(of: learningVM.reviewWords) { _, _ in
+            studiedWordIds = []
         }
     }
 }

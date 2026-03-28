@@ -2,6 +2,12 @@ import Foundation
 import SwiftUI
 import os
 
+enum ReviewContentState: Equatable {
+    case noPassedLevels
+    case dueWords
+    case fallbackWords
+}
+
 /// ViewModel for learning/review mode
 @MainActor
 final class LearningViewModel: ObservableObject {
@@ -12,6 +18,7 @@ final class LearningViewModel: ObservableObject {
     @Published var reviewWords: [Word] = []
     @Published var currentIndex = 0
     @Published var masteryFilter: Int? = nil
+    @Published var reviewContentState: ReviewContentState = .noPassedLevels
 
     private let database = DatabaseService.shared
 
@@ -198,14 +205,46 @@ final class LearningViewModel: ObservableObject {
                 return word1.masteryLevel < word2.masteryLevel
             }
 
-            // Limit to maxReviewWords
-            reviewWords = Array(sortedDueWords.prefix(maxReviewWords))
+            let fallbackWords = passedWords.sorted { word1, word2 in
+                if word1.masteryLevel != word2.masteryLevel {
+                    return word1.masteryLevel < word2.masteryLevel
+                }
+
+                switch (word1.lastReviewedAt, word2.lastReviewedAt) {
+                case (nil, nil):
+                    return word1.createdAt < word2.createdAt
+                case (nil, _?):
+                    return true
+                case (_?, nil):
+                    return false
+                case let (date1?, date2?):
+                    if date1 != date2 {
+                        return date1 < date2
+                    }
+                    return word1.createdAt < word2.createdAt
+                }
+            }
+
+            if !sortedDueWords.isEmpty {
+                reviewWords = Array(sortedDueWords.prefix(maxReviewWords))
+                reviewContentState = .dueWords
+            } else if !fallbackWords.isEmpty {
+                // Keep the review entry useful even when nothing is strictly due yet.
+                reviewWords = Array(fallbackWords.prefix(maxReviewWords))
+                reviewContentState = .fallbackWords
+            } else {
+                reviewWords = []
+                reviewContentState = .noPassedLevels
+            }
+
             currentIndex = 0
             currentWord = reviewWords.first
             showAnswer = false
             isCorrect = nil
         } catch {
             logger.error("Failed to load Ebbinghaus review words: \(error.localizedDescription)")
+            reviewWords = []
+            reviewContentState = .noPassedLevels
         }
     }
 }
