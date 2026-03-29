@@ -126,7 +126,11 @@ final class GameViewModel: ObservableObject {
         }
 
         // Load or create progress
-        _ = try? database.fetchOrCreateProgress(forBookId: book.id)
+        do {
+            _ = try database.fetchOrCreateProgress(forBookId: book.id)
+        } catch {
+            logger.error("Failed to fetch or create progress: \(error.localizedDescription)")
+        }
     }
 
     /// Start a review game session for a specific review level.
@@ -366,7 +370,11 @@ final class GameViewModel: ObservableObject {
 
         updatedWord.lastReviewedAt = Date()
 
-        try? database.updateWord(updatedWord)
+        do {
+            try database.updateWord(updatedWord)
+        } catch {
+            logger.error("Failed to update word mastery for \(word.id): \(error.localizedDescription)")
+        }
     }
 
     /// Record learning for analytics
@@ -389,7 +397,11 @@ final class GameViewModel: ObservableObject {
             answerTimeMs: answerTime
         )
 
-        try? database.createLearningRecord(record)
+        do {
+            try database.createLearningRecord(record)
+        } catch {
+            logger.error("Failed to create learning record: \(error.localizedDescription)")
+        }
     }
 
     /// Reset answer timing baseline when a question is actually presented to the user.

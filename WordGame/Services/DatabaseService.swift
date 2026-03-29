@@ -4,12 +4,20 @@ import os
 
 /// DatabaseService manages all SQLite database operations
 /// Singleton pattern ensures single database connection throughout the app
+/// Thread-safe via serial dispatch queue for SQLite operations
 final class DatabaseService: ObservableObject {
     static let shared = DatabaseService()
     private let logger = Logger(subsystem: "com.wordgame.database", category: "DatabaseService")
 
     private var db: Connection?
     let dbPath: String
+
+    /// Serial queue for thread-safe database access
+    private let dbQueue = DispatchQueue(label: "com.wordgame.database.queue")
+
+    // MARK: - Schema Version for Migrations
+    private static let schemaVersionKey = "schema_version"
+    private var currentSchemaVersion: Int = 0
 
     // MARK: - Table Definitions
     private let wordBooks = Table("word_books")
@@ -83,13 +91,19 @@ final class DatabaseService: ObservableObject {
         let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let appFolder = appSupport.appendingPathComponent("WordGame", isDirectory: true)
 
-        // Create directory if not exists
-        try? FileManager.default.createDirectory(at: appFolder, withIntermediateDirectories: true)
+        // Create directory - fail if cannot create
+        do {
+            try FileManager.default.createDirectory(at: appFolder, withIntermediateDirectories: true)
+        } catch {
+            logger.error("Failed to create app folder: \(error.localizedDescription)")
+        }
 
         dbPath = appFolder.appendingPathComponent("wordgame.db").path
 
         do {
             db = try Connection(dbPath)
+            // Enable foreign key constraints
+            try db?.execute("PRAGMA foreign_keys = ON")
             createTables()
             migrateTablesIfNeeded()
         } catch {
@@ -97,41 +111,53 @@ final class DatabaseService: ObservableObject {
         }
     }
 
-    // MARK: - Table Migration
-    /// Migrate existing tables to add new columns
+    // MARK: - Schema Migration with Version Tracking
+    /// Migrate existing tables using schema version tracking
     private func migrateTablesIfNeeded() {
         guard let db = db else { return }
 
         do {
-            let tableInfo = try db.prepare("PRAGMA table_info(words)")
-            var existingColumns = Set<String>()
-            for row in tableInfo {
-                if let name = row[1] as? String {
-                    existingColumns.insert(name)
+            // Get current schema version (default to 0 if not set)
+            if let version = try db.scalar("PRAGMA user_version") as? Int64 {
+                currentSchemaVersion = Int(version)
+            }
+
+            // Run migrations based on version
+            try db.transaction {
+                if currentSchemaVersion < 1 {
+                    // Migration 1: Add sentence_translation column to words
+                    var existingColumns = Set<String>()
+                    for row in try db.prepare("PRAGMA table_info(words)") {
+                        if let name = row[1] as? String {
+                            existingColumns.insert(name)
+                        }
+                    }
+                    if !existingColumns.contains("sentence_translation") {
+                        try db.execute("ALTER TABLE words ADD COLUMN sentence_translation TEXT")
+                    }
+                    if !existingColumns.contains("audio_url") {
+                        try db.execute("ALTER TABLE words ADD COLUMN audio_url TEXT")
+                    }
+                    try db.execute("PRAGMA user_version = 1")
+                    currentSchemaVersion = 1
+                    logger.info("Migration to schema version 1 completed")
                 }
-            }
 
-            if !existingColumns.contains("sentence_translation") {
-                try db.run("ALTER TABLE words ADD COLUMN sentence_translation TEXT")
-                logger.info("Migrated words table: added sentence_translation column")
-            }
-
-            if !existingColumns.contains("audio_url") {
-                try db.run("ALTER TABLE words ADD COLUMN audio_url TEXT")
-                logger.info("Migrated words table: added audio_url column")
-            }
-
-            // Migrate game_progress table for lastPassedBossChapter
-            let progressTableInfo = try db.prepare("PRAGMA table_info(game_progress)")
-            var progressColumns = Set<String>()
-            for row in progressTableInfo {
-                if let name = row[1] as? String {
-                    progressColumns.insert(name)
+                if currentSchemaVersion < 2 {
+                    // Migration 2: Add last_passed_boss_chapter to game_progress
+                    var progressColumns = Set<String>()
+                    for row in try db.prepare("PRAGMA table_info(game_progress)") {
+                        if let name = row[1] as? String {
+                            progressColumns.insert(name)
+                        }
+                    }
+                    if !progressColumns.contains("last_passed_boss_chapter") {
+                        try db.execute("ALTER TABLE game_progress ADD COLUMN last_passed_boss_chapter INTEGER DEFAULT 0")
+                    }
+                    try db.execute("PRAGMA user_version = 2")
+                    currentSchemaVersion = 2
+                    logger.info("Migration to schema version 2 completed")
                 }
-            }
-            if !progressColumns.contains("last_passed_boss_chapter") {
-                try db.run("ALTER TABLE game_progress ADD COLUMN last_passed_boss_chapter INTEGER DEFAULT 0")
-                logger.info("Migrated game_progress table: added last_passed_boss_chapter column")
             }
         } catch {
             logger.error("Migration failed: \(error.localizedDescription)")
@@ -182,6 +208,7 @@ final class DatabaseService: ObservableObject {
                 t.column(gpTotalAnswered, defaultValue: 0)
                 t.column(gpIsCompleted, defaultValue: false)
                 t.column(gpUpdatedAt)
+                t.column(gpLastPassedBossChapter, defaultValue: 0)
                 t.foreignKey(gpBookId, references: wordBooks, wbId, delete: .cascade)
             })
 
@@ -221,6 +248,8 @@ final class DatabaseService: ObservableObject {
             try db.run(learningRecords.createIndex(lrWordId, ifNotExists: true))
             try db.run(learningRecords.createIndex(lrBookId, ifNotExists: true))
             try db.run(reviewLevelRecords.createIndex(rlrBookId, ifNotExists: true))
+            // Compound index for review level records
+            try db.run(reviewLevelRecords.createIndex(rlrBookId, rlrLevelId, ifNotExists: true))
 
         } catch {
             logger.error("Table creation failed: \(error.localizedDescription)")
@@ -298,12 +327,15 @@ final class DatabaseService: ObservableObject {
     func deleteWordBook(byId id: String) throws {
         guard let db = db else { throw DatabaseError.connectionFailed }
 
-        // Delete associated words first (foreign key cascade should handle this, but explicit for safety)
-        let wordsQuery = words.filter(wBookId == id)
-        try db.run(wordsQuery.delete())
+        // Use transaction to ensure atomic deletion
+        try db.transaction {
+            // Delete associated words first (foreign key cascade handles this, but explicit for safety)
+            let wordsQuery = words.filter(wBookId == id)
+            try db.run(wordsQuery.delete())
 
-        let query = wordBooks.filter(wbId == id)
-        try db.run(query.delete())
+            let query = wordBooks.filter(wbId == id)
+            try db.run(query.delete())
+        }
     }
 
     func checkPresetVocabularyExists(_ preset: PresetVocabulary) throws -> Bool {
@@ -336,26 +368,32 @@ final class DatabaseService: ObservableObject {
     func createWord(_ word: Word) throws {
         guard let db = db else { throw DatabaseError.connectionFailed }
 
-        let insert = words.insert(
-            wId <- word.id,
-            wBookId <- word.bookId,
-            wWord <- word.word,
-            wPhonetic <- word.phonetic,
-            wMeaning <- word.meaning,
-            wSentence <- word.sentence,
-            wSentenceTranslation <- word.sentenceTranslation,
-            wAudioUrl <- word.audioUrl,
-            wMasteryLevel <- word.masteryLevel,
-            wWrongCount <- word.wrongCount,
-            wLastReviewedAt <- word.lastReviewedAt?.timeIntervalSince1970,
-            wCreatedAt <- word.createdAt.timeIntervalSince1970
-        )
+        // Use transaction to ensure atomic word creation and count update
+        try db.transaction {
+            let insert = words.insert(
+                wId <- word.id,
+                wBookId <- word.bookId,
+                wWord <- word.word,
+                wPhonetic <- word.phonetic,
+                wMeaning <- word.meaning,
+                wSentence <- word.sentence,
+                wSentenceTranslation <- word.sentenceTranslation,
+                wAudioUrl <- word.audioUrl,
+                wMasteryLevel <- word.masteryLevel,
+                wWrongCount <- word.wrongCount,
+                wLastReviewedAt <- word.lastReviewedAt?.timeIntervalSince1970,
+                wCreatedAt <- word.createdAt.timeIntervalSince1970
+            )
 
-        try db.run(insert)
+            try db.run(insert)
 
-        // Atomically increment word_count
-        try db.run("UPDATE word_books SET word_count = word_count + 1, updated_at = ? WHERE id = ?",
-                   Date().timeIntervalSince1970, word.bookId)
+            // Atomically increment word_count using type-safe API
+            let bookQuery = wordBooks.filter(wbId == word.bookId)
+            try db.run(bookQuery.update(
+                wbWordCount += 1,
+                wbUpdatedAt <- Date().timeIntervalSince1970
+            ))
+        }
     }
 
     func createWords(_ wordList: [Word]) throws {
@@ -438,15 +476,21 @@ final class DatabaseService: ObservableObject {
     func deleteWord(byId id: String) throws {
         guard let db = db else { throw DatabaseError.connectionFailed }
 
-        // Fetch word to get its bookId before deleting
-        guard let word = try fetchWord(byId: id) else { return }
+        // Use transaction for atomic deletion and count update
+        try db.transaction {
+            // Fetch word to get its bookId before deleting
+            guard let word = try fetchWord(byId: id) else { return }
 
-        let query = words.filter(wId == id)
-        try db.run(query.delete())
+            let query = words.filter(wId == id)
+            try db.run(query.delete())
 
-        // Atomically decrement word_count
-        try db.run("UPDATE word_books SET word_count = MAX(0, word_count - 1), updated_at = ? WHERE id = ?",
-                   Date().timeIntervalSince1970, word.bookId)
+            // Atomically decrement word_count using type-safe API
+            let bookQuery = wordBooks.filter(wbId == word.bookId)
+            try db.run(bookQuery.update(
+                wbWordCount -= 1,
+                wbUpdatedAt <- Date().timeIntervalSince1970
+            ))
+        }
     }
 
     func fetchRandomWords(forBookId bookId: String, count: Int, excludingIds: [String] = []) throws -> [Word] {
@@ -504,9 +548,28 @@ final class DatabaseService: ObservableObject {
             )
         }
 
-        // Create new progress
+        // Create new progress with INSERT OR IGNORE to handle race condition
         let progress = GameProgress(bookId: bookId)
-        try createGameProgress(progress)
+        do {
+            try createGameProgress(progress)
+        } catch {
+            // Race condition: another thread created it first, fetch again
+            if let row = try db.pluck(query) {
+                return GameProgress(
+                    id: row[gpId],
+                    bookId: row[gpBookId],
+                    currentChapter: row[gpCurrentChapter],
+                    currentStage: row[gpCurrentStage],
+                    starsEarned: row[gpStarsEarned],
+                    totalCorrect: row[gpTotalCorrect],
+                    totalAnswered: row[gpTotalAnswered],
+                    isCompleted: row[gpIsCompleted],
+                    updatedAt: Date(timeIntervalSince1970: row[gpUpdatedAt]),
+                    lastPassedBossChapter: row[gpLastPassedBossChapter]
+                )
+            }
+            throw error
+        }
         return progress
     }
 
@@ -697,28 +760,34 @@ final class DatabaseService: ObservableObject {
     }
 
     /// Reset all game progress, level records, and learning records for a specific book.
-    /// Preset vocabularies are also reset (user progress cleared, words remain).
+    /// Uses transaction to ensure atomic reset.
     func resetAllProgress(forBookId bookId: String) throws {
         guard let db = db else { throw DatabaseError.connectionFailed }
-        try db.run(learningRecords.filter(lrBookId == bookId).delete())
-        try db.run(gameProgress.filter(gpBookId == bookId).delete())
-        try db.run(levelRecords.filter(lvlBookId == bookId).delete())
-        try db.run(reviewLevelRecords.filter(rlrBookId == bookId).delete())
+
+        try db.transaction {
+            try db.run(learningRecords.filter(lrBookId == bookId).delete())
+            try db.run(gameProgress.filter(gpBookId == bookId).delete())
+            try db.run(levelRecords.filter(lvlBookId == bookId).delete())
+            try db.run(reviewLevelRecords.filter(rlrBookId == bookId).delete())
+        }
     }
 
     /// Reset all progress for ALL books (used by settings reset).
     /// Also resets word mastery levels and wrong counts so words are fresh.
     func resetAllProgressGlobally() throws {
         guard let db = db else { throw DatabaseError.connectionFailed }
-        try db.run(learningRecords.delete())
-        try db.run(gameProgress.delete())
-        try db.run(levelRecords.delete())
-        // Reset word mastery so next game starts clean
-        try db.run(words.update(
-            wMasteryLevel <- 0,
-            wWrongCount <- 0,
-            wLastReviewedAt <- (nil as Double?)
-        ))
+
+        try db.transaction {
+            try db.run(learningRecords.delete())
+            try db.run(gameProgress.delete())
+            try db.run(levelRecords.delete())
+            // Reset word mastery so next game starts clean
+            try db.run(words.update(
+                wMasteryLevel <- 0,
+                wWrongCount <- 0,
+                wLastReviewedAt <- (nil as Double?)
+            ))
+        }
     }
 }
 

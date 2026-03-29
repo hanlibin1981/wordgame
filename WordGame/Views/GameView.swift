@@ -111,8 +111,10 @@ struct GameView: View {
             Task {
                 if isReviewMode {
                     // Review mode: skip learning phase, start questions immediately
+                    // level is guaranteed non-nil in review mode via ReviewGameView
+                    guard let level else { return }
                     gamePhase = .playing
-                    await gameVM.startReviewGame(for: book, level: level!, reviewWords: reviewWords)
+                    await gameVM.startReviewGame(for: book, level: level, reviewWords: reviewWords)
                 } else {
                     // Normal mode: start with learning phase
                     await gameVM.startGame(for: book, level: level)
@@ -994,8 +996,10 @@ struct GameView: View {
         lastAutoPlayedQuestionID = nil
         Task {
             if isReviewMode {
+                // level is guaranteed non-nil in review mode via ReviewGameView
+                guard let level else { return }
                 gamePhase = .playing
-                await gameVM.startReviewGame(for: book, level: level!, reviewWords: reviewWords)
+                await gameVM.startReviewGame(for: book, level: level, reviewWords: reviewWords)
             } else {
                 await gameVM.startGame(for: book, level: level)
             }

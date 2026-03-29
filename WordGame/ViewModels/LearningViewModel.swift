@@ -108,7 +108,11 @@ final class LearningViewModel: ObservableObject {
         }
         updatedWord.lastReviewedAt = Date()
 
-        try? database.updateWord(updatedWord)
+        do {
+            try database.updateWord(updatedWord)
+        } catch {
+            logger.error("Failed to update word \(word.id): \(error.localizedDescription)")
+        }
 
         await recordAnswer(for: updatedWord, correct: correct)
         return updatedWord
@@ -139,7 +143,11 @@ final class LearningViewModel: ObservableObject {
             answerTimeMs: 0
         )
 
-        try? database.createLearningRecord(record)
+        do {
+            try database.createLearningRecord(record)
+        } catch {
+            logger.error("Failed to create learning record for word \(word.id): \(error.localizedDescription)")
+        }
     }
 
     /// Get progress text
@@ -299,7 +307,11 @@ final class LearningViewModel: ObservableObject {
 
     /// Persist a completed review level to the database.
     func markReviewLevelCompleted(bookId: String, levelId: Int) {
-        try? database.saveReviewLevelRecord(bookId: bookId, levelId: levelId)
+        do {
+            try database.saveReviewLevelRecord(bookId: bookId, levelId: levelId)
+        } catch {
+            logger.error("Failed to save review level record for level \(levelId): \(error.localizedDescription)")
+        }
     }
 
     /// Get the words for a specific review level.
