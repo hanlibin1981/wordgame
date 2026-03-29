@@ -52,9 +52,7 @@ final class AudioService: ObservableObject {
 
         #if os(macOS)
         speakWithSay(text)
-        return
-        #endif
-
+        #else
         stop()
 
         let utterance = AVSpeechUtterance(string: text)
@@ -73,6 +71,7 @@ final class AudioService: ObservableObject {
         }
 
         synthesizer.speak(utterance)
+        #endif
     }
 
     /// Speak a word using the `say` command (macOS native)

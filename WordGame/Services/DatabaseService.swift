@@ -14,6 +14,7 @@ final class DatabaseService: ObservableObject {
 
     /// Serial queue for thread-safe database access
     private let dbQueue = DispatchQueue(label: "com.wordgame.database.queue")
+    private let dbQueueKey = DispatchSpecificKey<Void>()
 
     // MARK: - Schema Version for Migrations
     private static let schemaVersionKey = "schema_version"
@@ -87,6 +88,7 @@ final class DatabaseService: ObservableObject {
     private let rlrCompletedAt = Expression<Double>("completed_at")
 
     private init() {
+        dbQueue.setSpecific(key: dbQueueKey, value: ())
         // Setup database path in Application Support directory
         let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let appFolder = appSupport.appendingPathComponent("WordGame", isDirectory: true)
@@ -108,6 +110,18 @@ final class DatabaseService: ObservableObject {
             migrateTablesIfNeeded()
         } catch {
             logger.error("Database connection failed: \(error.localizedDescription)")
+        }
+    }
+
+    private func withDB<T>(_ operation: (Connection) throws -> T) throws -> T {
+        guard let db else { throw DatabaseError.connectionFailed }
+
+        if DispatchQueue.getSpecific(key: dbQueueKey) != nil {
+            return try operation(db)
+        }
+
+        return try dbQueue.sync {
+            try operation(db)
         }
     }
 
@@ -258,28 +272,49 @@ final class DatabaseService: ObservableObject {
 
     // MARK: - WordBook Operations
     func createWordBook(_ book: WordBook) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            let insert = wordBooks.insert(
+                wbId <- book.id,
+                wbName <- book.name,
+                wbDescription <- book.description,
+                wbWordCount <- book.wordCount,
+                wbIsPreset <- book.isPreset,
+                wbCreatedAt <- book.createdAt.timeIntervalSince1970,
+                wbUpdatedAt <- book.updatedAt.timeIntervalSince1970
+            )
 
-        let insert = wordBooks.insert(
-            wbId <- book.id,
-            wbName <- book.name,
-            wbDescription <- book.description,
-            wbWordCount <- book.wordCount,
-            wbIsPreset <- book.isPreset,
-            wbCreatedAt <- book.createdAt.timeIntervalSince1970,
-            wbUpdatedAt <- book.updatedAt.timeIntervalSince1970
-        )
-
-        try db.run(insert)
+            try db.run(insert)
+        }
     }
 
     func fetchAllWordBooks() throws -> [WordBook] {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            var result: [WordBook] = []
 
-        var result: [WordBook] = []
+            for row in try db.prepare(wordBooks.order(wbCreatedAt.desc)) {
+                let book = WordBook(
+                    id: row[wbId],
+                    name: row[wbName],
+                    description: row[wbDescription],
+                    wordCount: row[wbWordCount],
+                    isPreset: row[wbIsPreset],
+                    createdAt: Date(timeIntervalSince1970: row[wbCreatedAt]),
+                    updatedAt: Date(timeIntervalSince1970: row[wbUpdatedAt])
+                )
+                result.append(book)
+            }
 
-        for row in try db.prepare(wordBooks.order(wbCreatedAt.desc)) {
-            let book = WordBook(
+            return result
+        }
+    }
+
+    func fetchWordBook(byId id: String) throws -> WordBook? {
+        try withDB { db in
+            let query = wordBooks.filter(wbId == id)
+
+            guard let row = try db.pluck(query) else { return nil }
+
+            return WordBook(
                 id: row[wbId],
                 name: row[wbName],
                 description: row[wbDescription],
@@ -288,91 +323,153 @@ final class DatabaseService: ObservableObject {
                 createdAt: Date(timeIntervalSince1970: row[wbCreatedAt]),
                 updatedAt: Date(timeIntervalSince1970: row[wbUpdatedAt])
             )
-            result.append(book)
         }
-
-        return result
-    }
-
-    func fetchWordBook(byId id: String) throws -> WordBook? {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        let query = wordBooks.filter(wbId == id)
-
-        guard let row = try db.pluck(query) else { return nil }
-
-        return WordBook(
-            id: row[wbId],
-            name: row[wbName],
-            description: row[wbDescription],
-            wordCount: row[wbWordCount],
-            isPreset: row[wbIsPreset],
-            createdAt: Date(timeIntervalSince1970: row[wbCreatedAt]),
-            updatedAt: Date(timeIntervalSince1970: row[wbUpdatedAt])
-        )
     }
 
     func updateWordBook(_ book: WordBook) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        let query = wordBooks.filter(wbId == book.id)
-        try db.run(query.update(
-            wbName <- book.name,
-            wbDescription <- book.description,
-            wbWordCount <- book.wordCount,
-            wbUpdatedAt <- Date().timeIntervalSince1970
-        ))
+        try withDB { db in
+            let query = wordBooks.filter(wbId == book.id)
+            try db.run(query.update(
+                wbName <- book.name,
+                wbDescription <- book.description,
+                wbWordCount <- book.wordCount,
+                wbUpdatedAt <- Date().timeIntervalSince1970
+            ))
+        }
     }
 
     func deleteWordBook(byId id: String) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            try db.transaction {
+                let wordsQuery = words.filter(wBookId == id)
+                try db.run(wordsQuery.delete())
 
-        // Use transaction to ensure atomic deletion
-        try db.transaction {
-            // Delete associated words first (foreign key cascade handles this, but explicit for safety)
-            let wordsQuery = words.filter(wBookId == id)
-            try db.run(wordsQuery.delete())
-
-            let query = wordBooks.filter(wbId == id)
-            try db.run(query.delete())
+                let query = wordBooks.filter(wbId == id)
+                try db.run(query.delete())
+            }
         }
     }
 
     func checkPresetVocabularyExists(_ preset: PresetVocabulary) throws -> Bool {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        let query = wordBooks.filter(wbName == preset.displayName && wbIsPreset == true)
-        return try db.pluck(query) != nil
+        try withDB { db in
+            let query = wordBooks.filter(wbName == preset.displayName && wbIsPreset == true)
+            return try db.pluck(query) != nil
+        }
     }
 
     /// Fetch a preset vocabulary book by its PresetVocabulary type.
     /// Returns nil if not found.
     func fetchPresetVocabulary(_ preset: PresetVocabulary) throws -> WordBook? {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            let query = wordBooks.filter(wbName == preset.displayName && wbIsPreset == true)
+            guard let row = try db.pluck(query) else { return nil }
 
-        let query = wordBooks.filter(wbName == preset.displayName && wbIsPreset == true)
-        guard let row = try db.pluck(query) else { return nil }
-
-        return WordBook(
-            id: row[wbId],
-            name: row[wbName],
-            description: row[wbDescription],
-            wordCount: row[wbWordCount],
-            isPreset: row[wbIsPreset],
-            createdAt: Date(timeIntervalSince1970: row[wbCreatedAt]),
-            updatedAt: Date(timeIntervalSince1970: row[wbUpdatedAt])
-        )
+            return WordBook(
+                id: row[wbId],
+                name: row[wbName],
+                description: row[wbDescription],
+                wordCount: row[wbWordCount],
+                isPreset: row[wbIsPreset],
+                createdAt: Date(timeIntervalSince1970: row[wbCreatedAt]),
+                updatedAt: Date(timeIntervalSince1970: row[wbUpdatedAt])
+            )
+        }
     }
 
     // MARK: - Word Operations
     func createWord(_ word: Word) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            try db.transaction {
+                let insert = words.insert(
+                    wId <- word.id,
+                    wBookId <- word.bookId,
+                    wWord <- word.word,
+                    wPhonetic <- word.phonetic,
+                    wMeaning <- word.meaning,
+                    wSentence <- word.sentence,
+                    wSentenceTranslation <- word.sentenceTranslation,
+                    wAudioUrl <- word.audioUrl,
+                    wMasteryLevel <- word.masteryLevel,
+                    wWrongCount <- word.wrongCount,
+                    wLastReviewedAt <- word.lastReviewedAt?.timeIntervalSince1970,
+                    wCreatedAt <- word.createdAt.timeIntervalSince1970
+                )
 
-        // Use transaction to ensure atomic word creation and count update
-        try db.transaction {
-            let insert = words.insert(
-                wId <- word.id,
-                wBookId <- word.bookId,
+                try db.run(insert)
+
+                let bookQuery = wordBooks.filter(wbId == word.bookId)
+                try db.run(bookQuery.update(
+                    wbWordCount += 1,
+                    wbUpdatedAt <- Date().timeIntervalSince1970
+                ))
+            }
+        }
+    }
+
+    func createWords(_ wordList: [Word]) throws {
+        try withDB { db in
+            try db.transaction {
+                for word in wordList {
+                    try createWord(word)
+                }
+            }
+        }
+    }
+
+    func fetchWords(forBookId bookId: String) throws -> [Word] {
+        try withDB { db in
+            var result: [Word] = []
+            let query = words.filter(wBookId == bookId).order(wCreatedAt.asc)
+
+            for row in try db.prepare(query) {
+                let word = Word(
+                    id: row[wId],
+                    bookId: row[wBookId],
+                    word: row[wWord],
+                    phonetic: row[wPhonetic],
+                    meaning: row[wMeaning],
+                    sentence: row[wSentence],
+                    sentenceTranslation: row[wSentenceTranslation],
+                    audioUrl: row[wAudioUrl],
+                    masteryLevel: row[wMasteryLevel],
+                    wrongCount: row[wWrongCount],
+                    lastReviewedAt: row[wLastReviewedAt].map { Date(timeIntervalSince1970: $0) },
+                    createdAt: Date(timeIntervalSince1970: row[wCreatedAt])
+                )
+                result.append(word)
+            }
+
+            return result
+        }
+    }
+
+    func fetchWord(byId id: String) throws -> Word? {
+        try withDB { db in
+            let query = words.filter(wId == id)
+
+            guard let row = try db.pluck(query) else { return nil }
+
+            return Word(
+                id: row[wId],
+                bookId: row[wBookId],
+                word: row[wWord],
+                phonetic: row[wPhonetic],
+                meaning: row[wMeaning],
+                sentence: row[wSentence],
+                sentenceTranslation: row[wSentenceTranslation],
+                audioUrl: row[wAudioUrl],
+                masteryLevel: row[wMasteryLevel],
+                wrongCount: row[wWrongCount],
+                lastReviewedAt: row[wLastReviewedAt].map { Date(timeIntervalSince1970: $0) },
+                createdAt: Date(timeIntervalSince1970: row[wCreatedAt])
+            )
+        }
+    }
+
+    func updateWord(_ word: Word) throws {
+        try withDB { db in
+            let query = words.filter(wId == word.id)
+            try db.run(query.update(
                 wWord <- word.word,
                 wPhonetic <- word.phonetic,
                 wMeaning <- word.meaning,
@@ -381,179 +478,67 @@ final class DatabaseService: ObservableObject {
                 wAudioUrl <- word.audioUrl,
                 wMasteryLevel <- word.masteryLevel,
                 wWrongCount <- word.wrongCount,
-                wLastReviewedAt <- word.lastReviewedAt?.timeIntervalSince1970,
-                wCreatedAt <- word.createdAt.timeIntervalSince1970
-            )
-
-            try db.run(insert)
-
-            // Atomically increment word_count using type-safe API
-            let bookQuery = wordBooks.filter(wbId == word.bookId)
-            try db.run(bookQuery.update(
-                wbWordCount += 1,
-                wbUpdatedAt <- Date().timeIntervalSince1970
+                wLastReviewedAt <- word.lastReviewedAt?.timeIntervalSince1970
             ))
         }
     }
 
-    func createWords(_ wordList: [Word]) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+    func deleteWord(byId id: String) throws {
+        try withDB { db in
+            try db.transaction {
+                guard let word = try fetchWord(byId: id) else { return }
 
-        try db.transaction {
-            for word in wordList {
-                try createWord(word)
+                let query = words.filter(wId == id)
+                try db.run(query.delete())
+
+                let bookQuery = wordBooks.filter(wbId == word.bookId)
+                try db.run(bookQuery.update(
+                    wbWordCount -= 1,
+                    wbUpdatedAt <- Date().timeIntervalSince1970
+                ))
             }
         }
     }
 
-    func fetchWords(forBookId bookId: String) throws -> [Word] {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        var result: [Word] = []
-        let query = words.filter(wBookId == bookId).order(wCreatedAt.asc)
-
-        for row in try db.prepare(query) {
-            let word = Word(
-                id: row[wId],
-                bookId: row[wBookId],
-                word: row[wWord],
-                phonetic: row[wPhonetic],
-                meaning: row[wMeaning],
-                sentence: row[wSentence],
-                sentenceTranslation: row[wSentenceTranslation],
-                audioUrl: row[wAudioUrl],
-                masteryLevel: row[wMasteryLevel],
-                wrongCount: row[wWrongCount],
-                lastReviewedAt: row[wLastReviewedAt].map { Date(timeIntervalSince1970: $0) },
-                createdAt: Date(timeIntervalSince1970: row[wCreatedAt])
-            )
-            result.append(word)
-        }
-
-        return result
-    }
-
-    func fetchWord(byId id: String) throws -> Word? {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        let query = words.filter(wId == id)
-
-        guard let row = try db.pluck(query) else { return nil }
-
-        return Word(
-            id: row[wId],
-            bookId: row[wBookId],
-            word: row[wWord],
-            phonetic: row[wPhonetic],
-            meaning: row[wMeaning],
-            sentence: row[wSentence],
-            sentenceTranslation: row[wSentenceTranslation],
-            audioUrl: row[wAudioUrl],
-            masteryLevel: row[wMasteryLevel],
-            wrongCount: row[wWrongCount],
-            lastReviewedAt: row[wLastReviewedAt].map { Date(timeIntervalSince1970: $0) },
-            createdAt: Date(timeIntervalSince1970: row[wCreatedAt])
-        )
-    }
-
-    func updateWord(_ word: Word) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        let query = words.filter(wId == word.id)
-        try db.run(query.update(
-            wWord <- word.word,
-            wPhonetic <- word.phonetic,
-            wMeaning <- word.meaning,
-            wSentence <- word.sentence,
-            wSentenceTranslation <- word.sentenceTranslation,
-            wAudioUrl <- word.audioUrl,
-            wMasteryLevel <- word.masteryLevel,
-            wWrongCount <- word.wrongCount,
-            wLastReviewedAt <- word.lastReviewedAt?.timeIntervalSince1970
-        ))
-    }
-
-    func deleteWord(byId id: String) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        // Use transaction for atomic deletion and count update
-        try db.transaction {
-            // Fetch word to get its bookId before deleting
-            guard let word = try fetchWord(byId: id) else { return }
-
-            let query = words.filter(wId == id)
-            try db.run(query.delete())
-
-            // Atomically decrement word_count using type-safe API
-            let bookQuery = wordBooks.filter(wbId == word.bookId)
-            try db.run(bookQuery.update(
-                wbWordCount -= 1,
-                wbUpdatedAt <- Date().timeIntervalSince1970
-            ))
-        }
-    }
-
     func fetchRandomWords(forBookId bookId: String, count: Int, excludingIds: [String] = []) throws -> [Word] {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            var query = words.filter(wBookId == bookId)
 
-        var query = words.filter(wBookId == bookId)
+            if !excludingIds.isEmpty {
+                query = query.filter(!excludingIds.contains(wId))
+            }
 
-        if !excludingIds.isEmpty {
-            query = query.filter(!excludingIds.contains(wId))
+            query = query.order(Expression<Int>.random()).limit(count)
+
+            var result: [Word] = []
+
+            for row in try db.prepare(query) {
+                let word = Word(
+                    id: row[wId],
+                    bookId: row[wBookId],
+                    word: row[wWord],
+                    phonetic: row[wPhonetic],
+                    meaning: row[wMeaning],
+                    sentence: row[wSentence],
+                    sentenceTranslation: row[wSentenceTranslation],
+                    audioUrl: row[wAudioUrl],
+                    masteryLevel: row[wMasteryLevel],
+                    wrongCount: row[wWrongCount],
+                    lastReviewedAt: row[wLastReviewedAt].map { Date(timeIntervalSince1970: $0) },
+                    createdAt: Date(timeIntervalSince1970: row[wCreatedAt])
+                )
+                result.append(word)
+            }
+
+            return result
         }
-
-        query = query.order(Expression<Int>.random()).limit(count)
-
-        var result: [Word] = []
-
-        for row in try db.prepare(query) {
-            let word = Word(
-                id: row[wId],
-                bookId: row[wBookId],
-                word: row[wWord],
-                phonetic: row[wPhonetic],
-                meaning: row[wMeaning],
-                sentence: row[wSentence],
-                sentenceTranslation: row[wSentenceTranslation],
-                audioUrl: row[wAudioUrl],
-                masteryLevel: row[wMasteryLevel],
-                wrongCount: row[wWrongCount],
-                lastReviewedAt: row[wLastReviewedAt].map { Date(timeIntervalSince1970: $0) },
-                createdAt: Date(timeIntervalSince1970: row[wCreatedAt])
-            )
-            result.append(word)
-        }
-
-        return result
     }
 
     // MARK: - GameProgress Operations
     func fetchOrCreateProgress(forBookId bookId: String) throws -> GameProgress {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            let query = gameProgress.filter(gpBookId == bookId)
 
-        let query = gameProgress.filter(gpBookId == bookId)
-
-        if let row = try db.pluck(query) {
-            return GameProgress(
-                id: row[gpId],
-                bookId: row[gpBookId],
-                currentChapter: row[gpCurrentChapter],
-                currentStage: row[gpCurrentStage],
-                starsEarned: row[gpStarsEarned],
-                totalCorrect: row[gpTotalCorrect],
-                totalAnswered: row[gpTotalAnswered],
-                isCompleted: row[gpIsCompleted],
-                updatedAt: Date(timeIntervalSince1970: row[gpUpdatedAt]),
-                lastPassedBossChapter: row[gpLastPassedBossChapter]
-            )
-        }
-
-        // Create new progress with INSERT OR IGNORE to handle race condition
-        let progress = GameProgress(bookId: bookId)
-        do {
-            try createGameProgress(progress)
-        } catch {
-            // Race condition: another thread created it first, fetch again
             if let row = try db.pluck(query) {
                 return GameProgress(
                     id: row[gpId],
@@ -568,116 +553,116 @@ final class DatabaseService: ObservableObject {
                     lastPassedBossChapter: row[gpLastPassedBossChapter]
                 )
             }
-            throw error
+
+            let progress = GameProgress(bookId: bookId)
+            do {
+                try createGameProgress(progress)
+            } catch {
+                if let row = try db.pluck(query) {
+                    return GameProgress(
+                        id: row[gpId],
+                        bookId: row[gpBookId],
+                        currentChapter: row[gpCurrentChapter],
+                        currentStage: row[gpCurrentStage],
+                        starsEarned: row[gpStarsEarned],
+                        totalCorrect: row[gpTotalCorrect],
+                        totalAnswered: row[gpTotalAnswered],
+                        isCompleted: row[gpIsCompleted],
+                        updatedAt: Date(timeIntervalSince1970: row[gpUpdatedAt]),
+                        lastPassedBossChapter: row[gpLastPassedBossChapter]
+                    )
+                }
+                throw error
+            }
+            return progress
         }
-        return progress
     }
 
     func createGameProgress(_ progress: GameProgress) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            let insert = gameProgress.insert(
+                gpId <- progress.id,
+                gpBookId <- progress.bookId,
+                gpCurrentChapter <- progress.currentChapter,
+                gpCurrentStage <- progress.currentStage,
+                gpStarsEarned <- progress.starsEarned,
+                gpTotalCorrect <- progress.totalCorrect,
+                gpTotalAnswered <- progress.totalAnswered,
+                gpIsCompleted <- progress.isCompleted,
+                gpUpdatedAt <- progress.updatedAt.timeIntervalSince1970,
+                gpLastPassedBossChapter <- progress.lastPassedBossChapter
+            )
 
-        let insert = gameProgress.insert(
-            gpId <- progress.id,
-            gpBookId <- progress.bookId,
-            gpCurrentChapter <- progress.currentChapter,
-            gpCurrentStage <- progress.currentStage,
-            gpStarsEarned <- progress.starsEarned,
-            gpTotalCorrect <- progress.totalCorrect,
-            gpTotalAnswered <- progress.totalAnswered,
-            gpIsCompleted <- progress.isCompleted,
-            gpUpdatedAt <- progress.updatedAt.timeIntervalSince1970,
-            gpLastPassedBossChapter <- progress.lastPassedBossChapter
-        )
-
-        try db.run(insert)
+            try db.run(insert)
+        }
     }
 
     func updateGameProgress(_ progress: GameProgress) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        let query = gameProgress.filter(gpId == progress.id)
-        try db.run(query.update(
-            gpCurrentChapter <- progress.currentChapter,
-            gpCurrentStage <- progress.currentStage,
-            gpStarsEarned <- progress.starsEarned,
-            gpTotalCorrect <- progress.totalCorrect,
-            gpTotalAnswered <- progress.totalAnswered,
-            gpIsCompleted <- progress.isCompleted,
-            gpUpdatedAt <- Date().timeIntervalSince1970,
-            gpLastPassedBossChapter <- progress.lastPassedBossChapter
-        ))
+        try withDB { db in
+            let query = gameProgress.filter(gpId == progress.id)
+            try db.run(query.update(
+                gpCurrentChapter <- progress.currentChapter,
+                gpCurrentStage <- progress.currentStage,
+                gpStarsEarned <- progress.starsEarned,
+                gpTotalCorrect <- progress.totalCorrect,
+                gpTotalAnswered <- progress.totalAnswered,
+                gpIsCompleted <- progress.isCompleted,
+                gpUpdatedAt <- Date().timeIntervalSince1970,
+                gpLastPassedBossChapter <- progress.lastPassedBossChapter
+            ))
+        }
     }
 
     // MARK: - LearningRecord Operations
     func createLearningRecord(_ record: LearningRecord) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            let insert = learningRecords.insert(
+                lrId <- record.id,
+                lrWordId <- record.wordId,
+                lrBookId <- record.bookId,
+                lrResult <- record.result,
+                lrQuestionType <- record.questionType.rawValue,
+                lrAnswerTimeMs <- record.answerTimeMs,
+                lrCreatedAt <- record.createdAt.timeIntervalSince1970
+            )
 
-        let insert = learningRecords.insert(
-            lrId <- record.id,
-            lrWordId <- record.wordId,
-            lrBookId <- record.bookId,
-            lrResult <- record.result,
-            lrQuestionType <- record.questionType.rawValue,
-            lrAnswerTimeMs <- record.answerTimeMs,
-            lrCreatedAt <- record.createdAt.timeIntervalSince1970
-        )
-
-        try db.run(insert)
+            try db.run(insert)
+        }
     }
 
     func fetchLearningRecords(forWordId wordId: String) throws -> [LearningRecord] {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            var result: [LearningRecord] = []
+            let query = learningRecords.filter(lrWordId == wordId).order(lrCreatedAt.desc)
 
-        var result: [LearningRecord] = []
-        let query = learningRecords.filter(lrWordId == wordId).order(lrCreatedAt.desc)
+            for row in try db.prepare(query) {
+                let record = LearningRecord(
+                    id: row[lrId],
+                    wordId: row[lrWordId],
+                    bookId: row[lrBookId],
+                    result: row[lrResult],
+                    questionType: QuestionType(rawValue: row[lrQuestionType]) ?? .choice,
+                    answerTimeMs: row[lrAnswerTimeMs],
+                    createdAt: Date(timeIntervalSince1970: row[lrCreatedAt])
+                )
+                result.append(record)
+            }
 
-        for row in try db.prepare(query) {
-            let record = LearningRecord(
-                id: row[lrId],
-                wordId: row[lrWordId],
-                bookId: row[lrBookId],
-                result: row[lrResult],
-                questionType: QuestionType(rawValue: row[lrQuestionType]) ?? .choice,
-                answerTimeMs: row[lrAnswerTimeMs],
-                createdAt: Date(timeIntervalSince1970: row[lrCreatedAt])
-            )
-            result.append(record)
+            return result
         }
-
-        return result
     }
 
     // MARK: - LevelRecord Operations
 
     /// Fetch the completion record for a specific level.
     func fetchLevelRecord(bookId: String, chapter: Int, stage: Int) throws -> LevelRecord? {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            let query = levelRecords.filter(
+                lvlBookId == bookId && lvlChapter == chapter && lvlStage == stage
+            )
+            guard let row = try db.pluck(query) else { return nil }
 
-        let query = levelRecords.filter(
-            lvlBookId == bookId && lvlChapter == chapter && lvlStage == stage
-        )
-        guard let row = try db.pluck(query) else { return nil }
-
-        return LevelRecord(
-            id: row[lvlId],
-            bookId: row[lvlBookId],
-            chapter: row[lvlChapter],
-            stage: row[lvlStage],
-            isPassed: row[lvlIsPassed],
-            starsEarned: row[lvlStarsEarned],
-            completedAt: Date(timeIntervalSince1970: row[lvlCompletedAt])
-        )
-    }
-
-    /// Fetch all level completion records for a word book.
-    func fetchAllLevelRecords(forBookId bookId: String) throws -> [LevelRecord] {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        var result: [LevelRecord] = []
-        let query = levelRecords.filter(lvlBookId == bookId).order(lvlChapter.asc, lvlStage.asc)
-
-        for row in try db.prepare(query) {
-            let record = LevelRecord(
+            return LevelRecord(
                 id: row[lvlId],
                 bookId: row[lvlBookId],
                 chapter: row[lvlChapter],
@@ -686,44 +671,63 @@ final class DatabaseService: ObservableObject {
                 starsEarned: row[lvlStarsEarned],
                 completedAt: Date(timeIntervalSince1970: row[lvlCompletedAt])
             )
-            result.append(record)
         }
+    }
 
-        return result
+    /// Fetch all level completion records for a word book.
+    func fetchAllLevelRecords(forBookId bookId: String) throws -> [LevelRecord] {
+        try withDB { db in
+            var result: [LevelRecord] = []
+            let query = levelRecords.filter(lvlBookId == bookId).order(lvlChapter.asc, lvlStage.asc)
+
+            for row in try db.prepare(query) {
+                let record = LevelRecord(
+                    id: row[lvlId],
+                    bookId: row[lvlBookId],
+                    chapter: row[lvlChapter],
+                    stage: row[lvlStage],
+                    isPassed: row[lvlIsPassed],
+                    starsEarned: row[lvlStarsEarned],
+                    completedAt: Date(timeIntervalSince1970: row[lvlCompletedAt])
+                )
+                result.append(record)
+            }
+
+            return result
+        }
     }
 
     /// Save or update a level completion record.
     /// If a record for this level already exists, update it only if the new result is better.
     func saveLevelRecord(_ record: LevelRecord) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
+        try withDB { db in
+            let query = levelRecords.filter(
+                lvlBookId == record.bookId && lvlChapter == record.chapter && lvlStage == record.stage
+            )
 
-        let query = levelRecords.filter(
-            lvlBookId == record.bookId && lvlChapter == record.chapter && lvlStage == record.stage
-        )
+            if let existing = try db.pluck(query) {
+                let existingStars = existing[lvlStarsEarned]
+                let existingPassed = existing[lvlIsPassed]
+                let shouldUpdate = record.starsEarned > existingStars || (!existingPassed && record.isPassed)
 
-        if let existing = try db.pluck(query) {
-            let existingStars = existing[lvlStarsEarned]
-            let existingPassed = existing[lvlIsPassed]
-            let shouldUpdate = record.starsEarned > existingStars || (!existingPassed && record.isPassed)
-
-            if shouldUpdate {
-                try db.run(query.update(
-                    lvlIsPassed <- (existingPassed || record.isPassed),
-                    lvlStarsEarned <- max(existingStars, record.starsEarned),
+                if shouldUpdate {
+                    try db.run(query.update(
+                        lvlIsPassed <- (existingPassed || record.isPassed),
+                        lvlStarsEarned <- max(existingStars, record.starsEarned),
+                        lvlCompletedAt <- record.completedAt.timeIntervalSince1970
+                    ))
+                }
+            } else {
+                try db.run(levelRecords.insert(
+                    lvlId <- record.id,
+                    lvlBookId <- record.bookId,
+                    lvlChapter <- record.chapter,
+                    lvlStage <- record.stage,
+                    lvlIsPassed <- record.isPassed,
+                    lvlStarsEarned <- record.starsEarned,
                     lvlCompletedAt <- record.completedAt.timeIntervalSince1970
                 ))
             }
-        } else {
-            // Insert new record
-            try db.run(levelRecords.insert(
-                lvlId <- record.id,
-                lvlBookId <- record.bookId,
-                lvlChapter <- record.chapter,
-                lvlStage <- record.stage,
-                lvlIsPassed <- record.isPassed,
-                lvlStarsEarned <- record.starsEarned,
-                lvlCompletedAt <- record.completedAt.timeIntervalSince1970
-            ))
         }
     }
 
@@ -731,62 +735,61 @@ final class DatabaseService: ObservableObject {
 
     /// Save a completed review level record. Idempotent — replaces if already exists.
     func saveReviewLevelRecord(bookId: String, levelId: Int) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        let query = reviewLevelRecords.filter(rlrBookId == bookId && rlrLevelId == levelId)
-        if try db.pluck(query) != nil {
-            // Already recorded, just update timestamp
-            try db.run(query.update(rlrCompletedAt <- Date().timeIntervalSince1970))
-        } else {
-            try db.run(reviewLevelRecords.insert(
-                rlrId <- UUID().uuidString,
-                rlrBookId <- bookId,
-                rlrLevelId <- levelId,
-                rlrCompletedAt <- Date().timeIntervalSince1970
-            ))
+        try withDB { db in
+            let query = reviewLevelRecords.filter(rlrBookId == bookId && rlrLevelId == levelId)
+            if try db.pluck(query) != nil {
+                try db.run(query.update(rlrCompletedAt <- Date().timeIntervalSince1970))
+            } else {
+                try db.run(reviewLevelRecords.insert(
+                    rlrId <- UUID().uuidString,
+                    rlrBookId <- bookId,
+                    rlrLevelId <- levelId,
+                    rlrCompletedAt <- Date().timeIntervalSince1970
+                ))
+            }
         }
     }
 
     /// Fetch all completed review level IDs for a book.
     func fetchCompletedReviewLevelIds(bookId: String) throws -> Set<Int> {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        var result = Set<Int>()
-        let query = reviewLevelRecords.filter(rlrBookId == bookId)
-        for row in try db.prepare(query) {
-            result.insert(row[rlrLevelId])
+        try withDB { db in
+            var result = Set<Int>()
+            let query = reviewLevelRecords.filter(rlrBookId == bookId)
+            for row in try db.prepare(query) {
+                result.insert(row[rlrLevelId])
+            }
+            return result
         }
-        return result
     }
 
     /// Reset all game progress, level records, and learning records for a specific book.
     /// Uses transaction to ensure atomic reset.
     func resetAllProgress(forBookId bookId: String) throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        try db.transaction {
-            try db.run(learningRecords.filter(lrBookId == bookId).delete())
-            try db.run(gameProgress.filter(gpBookId == bookId).delete())
-            try db.run(levelRecords.filter(lvlBookId == bookId).delete())
-            try db.run(reviewLevelRecords.filter(rlrBookId == bookId).delete())
+        try withDB { db in
+            try db.transaction {
+                try db.run(learningRecords.filter(lrBookId == bookId).delete())
+                try db.run(gameProgress.filter(gpBookId == bookId).delete())
+                try db.run(levelRecords.filter(lvlBookId == bookId).delete())
+                try db.run(reviewLevelRecords.filter(rlrBookId == bookId).delete())
+            }
         }
     }
 
     /// Reset all progress for ALL books (used by settings reset).
     /// Also resets word mastery levels and wrong counts so words are fresh.
     func resetAllProgressGlobally() throws {
-        guard let db = db else { throw DatabaseError.connectionFailed }
-
-        try db.transaction {
-            try db.run(learningRecords.delete())
-            try db.run(gameProgress.delete())
-            try db.run(levelRecords.delete())
-            // Reset word mastery so next game starts clean
-            try db.run(words.update(
-                wMasteryLevel <- 0,
-                wWrongCount <- 0,
-                wLastReviewedAt <- (nil as Double?)
-            ))
+        try withDB { db in
+            try db.transaction {
+                try db.run(learningRecords.delete())
+                try db.run(gameProgress.delete())
+                try db.run(levelRecords.delete())
+                try db.run(reviewLevelRecords.delete())
+                try db.run(words.update(
+                    wMasteryLevel <- 0,
+                    wWrongCount <- 0,
+                    wLastReviewedAt <- (nil as Double?)
+                ))
+            }
         }
     }
 }

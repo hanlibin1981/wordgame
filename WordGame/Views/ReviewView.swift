@@ -169,8 +169,7 @@ struct ReviewView: View {
 
     // MARK: - Level Completion
     private func handleLevelComplete(_ level: ReviewLevel, result: GameResult) {
-        // Always mark level as attempted, regardless of pass/fail
-        // This ensures failed attempts are also recorded
+        guard result.isPassed else { return }
         learningVM.markLevelStudied(level.id)
         learningVM.markReviewLevelCompleted(bookId: book.id, levelId: level.id)
     }

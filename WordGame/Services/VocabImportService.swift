@@ -175,7 +175,7 @@ final class VocabImportService {
         var result: [String] = []
         var current = ""
         var inQuotes = false
-        var chars = Array(line)
+        let chars = Array(line)
         var i = 0
         while i < chars.count {
             let char = chars[i]

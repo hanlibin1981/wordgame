@@ -102,9 +102,10 @@ final class BackupService {
 
         try exportTable("word_books", "id,name,description,word_count,is_preset,created_at,updated_at")
         try exportTable("words", "id,book_id,word,phonetic,meaning,sentence,sentence_translation,audio_url,mastery_level,wrong_count,last_reviewed_at,created_at")
-        try exportTable("game_progress", "id,book_id,current_chapter,current_stage,stars_earned,total_correct,total_answered,is_completed,updated_at", "updated_at")
+        try exportTable("game_progress", "id,book_id,current_chapter,current_stage,stars_earned,total_correct,total_answered,is_completed,updated_at,last_passed_boss_chapter", "updated_at")
         try exportTable("learning_records", "id,word_id,book_id,result,question_type,answer_time_ms,created_at")
         try exportTable("level_records", "id,book_id,chapter,stage,is_passed,stars_earned,completed_at", "completed_at")
+        try exportTable("review_level_records", "id,book_id,level_id,completed_at", "completed_at")
 
         sql += "COMMIT;\n"
 
@@ -172,6 +173,7 @@ final class BackupService {
         let cleanupSQL = """
         PRAGMA foreign_keys = OFF;
         DELETE FROM learning_records;
+        DELETE FROM review_level_records;
         DELETE FROM level_records;
         DELETE FROM game_progress;
         DELETE FROM words;
